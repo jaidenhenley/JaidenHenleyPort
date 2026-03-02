@@ -1,0 +1,322 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Take Flight | Case Study</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+	</head>
+	<body class="homepage take-flight-page">
+		<header class="site-header">
+			<h1 class="site-name">Jaiden Henley</h1>
+			<nav class="site-nav" aria-label="Main navigation">
+				<a href="index.html#top">Home</a>
+				<a href="index.html#about">About</a>
+				<a href="index.html#caseStudies">Case Studies</a>
+				<a href="contact.html">Contact</a>
+			</nav>
+		</header>
+
+		<main class="homepage-main">
+			<section class="tf-hero" id="top">
+				<div class="tf-hero-oval">
+					<h2>Take Flight</h2>
+					<p>
+						A high-score survival game where players master memory, coordination, speed,
+						and reflexes across five experiences.
+					</p>
+				</div>
+			</section>
+
+			<section class="tf-overview">
+				<div class="tf-overview-grid">
+					<figure class="tf-media tf-media-ipad">
+						<video 
+						controls
+						playsinline
+						poster="images/coverArt.png"
+						preload="metadata"
+						>
+						<source src="images/TakeFlightDemo.mp4" type="video/mp4" />
+						Your browser does not support the video tag
+						</video>
+					</figure>
+					<div class="tf-copy">
+						<h3>Take Flight - A Bird Life</h3>
+						<p>
+							Take Flight is a Belle Isle inspired, 5-in-1 mini game collection built in
+							6 weeks at the Apple Developer Academy.
+						</p>
+						<p>
+							The game loop focuses on surviving, growing your nest, and chasing high scores
+							across challenges focused on memory, coordination, speed, and reflexes.
+						</p>
+							<p><strong>Team:</strong> 5</p>
+							<p><strong>Tech:</strong> SpriteKit, SwiftUI, SwiftData, Game Center, AVFoundation</p>
+							<p><strong>Role:</strong> iOS Developer</p>
+							<p><strong>Timeline:</strong> 01/11/2026 - 02/20/2026</p>
+							<p class="tf-project-link-wrap">
+								<a class="tf-project-link" href="https://github.com/jaidenhenley/TakeFlight" target="_blank" rel="noopener noreferrer">View Project on GitHub</a>
+							</p>
+						</div>
+					</div>
+				</section>
+
+			<section class="tf-game-flow">
+				<h3>The Game Flow</h3>
+				<div class="tf-flow-grid">
+					<article class="tf-card tf-card-start">
+						<div class="tf-card-ipad-frame">
+							<img src="images/PortStartARun.png" alt="Take Flight gameplay starting run" />
+						</div>
+						<h4>Start a run!</h4>
+						<p>
+							Begin your journey on Belle Isle, jump into quick challenges, and start
+							building score momentum.
+						</p>
+					</article>
+					<article class="tf-card tf-card-tall">
+						<img src="images/pic08.JPEG" alt="Take Flight quick challenge gameplay" />
+						<h4>Quick Challenges</h4>
+						<p>
+							Rotate through mini games that test memory, coordination, speed, and reflexes.
+						</p>
+					</article>
+					<article class="tf-card">
+						<img src="images/pic06.jpg" alt="Take Flight score and progression screen" />
+						<h4>Build Score and Momentum!</h4>
+						<p>
+							Survive longer, manage multiple nests, and watch your high score climb.
+						</p>
+					</article>
+					<article class="tf-card tf-card-phone">
+						<img src="images/coverArt.png" alt="Take Flight achievements panel" />
+						<h4>Finish, Rest, and Replay!</h4>
+						<p>
+							Track achievement progress and jump back in with smarter strategies each run.
+						</p>
+					</article>
+				</div>
+			</section>
+
+			<section class="tf-experiences">
+				<h3>The Experiences</h3>
+				<button class="tf-arrow tf-arrow-left" aria-label="Previous experience">&larr;</button>
+				<div class="tf-experience-grid">
+					<article class="tf-card">
+						<img src="images/pic08.JPEG" alt="Getting hungry mini game" />
+						<h4>Getting Hungry?</h4>
+						<p>
+							Keep your hunger up by testing coordination with the quick feeding mini game.
+						</p>
+					</article>
+					<article class="tf-card">
+						<img src="images/pic07.jpg" alt="Build your home mini game" />
+						<h4>Build your home.</h4>
+						<p>
+							Collect materials around the island and find the perfect nesting tree.
+						</p>
+					</article>
+					<article class="tf-card">
+						<img src="images/pic06.jpg" alt="Feed your young mini game" />
+						<h4>Feed your young.</h4>
+						<p>
+							Feed your baby birds regularly to earn extra points and boost your score.
+						</p>
+					</article>
+				</div>
+				<button class="tf-arrow tf-arrow-right" aria-label="Next experience">&rarr;</button>
+			</section>
+
+			<section class="tf-owned">
+				<div class="tf-owned-grid">
+					<figure class="tf-media tf-media-ipad">
+						<video controls playsinline poster="images/coverArt.png" preload="metadata">
+							<source src="images/TakeFlightWhatIDid.MP4" type="video/mp4" />
+							Your browser does not support the video tag.
+						</video>
+					</figure>
+					<div class="tf-copy">
+						<h3>What I Owned</h3>
+						<p>
+							I worked across the whole game, but focused most on the systems that made it feel
+							complete and replayable.
+						</p>
+						<ul class="tf-list">
+							<li>Full Game Center Integration</li>
+							<li>Custom Virtual Controller + Keyboard Support</li>
+							<li>Tutorial Mode</li>
+							<li>Core Game Loop</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<section class="tf-code-snippets">
+				<div class="tf-code-header">
+					<h3>Code Snippets</h3>
+					<p>
+						Selected implementation details from the systems I owned in Take Flight.
+					</p>
+				</div>
+				<div class="tf-snippet-grid">
+					<article class="tf-snippet-card">
+						<h4>Game Center - Auth + Achievements</h4>
+						<pre class="language-swift"><code class="language-swift">// Call once at app start or main menu.
+@MainActor
+func authenticateLocalPlayer(presentingViewController: UIViewController?) async {
+    let localPlayer = GKLocalPlayer.local
+    localPlayer.authenticateHandler = { viewController, error in
+        if let viewController, let presentingViewController {
+            presentingViewController.present(viewController, animated: true)
+            return
+        }
+        
+        if let error {
+            print("Game Center auth error: \(error.localizedDescription)")
+            return
+        }
+        
+        self.isAuthenticated = localPlayer.isAuthenticated
+    }
+}
+
+// Set an achievement to 100% immediately.
+func completeAchievement(id: String, showBanner: Bool = true) async {
+    guard GKLocalPlayer.local.isAuthenticated else { return }
+    
+    let achievement = GKAchievement(identifier: id)
+    achievement.percentComplete = 100
+    achievement.showsCompletionBanner = showBanner
+    
+    do {
+        try await GKAchievement.report([achievement])
+    } catch {
+        print("Achievement report error: \(error.localizedDescription)")
+    }
+}</code></pre>
+					</article>
+					<article class="tf-snippet-card">
+						<h4>Custom On-Screen Joystick</h4>
+						<pre class="language-swift"><code class="language-swift">// Custom Joystick
+ZStack {
+    Circle() // Background
+        .fill(.white.opacity(0.3))
+        
+    
+    Circle() // Thumbstick
+        .fill(.white.opacity(0.8))
+        .frame(width: radius, height: radius)
+        .offset(x: fingerLocation.x, y: fingerLocation.y)
+        .gesture(
+            DragGesture(minimumDistance: 0)
+                .onChanged { value in
+                    isDragging = true
+
+                    let dx = value.translation.width
+                    let dy = value.translation.height
+
+                    // Clamp to joystick radius
+                    let distance = hypot(dx, dy)
+                    let angle = atan2(dy, dx)
+                    let clamped = min(distance, radius)
+
+                    // Knob position inside the base circle
+                    let knob = CGPoint(x: cos(angle) * clamped, y: sin(angle) * clamped)
+                    fingerLocation = knob
+
+                    // Normalize and flip Y so up is positive in SpriteKit
+                    viewModel.joystickVelocity = CGPoint(x: knob.x / radius, y: -knob.y / radius)
+                }
+                .onEnded  { _ in
+                    isDragging = false
+                    fingerLocation = .zero
+                    viewModel.joystickVelocity = .zero
+                }
+        )
+    
+    
+}
+.frame(width: radius * 2, height: radius * 2)
+.contentShape(Circle())</code></pre>
+					</article>
+					<article class="tf-snippet-card">
+						<h4>Tutorial Mode</h4>
+						<pre class="language-swift"><code class="language-swift">enum RunState {
+    case tutorial
+    case active
+    case gameOver
+}
+
+@Published private(set) var state: RunState = .tutorial
+
+func completeTutorial() {
+    state = .active
+    showTutorialOverlay = false
+}
+
+func restartToTutorial() {
+    state = .tutorial
+    showTutorialOverlay = true
+}</code></pre>
+					</article>
+					<article class="tf-snippet-card">
+						<h4>Core Game Loop</h4>
+						<pre class="language-swift"><code class="language-swift">override func update(_ currentTime: TimeInterval) {
+    handleKeyboardMapInput()
+    if viewModel?.isMapMode == true { return }
+
+    viewModel?.currentMessage = ""
+
+    if lastUpdateTime == 0 { lastUpdateTime = currentTime }
+    let rawDelta: CGFloat = CGFloat(currentTime - lastUpdateTime)
+    let deltaTime = min(max(rawDelta, 1.0/120.0), 1.0/30.0)
+    lastUpdateTime = currentTime
+
+    positionPersistAccumulator += deltaTime
+    if positionPersistAccumulator >= 1.0 {
+        positionPersistAccumulator = 0
+        if let player = childNode(withName: "userBird") {
+            viewModel?.savedPlayerPosition = player.position
+        }
+        viewModel?.savedCameraPosition = cameraNode.position
+        viewModel?.saveState()
+    }
+
+    healthAccumulator += deltaTime
+    if healthAccumulator >= 35.0 {
+        healthAccumulator = 0
+        if let current = viewModel?.hunger, current > 0 { viewModel?.hunger = current - 1 }
+    }
+
+    guard let player = childNode(withName: "userBird") else { return }
+
+    updatePlayerPosition(deltaTime: deltaTime)
+    clampPlayerToMap()
+    updateCameraFollow(target: player.position, deltaTime: deltaTime)
+    clampCameraToMap()
+}</code></pre>
+					</article>
+				</div>
+			</section>
+
+			<section id="about" class="anchor-section"></section>
+			<section id="contact" class="anchor-section"></section>
+			<section id="login" class="anchor-section"></section>
+		</main>
+
+		<footer class="site-footer">
+			<div class="site-footer-content">
+				<p class="footer-name">Jaiden Henley</p>
+				<a class="footer-link" href="mailto:jaidenhenleydev@gmail.com">jaidenhenleydev@gmail.com</a>
+				<a class="footer-link" href="https://www.linkedin.com/in/jaiden-henley" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+				<a class="footer-link" href="https://github.com/jaidenhenley" target="_blank" rel="noopener noreferrer">GitHub</a>
+				<a class="footer-link footer-contact-button" href="contact.html">Contact Me</a>
+			</div>
+		</footer>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-swift.min.js"></script>
+	</body>
+</html>
+	
