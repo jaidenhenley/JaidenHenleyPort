@@ -1,0 +1,233 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>QuickStudy | Case Study</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+	</head>
+	<body class="homepage take-flight-page quickstudy-page">
+		<header class="site-header">
+			<h1 class="site-name">Jaiden Henley</h1>
+			<nav class="site-nav" aria-label="Main navigation">
+				<a href="index.html#top">Home</a>
+				<a href="index.html#about">About</a>
+				<a href="index.html#caseStudies">Case Studies</a>
+				<a href="contact.html">Contact</a>
+			</nav>
+		</header>
+
+		<main class="homepage-main">
+			<section class="tf-hero" id="top">
+				<div class="tf-hero-oval">
+					<h2>QuickStudy</h2>
+					<p>
+						Turn scans and PDFs into study-ready flashcards in minutes.
+					</p>
+				</div>
+			</section>
+
+			<section class="tf-overview">
+				<div class="tf-overview-grid">
+					<figure class="tf-media tf-media-ipad">
+						<img src="images/banner.jpg" alt="QuickStudy project preview placeholder" />
+					</figure>
+					<div class="tf-copy">
+						<h3>Project Overview</h3>
+						<p>
+							QuickStudy converts scanned notes or PDFs into flashcards so you can study fast without rewriting everything.
+						</p>
+						<p>
+							You can approve the cards you want, practice as flashcards, or switch into a multiple-choice quiz mode built from your set.
+						</p>
+						<p><strong>Team:</strong> Solo</p>
+						<p><strong>Tech:</strong> SwiftUI, Apple Intelligence (FoundationModels), PDF import, local persistence (SavedSets.json)</p>
+						<p><strong>Role:</strong> iOS Developer</p>
+						<p><strong>Timeline:</strong> MM/DD/YYYY - MM/DD/YYYY</p>
+						<p class="tf-project-link-wrap">
+							<a class="tf-project-link tf-project-link-github" href="https://github.com/" target="_blank" rel="noopener noreferrer">View Project on GitHub</a>
+							<a class="tf-project-link" href="https://example.com/" target="_blank" rel="noopener noreferrer">View Live Demo</a>
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section class="tf-game-flow">
+				<h3>Challenges &amp; Solutions</h3>
+				<div class="tf-flow-grid">
+					<article class="tf-card">
+						<img src="images/pic02.jpg" alt="Challenge card placeholder one" />
+						<h4>OCR Messiness</h4>
+						<p>
+							<strong>Challenge:</strong> Scanned notes can produce inconsistent OCR output.<br />
+							<strong>Fix:</strong> Added a cleanup pass before generation.<br />
+							<strong>Result:</strong> Cleaner flashcards and less manual correction.
+						</p>
+					</article>
+					<article class="tf-card">
+						<img src="images/pic03.jpg" alt="Challenge card placeholder two" />
+						<h4>AI Availability and Failures</h4>
+						<p>
+							<strong>Challenge:</strong> AI generation is not always available or can fail.<br />
+							<strong>Fix:</strong> Added deterministic fallback generation plus clear error UI.<br />
+							<strong>Result:</strong> Reliable card generation behavior across devices.
+						</p>
+					</article>
+					<article class="tf-card">
+						<img src="images/pic04.jpg" alt="Challenge card placeholder three" />
+						<h4>Noisy Generated Cards</h4>
+						<p>
+							<strong>Challenge:</strong> Not every generated flashcard is worth studying.<br />
+							<strong>Fix:</strong> Added approval toggles so cards can be enabled/disabled.<br />
+							<strong>Result:</strong> Users only practice high-value cards.
+						</p>
+					</article>
+				</div>
+			</section>
+
+			<section class="tf-experiences">
+				<h3>Screenshots / Media</h3>
+				<button class="tf-arrow tf-arrow-left" aria-label="Previous screenshot">&larr;</button>
+				<div class="tf-experience-grid">
+					<article class="tf-card">
+						<div class="tf-experience-media">
+							<img src="images/pic05.jpg" alt="QuickStudy deck list placeholder" />
+						</div>
+						<div class="tf-experience-copy">
+							<h4>Import Source</h4>
+							<p>Placeholder for scan and PDF import entry point.</p>
+						</div>
+					</article>
+					<article class="tf-card">
+						<div class="tf-experience-media">
+							<img src="images/pic06.jpg" alt="QuickStudy card review placeholder" />
+						</div>
+						<div class="tf-experience-copy">
+							<h4>Generated Cards</h4>
+							<p>Placeholder for generated flashcard review and approval toggles.</p>
+						</div>
+					</article>
+					<article class="tf-card">
+						<div class="tf-experience-media">
+							<img src="images/pic07.jpg" alt="QuickStudy progress placeholder" />
+						</div>
+						<div class="tf-experience-copy">
+							<h4>Flashcard Practice</h4>
+							<p>Placeholder for the flashcard practice loop UI.</p>
+						</div>
+					</article>
+					<article class="tf-card">
+						<div class="tf-experience-media">
+							<img src="images/pic08.jpeg" alt="QuickStudy summary placeholder" />
+						</div>
+						<div class="tf-experience-copy">
+							<h4>Quiz Mode</h4>
+							<p>Placeholder for multiple-choice quiz mode from approved cards.</p>
+						</div>
+					</article>
+				</div>
+				<button class="tf-arrow tf-arrow-right" aria-label="Next screenshot">&rarr;</button>
+			</section>
+
+			<section class="tf-owned">
+				<div class="tf-owned-grid">
+					<figure class="tf-media tf-media-ipad">
+						<img src="images/coverArt.png" alt="QuickStudy ownership section placeholder" />
+					</figure>
+					<div class="tf-copy">
+						<h3>What I Built / My Role</h3>
+						<ul class="tf-list">
+							<li>Scan/PDF import to text pipeline</li>
+							<li>Flashcard generation with AI plus deterministic fallback</li>
+							<li>Approve/toggle flow for included cards</li>
+							<li>Flashcard practice mode</li>
+							<li>Multiple-choice quiz mode from approved cards</li>
+							<li>Saved sets persistence</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<section class="tf-code-snippets">
+				<div class="tf-code-header">
+					<h3>Core Features</h3>
+					<p>
+						Primary product capabilities included in QuickStudy.
+					</p>
+				</div>
+				<div class="tf-snippet-grid">
+					<article class="tf-snippet-card">
+						<h4>Study Flow</h4>
+						<pre class="language-swift"><code class="language-swift">- Scan notes or import PDFs
+- Clean-up options (handwriting mode/spellcheck when enabled)
+- Generate flashcards automatically
+- Approve-only studying (toggle cards on/off)
+- Flashcard practice loop
+- Quiz mode with distractors
+- Save and reload study sets</code></pre>
+					</article>
+					<article class="tf-snippet-card">
+						<h4>Import to Cards</h4>
+						<pre class="language-swift"><code class="language-swift">Input: scanned note or PDF
+1. Extract text
+2. Run cleanup pass
+3. Generate card candidates
+4. Save generated set for review</code></pre>
+					</article>
+					<article class="tf-snippet-card">
+						<h4>Approval Controls</h4>
+						<pre class="language-swift"><code class="language-swift">1. Present generated cards
+2. Toggle card include/exclude
+3. Build active study deck from approved cards
+4. Route approved deck to practice or quiz</code></pre>
+					</article>
+					<article class="tf-snippet-card">
+						<h4>Persistence</h4>
+						<pre class="language-swift"><code class="language-swift">SavedSets.json stores:
+- Deck metadata
+- Approved card set
+- Quiz-ready data
+- Reload state for follow-up sessions</code></pre>
+					</article>
+				</div>
+			</section>
+
+			<section class="tf-outcomes">
+				<div class="tf-outcomes-grid">
+					<article class="tf-outcome-card">
+						<h3>Tech Stack</h3>
+						<ul class="tf-list">
+							<li>SwiftUI</li>
+							<li>Apple Intelligence (FoundationModels)</li>
+							<li>PDF import</li>
+							<li>Local persistence (SavedSets.json)</li>
+						</ul>
+					</article>
+					<article class="tf-outcome-card">
+						<h3>Outcome</h3>
+						<p>
+							QuickStudy made it faster to move from raw notes to active recall by combining import, generation, approval, and practice in one focused flow.
+						</p>
+					</article>
+				</div>
+			</section>
+
+			<section id="about" class="anchor-section"></section>
+			<section id="contact" class="anchor-section"></section>
+			<section id="login" class="anchor-section"></section>
+		</main>
+
+		<footer class="site-footer">
+			<div class="site-footer-content">
+				<p class="footer-name">Jaiden Henley</p>
+				<a class="footer-link" href="mailto:jaidenhenleydev@gmail.com">jaidenhenleydev@gmail.com</a>
+				<a class="footer-link" href="https://www.linkedin.com/in/jaiden-henley" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+				<a class="footer-link" href="https://github.com/jaidenhenley" target="_blank" rel="noopener noreferrer">GitHub</a>
+				<a class="footer-link footer-contact-button" href="contact.html">Contact Me</a>
+			</div>
+		</footer>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-swift.min.js"></script>
+	</body>
+</html>

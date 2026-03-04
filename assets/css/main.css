@@ -3451,7 +3451,8 @@ body.take-flight-page .tf-overview,
 body.take-flight-page .tf-game-flow,
 body.take-flight-page .tf-experiences,
 body.take-flight-page .tf-owned,
-body.take-flight-page .tf-code-snippets {
+body.take-flight-page .tf-code-snippets,
+body.take-flight-page .tf-outcomes {
 	padding: 3.5rem 3.75rem 2rem;
 }
 
@@ -3508,6 +3509,10 @@ body.take-flight-page .tf-project-cta {
 }
 
 body.take-flight-page .tf-project-link-wrap {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.72rem;
 	margin-top: 1rem;
 }
 
@@ -3528,6 +3533,17 @@ body.take-flight-page .tf-project-link {
 body.take-flight-page .tf-project-link:hover {
 	background: #255b81;
 	color: #fff;
+}
+
+body.take-flight-page .tf-project-link-github {
+	background: rgba(18, 23, 34, 0.06);
+	border: 1px solid rgba(18, 23, 34, 0.35);
+	color: #172034;
+}
+
+body.take-flight-page .tf-project-link-github:hover {
+	background: rgba(18, 23, 34, 0.14);
+	color: #0e1525;
 }
 
 body.take-flight-page .tf-game-flow h3,
@@ -3609,36 +3625,66 @@ body.take-flight-page .tf-experiences {
 }
 
 body.take-flight-page .tf-experience-grid {
-	display: grid;
-	gap: 2.2rem;
-	grid-template-columns: repeat(3, minmax(0, 1fr));
+	align-items: stretch;
+	display: flex;
+	gap: 1.25rem;
+	overflow-x: auto;
+	padding: 0.2rem 0 0.55rem;
+	scroll-snap-type: x proximity;
+	-webkit-overflow-scrolling: touch;
 }
 
 body.take-flight-page .tf-experience-grid .tf-card {
 	background: #dfe0e6;
-	padding-bottom: 1.4rem;
+	display: flex;
+	flex-direction: column;
+	flex: 0 0 min(360px, 84vw);
+	height: 100%;
+	overflow: hidden;
+	scroll-snap-align: start;
+}
+
+body.take-flight-page .tf-experience-grid .tf-experience-media {
+	background: #10131a;
+	flex: 0 0 320px;
+	overflow: hidden;
+}
+
+body.take-flight-page .tf-experience-grid .tf-experience-media img {
+	display: block;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+	width: 100%;
+}
+
+body.take-flight-page .tf-experience-grid .tf-experience-copy {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	padding: 0.9rem 0.95rem 1rem;
 	text-align: center;
 }
 
-body.take-flight-page .tf-experience-grid .tf-card img {
-	height: 430px;
+body.take-flight-page .tf-experience-grid .tf-card h4 {
+	margin: 0 0 0.45rem;
+}
+
+body.take-flight-page .tf-experience-grid .tf-card p {
+	margin: 0;
+}
+
+body.take-flight-page .tf-experience-grid::-webkit-scrollbar {
+	height: 0.62rem;
+}
+
+body.take-flight-page .tf-experience-grid::-webkit-scrollbar-thumb {
+	background: rgba(39, 49, 68, 0.45);
+	border-radius: 999px;
 }
 
 body.take-flight-page .tf-arrow {
-	align-items: center;
-	background: rgba(55, 132, 189, 0.8);
-	border: 0;
-	border-radius: 999px;
-	color: #fff;
-	display: inline-flex;
-	font-size: 2.5rem;
-	height: 72px;
-	justify-content: center;
-	line-height: 1;
-	position: absolute;
-	top: 52%;
-	transform: translateY(-50%);
-	width: 72px;
+	display: none;
 }
 
 body.take-flight-page .tf-arrow-left {
@@ -3660,6 +3706,43 @@ body.take-flight-page .tf-code-snippets {
 	background: #ececf1;
 	padding-bottom: 4.5rem;
 	padding-top: 4.3rem;
+}
+
+body.take-flight-page .tf-outcomes {
+	background: #dfe0e6;
+	padding-bottom: 4rem;
+	padding-top: 3.9rem;
+}
+
+body.take-flight-page .tf-outcomes-grid {
+	display: grid;
+	gap: 1rem;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	margin: 0 auto;
+	max-width: 1150px;
+}
+
+body.take-flight-page .tf-outcome-card {
+	background: #ececf1;
+	border: 1px solid rgba(10, 14, 22, 0.08);
+	border-radius: 0.32rem;
+	padding: 1rem 1rem 1.05rem;
+}
+
+body.take-flight-page .tf-outcome-card h3 {
+	color: #0b0b0d;
+	font-size: clamp(1.2rem, 2.2vw, 1.8rem);
+	font-weight: 600;
+	letter-spacing: -0.01em;
+	line-height: 1.15;
+	margin: 0 0 0.45rem;
+}
+
+body.take-flight-page .tf-outcome-card p {
+	color: #111;
+	font-size: clamp(0.94rem, 1.28vw, 1.08rem);
+	line-height: 1.58;
+	margin: 0;
 }
 
 body.take-flight-page .tf-code-header {
@@ -3687,43 +3770,69 @@ body.take-flight-page .tf-code-header p {
 body.take-flight-page .tf-snippet-grid {
 	display: grid;
 	gap: 1.3rem;
-	grid-template-columns: repeat(2, minmax(0, 1fr));
+	grid-template-columns: 1fr;
 	margin: 0 auto;
-	max-width: 1150px;
+	max-width: 980px;
 }
 
 body.take-flight-page .tf-snippet-card {
 	background: #121419;
 	border: 1px solid rgba(255, 255, 255, 0.08);
-	border-radius: 0.5rem;
+	border-radius: 0.35rem;
 	box-shadow: 0 0.9rem 1.6rem rgba(0, 0, 0, 0.2);
-	padding: 1.1rem 1.15rem 1.2rem;
+	overflow: hidden;
+	padding: 0.85rem 0.9rem 0.9rem;
 }
 
 body.take-flight-page .tf-snippet-card h4 {
 	color: #f4f5f7;
-	font-size: clamp(1.05rem, 1.6vw, 1.32rem);
+	font-size: clamp(0.95rem, 1.3vw, 1.16rem);
 	font-weight: 600;
 	letter-spacing: -0.01em;
-	line-height: 1.3;
-	margin: 0 0 0.8rem;
+	line-height: 1.25;
+	margin: 0 0 0.62rem;
 }
 
 body.take-flight-page .tf-snippet-card pre {
-	background: rgba(255, 255, 255, 0.03);
-	border-radius: 0.35rem;
+	background: rgba(255, 255, 255, 0.025);
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	border-radius: 0.3rem;
 	color: #f4f5f7;
 	font-family: "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-	font-size: clamp(0.8rem, 1.35vw, 0.96rem);
-	line-height: 1.5;
+	font-size: clamp(0.72rem, 1vw, 0.84rem);
+	line-height: 1.4;
 	margin: 0;
 	overflow-x: auto;
-	padding: 0.8rem;
+	padding: 0.7rem 0.76rem 0.76rem;
 	white-space: pre;
 }
 
 body.take-flight-page .tf-snippet-card code {
 	font-family: inherit;
+}
+
+body.take-flight-page .tf-dark-list {
+	list-style: disc;
+	margin: 0.15rem 0 0 1.2rem;
+}
+
+body.take-flight-page .tf-dark-list li {
+	color: #e7ecf6;
+	font-size: clamp(0.9rem, 1.15vw, 1.02rem);
+	line-height: 1.5;
+	margin: 0 0 0.34rem;
+}
+
+body.take-flight-page .tf-list-compact {
+	list-style: disc;
+	margin: 0.15rem 0 0 1.2rem;
+}
+
+body.take-flight-page .tf-list-compact li {
+	color: #111;
+	font-size: clamp(0.94rem, 1.28vw, 1.08rem);
+	line-height: 1.58;
+	margin: 0 0 0.32rem;
 }
 
 body.take-flight-page .tf-list {
@@ -3759,7 +3868,20 @@ body.take-flight-page .tf-owned .tf-media-ipad {
 	width: 100%;
 }
 
-body.take-flight-page .tf-overview .tf-media-ipad video,
+body.take-flight-page:not(.quickstudy-page) .tf-overview .tf-media-ipad {
+	max-width: 430px;
+}
+
+body.take-flight-page:not(.quickstudy-page) .tf-overview .tf-media-ipad video {
+	aspect-ratio: 9 / 16;
+	border-radius: clamp(1.22rem, 2vw, 1.62rem);
+	display: block;
+	height: auto;
+	object-fit: cover;
+	object-position: center;
+	width: 100%;
+}
+
 body.take-flight-page .tf-owned .tf-media-ipad video {
 	aspect-ratio: 4 / 3;
 	border-radius: clamp(1.22rem, 2vw, 1.62rem);
@@ -3778,7 +3900,8 @@ body.take-flight-page .tf-owned .tf-media-ipad video {
 	body.take-flight-page .tf-game-flow,
 	body.take-flight-page .tf-experiences,
 	body.take-flight-page .tf-owned,
-	body.take-flight-page .tf-code-snippets {
+	body.take-flight-page .tf-code-snippets,
+	body.take-flight-page .tf-outcomes {
 		padding-left: 1.75rem;
 		padding-right: 1.75rem;
 	}
@@ -3818,16 +3941,12 @@ body.take-flight-page .tf-owned .tf-media-ipad video {
 		grid-template-columns: 1fr;
 	}
 
-	body.take-flight-page .tf-experience-grid {
-		grid-template-columns: 1fr;
-	}
-
 	body.take-flight-page .tf-snippet-grid {
 		grid-template-columns: 1fr;
 	}
 
-	body.take-flight-page .tf-arrow {
-		display: none;
+	body.take-flight-page .tf-outcomes-grid {
+		grid-template-columns: 1fr;
 	}
 }
 
@@ -3839,8 +3958,113 @@ body.take-flight-page .tf-owned .tf-media-ipad video {
 
 	body.take-flight-page .tf-card img,
 	body.take-flight-page .tf-card-tall img,
-	body.take-flight-page .tf-card-phone img,
-	body.take-flight-page .tf-experience-grid .tf-card img {
+	body.take-flight-page .tf-card-phone img {
 		height: auto;
+	}
+}
+
+body.take-flight-page.quickstudy-page .tf-hero {
+	background:
+		radial-gradient(120% 120% at 12% 0%, rgba(197, 170, 255, 0.46) 0%, rgba(197, 170, 255, 0) 46%),
+		radial-gradient(130% 130% at 96% 94%, rgba(118, 75, 225, 0.58) 0%, rgba(118, 75, 225, 0) 58%),
+		linear-gradient(135deg, #24103f 0%, #38205f 48%, #6b3fd1 100%);
+}
+
+body.take-flight-page.quickstudy-page .tf-hero::after {
+	background: #d9cdf2;
+}
+
+body.take-flight-page.quickstudy-page .site-name,
+body.take-flight-page.quickstudy-page .site-nav a {
+	color: #ffffff;
+	text-shadow: 0 2px 10px rgba(20, 10, 36, 0.45);
+}
+
+body.take-flight-page.quickstudy-page .site-nav a:hover,
+body.take-flight-page.quickstudy-page .site-nav a:focus-visible {
+	color: #efe4ff;
+}
+
+body.take-flight-page.quickstudy-page .tf-hero-oval {
+	background: rgba(240, 233, 255, 0.92);
+	box-shadow: 0 1.15rem 2.2rem rgba(26, 13, 47, 0.25);
+}
+
+body.take-flight-page.quickstudy-page .tf-hero-oval h2 {
+	color: #2e1b58;
+}
+
+body.take-flight-page.quickstudy-page .tf-hero-oval p {
+	color: #4a2b83;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview,
+body.take-flight-page.quickstudy-page .tf-game-flow,
+body.take-flight-page.quickstudy-page .tf-experiences {
+	background: #f4eefc;
+}
+
+body.take-flight-page.quickstudy-page .tf-owned {
+	background: #ede3fa;
+}
+
+body.take-flight-page.quickstudy-page .tf-code-snippets {
+	background: #e6daf8;
+}
+
+body.take-flight-page.quickstudy-page .tf-outcomes {
+	background: #ddd0f3;
+}
+
+body.take-flight-page.quickstudy-page .tf-card {
+	background: #ece3fb;
+}
+
+body.take-flight-page.quickstudy-page .tf-experience-grid .tf-card {
+	background: #e7dcfa;
+}
+
+body.take-flight-page.quickstudy-page .tf-outcome-card {
+	background: #f3ebff;
+	border-color: rgba(67, 38, 123, 0.18);
+}
+
+body.take-flight-page.quickstudy-page .tf-project-link {
+	background: linear-gradient(135deg, #7448d8 0%, #9656ee 100%);
+}
+
+body.take-flight-page.quickstudy-page .tf-project-link:hover {
+	background: linear-gradient(135deg, #663ac6 0%, #8242dc 100%);
+}
+
+body.take-flight-page.quickstudy-page .tf-project-link-github {
+	background: rgba(56, 34, 101, 0.08);
+	border-color: rgba(56, 34, 101, 0.34);
+	color: #2d1a5c;
+}
+
+body.take-flight-page.quickstudy-page .tf-project-link-github:hover {
+	background: rgba(56, 34, 101, 0.16);
+	color: #221348;
+}
+
+body.take-flight-page.quickstudy-page .tf-snippet-card {
+	background: #171128;
+	border-color: rgba(210, 193, 255, 0.16);
+}
+
+body.take-flight-page.quickstudy-page .tf-snippet-card pre {
+	background: rgba(255, 255, 255, 0.05);
+	border-color: rgba(210, 193, 255, 0.22);
+}
+
+body.take-flight-page.quickstudy-page .tf-experience-grid::-webkit-scrollbar-thumb {
+	background: rgba(103, 63, 182, 0.55);
+}
+
+@media screen and (max-width: 960px) {
+
+	body.take-flight-page.quickstudy-page .site-header {
+		background: linear-gradient(135deg, #2f1a57 0%, #4a2d84 100%);
 	}
 }
