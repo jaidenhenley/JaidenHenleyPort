@@ -3073,6 +3073,29 @@ body.homepage.home-view .featured-project-grid {
 	grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+body.homepage.home-view .featured-project-layout {
+	display: grid;
+	gap: 1.1rem;
+}
+
+body.homepage.home-view .featured-project-primary {
+	width: 100%;
+}
+
+body.homepage.home-view .project-card--featured {
+	display: grid;
+	grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+}
+
+body.homepage.home-view .project-card--featured .featured-project-image img {
+	aspect-ratio: 18 / 9;
+	height: 100%;
+}
+
+body.homepage.home-view .projects-grid--secondary {
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 body.homepage.home-view .featured-project-card {
 	background: rgba(240, 241, 246, 0.9);
 	border: 1px solid rgba(165, 169, 182, 0.38);
@@ -3303,6 +3326,19 @@ body.homepage .current-location-city {
 	body.homepage .case-studies-grid {
 		grid-template-columns: 1fr;
 		margin-bottom: 4rem;
+	}
+
+	body.homepage.home-view .project-card--featured {
+		grid-template-columns: 1fr;
+	}
+
+	body.homepage.home-view .project-card--featured .featured-project-image img {
+		aspect-ratio: 16 / 10;
+		height: auto;
+	}
+
+	body.homepage.home-view .projects-grid--secondary {
+		grid-template-columns: 1fr;
 	}
 
 	body.homepage.home-view .featured-project-grid {
@@ -3967,7 +4003,7 @@ body.take-flight-page.quickstudy-page .tf-hero {
 	background:
 		radial-gradient(120% 120% at 12% 0%, rgba(197, 170, 255, 0.46) 0%, rgba(197, 170, 255, 0) 46%),
 		radial-gradient(130% 130% at 96% 94%, rgba(118, 75, 225, 0.58) 0%, rgba(118, 75, 225, 0) 58%),
-		linear-gradient(135deg, #24103f 0%, #38205f 48%, #6b3fd1 100%);
+		linear-gradient(135deg, #24103f 0%, #38205f 48%, #181818 100%);
 }
 
 body.take-flight-page.quickstudy-page .tf-hero::after {
