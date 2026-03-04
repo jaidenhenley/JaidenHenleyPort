@@ -4059,6 +4059,29 @@ body.take-flight-page.quickstudy-page .tf-overview .tf-media-ipad {
 	padding: 0.5rem;
 }
 
+body.take-flight-page.quickstudy-page .tf-overview .tf-media-phone {
+	background: #121419;
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	border-radius: clamp(1.65rem, 2.8vw, 2.2rem);
+	box-shadow:
+		0 0.9rem 1.8rem rgba(0, 0, 0, 0.24),
+		inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+	justify-self: center;
+	max-width: 340px;
+	padding: clamp(0.38rem, 0.62vw, 0.5rem);
+	width: 100%;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview .tf-media-phone video {
+	aspect-ratio: 9 / 19.5;
+	border-radius: clamp(1.2rem, 1.9vw, 1.5rem);
+	display: block;
+	height: auto;
+	object-fit: cover;
+	object-position: center;
+	width: 100%;
+}
+
 body.take-flight-page.quickstudy-page .tf-overview-media-shell {
 	aspect-ratio: 16 / 10;
 	background: #1f1538;
@@ -4229,6 +4252,10 @@ body.take-flight-page.quickstudy-page .tf-experience-grid::-webkit-scrollbar-thu
 
 	body.take-flight-page.quickstudy-page .tf-overview {
 		padding-top: 2rem;
+	}
+
+	body.take-flight-page.quickstudy-page .tf-overview .tf-media-phone {
+		max-width: 320px;
 	}
 }
 
