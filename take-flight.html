@@ -38,7 +38,7 @@
 						poster="images/coverArt.png"
 						preload="metadata"
 						>
-						<source src="images/TakeFlightDemo.mp4" type="video/mp4" />
+						<source src="images/TakeFlightDemoCompressed.mp4" type="video/mp4" />
 						Your browser does not support the video tag
 						</video>
 					</figure>
@@ -48,16 +48,26 @@
 							Take Flight is a Belle Isle inspired, 5-in-1 mini game collection built in
 							6 weeks at the Apple Developer Academy.
 						</p>
-						<p>
-							The game loop focuses on surviving, growing your nest, and chasing high scores
-							across challenges focused on memory, coordination, speed, and reflexes.
-						</p>
+							<p>
+								The game loop focuses on surviving, growing your nest, and chasing high scores
+								across challenges focused on memory, coordination, speed, and reflexes.
+							</p>
 							<p><strong>Team:</strong> 5</p>
-							<p><strong>Tech:</strong> SpriteKit, SwiftUI, SwiftData, Game Center, AVFoundation</p>
 							<p><strong>Role:</strong> iOS Developer</p>
 							<p><strong>Timeline:</strong> 01/11/2026 - 02/20/2026</p>
+							<div class="tf-overview-tech">
+								<h4>Tech</h4>
+								<ul class="tf-tech-chips">
+									<li>SpriteKit</li>
+									<li>SwiftUI</li>
+									<li>SwiftData</li>
+									<li>Game Center</li>
+									<li>AVFoundation</li>
+								</ul>
+							</div>
 							<p class="tf-project-link-wrap">
-								<a class="tf-project-link" href="https://github.com/jaidenhenley/TakeFlight" target="_blank" rel="noopener noreferrer">View Project on GitHub</a>
+								<a class="tf-project-link tf-project-link-github" href="https://github.com/jaidenhenley/TakeFlight" target="_blank" rel="noopener noreferrer">View Project on GitHub</a>
+								<a class="tf-project-link" href="https://testflight.apple.com/join/vwcyPcTW" target="_blank" rel="noopener noreferrer">Try on TestFlight</a>
 							</p>
 						</div>
 					</div>
@@ -65,34 +75,34 @@
 
 			<section class="tf-game-flow">
 				<h3>The Game Flow</h3>
-				<div class="tf-flow-grid">
-					<article class="tf-card tf-card-start">
-						<div class="tf-card-ipad-frame">
-							<img src="images/PortStartARun.png" alt="Take Flight gameplay starting run" />
-						</div>
-						<h4>Start a run!</h4>
+					<div class="tf-flow-grid">
+						<article class="tf-card tf-card-start">
+							<div class="tf-card-ipad-frame">
+								<img src="images/StartARun.png" alt="Take Flight start a run screen" />
+							</div>
+							<h4>Start a run!</h4>
 						<p>
 							Begin your journey on Belle Isle, jump into quick challenges, and start
 							building score momentum.
 						</p>
-					</article>
-					<article class="tf-card tf-card-tall">
-						<img src="images/pic08.JPEG" alt="Take Flight quick challenge gameplay" />
-						<h4>Quick Challenges</h4>
+						</article>
+						<article class="tf-card tf-card-tall">
+							<img src="images/QuickChallenges.png" alt="Take Flight quick challenges screen" />
+							<h4>Quick Challenges</h4>
 						<p>
 							Rotate through mini games that test memory, coordination, speed, and reflexes.
 						</p>
-					</article>
-					<article class="tf-card">
-						<img src="images/pic06.jpg" alt="Take Flight score and progression screen" />
-						<h4>Build Score and Momentum!</h4>
+						</article>
+						<article class="tf-card">
+							<img src="images/BuildNest.png" alt="Take Flight score and progression gameplay" />
+							<h4>Build Score and Momentum!</h4>
 						<p>
 							Survive longer, manage multiple nests, and watch your high score climb.
 						</p>
-					</article>
-					<article class="tf-card tf-card-phone">
-						<img src="images/coverArt.png" alt="Take Flight achievements panel" />
-						<h4>Finish, Rest, and Replay!</h4>
+						</article>
+						<article class="tf-card tf-card-phone">
+							<img src="images/FinishRestReplay.jpg" alt="Take Flight finish, rest, and replay screen" />
+							<h4>Finish, Rest, and Replay!</h4>
 						<p>
 							Track achievement progress and jump back in with smarter strategies each run.
 						</p>
@@ -103,29 +113,63 @@
 			<section class="tf-experiences">
 				<h3>The Experiences</h3>
 				<button class="tf-arrow tf-arrow-left" aria-label="Previous experience">&larr;</button>
-				<div class="tf-experience-grid">
-					<article class="tf-card">
-						<img src="images/pic08.JPEG" alt="Getting hungry mini game" />
-						<h4>Getting Hungry?</h4>
-						<p>
-							Keep your hunger up by testing coordination with the quick feeding mini game.
-						</p>
-					</article>
-					<article class="tf-card">
-						<img src="images/pic07.jpg" alt="Build your home mini game" />
-						<h4>Build your home.</h4>
-						<p>
-							Collect materials around the island and find the perfect nesting tree.
-						</p>
-					</article>
-					<article class="tf-card">
-						<img src="images/pic06.jpg" alt="Feed your young mini game" />
-						<h4>Feed your young.</h4>
-						<p>
-							Feed your baby birds regularly to earn extra points and boost your score.
-						</p>
-					</article>
-				</div>
+					<div class="tf-experience-grid">
+						<article class="tf-card">
+							<div class="tf-experience-media">
+								<img src="images/GettingHungry.png" alt="Getting hungry mini game" />
+							</div>
+							<div class="tf-experience-copy">
+								<h4>Getting Hungry?</h4>
+								<p>
+									Keep your hunger up by testing coordination with the quick feeding mini game.
+								</p>
+							</div>
+						</article>
+						<article class="tf-card">
+							<div class="tf-experience-media">
+								<img src="images/BuildNest.png" alt="Build your home mini game" />
+							</div>
+							<div class="tf-experience-copy">
+								<h4>Build your home.</h4>
+								<p>
+									Collect materials around the island and find the perfect nesting tree.
+								</p>
+							</div>
+						</article>
+						<article class="tf-card">
+							<div class="tf-experience-media">
+								<img src="images/FeedYourYoung.png" alt="Feed your young mini game" />
+							</div>
+							<div class="tf-experience-copy">
+								<h4>Feed your young.</h4>
+								<p>
+									Feed your baby birds regularly to earn extra points and boost your score.
+								</p>
+							</div>
+						</article>
+						<article class="tf-card">
+							<div class="tf-experience-media">
+								<img src="images/EscapePredator.png" alt="Avoid predators mini game" />
+							</div>
+							<div class="tf-experience-copy">
+								<h4>Avoid Predators.</h4>
+								<p>
+									Dodge dangerous threats around the island to keep your run alive.
+								</p>
+							</div>
+						</article>
+						<article class="tf-card">
+							<div class="tf-experience-media">
+								<img src="images/EscapeBelleIsle.png" alt="Escape the island mini game" />
+							</div>
+							<div class="tf-experience-copy">
+								<h4>Escape the Island.</h4>
+								<p>
+									Navigate your way out under pressure and survive the final chase.
+								</p>
+							</div>
+						</article>
+					</div>
 				<button class="tf-arrow tf-arrow-right" aria-label="Next experience">&rarr;</button>
 			</section>
 
@@ -133,7 +177,7 @@
 				<div class="tf-owned-grid">
 					<figure class="tf-media tf-media-ipad">
 						<video controls playsinline poster="images/coverArt.png" preload="metadata">
-							<source src="images/TakeFlightWhatIDid.MP4" type="video/mp4" />
+							<source src="images/NewWhatIDID.mp4" type="video/mp4" />
 							Your browser does not support the video tag.
 						</video>
 					</figure>
@@ -157,13 +201,13 @@
 				<div class="tf-code-header">
 					<h3>Code Snippets</h3>
 					<p>
-						Selected implementation details from the systems I owned in Take Flight.
+						Highlights from the core systems I owned and implemented in Take Flight.
 					</p>
 				</div>
-				<div class="tf-snippet-grid">
-					<article class="tf-snippet-card">
-						<h4>Game Center - Auth + Achievements</h4>
-						<pre class="language-swift"><code class="language-swift">// Call once at app start or main menu.
+					<div class="tf-snippet-grid">
+						<article class="tf-snippet-card">
+							<h4>Game Center - Auth + Achievements</h4>
+							<pre class="language-swift"><code class="language-swift">// Call once at app start or main menu.
 @MainActor
 func authenticateLocalPlayer(presentingViewController: UIViewController?) async {
     let localPlayer = GKLocalPlayer.local
@@ -196,10 +240,10 @@ func completeAchievement(id: String, showBanner: Bool = true) async {
         print("Achievement report error: \(error.localizedDescription)")
     }
 }</code></pre>
-					</article>
-					<article class="tf-snippet-card">
-						<h4>Custom On-Screen Joystick</h4>
-						<pre class="language-swift"><code class="language-swift">// Custom Joystick
+						</article>
+						<article class="tf-snippet-card">
+							<h4>Custom On-Screen Joystick</h4>
+							<pre class="language-swift"><code class="language-swift">// Custom Joystick
 ZStack {
     Circle() // Background
         .fill(.white.opacity(0.3))
@@ -240,10 +284,15 @@ ZStack {
 }
 .frame(width: radius * 2, height: radius * 2)
 .contentShape(Circle())</code></pre>
-					</article>
-					<article class="tf-snippet-card">
-						<h4>Tutorial Mode</h4>
-						<pre class="language-swift"><code class="language-swift">enum RunState {
+						</article>
+						<article class="tf-snippet-card">
+							<h4>Tutorial Mode</h4>
+							<pre class="language-swift"><code class="language-swift">if viewModel?.tutorialIsOn == true, viewModel?.inventoryFullOnce == false {
+    viewModel?.showMainGameInstructions(type: .nestBuilding)
+    viewModel?.inventoryFullOnce = true
+}
+
+enum RunState {
     case tutorial
     case active
     case gameOver
@@ -259,11 +308,34 @@ func completeTutorial() {
 func restartToTutorial() {
     state = .tutorial
     showTutorialOverlay = true
+}
+
+struct MainOnboardingView: View {
+    @ObservedObject var viewModel: MainGameView.ViewModel
+    @Environment(\.dismiss) var dismiss
+    let type: MainGameView.ViewModel.InstructionType
+
+    var body: some View {
+        VStack(spacing: 16) {
+            Text("Tutorial").font(.system(.title, design: .rounded)).bold()
+            Text(viewModel.mainInstructionText(for: type))
+                .multilineTextAlignment(.center)
+
+            let resources = viewModel.mainInstructionImage(for: type)
+            if let imageName = resources.first {
+                Image(imageName).resizable().scaledToFit()
+            }
+
+            Button("Start") { dismiss() }
+                .buttonStyle(.borderedProminent)
+        }
+        .presentationDetents([.medium])
+    }
 }</code></pre>
-					</article>
-					<article class="tf-snippet-card">
-						<h4>Core Game Loop</h4>
-						<pre class="language-swift"><code class="language-swift">override func update(_ currentTime: TimeInterval) {
+						</article>
+						<article class="tf-snippet-card">
+							<h4>Core Game Loop</h4>
+							<pre class="language-swift"><code class="language-swift">override func update(_ currentTime: TimeInterval) {
     handleKeyboardMapInput()
     if viewModel?.isMapMode == true { return }
 
@@ -297,14 +369,49 @@ func restartToTutorial() {
     updateCameraFollow(target: player.position, deltaTime: deltaTime)
     clampCameraToMap()
 }</code></pre>
-					</article>
-				</div>
-			</section>
+						</article>
+					</div>
+				</section>
 
-			<section id="about" class="anchor-section"></section>
-			<section id="contact" class="anchor-section"></section>
-			<section id="login" class="anchor-section"></section>
-		</main>
+				<section class="tf-outcomes">
+					<div class="tf-outcomes-grid">
+						<article class="tf-outcome-card">
+							<h3>Outcome</h3>
+							<p>
+								The final build feels like one survival game, not a bunch of disconnected mini-games. Everything feeds the same loop, keep hunger up, avoid predators, build nests, and push your score higher, so each challenge has a clear purpose. Shared input, UI messaging, and scene transitions keep the experience consistent across SwiftUI + SpriteKit.
+							</p>
+						</article>
+						<article class="tf-outcome-card">
+							<h3>Next Iterations</h3>
+							<p>
+								Next, I&apos;d add adaptive difficulty so the game adjusts based on how you&apos;re playing, things like predator pressure, timers, and spawn rates. I&apos;d also add more little milestone moments so progression feels clearer between the big goals. And I&apos;d start tracking a few more stats besides score and hunger (time survived, nests completed, failed attempts) so I can balance the difficulty and pacing using real numbers instead of guessing.
+							</p>
+						</article>
+					</div>
+				</section>
+
+				<section class="cs-next-project">
+					<p class="cs-next-label">More Case Studies</p>
+					<div class="cs-next-grid">
+						<a class="cs-next-card" href="quickstudy.html">
+							<img src="images/PortQuickStudyIndexPic.png" alt="QuickStudy" />
+							<div class="cs-next-copy">
+								<h4>QuickStudy</h4>
+								<p>Turn scans and PDFs into study-ready flashcards using on-device AI.</p>
+							</div>
+							<span class="cs-next-arrow">&rarr;</span>
+						</a>
+						<a class="cs-next-card" href="caseStudies.html">
+							<img src="assets/commonsight/cover.png" alt="CommonSight" />
+							<div class="cs-next-copy">
+								<h4>CommonSight</h4>
+								<p>AI-assisted civic reporting and story cards built to help communities document issues.</p>
+							</div>
+							<span class="cs-next-arrow">&rarr;</span>
+						</a>
+					</div>
+				</section>
+			</main>
 
 		<footer class="site-footer">
 			<div class="site-footer-content">

@@ -1,0 +1,258 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>QuickStudy | Case Study</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+	</head>
+	<body class="homepage take-flight-page quickstudy-page">
+		<header class="site-header">
+			<h1 class="site-name">Jaiden Henley</h1>
+			<nav class="site-nav" aria-label="Main navigation">
+				<a href="index.html#top">Home</a>
+				<a href="index.html#about">About</a>
+				<a href="index.html#caseStudies">Case Studies</a>
+				<a href="contact.html">Contact</a>
+			</nav>
+		</header>
+
+		<main class="homepage-main">
+			<section class="tf-hero" id="top">
+				<div class="tf-hero-oval">
+					<h2>QuickStudy</h2>
+					<p>
+						Turn scans and PDFs into study-ready flashcards in minutes.
+					</p>
+				</div>
+			</section>
+
+			<section class="tf-overview">
+				<div class="tf-overview-grid">
+					<figure class="tf-media tf-media-phone">
+						<video controls playsinline preload="metadata" poster="assets/quickstudy/hero.png">
+							<source src="images/QuickStudyDemo1080.mp4" type="video/mp4" />
+							Your browser does not support the video tag.
+						</video>
+					</figure>
+					<div class="tf-copy">
+						<h1 class="tf-overview-title">QuickStudy</h1>
+						<p class="tf-overview-subtitle">Scan notes and PDFs into flashcards&#8212;fast.</p>
+						<p class="tf-overview-description">
+							QuickStudy takes the friction out of making study materials. Import a scan or PDF, review what the AI generates, approve the cards worth keeping, then jump straight into flashcard practice or a multiple-choice quiz.
+						</p>
+						<div class="tf-overview-highlights">
+							<h4>Highlights</h4>
+							<ul>
+								<li>Scan or PDF import to flashcards in one flow</li>
+								<li>Approve/edit cards before saving &mdash; no noise in your deck</li>
+								<li>Quiz mode auto-generated from your approved set</li>
+								<li>Fully local-first, no account needed</li>
+							</ul>
+						</div>
+						<div class="tf-overview-meta">
+							<p><strong>Team:</strong> Solo</p>
+							<p><strong>Role:</strong> iOS Developer</p>
+							<p><strong>Timeline:</strong> 2025</p>
+						</div>
+						<div class="tf-overview-tech">
+							<h4>Tech</h4>
+							<ul class="tf-tech-chips">
+								<li>SwiftUI</li>
+								<li>Foundation Models</li>
+								<li>VisionKit</li>
+								<li>PDF import</li>
+								<li>Local persistence</li>
+							</ul>
+						</div>
+						<p class="tf-project-link-wrap">
+							<a class="tf-project-link tf-project-link-github" href="https://github.com/jaidenhenley/QuickStudy" target="_blank" rel="noopener noreferrer">View Project on GitHub</a>
+							<span class="tf-project-link tf-project-link-disabled" aria-disabled="true">TestFlight &mdash; Coming Soon</span>
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section class="tf-game-flow">
+				<h3>Challenges &amp; Solutions</h3>
+				<div class="tf-flow-grid">
+					<article class="tf-card tf-card-challenge">
+						<span class="tf-challenge-number">01</span>
+						<h4>OCR Messiness</h4>
+						<p>
+							<strong>Challenge:</strong> Scanned notes produce inconsistent OCR output &mdash; stray characters, broken words, merged lines.<br /><br />
+							<strong>Solution:</strong> Added a cleanup pass on extracted text before handing it to the model.<br /><br />
+							<strong>Result:</strong> Cleaner flashcard generation with significantly less manual correction.
+						</p>
+					</article>
+					<article class="tf-card tf-card-challenge">
+						<span class="tf-challenge-number">02</span>
+						<h4>AI Availability &amp; Failures</h4>
+						<p>
+							<strong>Challenge:</strong> On-device Foundation Models aren't always available &mdash; older devices, low memory, or generation errors.<br /><br />
+							<strong>Solution:</strong> Built a deterministic fallback that splits text into card-sized chunks when AI isn't available, plus clear error UI so users always know what happened.<br /><br />
+							<strong>Result:</strong> Reliable card generation behavior across all supported devices.
+						</p>
+					</article>
+					<article class="tf-card tf-card-challenge">
+						<span class="tf-challenge-number">03</span>
+						<h4>Noisy Generated Cards</h4>
+						<p>
+							<strong>Challenge:</strong> Not every generated flashcard is worth studying &mdash; filler sentences, repeated facts, or low-value cards end up in the set.<br /><br />
+							<strong>Solution:</strong> Added an approval step where users toggle cards on or off before committing to a deck.<br /><br />
+							<strong>Result:</strong> Users only practice the cards they've deliberately chosen to keep.
+						</p>
+					</article>
+				</div>
+			</section>
+
+			<section class="tf-experiences">
+				<h3>Screenshots</h3>
+				<button class="tf-arrow tf-arrow-left" aria-label="Previous screenshot">&larr;</button>
+				<div class="tf-experience-grid">
+					<article class="tf-card">
+						<div class="tf-experience-media tf-experience-media--pending">
+							<p class="tf-screenshot-pending">Screenshot coming soon</p>
+						</div>
+						<div class="tf-experience-copy">
+							<h4>Import Source</h4>
+							<p>Choose between scanning a handwritten note or importing an existing PDF. VisionKit handles the OCR pass before anything goes to the model.</p>
+						</div>
+					</article>
+					<article class="tf-card">
+						<div class="tf-experience-media tf-experience-media--pending">
+							<p class="tf-screenshot-pending">Screenshot coming soon</p>
+						</div>
+						<div class="tf-experience-copy">
+							<h4>Card Review</h4>
+							<p>Generated cards land in a review list. Toggle each one on or off &mdash; only approved cards move forward into the deck.</p>
+						</div>
+					</article>
+					<article class="tf-card">
+						<div class="tf-experience-media tf-experience-media--pending">
+							<p class="tf-screenshot-pending">Screenshot coming soon</p>
+						</div>
+						<div class="tf-experience-copy">
+							<h4>Flashcard Practice</h4>
+							<p>Swipe through approved cards in a focused practice loop. No distractions &mdash; just the question, a tap to reveal, and a swipe to move on.</p>
+						</div>
+					</article>
+					<article class="tf-card">
+						<div class="tf-experience-media tf-experience-media--pending">
+							<p class="tf-screenshot-pending">Screenshot coming soon</p>
+						</div>
+						<div class="tf-experience-copy">
+							<h4>Quiz Mode</h4>
+							<p>Tap into quiz mode and answer multiple-choice questions auto-generated from your approved cards. Wrong answers circle back at the end.</p>
+						</div>
+					</article>
+				</div>
+				<button class="tf-arrow tf-arrow-right" aria-label="Next screenshot">&rarr;</button>
+			</section>
+
+			<section class="tf-owned">
+				<div class="tf-owned-grid">
+					<figure class="tf-media tf-media-ipad">
+						<img src="assets/quickstudy/hero.png" alt="QuickStudy app interface" />
+					</figure>
+					<div class="tf-copy">
+						<h3>What I Built</h3>
+						<ul class="tf-list">
+							<li>Scan and PDF import pipeline with VisionKit OCR</li>
+							<li>Text cleanup pass before model generation</li>
+							<li>On-device AI flashcard generation via Foundation Models</li>
+							<li>Deterministic fallback for devices without AI availability</li>
+							<li>Approve/toggle flow to build a curated study deck</li>
+							<li>Flashcard practice mode with swipe interaction</li>
+							<li>Multiple-choice quiz mode with distractor generation</li>
+							<li>Local persistence for saved sets and study history</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<section class="tf-code-snippets">
+				<div class="tf-code-header">
+					<h3>Key Engineering Details</h3>
+					<p>
+						Technical decisions that shaped the final product.
+					</p>
+				</div>
+				<div class="tf-snippet-grid">
+					<article class="tf-snippet-card">
+						<h4>On-Device AI with Fallback</h4>
+						<p>Used Apple's Foundation Models framework to generate flashcard question/answer pairs directly on-device &mdash; no server, no data leaving the phone. When the model isn't available (older hardware or low memory), a deterministic splitter breaks the source text into card-sized chunks so generation always succeeds.</p>
+					</article>
+					<article class="tf-snippet-card">
+						<h4>OCR Cleanup Pipeline</h4>
+						<p>Raw VisionKit output often contains stray characters, broken hyphenation, and merged words. Before sending text to the model, I run a cleanup pass that normalizes whitespace, removes recognition artifacts, and re-joins hyphenated words &mdash; improving card quality without manual editing.</p>
+					</article>
+					<article class="tf-snippet-card">
+						<h4>Approval-First Deck Building</h4>
+						<p>Every generated card goes into a review list before it can be studied. Users toggle cards on or off, and only approved cards are written to the saved deck. This keeps study sessions high-signal and gives users control over what the AI produced.</p>
+					</article>
+					<article class="tf-snippet-card">
+						<h4>Local-First Persistence</h4>
+						<p>All decks, approved cards, and quiz state are stored locally. No account, no sync, no network dependency. Saved sets persist between sessions and can be reloaded for follow-up practice without re-importing the source material.</p>
+					</article>
+				</div>
+			</section>
+
+			<section class="tf-outcomes">
+				<div class="tf-outcomes-grid">
+					<article class="tf-outcome-card">
+						<h3>Tech Stack</h3>
+						<ul class="tf-list">
+							<li>SwiftUI</li>
+							<li>Foundation Models (Apple Intelligence)</li>
+							<li>VisionKit (OCR)</li>
+							<li>PDF import</li>
+							<li>Local persistence</li>
+						</ul>
+					</article>
+					<article class="tf-outcome-card">
+						<h3>Outcome</h3>
+						<p>
+							QuickStudy collapses what used to be a multi-step process &mdash; scan, organize, manually write cards, then study &mdash; into a single focused flow. The approval step means the AI does the heavy lifting without removing user judgment from the loop.
+						</p>
+					</article>
+				</div>
+			</section>
+
+			<section class="cs-next-project">
+				<p class="cs-next-label">More Case Studies</p>
+				<div class="cs-next-grid">
+					<a class="cs-next-card" href="take-flight.html">
+						<img src="images/coverArt.png" alt="Take Flight" />
+						<div class="cs-next-copy">
+							<h4>Take Flight</h4>
+							<p>A Belle Isle-inspired 5-in-1 survival game built in 6 weeks at the Apple Developer Academy.</p>
+						</div>
+						<span class="cs-next-arrow">&rarr;</span>
+					</a>
+					<a class="cs-next-card" href="caseStudies.html">
+						<img src="assets/commonsight/cover.png" alt="CommonSight" />
+						<div class="cs-next-copy">
+							<h4>CommonSight</h4>
+							<p>AI-assisted civic reporting and story cards built to help communities document issues.</p>
+						</div>
+						<span class="cs-next-arrow">&rarr;</span>
+					</a>
+				</div>
+			</section>
+		</main>
+
+		<footer class="site-footer">
+			<div class="site-footer-content">
+				<p class="footer-name">Jaiden Henley</p>
+				<a class="footer-link" href="mailto:jaidenhenleydev@gmail.com">jaidenhenleydev@gmail.com</a>
+				<a class="footer-link" href="https://www.linkedin.com/in/jaiden-henley" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+				<a class="footer-link" href="https://github.com/jaidenhenley" target="_blank" rel="noopener noreferrer">GitHub</a>
+				<a class="footer-link footer-contact-button" href="contact.html">Contact Me</a>
+			</div>
+		</footer>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-swift.min.js"></script>
+	</body>
+</html>

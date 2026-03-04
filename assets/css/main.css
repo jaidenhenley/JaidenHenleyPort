@@ -2867,6 +2867,99 @@ body.homepage .anchor-section {
 	overflow: hidden;
 }
 
+/* ========================================================
+   About Section
+   ======================================================== */
+
+body.homepage .about-section {
+	background: #f0f0f5;
+	padding: 5rem 3rem;
+}
+
+body.homepage .about-grid {
+	display: grid;
+	gap: 3.5rem 5rem;
+	grid-template-columns: 1fr 280px;
+	margin: 0 auto;
+	max-width: 1060px;
+}
+
+body.homepage .about-copy h3 {
+	color: #050505;
+	font-size: 1.9rem;
+	font-weight: 800;
+	letter-spacing: -0.02em;
+	margin: 0 0 1.2rem;
+}
+
+body.homepage .about-copy p {
+	color: #3a3a44;
+	font-size: 1.05rem;
+	line-height: 1.75;
+	margin: 0 0 1rem;
+}
+
+body.homepage .about-copy p:last-child {
+	margin-bottom: 0;
+}
+
+body.homepage .about-looking-for {
+	background: rgba(47, 111, 158, 0.07);
+	border-left: 3px solid #2f6f9e;
+	border-radius: 0 6px 6px 0;
+	color: #1e3a4f !important;
+	padding: 0.75rem 1rem;
+}
+
+body.homepage .about-skills h4 {
+	color: #050505;
+	font-size: 0.8rem;
+	font-weight: 800;
+	letter-spacing: 0.1em;
+	margin: 0 0 0.9rem;
+	text-transform: uppercase;
+}
+
+body.homepage .about-skills-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+body.homepage .about-skills-list li {
+	background: #fff;
+	border: 1.5px solid rgba(5, 5, 5, 0.12);
+	border-radius: 999px;
+	color: #1a1a24;
+	font-size: 0.8rem;
+	font-weight: 600;
+	padding: 0.35rem 0.75rem;
+}
+
+@media screen and (max-width: 960px) {
+	body.homepage .about-grid {
+		grid-template-columns: 1fr;
+		gap: 2.5rem;
+	}
+
+	body.homepage .about-section {
+		padding: 3.5rem 2rem;
+	}
+}
+
+@media screen and (max-width: 736px) {
+	body.homepage .about-section {
+		padding: 2.5rem 1.25rem;
+	}
+
+	body.homepage .about-copy h3 {
+		font-size: 1.5rem;
+	}
+}
+
 body.homepage .site-footer {
 	background: #d7d8dd;
 	margin-top: 2.5rem;
@@ -3073,11 +3166,42 @@ body.homepage.home-view .featured-project-grid {
 	grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+body.homepage.home-view .featured-project-layout {
+	display: grid;
+	gap: 1.1rem;
+}
+
+body.homepage.home-view .featured-project-primary {
+	width: 100%;
+}
+
+body.homepage.home-view .project-card--featured {
+	display: grid;
+	grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+}
+
+body.homepage.home-view .project-card--featured .featured-project-image img {
+	aspect-ratio: 18 / 9;
+	height: 100%;
+}
+
+body.homepage.home-view .projects-grid--secondary {
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 body.homepage.home-view .featured-project-card {
 	background: rgba(240, 241, 246, 0.9);
 	border: 1px solid rgba(165, 169, 182, 0.38);
 	border-radius: 0.55rem;
 	overflow: hidden;
+	transition: box-shadow 0.22s ease, transform 0.22s ease;
+}
+
+body.homepage.home-view .featured-project-card:hover {
+	box-shadow:
+		0 8px 24px rgba(5, 5, 5, 0.1),
+		0 2px 6px rgba(5, 5, 5, 0.06);
+	transform: translateY(-2px);
 }
 
 body.homepage.home-view .featured-project-image {
@@ -3305,6 +3429,19 @@ body.homepage .current-location-city {
 		margin-bottom: 4rem;
 	}
 
+	body.homepage.home-view .project-card--featured {
+		grid-template-columns: 1fr;
+	}
+
+	body.homepage.home-view .project-card--featured .featured-project-image img {
+		aspect-ratio: 16 / 10;
+		height: auto;
+	}
+
+	body.homepage.home-view .projects-grid--secondary {
+		grid-template-columns: 1fr;
+	}
+
 	body.homepage.home-view .featured-project-grid {
 		grid-template-columns: 1fr;
 	}
@@ -3447,11 +3584,22 @@ body.take-flight-page .tf-hero-oval p {
 	margin: 0;
 }
 
+body.take-flight-page:not(.quickstudy-page) .tf-hero-oval {
+	max-width: 760px;
+	padding: 2.1rem 3.1rem;
+}
+
+body.take-flight-page:not(.quickstudy-page) .tf-hero-oval p {
+	font-size: clamp(1rem, 1.6vw, 1.55rem);
+	line-height: 1.3;
+}
+
 body.take-flight-page .tf-overview,
 body.take-flight-page .tf-game-flow,
 body.take-flight-page .tf-experiences,
 body.take-flight-page .tf-owned,
-body.take-flight-page .tf-code-snippets {
+body.take-flight-page .tf-code-snippets,
+body.take-flight-page .tf-outcomes {
 	padding: 3.5rem 3.75rem 2rem;
 }
 
@@ -3508,6 +3656,10 @@ body.take-flight-page .tf-project-cta {
 }
 
 body.take-flight-page .tf-project-link-wrap {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.72rem;
 	margin-top: 1rem;
 }
 
@@ -3528,6 +3680,17 @@ body.take-flight-page .tf-project-link {
 body.take-flight-page .tf-project-link:hover {
 	background: #255b81;
 	color: #fff;
+}
+
+body.take-flight-page .tf-project-link-github {
+	background: rgba(18, 23, 34, 0.06);
+	border: 1px solid rgba(18, 23, 34, 0.35);
+	color: #172034;
+}
+
+body.take-flight-page .tf-project-link-github:hover {
+	background: rgba(18, 23, 34, 0.14);
+	color: #0e1525;
 }
 
 body.take-flight-page .tf-game-flow h3,
@@ -3609,36 +3772,66 @@ body.take-flight-page .tf-experiences {
 }
 
 body.take-flight-page .tf-experience-grid {
-	display: grid;
-	gap: 2.2rem;
-	grid-template-columns: repeat(3, minmax(0, 1fr));
+	align-items: stretch;
+	display: flex;
+	gap: 1.25rem;
+	overflow-x: auto;
+	padding: 0.2rem 0 0.55rem;
+	scroll-snap-type: x proximity;
+	-webkit-overflow-scrolling: touch;
 }
 
 body.take-flight-page .tf-experience-grid .tf-card {
 	background: #dfe0e6;
-	padding-bottom: 1.4rem;
+	display: flex;
+	flex-direction: column;
+	flex: 0 0 min(360px, 84vw);
+	height: 100%;
+	overflow: hidden;
+	scroll-snap-align: start;
+}
+
+body.take-flight-page .tf-experience-grid .tf-experience-media {
+	background: #10131a;
+	flex: 0 0 320px;
+	overflow: hidden;
+}
+
+body.take-flight-page .tf-experience-grid .tf-experience-media img {
+	display: block;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+	width: 100%;
+}
+
+body.take-flight-page .tf-experience-grid .tf-experience-copy {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	padding: 0.9rem 0.95rem 1rem;
 	text-align: center;
 }
 
-body.take-flight-page .tf-experience-grid .tf-card img {
-	height: 430px;
+body.take-flight-page .tf-experience-grid .tf-card h4 {
+	margin: 0 0 0.45rem;
+}
+
+body.take-flight-page .tf-experience-grid .tf-card p {
+	margin: 0;
+}
+
+body.take-flight-page .tf-experience-grid::-webkit-scrollbar {
+	height: 0.62rem;
+}
+
+body.take-flight-page .tf-experience-grid::-webkit-scrollbar-thumb {
+	background: rgba(39, 49, 68, 0.45);
+	border-radius: 999px;
 }
 
 body.take-flight-page .tf-arrow {
-	align-items: center;
-	background: rgba(55, 132, 189, 0.8);
-	border: 0;
-	border-radius: 999px;
-	color: #fff;
-	display: inline-flex;
-	font-size: 2.5rem;
-	height: 72px;
-	justify-content: center;
-	line-height: 1;
-	position: absolute;
-	top: 52%;
-	transform: translateY(-50%);
-	width: 72px;
+	display: none;
 }
 
 body.take-flight-page .tf-arrow-left {
@@ -3660,6 +3853,43 @@ body.take-flight-page .tf-code-snippets {
 	background: #ececf1;
 	padding-bottom: 4.5rem;
 	padding-top: 4.3rem;
+}
+
+body.take-flight-page .tf-outcomes {
+	background: #dfe0e6;
+	padding-bottom: 4rem;
+	padding-top: 3.9rem;
+}
+
+body.take-flight-page .tf-outcomes-grid {
+	display: grid;
+	gap: 1rem;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	margin: 0 auto;
+	max-width: 1150px;
+}
+
+body.take-flight-page .tf-outcome-card {
+	background: #ececf1;
+	border: 1px solid rgba(10, 14, 22, 0.08);
+	border-radius: 0.32rem;
+	padding: 1rem 1rem 1.05rem;
+}
+
+body.take-flight-page .tf-outcome-card h3 {
+	color: #0b0b0d;
+	font-size: clamp(1.2rem, 2.2vw, 1.8rem);
+	font-weight: 600;
+	letter-spacing: -0.01em;
+	line-height: 1.15;
+	margin: 0 0 0.45rem;
+}
+
+body.take-flight-page .tf-outcome-card p {
+	color: #111;
+	font-size: clamp(0.94rem, 1.28vw, 1.08rem);
+	line-height: 1.58;
+	margin: 0;
 }
 
 body.take-flight-page .tf-code-header {
@@ -3687,43 +3917,69 @@ body.take-flight-page .tf-code-header p {
 body.take-flight-page .tf-snippet-grid {
 	display: grid;
 	gap: 1.3rem;
-	grid-template-columns: repeat(2, minmax(0, 1fr));
+	grid-template-columns: 1fr;
 	margin: 0 auto;
-	max-width: 1150px;
+	max-width: 980px;
 }
 
 body.take-flight-page .tf-snippet-card {
 	background: #121419;
 	border: 1px solid rgba(255, 255, 255, 0.08);
-	border-radius: 0.5rem;
+	border-radius: 0.35rem;
 	box-shadow: 0 0.9rem 1.6rem rgba(0, 0, 0, 0.2);
-	padding: 1.1rem 1.15rem 1.2rem;
+	overflow: hidden;
+	padding: 0.85rem 0.9rem 0.9rem;
 }
 
 body.take-flight-page .tf-snippet-card h4 {
 	color: #f4f5f7;
-	font-size: clamp(1.05rem, 1.6vw, 1.32rem);
+	font-size: clamp(0.95rem, 1.3vw, 1.16rem);
 	font-weight: 600;
 	letter-spacing: -0.01em;
-	line-height: 1.3;
-	margin: 0 0 0.8rem;
+	line-height: 1.25;
+	margin: 0 0 0.62rem;
 }
 
 body.take-flight-page .tf-snippet-card pre {
-	background: rgba(255, 255, 255, 0.03);
-	border-radius: 0.35rem;
+	background: rgba(255, 255, 255, 0.025);
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	border-radius: 0.3rem;
 	color: #f4f5f7;
 	font-family: "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-	font-size: clamp(0.8rem, 1.35vw, 0.96rem);
-	line-height: 1.5;
+	font-size: clamp(0.72rem, 1vw, 0.84rem);
+	line-height: 1.4;
 	margin: 0;
 	overflow-x: auto;
-	padding: 0.8rem;
+	padding: 0.7rem 0.76rem 0.76rem;
 	white-space: pre;
 }
 
 body.take-flight-page .tf-snippet-card code {
 	font-family: inherit;
+}
+
+body.take-flight-page .tf-dark-list {
+	list-style: disc;
+	margin: 0.15rem 0 0 1.2rem;
+}
+
+body.take-flight-page .tf-dark-list li {
+	color: #e7ecf6;
+	font-size: clamp(0.9rem, 1.15vw, 1.02rem);
+	line-height: 1.5;
+	margin: 0 0 0.34rem;
+}
+
+body.take-flight-page .tf-list-compact {
+	list-style: disc;
+	margin: 0.15rem 0 0 1.2rem;
+}
+
+body.take-flight-page .tf-list-compact li {
+	color: #111;
+	font-size: clamp(0.94rem, 1.28vw, 1.08rem);
+	line-height: 1.58;
+	margin: 0 0 0.32rem;
 }
 
 body.take-flight-page .tf-list {
@@ -3759,7 +4015,20 @@ body.take-flight-page .tf-owned .tf-media-ipad {
 	width: 100%;
 }
 
-body.take-flight-page .tf-overview .tf-media-ipad video,
+body.take-flight-page:not(.quickstudy-page) .tf-overview .tf-media-ipad {
+	max-width: 700px;
+}
+
+body.take-flight-page:not(.quickstudy-page) .tf-overview .tf-media-ipad video {
+	aspect-ratio: 4 / 3;
+	border-radius: clamp(1.22rem, 2vw, 1.62rem);
+	display: block;
+	height: auto;
+	object-fit: cover;
+	object-position: center;
+	width: 100%;
+}
+
 body.take-flight-page .tf-owned .tf-media-ipad video {
 	aspect-ratio: 4 / 3;
 	border-radius: clamp(1.22rem, 2vw, 1.62rem);
@@ -3778,7 +4047,8 @@ body.take-flight-page .tf-owned .tf-media-ipad video {
 	body.take-flight-page .tf-game-flow,
 	body.take-flight-page .tf-experiences,
 	body.take-flight-page .tf-owned,
-	body.take-flight-page .tf-code-snippets {
+	body.take-flight-page .tf-code-snippets,
+	body.take-flight-page .tf-outcomes {
 		padding-left: 1.75rem;
 		padding-right: 1.75rem;
 	}
@@ -3818,16 +4088,12 @@ body.take-flight-page .tf-owned .tf-media-ipad video {
 		grid-template-columns: 1fr;
 	}
 
-	body.take-flight-page .tf-experience-grid {
-		grid-template-columns: 1fr;
-	}
-
 	body.take-flight-page .tf-snippet-grid {
 		grid-template-columns: 1fr;
 	}
 
-	body.take-flight-page .tf-arrow {
-		display: none;
+	body.take-flight-page .tf-outcomes-grid {
+		grid-template-columns: 1fr;
 	}
 }
 
@@ -3839,8 +4105,655 @@ body.take-flight-page .tf-owned .tf-media-ipad video {
 
 	body.take-flight-page .tf-card img,
 	body.take-flight-page .tf-card-tall img,
-	body.take-flight-page .tf-card-phone img,
-	body.take-flight-page .tf-experience-grid .tf-card img {
+	body.take-flight-page .tf-card-phone img {
 		height: auto;
+	}
+}
+
+body.take-flight-page.quickstudy-page .tf-hero {
+	background:
+		radial-gradient(120% 120% at 12% 0%, rgba(197, 170, 255, 0.46) 0%, rgba(197, 170, 255, 0) 46%),
+		radial-gradient(130% 130% at 96% 94%, rgba(118, 75, 225, 0.58) 0%, rgba(118, 75, 225, 0) 58%),
+		linear-gradient(135deg, #24103f 0%, #38205f 48%, #181818 100%);
+}
+
+body.take-flight-page.quickstudy-page .tf-hero::after {
+	background: #d9cdf2;
+}
+
+body.take-flight-page.quickstudy-page .site-name,
+body.take-flight-page.quickstudy-page .site-nav a {
+	color: #ffffff;
+	text-shadow: 0 2px 10px rgba(20, 10, 36, 0.45);
+}
+
+body.take-flight-page.quickstudy-page .site-nav a:hover,
+body.take-flight-page.quickstudy-page .site-nav a:focus-visible {
+	color: #efe4ff;
+}
+
+body.take-flight-page.quickstudy-page .tf-hero-oval {
+	background: rgba(240, 233, 255, 0.92);
+	box-shadow: 0 1.15rem 2.2rem rgba(26, 13, 47, 0.25);
+	max-width: 760px;
+	padding: 2.1rem 3.1rem;
+}
+
+body.take-flight-page.quickstudy-page .tf-hero-oval h2 {
+	color: #2e1b58;
+}
+
+body.take-flight-page.quickstudy-page .tf-hero-oval p {
+	color: #4a2b83;
+	font-size: clamp(1rem, 1.6vw, 1.55rem);
+	line-height: 1.3;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview,
+body.take-flight-page.quickstudy-page .tf-game-flow,
+body.take-flight-page.quickstudy-page .tf-experiences {
+	background: linear-gradient(180deg, #f6f2fc 0%, #f1e8fb 100%);
+}
+
+body.take-flight-page.quickstudy-page .tf-overview {
+	padding-bottom: 1.35rem;
+	padding-top: 2.4rem;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview-grid {
+	align-items: start;
+	gap: 2rem;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview .tf-media-ipad {
+	background: #efe6ff;
+	border: 1px solid rgba(60, 36, 112, 0.2);
+	border-radius: 0.72rem;
+	box-shadow: 0 0.85rem 1.6rem rgba(31, 16, 56, 0.2);
+	max-width: 100%;
+	padding: 0.5rem;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview .tf-media-phone {
+	background: linear-gradient(155deg, #5f636c 0%, #3a3e45 18%, #16181d 52%, #0f1115 100%);
+	border: 1px solid rgba(220, 226, 239, 0.2);
+	border-radius: clamp(2rem, 3vw, 2.45rem);
+	box-shadow:
+		0 1.2rem 2rem rgba(0, 0, 0, 0.28),
+		inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+		inset 0 -10px 18px rgba(0, 0, 0, 0.38);
+	justify-self: center;
+	max-width: 340px;
+	padding: clamp(0.62rem, 1vw, 0.72rem) clamp(0.4rem, 0.68vw, 0.52rem) clamp(0.52rem, 0.84vw, 0.6rem);
+	position: relative;
+	isolation: isolate;
+	width: 100%;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview .tf-media-phone::before {
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-radius: inherit;
+	content: "";
+	inset: 2px;
+	pointer-events: none;
+	position: absolute;
+	z-index: 2;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview .tf-media-phone video {
+	aspect-ratio: 9 / 19.5;
+	border-radius: clamp(1.52rem, 2.2vw, 1.82rem);
+	display: block;
+	height: auto;
+	object-fit: cover;
+	object-position: center;
+	position: relative;
+	width: 100%;
+	z-index: 1;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview-media-shell {
+	aspect-ratio: 16 / 10;
+	background: #1f1538;
+	border-radius: 0.5rem;
+	overflow: hidden;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview-media-shell img,
+body.take-flight-page.quickstudy-page .tf-overview-media-shell video {
+	display: block;
+	height: 100%;
+	object-fit: cover;
+	width: 100%;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview .tf-copy {
+	padding-top: 0.08rem;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview-title {
+	color: #26154f;
+	font-size: clamp(2.2rem, 4.6vw, 3.6rem);
+	font-weight: 600;
+	letter-spacing: -0.03em;
+	line-height: 1.05;
+	margin: 0 0 0.45rem;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview-subtitle {
+	color: #4a2b83;
+	font-size: clamp(1.08rem, 2vw, 1.36rem);
+	font-weight: 600;
+	line-height: 1.45;
+	margin: 0 0 0.72rem;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview-description {
+	margin: 0 0 1rem;
+	max-width: 56ch;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview-highlights {
+	margin: 0 0 1.02rem;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview-highlights h4 {
+	font-size: 0.72rem;
+	font-weight: 800;
+	letter-spacing: 0.1em;
+	line-height: 1;
+	margin: 0 0 0.6rem;
+	text-transform: uppercase;
+}
+
+body.take-flight-page .tf-overview-tech h4 {
+	font-size: 1rem;
+	font-weight: 800;
+	letter-spacing: 0.04em;
+	line-height: 1;
+	margin: 0 0 0.7rem;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview-highlights h4,
+body.take-flight-page.quickstudy-page .tf-overview-tech h4 {
+	color: #2d1a5c;
+}
+
+body.take-flight-page:not(.quickstudy-page) .tf-overview-tech h4 {
+	color: #0d3050;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview-highlights ul {
+	list-style: disc;
+	margin: 0 0 0 1.2rem;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview-highlights li {
+	color: #1e1631;
+	font-size: 0.98rem;
+	line-height: 1.52;
+	margin: 0 0 0.22rem;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview-meta {
+	margin: 0 0 0.85rem;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview-meta p {
+	margin: 0 0 0.28rem;
+}
+
+body.take-flight-page .tf-overview-tech {
+	border-top: 1.5px solid rgba(255, 255, 255, 0.12);
+	margin: 0.6rem 0 1rem;
+	padding-top: 1rem;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview-tech {
+	border-top-color: rgba(82, 47, 154, 0.18);
+}
+
+body.take-flight-page:not(.quickstudy-page) .tf-overview-tech {
+	border-top-color: rgba(47, 111, 158, 0.22);
+}
+
+body.take-flight-page .tf-tech-chips {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.55rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+body.take-flight-page:not(.quickstudy-page) .tf-tech-chips li {
+	background: rgba(47, 111, 158, 0.14);
+	border: 1.5px solid rgba(47, 111, 158, 0.45);
+	border-radius: 999px;
+	color: #0d3050;
+	font-size: 0.85rem;
+	font-weight: 700;
+	line-height: 1;
+	padding: 0.52rem 0.9rem;
+}
+
+body.take-flight-page.quickstudy-page .tf-tech-chips li {
+	background: rgba(116, 72, 216, 0.14);
+	border: 1.5px solid rgba(116, 72, 216, 0.4);
+	border-radius: 999px;
+	color: #2b1b57;
+	font-size: 0.85rem;
+	font-weight: 700;
+	line-height: 1;
+	padding: 0.52rem 0.9rem;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview .tf-project-link-wrap {
+	margin-top: 0.1rem;
+}
+
+body.take-flight-page.quickstudy-page .tf-owned {
+	background: linear-gradient(180deg, #efe4fb 0%, #eadcf9 100%);
+}
+
+body.take-flight-page.quickstudy-page .tf-code-snippets {
+	background: linear-gradient(180deg, #e9def8 0%, #e2d3f5 100%);
+}
+
+body.take-flight-page.quickstudy-page .tf-outcomes {
+	background: linear-gradient(180deg, #dfd2f3 0%, #d8c7ee 100%);
+}
+
+body.take-flight-page.quickstudy-page .tf-card {
+	background: #ece3fb;
+}
+
+body.take-flight-page.quickstudy-page .tf-experience-grid .tf-card {
+	background: #e7dcfa;
+}
+
+body.take-flight-page.quickstudy-page .tf-outcome-card {
+	background: #f3ebff;
+	border-color: rgba(67, 38, 123, 0.18);
+}
+
+body.take-flight-page.quickstudy-page .tf-project-link {
+	background: linear-gradient(135deg, #7448d8 0%, #9656ee 100%);
+}
+
+body.take-flight-page.quickstudy-page .tf-project-link:hover {
+	background: linear-gradient(135deg, #663ac6 0%, #8242dc 100%);
+}
+
+body.take-flight-page.quickstudy-page .tf-project-link-github {
+	background: rgba(56, 34, 101, 0.08);
+	border-color: rgba(56, 34, 101, 0.34);
+	color: #2d1a5c;
+}
+
+body.take-flight-page.quickstudy-page .tf-project-link-github:hover {
+	background: rgba(56, 34, 101, 0.16);
+	color: #221348;
+}
+
+body.take-flight-page.quickstudy-page .tf-snippet-card {
+	background: #171128;
+	border-color: rgba(210, 193, 255, 0.16);
+}
+
+body.take-flight-page.quickstudy-page .tf-snippet-card pre {
+	background: rgba(255, 255, 255, 0.05);
+	border-color: rgba(210, 193, 255, 0.22);
+}
+
+body.take-flight-page.quickstudy-page .tf-experience-grid::-webkit-scrollbar-thumb {
+	background: rgba(103, 63, 182, 0.55);
+}
+
+@media screen and (max-width: 960px) {
+
+	body.take-flight-page.quickstudy-page .site-header {
+		background: linear-gradient(135deg, #2f1a57 0%, #4a2d84 100%);
+	}
+
+	body.take-flight-page.quickstudy-page .tf-overview {
+		padding-top: 2rem;
+	}
+
+	body.take-flight-page.quickstudy-page .tf-overview .tf-media-phone {
+		max-width: 320px;
+	}
+}
+
+@media screen and (max-width: 736px) {
+
+	body.take-flight-page.quickstudy-page .tf-overview .tf-project-link-wrap {
+		width: 100%;
+	}
+
+	body.take-flight-page.quickstudy-page .tf-overview .tf-project-link {
+		flex: 1 1 100%;
+		text-align: center;
+	}
+}
+
+/* QuickStudy — challenge number cards */
+body.take-flight-page.quickstudy-page .tf-card-challenge {
+	border-left: 3px solid #7448d8;
+	padding: 1.8rem 1.6rem 1.6rem 1.5rem;
+	position: relative;
+	transition: box-shadow 0.22s ease, transform 0.22s ease;
+}
+
+body.take-flight-page.quickstudy-page .tf-card-challenge:hover {
+	box-shadow:
+		0 8px 24px rgba(103, 63, 182, 0.18),
+		0 2px 6px rgba(103, 63, 182, 0.1);
+	transform: translateY(-2px);
+}
+
+body.take-flight-page.quickstudy-page .tf-challenge-number {
+	color: #7448d8;
+	font-size: 1rem;
+	font-weight: 900;
+	letter-spacing: -0.01em;
+	line-height: 1;
+	margin: 0 0 0.9rem;
+	position: static;
+}
+
+/* Challenge / Solution / Result inline badges */
+body.take-flight-page.quickstudy-page .tf-card-challenge p strong {
+	border-radius: 4px;
+	display: inline-block;
+	font-size: 0.7rem;
+	font-weight: 800;
+	letter-spacing: 0.06em;
+	line-height: 1;
+	padding: 0.2rem 0.45rem;
+	text-transform: uppercase;
+	vertical-align: middle;
+	margin-right: 0.3rem;
+}
+
+body.take-flight-page.quickstudy-page .tf-card-challenge p strong:nth-of-type(1) {
+	background: rgba(220, 38, 38, 0.1);
+	border: 1px solid rgba(220, 38, 38, 0.25);
+	color: #b91c1c;
+}
+
+body.take-flight-page.quickstudy-page .tf-card-challenge p strong:nth-of-type(2) {
+	background: rgba(37, 99, 235, 0.1);
+	border: 1px solid rgba(37, 99, 235, 0.25);
+	color: #1d4ed8;
+}
+
+body.take-flight-page.quickstudy-page .tf-card-challenge p strong:nth-of-type(3) {
+	background: rgba(22, 163, 74, 0.1);
+	border: 1px solid rgba(22, 163, 74, 0.25);
+	color: #15803d;
+}
+
+/* QuickStudy — screenshot pending state */
+body.take-flight-page.quickstudy-page .tf-experience-media--pending {
+	background: rgba(103, 63, 182, 0.08);
+	border: 1.5px dashed rgba(103, 63, 182, 0.3);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 200px;
+	flex: 0 0 320px;
+}
+
+body.take-flight-page.quickstudy-page .tf-screenshot-pending {
+	color: rgba(103, 63, 182, 0.5);
+	font-size: 0.8rem;
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	margin: 0;
+	text-align: center;
+}
+
+/* QuickStudy — disabled / coming-soon link */
+body.take-flight-page.quickstudy-page .tf-project-link-disabled {
+	background: rgba(103, 63, 182, 0.06);
+	border: 1.5px solid rgba(103, 63, 182, 0.2);
+	border-radius: 8px;
+	color: rgba(103, 63, 182, 0.45);
+	cursor: default;
+	display: inline-block;
+	font-size: 0.85rem;
+	font-weight: 600;
+	padding: 0.6rem 1.1rem;
+	text-decoration: none;
+}
+
+/* QuickStudy — snippet cards now use <p> instead of <pre> */
+body.take-flight-page.quickstudy-page .tf-snippet-card p {
+	color: rgba(220, 210, 255, 0.8);
+	font-size: 0.9rem;
+	line-height: 1.65;
+	margin: 0;
+}
+
+/* ========================================================
+   Case Study — Next Project + CTA sections
+   ======================================================== */
+
+.cs-next-project {
+	padding: 3.5rem 3rem;
+}
+
+body.take-flight-page:not(.quickstudy-page) .cs-next-project {
+	background: #0f1520;
+}
+
+body.take-flight-page.quickstudy-page .cs-next-project {
+	background: linear-gradient(180deg, #d8c7ee 0%, #cdbde8 100%);
+}
+
+.cs-next-label {
+	color: rgba(255, 255, 255, 0.45);
+	font-size: 0.72rem;
+	font-weight: 800;
+	letter-spacing: 0.12em;
+	margin: 0 0 1rem;
+	text-transform: uppercase;
+}
+
+body.take-flight-page.quickstudy-page .cs-next-label {
+	color: rgba(44, 22, 90, 0.5);
+}
+
+.cs-next-grid {
+	display: grid;
+	gap: 1rem;
+	grid-template-columns: 1fr 1fr;
+	max-width: 960px;
+}
+
+.cs-next-card {
+	align-items: center;
+	background: rgba(255, 255, 255, 0.06);
+	border: 1.5px solid rgba(255, 255, 255, 0.1);
+	border-radius: 14px;
+	display: flex;
+	gap: 1.25rem;
+	padding: 1.25rem 1.5rem;
+	text-decoration: none;
+	transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.cs-next-card:hover {
+	background: rgba(255, 255, 255, 0.1);
+	border-color: rgba(255, 255, 255, 0.2);
+	transform: translateY(-2px);
+}
+
+body.take-flight-page.quickstudy-page .cs-next-card {
+	background: rgba(44, 22, 90, 0.08);
+	border-color: rgba(44, 22, 90, 0.18);
+}
+
+body.take-flight-page.quickstudy-page .cs-next-card:hover {
+	background: rgba(44, 22, 90, 0.14);
+	border-color: rgba(44, 22, 90, 0.3);
+}
+
+.cs-next-card img {
+	border-radius: 8px;
+	flex-shrink: 0;
+	height: 64px;
+	object-fit: cover;
+	width: 96px;
+}
+
+.cs-next-copy {
+	flex: 1;
+}
+
+.cs-next-copy h4 {
+	color: #fff;
+	font-size: 1rem;
+	font-weight: 700;
+	margin: 0 0 0.25rem;
+}
+
+body.take-flight-page.quickstudy-page .cs-next-copy h4 {
+	color: #1a0a38;
+}
+
+.cs-next-copy p {
+	color: rgba(255, 255, 255, 0.6);
+	font-size: 0.875rem;
+	line-height: 1.5;
+	margin: 0;
+}
+
+body.take-flight-page.quickstudy-page .cs-next-copy p {
+	color: rgba(44, 22, 90, 0.65);
+}
+
+.cs-next-arrow {
+	color: rgba(255, 255, 255, 0.4);
+	flex-shrink: 0;
+	font-size: 1.25rem;
+	transition: color 0.2s ease, transform 0.2s ease;
+}
+
+body.take-flight-page.quickstudy-page .cs-next-arrow {
+	color: rgba(44, 22, 90, 0.4);
+}
+
+.cs-next-card:hover .cs-next-arrow {
+	color: rgba(255, 255, 255, 0.8);
+	transform: translateX(4px);
+}
+
+body.take-flight-page.quickstudy-page .cs-next-card:hover .cs-next-arrow {
+	color: rgba(44, 22, 90, 0.7);
+}
+
+/* CTA section */
+.cs-cta {
+	padding: 5rem 3rem;
+	text-align: center;
+}
+
+body.take-flight-page:not(.quickstudy-page) .cs-cta {
+	background: #080d16;
+}
+
+body.take-flight-page.quickstudy-page .cs-cta {
+	background: linear-gradient(180deg, #cdbde8 0%, #c4b0e2 100%);
+}
+
+.cs-cta-inner {
+	margin: 0 auto;
+	max-width: 520px;
+}
+
+.cs-cta-inner h3 {
+	font-size: 2rem;
+	font-weight: 800;
+	letter-spacing: -0.02em;
+	margin: 0 0 0.75rem;
+}
+
+body.take-flight-page:not(.quickstudy-page) .cs-cta-inner h3 {
+	color: #fff;
+}
+
+body.take-flight-page.quickstudy-page .cs-cta-inner h3 {
+	color: #150830;
+}
+
+.cs-cta-inner p {
+	font-size: 1rem;
+	line-height: 1.6;
+	margin: 0 0 2rem;
+}
+
+body.take-flight-page:not(.quickstudy-page) .cs-cta-inner p {
+	color: rgba(255, 255, 255, 0.6);
+}
+
+body.take-flight-page.quickstudy-page .cs-cta-inner p {
+	color: rgba(21, 8, 48, 0.65);
+}
+
+.cs-cta-button {
+	border-radius: 10px;
+	display: inline-block;
+	font-size: 0.95rem;
+	font-weight: 700;
+	padding: 0.8rem 2rem;
+	text-decoration: none;
+	transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.cs-cta-button:hover {
+	opacity: 0.88;
+	transform: translateY(-2px);
+}
+
+body.take-flight-page:not(.quickstudy-page) .cs-cta-button {
+	background: linear-gradient(135deg, #2f6f9e 0%, #3a88bf 100%);
+	color: #fff;
+}
+
+body.take-flight-page.quickstudy-page .cs-cta-button {
+	background: linear-gradient(135deg, #7448d8 0%, #9656ee 100%);
+	color: #fff;
+}
+
+@media screen and (max-width: 736px) {
+	.cs-next-project,
+	.cs-cta {
+		padding-left: 1.25rem;
+		padding-right: 1.25rem;
+	}
+
+	.cs-cta {
+		padding-top: 3.5rem;
+		padding-bottom: 3.5rem;
+	}
+
+	.cs-cta-inner h3 {
+		font-size: 1.5rem;
+	}
+
+	.cs-next-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.cs-next-card {
+		gap: 1rem;
+		padding: 1rem 1.1rem;
+	}
+
+	.cs-next-card img {
+		height: 48px;
+		width: 72px;
 	}
 }
