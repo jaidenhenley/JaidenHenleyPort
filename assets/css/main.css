@@ -2867,6 +2867,99 @@ body.homepage .anchor-section {
 	overflow: hidden;
 }
 
+/* ========================================================
+   About Section
+   ======================================================== */
+
+body.homepage .about-section {
+	background: #f0f0f5;
+	padding: 5rem 3rem;
+}
+
+body.homepage .about-grid {
+	display: grid;
+	gap: 3.5rem 5rem;
+	grid-template-columns: 1fr 280px;
+	margin: 0 auto;
+	max-width: 1060px;
+}
+
+body.homepage .about-copy h3 {
+	color: #050505;
+	font-size: 1.9rem;
+	font-weight: 800;
+	letter-spacing: -0.02em;
+	margin: 0 0 1.2rem;
+}
+
+body.homepage .about-copy p {
+	color: #3a3a44;
+	font-size: 1.05rem;
+	line-height: 1.75;
+	margin: 0 0 1rem;
+}
+
+body.homepage .about-copy p:last-child {
+	margin-bottom: 0;
+}
+
+body.homepage .about-looking-for {
+	background: rgba(47, 111, 158, 0.07);
+	border-left: 3px solid #2f6f9e;
+	border-radius: 0 6px 6px 0;
+	color: #1e3a4f !important;
+	padding: 0.75rem 1rem;
+}
+
+body.homepage .about-skills h4 {
+	color: #050505;
+	font-size: 0.8rem;
+	font-weight: 800;
+	letter-spacing: 0.1em;
+	margin: 0 0 0.9rem;
+	text-transform: uppercase;
+}
+
+body.homepage .about-skills-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+body.homepage .about-skills-list li {
+	background: #fff;
+	border: 1.5px solid rgba(5, 5, 5, 0.12);
+	border-radius: 999px;
+	color: #1a1a24;
+	font-size: 0.8rem;
+	font-weight: 600;
+	padding: 0.35rem 0.75rem;
+}
+
+@media screen and (max-width: 960px) {
+	body.homepage .about-grid {
+		grid-template-columns: 1fr;
+		gap: 2.5rem;
+	}
+
+	body.homepage .about-section {
+		padding: 3.5rem 2rem;
+	}
+}
+
+@media screen and (max-width: 736px) {
+	body.homepage .about-section {
+		padding: 2.5rem 1.25rem;
+	}
+
+	body.homepage .about-copy h3 {
+		font-size: 1.5rem;
+	}
+}
+
 body.homepage .site-footer {
 	background: #d7d8dd;
 	margin-top: 2.5rem;
@@ -3101,6 +3194,14 @@ body.homepage.home-view .featured-project-card {
 	border: 1px solid rgba(165, 169, 182, 0.38);
 	border-radius: 0.55rem;
 	overflow: hidden;
+	transition: box-shadow 0.22s ease, transform 0.22s ease;
+}
+
+body.homepage.home-view .featured-project-card:hover {
+	box-shadow:
+		0 8px 24px rgba(5, 5, 5, 0.1),
+		0 2px 6px rgba(5, 5, 5, 0.06);
+	transform: translateY(-2px);
 }
 
 body.homepage.home-view .featured-project-image {
@@ -3481,6 +3582,16 @@ body.take-flight-page .tf-hero-oval p {
 	font-weight: 600;
 	line-height: 1.4;
 	margin: 0;
+}
+
+body.take-flight-page:not(.quickstudy-page) .tf-hero-oval {
+	max-width: 760px;
+	padding: 2.1rem 3.1rem;
+}
+
+body.take-flight-page:not(.quickstudy-page) .tf-hero-oval p {
+	font-size: clamp(1rem, 1.6vw, 1.55rem);
+	line-height: 1.3;
 }
 
 body.take-flight-page .tf-overview,
@@ -3905,11 +4016,11 @@ body.take-flight-page .tf-owned .tf-media-ipad {
 }
 
 body.take-flight-page:not(.quickstudy-page) .tf-overview .tf-media-ipad {
-	max-width: 430px;
+	max-width: 700px;
 }
 
 body.take-flight-page:not(.quickstudy-page) .tf-overview .tf-media-ipad video {
-	aspect-ratio: 9 / 16;
+	aspect-ratio: 4 / 3;
 	border-radius: clamp(1.22rem, 2vw, 1.62rem);
 	display: block;
 	height: auto;
@@ -4024,6 +4135,8 @@ body.take-flight-page.quickstudy-page .site-nav a:focus-visible {
 body.take-flight-page.quickstudy-page .tf-hero-oval {
 	background: rgba(240, 233, 255, 0.92);
 	box-shadow: 0 1.15rem 2.2rem rgba(26, 13, 47, 0.25);
+	max-width: 760px;
+	padding: 2.1rem 3.1rem;
 }
 
 body.take-flight-page.quickstudy-page .tf-hero-oval h2 {
@@ -4032,12 +4145,14 @@ body.take-flight-page.quickstudy-page .tf-hero-oval h2 {
 
 body.take-flight-page.quickstudy-page .tf-hero-oval p {
 	color: #4a2b83;
+	font-size: clamp(1rem, 1.6vw, 1.55rem);
+	line-height: 1.3;
 }
 
 body.take-flight-page.quickstudy-page .tf-overview,
 body.take-flight-page.quickstudy-page .tf-game-flow,
 body.take-flight-page.quickstudy-page .tf-experiences {
-	background: #f4eefc;
+	background: linear-gradient(180deg, #f6f2fc 0%, #f1e8fb 100%);
 }
 
 body.take-flight-page.quickstudy-page .tf-overview {
@@ -4060,26 +4175,41 @@ body.take-flight-page.quickstudy-page .tf-overview .tf-media-ipad {
 }
 
 body.take-flight-page.quickstudy-page .tf-overview .tf-media-phone {
-	background: #121419;
-	border: 1px solid rgba(255, 255, 255, 0.08);
-	border-radius: clamp(1.65rem, 2.8vw, 2.2rem);
+	background: linear-gradient(155deg, #5f636c 0%, #3a3e45 18%, #16181d 52%, #0f1115 100%);
+	border: 1px solid rgba(220, 226, 239, 0.2);
+	border-radius: clamp(2rem, 3vw, 2.45rem);
 	box-shadow:
-		0 0.9rem 1.8rem rgba(0, 0, 0, 0.24),
-		inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+		0 1.2rem 2rem rgba(0, 0, 0, 0.28),
+		inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+		inset 0 -10px 18px rgba(0, 0, 0, 0.38);
 	justify-self: center;
 	max-width: 340px;
-	padding: clamp(0.38rem, 0.62vw, 0.5rem);
+	padding: clamp(0.62rem, 1vw, 0.72rem) clamp(0.4rem, 0.68vw, 0.52rem) clamp(0.52rem, 0.84vw, 0.6rem);
+	position: relative;
+	isolation: isolate;
 	width: 100%;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview .tf-media-phone::before {
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-radius: inherit;
+	content: "";
+	inset: 2px;
+	pointer-events: none;
+	position: absolute;
+	z-index: 2;
 }
 
 body.take-flight-page.quickstudy-page .tf-overview .tf-media-phone video {
 	aspect-ratio: 9 / 19.5;
-	border-radius: clamp(1.2rem, 1.9vw, 1.5rem);
+	border-radius: clamp(1.52rem, 2.2vw, 1.82rem);
 	display: block;
 	height: auto;
 	object-fit: cover;
 	object-position: center;
+	position: relative;
 	width: 100%;
+	z-index: 1;
 }
 
 body.take-flight-page.quickstudy-page .tf-overview-media-shell {
@@ -4127,15 +4257,30 @@ body.take-flight-page.quickstudy-page .tf-overview-highlights {
 	margin: 0 0 1.02rem;
 }
 
+body.take-flight-page.quickstudy-page .tf-overview-highlights h4 {
+	font-size: 0.72rem;
+	font-weight: 800;
+	letter-spacing: 0.1em;
+	line-height: 1;
+	margin: 0 0 0.6rem;
+	text-transform: uppercase;
+}
+
+body.take-flight-page .tf-overview-tech h4 {
+	font-size: 1rem;
+	font-weight: 800;
+	letter-spacing: 0.04em;
+	line-height: 1;
+	margin: 0 0 0.7rem;
+}
+
 body.take-flight-page.quickstudy-page .tf-overview-highlights h4,
 body.take-flight-page.quickstudy-page .tf-overview-tech h4 {
 	color: #2d1a5c;
-	font-size: 0.92rem;
-	font-weight: 700;
-	letter-spacing: 0.05em;
-	line-height: 1;
-	margin: 0 0 0.45rem;
-	text-transform: uppercase;
+}
+
+body.take-flight-page:not(.quickstudy-page) .tf-overview-tech h4 {
+	color: #0d3050;
 }
 
 body.take-flight-page.quickstudy-page .tf-overview-highlights ul {
@@ -4158,28 +4303,49 @@ body.take-flight-page.quickstudy-page .tf-overview-meta p {
 	margin: 0 0 0.28rem;
 }
 
-body.take-flight-page.quickstudy-page .tf-overview-tech {
-	margin: 0 0 1rem;
+body.take-flight-page .tf-overview-tech {
+	border-top: 1.5px solid rgba(255, 255, 255, 0.12);
+	margin: 0.6rem 0 1rem;
+	padding-top: 1rem;
 }
 
-body.take-flight-page.quickstudy-page .tf-tech-chips {
+body.take-flight-page.quickstudy-page .tf-overview-tech {
+	border-top-color: rgba(82, 47, 154, 0.18);
+}
+
+body.take-flight-page:not(.quickstudy-page) .tf-overview-tech {
+	border-top-color: rgba(47, 111, 158, 0.22);
+}
+
+body.take-flight-page .tf-tech-chips {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 0.45rem;
+	gap: 0.55rem;
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
 
-body.take-flight-page.quickstudy-page .tf-tech-chips li {
-	background: #e8ddff;
-	border: 1px solid rgba(82, 47, 154, 0.28);
+body.take-flight-page:not(.quickstudy-page) .tf-tech-chips li {
+	background: rgba(47, 111, 158, 0.14);
+	border: 1.5px solid rgba(47, 111, 158, 0.45);
 	border-radius: 999px;
-	color: #2b1b57;
-	font-size: 0.78rem;
+	color: #0d3050;
+	font-size: 0.85rem;
 	font-weight: 700;
 	line-height: 1;
-	padding: 0.44rem 0.7rem;
+	padding: 0.52rem 0.9rem;
+}
+
+body.take-flight-page.quickstudy-page .tf-tech-chips li {
+	background: rgba(116, 72, 216, 0.14);
+	border: 1.5px solid rgba(116, 72, 216, 0.4);
+	border-radius: 999px;
+	color: #2b1b57;
+	font-size: 0.85rem;
+	font-weight: 700;
+	line-height: 1;
+	padding: 0.52rem 0.9rem;
 }
 
 body.take-flight-page.quickstudy-page .tf-overview .tf-project-link-wrap {
@@ -4187,15 +4353,15 @@ body.take-flight-page.quickstudy-page .tf-overview .tf-project-link-wrap {
 }
 
 body.take-flight-page.quickstudy-page .tf-owned {
-	background: #ede3fa;
+	background: linear-gradient(180deg, #efe4fb 0%, #eadcf9 100%);
 }
 
 body.take-flight-page.quickstudy-page .tf-code-snippets {
-	background: #e6daf8;
+	background: linear-gradient(180deg, #e9def8 0%, #e2d3f5 100%);
 }
 
 body.take-flight-page.quickstudy-page .tf-outcomes {
-	background: #ddd0f3;
+	background: linear-gradient(180deg, #dfd2f3 0%, #d8c7ee 100%);
 }
 
 body.take-flight-page.quickstudy-page .tf-card {
@@ -4268,5 +4434,326 @@ body.take-flight-page.quickstudy-page .tf-experience-grid::-webkit-scrollbar-thu
 	body.take-flight-page.quickstudy-page .tf-overview .tf-project-link {
 		flex: 1 1 100%;
 		text-align: center;
+	}
+}
+
+/* QuickStudy — challenge number cards */
+body.take-flight-page.quickstudy-page .tf-card-challenge {
+	border-left: 3px solid #7448d8;
+	padding: 1.8rem 1.6rem 1.6rem 1.5rem;
+	position: relative;
+	transition: box-shadow 0.22s ease, transform 0.22s ease;
+}
+
+body.take-flight-page.quickstudy-page .tf-card-challenge:hover {
+	box-shadow:
+		0 8px 24px rgba(103, 63, 182, 0.18),
+		0 2px 6px rgba(103, 63, 182, 0.1);
+	transform: translateY(-2px);
+}
+
+body.take-flight-page.quickstudy-page .tf-challenge-number {
+	color: #7448d8;
+	font-size: 1rem;
+	font-weight: 900;
+	letter-spacing: -0.01em;
+	line-height: 1;
+	margin: 0 0 0.9rem;
+	position: static;
+}
+
+/* Challenge / Solution / Result inline badges */
+body.take-flight-page.quickstudy-page .tf-card-challenge p strong {
+	border-radius: 4px;
+	display: inline-block;
+	font-size: 0.7rem;
+	font-weight: 800;
+	letter-spacing: 0.06em;
+	line-height: 1;
+	padding: 0.2rem 0.45rem;
+	text-transform: uppercase;
+	vertical-align: middle;
+	margin-right: 0.3rem;
+}
+
+body.take-flight-page.quickstudy-page .tf-card-challenge p strong:nth-of-type(1) {
+	background: rgba(220, 38, 38, 0.1);
+	border: 1px solid rgba(220, 38, 38, 0.25);
+	color: #b91c1c;
+}
+
+body.take-flight-page.quickstudy-page .tf-card-challenge p strong:nth-of-type(2) {
+	background: rgba(37, 99, 235, 0.1);
+	border: 1px solid rgba(37, 99, 235, 0.25);
+	color: #1d4ed8;
+}
+
+body.take-flight-page.quickstudy-page .tf-card-challenge p strong:nth-of-type(3) {
+	background: rgba(22, 163, 74, 0.1);
+	border: 1px solid rgba(22, 163, 74, 0.25);
+	color: #15803d;
+}
+
+/* QuickStudy — screenshot pending state */
+body.take-flight-page.quickstudy-page .tf-experience-media--pending {
+	background: rgba(103, 63, 182, 0.08);
+	border: 1.5px dashed rgba(103, 63, 182, 0.3);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 200px;
+	flex: 0 0 320px;
+}
+
+body.take-flight-page.quickstudy-page .tf-screenshot-pending {
+	color: rgba(103, 63, 182, 0.5);
+	font-size: 0.8rem;
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	margin: 0;
+	text-align: center;
+}
+
+/* QuickStudy — disabled / coming-soon link */
+body.take-flight-page.quickstudy-page .tf-project-link-disabled {
+	background: rgba(103, 63, 182, 0.06);
+	border: 1.5px solid rgba(103, 63, 182, 0.2);
+	border-radius: 8px;
+	color: rgba(103, 63, 182, 0.45);
+	cursor: default;
+	display: inline-block;
+	font-size: 0.85rem;
+	font-weight: 600;
+	padding: 0.6rem 1.1rem;
+	text-decoration: none;
+}
+
+/* QuickStudy — snippet cards now use <p> instead of <pre> */
+body.take-flight-page.quickstudy-page .tf-snippet-card p {
+	color: rgba(220, 210, 255, 0.8);
+	font-size: 0.9rem;
+	line-height: 1.65;
+	margin: 0;
+}
+
+/* ========================================================
+   Case Study — Next Project + CTA sections
+   ======================================================== */
+
+.cs-next-project {
+	padding: 3.5rem 3rem;
+}
+
+body.take-flight-page:not(.quickstudy-page) .cs-next-project {
+	background: #0f1520;
+}
+
+body.take-flight-page.quickstudy-page .cs-next-project {
+	background: linear-gradient(180deg, #d8c7ee 0%, #cdbde8 100%);
+}
+
+.cs-next-label {
+	color: rgba(255, 255, 255, 0.45);
+	font-size: 0.72rem;
+	font-weight: 800;
+	letter-spacing: 0.12em;
+	margin: 0 0 1rem;
+	text-transform: uppercase;
+}
+
+body.take-flight-page.quickstudy-page .cs-next-label {
+	color: rgba(44, 22, 90, 0.5);
+}
+
+.cs-next-grid {
+	display: grid;
+	gap: 1rem;
+	grid-template-columns: 1fr 1fr;
+	max-width: 960px;
+}
+
+.cs-next-card {
+	align-items: center;
+	background: rgba(255, 255, 255, 0.06);
+	border: 1.5px solid rgba(255, 255, 255, 0.1);
+	border-radius: 14px;
+	display: flex;
+	gap: 1.25rem;
+	padding: 1.25rem 1.5rem;
+	text-decoration: none;
+	transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.cs-next-card:hover {
+	background: rgba(255, 255, 255, 0.1);
+	border-color: rgba(255, 255, 255, 0.2);
+	transform: translateY(-2px);
+}
+
+body.take-flight-page.quickstudy-page .cs-next-card {
+	background: rgba(44, 22, 90, 0.08);
+	border-color: rgba(44, 22, 90, 0.18);
+}
+
+body.take-flight-page.quickstudy-page .cs-next-card:hover {
+	background: rgba(44, 22, 90, 0.14);
+	border-color: rgba(44, 22, 90, 0.3);
+}
+
+.cs-next-card img {
+	border-radius: 8px;
+	flex-shrink: 0;
+	height: 64px;
+	object-fit: cover;
+	width: 96px;
+}
+
+.cs-next-copy {
+	flex: 1;
+}
+
+.cs-next-copy h4 {
+	color: #fff;
+	font-size: 1rem;
+	font-weight: 700;
+	margin: 0 0 0.25rem;
+}
+
+body.take-flight-page.quickstudy-page .cs-next-copy h4 {
+	color: #1a0a38;
+}
+
+.cs-next-copy p {
+	color: rgba(255, 255, 255, 0.6);
+	font-size: 0.875rem;
+	line-height: 1.5;
+	margin: 0;
+}
+
+body.take-flight-page.quickstudy-page .cs-next-copy p {
+	color: rgba(44, 22, 90, 0.65);
+}
+
+.cs-next-arrow {
+	color: rgba(255, 255, 255, 0.4);
+	flex-shrink: 0;
+	font-size: 1.25rem;
+	transition: color 0.2s ease, transform 0.2s ease;
+}
+
+body.take-flight-page.quickstudy-page .cs-next-arrow {
+	color: rgba(44, 22, 90, 0.4);
+}
+
+.cs-next-card:hover .cs-next-arrow {
+	color: rgba(255, 255, 255, 0.8);
+	transform: translateX(4px);
+}
+
+body.take-flight-page.quickstudy-page .cs-next-card:hover .cs-next-arrow {
+	color: rgba(44, 22, 90, 0.7);
+}
+
+/* CTA section */
+.cs-cta {
+	padding: 5rem 3rem;
+	text-align: center;
+}
+
+body.take-flight-page:not(.quickstudy-page) .cs-cta {
+	background: #080d16;
+}
+
+body.take-flight-page.quickstudy-page .cs-cta {
+	background: linear-gradient(180deg, #cdbde8 0%, #c4b0e2 100%);
+}
+
+.cs-cta-inner {
+	margin: 0 auto;
+	max-width: 520px;
+}
+
+.cs-cta-inner h3 {
+	font-size: 2rem;
+	font-weight: 800;
+	letter-spacing: -0.02em;
+	margin: 0 0 0.75rem;
+}
+
+body.take-flight-page:not(.quickstudy-page) .cs-cta-inner h3 {
+	color: #fff;
+}
+
+body.take-flight-page.quickstudy-page .cs-cta-inner h3 {
+	color: #150830;
+}
+
+.cs-cta-inner p {
+	font-size: 1rem;
+	line-height: 1.6;
+	margin: 0 0 2rem;
+}
+
+body.take-flight-page:not(.quickstudy-page) .cs-cta-inner p {
+	color: rgba(255, 255, 255, 0.6);
+}
+
+body.take-flight-page.quickstudy-page .cs-cta-inner p {
+	color: rgba(21, 8, 48, 0.65);
+}
+
+.cs-cta-button {
+	border-radius: 10px;
+	display: inline-block;
+	font-size: 0.95rem;
+	font-weight: 700;
+	padding: 0.8rem 2rem;
+	text-decoration: none;
+	transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.cs-cta-button:hover {
+	opacity: 0.88;
+	transform: translateY(-2px);
+}
+
+body.take-flight-page:not(.quickstudy-page) .cs-cta-button {
+	background: linear-gradient(135deg, #2f6f9e 0%, #3a88bf 100%);
+	color: #fff;
+}
+
+body.take-flight-page.quickstudy-page .cs-cta-button {
+	background: linear-gradient(135deg, #7448d8 0%, #9656ee 100%);
+	color: #fff;
+}
+
+@media screen and (max-width: 736px) {
+	.cs-next-project,
+	.cs-cta {
+		padding-left: 1.25rem;
+		padding-right: 1.25rem;
+	}
+
+	.cs-cta {
+		padding-top: 3.5rem;
+		padding-bottom: 3.5rem;
+	}
+
+	.cs-cta-inner h3 {
+		font-size: 1.5rem;
+	}
+
+	.cs-next-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.cs-next-card {
+		gap: 1rem;
+		padding: 1rem 1.1rem;
+	}
+
+	.cs-next-card img {
+		height: 48px;
+		width: 72px;
 	}
 }
