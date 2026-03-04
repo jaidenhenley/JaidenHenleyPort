@@ -4004,6 +4004,129 @@ body.take-flight-page.quickstudy-page .tf-experiences {
 	background: #f4eefc;
 }
 
+body.take-flight-page.quickstudy-page .tf-overview {
+	padding-bottom: 1.35rem;
+	padding-top: 2.4rem;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview-grid {
+	align-items: start;
+	gap: 2rem;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview .tf-media-ipad {
+	background: #efe6ff;
+	border: 1px solid rgba(60, 36, 112, 0.2);
+	border-radius: 0.72rem;
+	box-shadow: 0 0.85rem 1.6rem rgba(31, 16, 56, 0.2);
+	max-width: 100%;
+	padding: 0.5rem;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview-media-shell {
+	aspect-ratio: 16 / 10;
+	background: #1f1538;
+	border-radius: 0.5rem;
+	overflow: hidden;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview-media-shell img,
+body.take-flight-page.quickstudy-page .tf-overview-media-shell video {
+	display: block;
+	height: 100%;
+	object-fit: cover;
+	width: 100%;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview .tf-copy {
+	padding-top: 0.08rem;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview-title {
+	color: #26154f;
+	font-size: clamp(2.2rem, 4.6vw, 3.6rem);
+	font-weight: 600;
+	letter-spacing: -0.03em;
+	line-height: 1.05;
+	margin: 0 0 0.45rem;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview-subtitle {
+	color: #4a2b83;
+	font-size: clamp(1.08rem, 2vw, 1.36rem);
+	font-weight: 600;
+	line-height: 1.45;
+	margin: 0 0 0.72rem;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview-description {
+	margin: 0 0 1rem;
+	max-width: 56ch;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview-highlights {
+	margin: 0 0 1.02rem;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview-highlights h4,
+body.take-flight-page.quickstudy-page .tf-overview-tech h4 {
+	color: #2d1a5c;
+	font-size: 0.92rem;
+	font-weight: 700;
+	letter-spacing: 0.05em;
+	line-height: 1;
+	margin: 0 0 0.45rem;
+	text-transform: uppercase;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview-highlights ul {
+	list-style: disc;
+	margin: 0 0 0 1.2rem;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview-highlights li {
+	color: #1e1631;
+	font-size: 0.98rem;
+	line-height: 1.52;
+	margin: 0 0 0.22rem;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview-meta {
+	margin: 0 0 0.85rem;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview-meta p {
+	margin: 0 0 0.28rem;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview-tech {
+	margin: 0 0 1rem;
+}
+
+body.take-flight-page.quickstudy-page .tf-tech-chips {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.45rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+body.take-flight-page.quickstudy-page .tf-tech-chips li {
+	background: #e8ddff;
+	border: 1px solid rgba(82, 47, 154, 0.28);
+	border-radius: 999px;
+	color: #2b1b57;
+	font-size: 0.78rem;
+	font-weight: 700;
+	line-height: 1;
+	padding: 0.44rem 0.7rem;
+}
+
+body.take-flight-page.quickstudy-page .tf-overview .tf-project-link-wrap {
+	margin-top: 0.1rem;
+}
+
 body.take-flight-page.quickstudy-page .tf-owned {
 	background: #ede3fa;
 }
@@ -4066,5 +4189,21 @@ body.take-flight-page.quickstudy-page .tf-experience-grid::-webkit-scrollbar-thu
 
 	body.take-flight-page.quickstudy-page .site-header {
 		background: linear-gradient(135deg, #2f1a57 0%, #4a2d84 100%);
+	}
+
+	body.take-flight-page.quickstudy-page .tf-overview {
+		padding-top: 2rem;
+	}
+}
+
+@media screen and (max-width: 736px) {
+
+	body.take-flight-page.quickstudy-page .tf-overview .tf-project-link-wrap {
+		width: 100%;
+	}
+
+	body.take-flight-page.quickstudy-page .tf-overview .tf-project-link {
+		flex: 1 1 100%;
+		text-align: center;
 	}
 }
