@@ -23,7 +23,7 @@
 				<div class="tf-hero-oval">
 					<h2>QuickStudy</h2>
 					<p>
-						Turn scans and PDFs into study-ready flashcards in minutes.
+						Turn scans and PDFs into a study-ready deck in minutes.
 					</p>
 				</div>
 			</section>
@@ -31,40 +31,42 @@
 			<section class="tf-overview">
 				<div class="tf-overview-grid">
 					<figure class="tf-media tf-media-phone">
-						<video controls playsinline preload="metadata" poster="assets/quickstudy/hero.png">
+						<video controls playsinline preload="metadata" poster="images/QuickStudyThumb.png">
 							<source src="images/QuickStudyDemo1080.mp4" type="video/mp4" />
 							Your browser does not support the video tag.
 						</video>
 					</figure>
 					<div class="tf-copy">
-						<h1 class="tf-overview-title">QuickStudy</h1>
-						<p class="tf-overview-subtitle">Scan notes and PDFs into flashcards fast.</p>
+						<p class="tf-overview-subtitle">Turn scans and PDFs into a study-ready deck in minutes.</p>
 						<p class="tf-overview-description">
-							QuickStudy takes the friction out of making study materials. Import a scan or PDF, review what the AI generates, approve the cards worth keeping, then jump straight into flashcard practice or a multiple-choice quiz.
+							QuickStudy takes you from notes to practice without the busywork. Scan a page or import a PDF, let the app generate flashcards, then approve what&rsquo;s worth keeping before you study. The AI speeds up the process, but you stay in control of the deck.
 						</p>
 						<div class="tf-overview-highlights">
 							<h4>Highlights</h4>
 							<ul>
-								<li>Scan or PDF import to flashcards in one flow</li>
-								<li>Approve/edit cards before saving &mdash; no noise in your deck</li>
-								<li>Quiz mode auto-generated from your approved set</li>
-								<li>Fully local-first, no account needed</li>
+								<li>One flow from scan or PDF import to a study-ready deck</li>
+								<li>Review and approve cards before saving so your deck stays clean</li>
+								<li>Flashcard practice mode built around quick swipe sessions</li>
+								<li>Quiz mode generated from your approved set</li>
+								<li>Local-first with no account required</li>
+								<li>Saves sets on-device with AppStorage and UserDefaults</li>
 							</ul>
-						</div>
-						<div class="tf-overview-meta">
-							<p><strong>Team:</strong> Solo</p>
-							<p><strong>Role:</strong> iOS Developer</p>
-							<p><strong>Timeline:</strong> 2025</p>
 						</div>
 						<div class="tf-overview-tech">
-							<h4>Tech</h4>
+							<h4>Tech Stack</h4>
 							<ul class="tf-tech-chips">
 								<li>SwiftUI</li>
-								<li>Foundation Models</li>
 								<li>VisionKit</li>
-								<li>PDF import</li>
-								<li>Local persistence</li>
+								<li>PDFKit</li>
+								<li>Foundation Models</li>
+								<li>AppStorage</li>
+								<li>UserDefaults</li>
 							</ul>
+							<div class="tf-overview-meta">
+								<p><strong>Team:</strong> Solo</p>
+								<p><strong>Role:</strong> iOS Developer</p>
+								<p><strong>Timeline:</strong> 2025</p>
+							</div>
 						</div>
 						<p class="tf-project-link-wrap">
 							<a class="tf-project-link tf-project-link-github" href="https://github.com/jaidenhenley/QuickStudy" target="_blank" rel="noopener noreferrer">View Project on GitHub</a>
@@ -81,27 +83,27 @@
 						<span class="tf-challenge-number">01</span>
 						<h4>OCR Messiness</h4>
 						<p>
-							<strong>Challenge:</strong> Scanned notes produce inconsistent OCR output &mdash; stray characters, broken words, merged lines.<br /><br />
-							<strong>Solution:</strong> Added a cleanup pass on extracted text before handing it to the model.<br /><br />
-							<strong>Result:</strong> Cleaner flashcard generation with significantly less manual correction.
+							<strong>Challenge:</strong> Scans can come back messy with VisionKit OCR &mdash; broken words, merged lines, and random characters that mess up what comes next.<br /><br />
+							<strong>Solution:</strong> I added a cleanup pass on the extracted text before generating anything. It trims junk characters, fixes spacing and line breaks, and reshapes the text into something the model can actually work with.<br /><br />
+							<strong>Result:</strong> Cleaner flashcards with way less manual correction.
 						</p>
 					</article>
 					<article class="tf-card tf-card-challenge">
 						<span class="tf-challenge-number">02</span>
 						<h4>AI Availability &amp; Failures</h4>
 						<p>
-							<strong>Challenge:</strong> On-device Foundation Models aren't always available &mdash; older devices, low memory, or generation errors.<br /><br />
-							<strong>Solution:</strong> Built a deterministic fallback that splits text into card-sized chunks when AI isn't available, plus clear error UI so users always know what happened.<br /><br />
-							<strong>Result:</strong> Reliable card generation behavior across all supported devices.
+							<strong>Challenge:</strong> On-device generation with Foundation Models isn&rsquo;t always available. Some devices don&rsquo;t support it, and even supported devices can fail from low memory or a generation error.<br /><br />
+							<strong>Solution:</strong> I built a backup flow that still creates a usable deck by breaking the cleaned text into card-sized chunks when AI can&rsquo;t run. I also added clear messaging in the UI so users know what happened instead of getting a silent failure.<br /><br />
+							<strong>Result:</strong> Card generation stays dependable across supported devices, not just the newest ones.
 						</p>
 					</article>
 					<article class="tf-card tf-card-challenge">
 						<span class="tf-challenge-number">03</span>
 						<h4>Noisy Generated Cards</h4>
 						<p>
-							<strong>Challenge:</strong> Not every generated flashcard is worth studying &mdash; filler sentences, repeated facts, or low-value cards end up in the set.<br /><br />
-							<strong>Solution:</strong> Added an approval step where users toggle cards on or off before committing to a deck.<br /><br />
-							<strong>Result:</strong> Users only practice the cards they've deliberately chosen to keep.
+							<strong>Challenge:</strong> Not every generated flashcard is worth studying &mdash; repeats, filler, or low-value cards end up cluttering the set.<br /><br />
+							<strong>Solution:</strong> I built an approval step where users quickly toggle cards on or off before saving the deck. Only approved cards make it into study and quiz mode.<br /><br />
+							<strong>Result:</strong> Users practice only what they chose to keep, so decks feel focused instead of noisy.
 						</p>
 					</article>
 				</div>
@@ -164,14 +166,14 @@
 					<div class="tf-copy">
 						<h3>What I Built</h3>
 						<ul class="tf-list">
-							<li>Scan and PDF import pipeline with VisionKit OCR</li>
-							<li>Text cleanup pass before model generation</li>
-							<li>On-device AI flashcard generation via Foundation Models</li>
-							<li>Deterministic fallback for devices without AI availability</li>
-							<li>Approve/toggle flow to build a curated study deck</li>
-							<li>Flashcard practice mode with swipe interaction</li>
-							<li>Multiple-choice quiz mode with distractor generation</li>
-							<li>Local persistence for saved sets and study history</li>
+							<li>Scan + PDF import pipeline using VisionKit OCR and PDFKit</li>
+							<li>Text cleanup pass to normalize OCR output before generation</li>
+							<li>On-device flashcard generation with Foundation Models</li>
+							<li>Backup generation path when on-device AI isn&rsquo;t available</li>
+							<li>Approve and toggle flow to curate a deck before saving</li>
+							<li>Flashcard practice mode with swipe-first interaction</li>
+							<li>Quiz mode built from approved cards with distractor selection</li>
+							<li>On-device persistence for saved decks and study history using AppStorage and UserDefaults</li>
 						</ul>
 					</div>
 				</div>
@@ -330,21 +332,12 @@ static func preprocessForHandwriting(_ image: UIImage) -> CGImage? {
 			<section class="tf-outcomes">
 				<div class="tf-outcomes-grid">
 					<article class="tf-outcome-card">
-						<h3>Tech Stack</h3>
-						<ul class="tf-list">
-							<li>SwiftUI</li>
-							<li>Foundation Models (Apple Intelligence)</li>
-							<li>VisionKit (OCR)</li>
-							<li>PDF import</li>
-							<li>Local persistence</li>
-						</ul>
+						<h3>Next Iterations</h3>
+						<p>Next I&rsquo;m keeping it focused and polishing what&rsquo;s already there. I want OCR to feel more consistent with clearer scan feedback and fewer messy results, and I want the review step to be faster with bulk approve and quick edits so fixing a bad card doesn&rsquo;t slow everything down. On the study side, I&rsquo;m tightening the swipe experience, making progress clearer, and adding a simple &ldquo;review missed questions&rdquo; loop in quiz mode. If I have time after that, I&rsquo;ll add lightweight stats like accuracy and streaks so you can actually see improvement.</p>
 					</article>
 					<article class="tf-outcome-card">
 						<h3>Outcome</h3>
-						<p>
-							QuickStudy came from me being tired of how much effort it takes to turn notes into something I can actually study. 
-							You scan a page or import a PDF, try to organize it, manually write cards, and only then start reviewing. I wanted one clean flow that gets
-							 you from having notes to studying the content fast. The key for me was keeping control in the user’s hands, so the app generates the cards but nothing goes straight into your deck until you approve it, the AI speeds things up, but you’re still the one deciding what’s worth learning.
+						<p>QuickStudy came from me being tired of how much work it takes to turn notes into something I can actually study. Normally you scan or import, clean things up, manually write cards, then finally start reviewing. I built QuickStudy to collapse that into one flow so you can get to practice fast, and the approval step is the key&mdash;AI handles the heavy lifting, but nothing gets saved until you choose what belongs in your deck.</p>
 					</article>
 				</div>
 			</section>
