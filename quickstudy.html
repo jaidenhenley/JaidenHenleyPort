@@ -38,7 +38,7 @@
 					</figure>
 					<div class="tf-copy">
 						<h1 class="tf-overview-title">QuickStudy</h1>
-						<p class="tf-overview-subtitle">Scan notes and PDFs into flashcards&#8212;fast.</p>
+						<p class="tf-overview-subtitle">Scan notes and PDFs into flashcards fast.</p>
 						<p class="tf-overview-description">
 							QuickStudy takes the friction out of making study materials. Import a scan or PDF, review what the AI generates, approve the cards worth keeping, then jump straight into flashcard practice or a multiple-choice quiz.
 						</p>
@@ -112,8 +112,10 @@
 				<button class="tf-arrow tf-arrow-left" aria-label="Previous screenshot">&larr;</button>
 				<div class="tf-experience-grid">
 					<article class="tf-card">
-						<div class="tf-experience-media tf-experience-media--pending">
-							<p class="tf-screenshot-pending">Screenshot coming soon</p>
+						<div class="tf-experience-media">
+							<div class="tf-iphone-frame">
+								<img src="images/ImportSource.png" alt="Import Source screen" />
+							</div>
 						</div>
 						<div class="tf-experience-copy">
 							<h4>Import Source</h4>
@@ -121,8 +123,10 @@
 						</div>
 					</article>
 					<article class="tf-card">
-						<div class="tf-experience-media tf-experience-media--pending">
-							<p class="tf-screenshot-pending">Screenshot coming soon</p>
+						<div class="tf-experience-media">
+							<div class="tf-iphone-frame">
+								<img src="images/CardReview.png" alt="Card Review screen" />
+							</div>
 						</div>
 						<div class="tf-experience-copy">
 							<h4>Card Review</h4>
@@ -130,8 +134,10 @@
 						</div>
 					</article>
 					<article class="tf-card">
-						<div class="tf-experience-media tf-experience-media--pending">
-							<p class="tf-screenshot-pending">Screenshot coming soon</p>
+						<div class="tf-experience-media">
+							<div class="tf-iphone-frame">
+								<img src="images/Practice.png" alt="Flashcard Practice screen" />
+							</div>
 						</div>
 						<div class="tf-experience-copy">
 							<h4>Flashcard Practice</h4>
@@ -139,8 +145,10 @@
 						</div>
 					</article>
 					<article class="tf-card">
-						<div class="tf-experience-media tf-experience-media--pending">
-							<p class="tf-screenshot-pending">Screenshot coming soon</p>
+						<div class="tf-experience-media">
+							<div class="tf-iphone-frame">
+								<img src="images/Quiz.png" alt="Quiz Mode screen" />
+							</div>
 						</div>
 						<div class="tf-experience-copy">
 							<h4>Quiz Mode</h4>
@@ -153,9 +161,6 @@
 
 			<section class="tf-owned">
 				<div class="tf-owned-grid">
-					<figure class="tf-media tf-media-ipad">
-						<img src="assets/quickstudy/hero.png" alt="QuickStudy app interface" />
-					</figure>
 					<div class="tf-copy">
 						<h3>What I Built</h3>
 						<ul class="tf-list">
@@ -172,29 +177,152 @@
 				</div>
 			</section>
 
-			<section class="tf-code-snippets">
+			<section class="qs-code-showcase">
 				<div class="tf-code-header">
-					<h3>Key Engineering Details</h3>
-					<p>
-						Technical decisions that shaped the final product.
-					</p>
+					<h3>Code Snippets</h3>
+					<p>Highlights from the core systems I implemented in QuickStudy.</p>
 				</div>
 				<div class="tf-snippet-grid">
 					<article class="tf-snippet-card">
-						<h4>On-Device AI with Fallback</h4>
-						<p>Used Apple's Foundation Models framework to generate flashcard question/answer pairs directly on-device &mdash; no server, no data leaving the phone. When the model isn't available (older hardware or low memory), a deterministic splitter breaks the source text into card-sized chunks so generation always succeeds.</p>
+					<h4>preprocessForHandwriting</h4>
+					<pre class="language-swift"><code class="language-swift">// Enhances image quality before OCR by applying desaturation, contrast boost,
+// exposure adjustment, and sharpening to improve handwriting recognition
+static func preprocessForHandwriting(_ image: UIImage) -> CGImage? {
+    guard let cgImage = image.cgImage else { return nil }
+    let ciImage = CIImage(cgImage: cgImage)
+
+    let controls = ciImage.applyingFilter(
+        "CIColorControls",
+        parameters: [
+            kCIInputSaturationKey: 0.0,      // Grayscale
+            kCIInputContrastKey: 1.45,       // Boost contrast
+            kCIInputBrightnessKey: 0.05
+        ]
+    )
+
+    let sharpened = controls.applyingFilter(
+        "CIUnsharpMask",
+        parameters: [kCIInputRadiusKey: 2.0, kCIInputIntensityKey: 0.85]
+    )
+
+    let context = CIContext(options: nil)
+    return context.createCGImage(sharpened, from: sharpened.extent)
+}</code></pre>
 					</article>
 					<article class="tf-snippet-card">
-						<h4>OCR Cleanup Pipeline</h4>
-						<p>Raw VisionKit output often contains stray characters, broken hyphenation, and merged words. Before sending text to the model, I run a cleanup pass that normalizes whitespace, removes recognition artifacts, and re-joins hyphenated words &mdash; improving card quality without manual editing.</p>
+						<h4>QuizGenerator</h4>
+						<pre class="language-swift"><code class="language-swift">struct QuizGenerator {
+    
+    // Generates multiple-choice quiz questions from approved flashcards with intelligent
+    // distractor selection based on answer similarity and length matching
+    func generateQuiz(from flashcards: [Flashcard]) -> [QuizQuestion] {
+        let approvedCards = flashcards.filter { $0.approved }
+        guard !approvedCards.isEmpty else { return [] }
+        
+        var questions: [QuizQuestion] = []
+        questions.reserveCapacity(approvedCards.count)
+        
+        let allAnswers = uniqueAnswers(from: flashcards.map { $0.answer })
+        
+        for (index, card) in approvedCards.enumerated() {
+            let correctAnswer = card.answer
+            let normalizedCorrect = normalizedAnswer(correctAnswer)
+            
+            // Build pool of wrong answers excluding the correct one
+            var pool = allAnswers.filter { normalizedAnswer($0) != normalizedCorrect }
+            
+            // Prefer distractors with similar length (within 10 characters)
+            // to avoid trivially obvious wrong answers
+            let similarLengthPool = pool.filter { abs($0.count - correctAnswer.count) &lt;= 10 }
+            if !similarLengthPool.isEmpty {
+                pool = similarLengthPool
+            }
+            
+            // Select 3 distractors randomly from the filtered pool
+            var distractors: [String] = []
+            for answer in pool.shuffled() {
+                distractors.append(answer)
+                if distractors.count == 3 { break }
+            }
+            
+            // If insufficient unique answers exist, add fallback options
+            if distractors.count &lt; 3 {
+                let fallbacks = ["None of the above", "Not sure", "Not listed"]
+                for fallback in fallbacks {
+                    let normalizedFallback = normalizedAnswer(fallback)
+                    // Ensure fallback isn't duplicate or matching correct answer
+                    if normalizedFallback != normalizedCorrect
+                        && !distractors.contains(where: { normalizedAnswer($0) == normalizedFallback }) {
+                        distractors.append(fallback)
+                    }
+                    if distractors.count == 3 { break }
+                }
+            }
+            
+            // Combine and shuffle choices
+            var choices: [String] = [correctAnswer] + distractors
+            choices.shuffle()
+            
+            let correctIndex = choices.firstIndex(of: correctAnswer) ?? 0
+            let question = QuizQuestion(
+                prompt: card.question,
+                choices: choices,
+                correctIndex: correctIndex,
+                explanation: card.answer,
+                sourceIndex: index
+            )
+            questions.append(question)
+        }
+        
+        return questions
+    }
+    
+    // Normalizes answers for comparison by trimming and lowercasing
+    private func normalizedAnswer(_ answer: String) -> String {
+        answer.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+    }
+    
+    // Extracts unique answers using normalized comparison while preserving original formatting
+    private func uniqueAnswers(from answers: [String]) -> [String] {
+        var seen: Set&lt;String&gt; = []
+        var result: [String] = []
+        result.reserveCapacity(answers.count)
+        
+        for answer in answers {
+            let key = normalizedAnswer(answer)
+            if seen.insert(key).inserted {
+                result.append(answer)
+            }
+        }
+        return result
+    }
+}</code></pre>
 					</article>
 					<article class="tf-snippet-card">
-						<h4>Approval-First Deck Building</h4>
-						<p>Every generated card goes into a review list before it can be studied. Users toggle cards on or off, and only approved cards are written to the saved deck. This keeps study sessions high-signal and gives users control over what the AI produced.</p>
-					</article>
-					<article class="tf-snippet-card">
-						<h4>Local-First Persistence</h4>
-						<p>All decks, approved cards, and quiz state are stored locally. No account, no sync, no network dependency. Saved sets persist between sessions and can be reloaded for follow-up practice without re-importing the source material.</p>
+						<h4>AICardGenerator</h4>
+						<pre class="language-swift"><code class="language-swift">struct AICardGenerator {
+
+    // Generates flashcards from text using on-device AI with structured output
+    // via FoundationModels @Generable macro for type-safe generation
+    func generateCards(from text: String) async throws -> [Flashcard] {
+        let session = LanguageModelSession()
+
+        let prompt = """
+        Analyze the following scanned text and extract the most important concepts.
+        Create a set of high quality flashcards for a student.
+
+        TEXT:
+        \(text)
+        """
+
+        // Structured generation ensures type-safe output matching FlashcardSetModel schema
+        let response = try await session.respond(to: prompt, generating: FlashcardSetModel.self)
+
+        return response.content.cards.map {
+            Flashcard(question: $0.question, answer: $0.answer, approved: false)
+        }
+    }
+}</code></pre>
 					</article>
 				</div>
 			</section>
@@ -214,8 +342,9 @@
 					<article class="tf-outcome-card">
 						<h3>Outcome</h3>
 						<p>
-							QuickStudy collapses what used to be a multi-step process &mdash; scan, organize, manually write cards, then study &mdash; into a single focused flow. The approval step means the AI does the heavy lifting without removing user judgment from the loop.
-						</p>
+							QuickStudy came from me being tired of how much effort it takes to turn notes into something I can actually study. 
+							You scan a page or import a PDF, try to organize it, manually write cards, and only then start reviewing. I wanted one clean flow that gets
+							 you from having notes to studying the content fast. The key for me was keeping control in the user’s hands, so the app generates the cards but nothing goes straight into your deck until you approve it, the AI speeds things up, but you’re still the one deciding what’s worth learning.
 					</article>
 				</div>
 			</section>
@@ -254,5 +383,16 @@
 		</footer>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-swift.min.js"></script>
-	</body>
+		<script>
+		document.querySelectorAll('.qs-copy-btn').forEach(function(btn) {
+			btn.addEventListener('click', function() {
+				var code = btn.closest('.qs-code-block-wrap').querySelector('code').innerText;
+				navigator.clipboard.writeText(code).then(function() {
+					btn.textContent = 'Copied!';
+					setTimeout(function() { btn.textContent = 'Copy'; }, 2000);
+				});
+			});
+		});
+	</script>
+</body>
 </html>

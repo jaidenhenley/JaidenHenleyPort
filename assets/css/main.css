@@ -2705,6 +2705,7 @@ body.homepage.home-view .homepage-main {
 
 body.homepage .hero {
 	min-height: calc(100vh - 9rem);
+	position: relative;
 }
 
 body.homepage.home-view .hero {
@@ -2726,7 +2727,7 @@ body.homepage .hero .hero-tag {
 }
 
 body.homepage .hero-content {
-	align-items: flex-start;
+	align-items: center;
 	display: grid;
 	gap: 2.25rem;
 	grid-template-columns: minmax(260px, 0.78fr) minmax(320px, 1.22fr);
@@ -2738,6 +2739,7 @@ body.homepage .hero-image {
 }
 
 body.homepage .hero-image img {
+	border-radius: 1rem;
 	display: block;
 	height: auto;
 	max-width: 100%;
@@ -2793,14 +2795,53 @@ body.homepage .hero-copy h2 {
 	margin: 0 0 1.4rem;
 }
 
-body.homepage .hero-copy > p:not(.hero-availability-pill) {
+body.homepage .hero-copy > p:not(.hero-availability-pill):not(.hero-case-study-count) {
 	color: #050505;
-	font-size: clamp(1.35rem, 2.45vw, 2.5rem);
+	font-size: clamp(1rem, 1.6vw, 1.35rem);
 	font-weight: 500;
-	letter-spacing: -0.03em;
-	line-height: 1.2;
+	letter-spacing: -0.01em;
+	line-height: 1.5;
 	margin: 0;
-	max-width: 22ch;
+	max-width: 38ch;
+}
+
+body.homepage .hero-case-study-count {
+	color: #888;
+	font-size: 0.82rem;
+	font-weight: 500;
+	letter-spacing: 0;
+	margin: 0.6rem 0 0;
+}
+
+@keyframes hero-bounce {
+	0%, 100% { transform: translateY(0); }
+	50%       { transform: translateY(5px); }
+}
+
+body.homepage .hero-scroll-cue {
+	align-items: center;
+	animation: hero-bounce 1.8s ease-in-out infinite;
+	bottom: 1.5rem;
+	color: rgba(30, 30, 40, 0.38);
+	display: flex;
+	flex-direction: column;
+	font-size: 0.72rem;
+	font-weight: 600;
+	gap: 0.2rem;
+	left: 50%;
+	letter-spacing: 0.08em;
+	position: absolute;
+	text-decoration: none;
+	text-transform: uppercase;
+	transform: translateX(-50%);
+}
+
+body.homepage .hero-scroll-cue:hover {
+	color: rgba(30, 30, 40, 0.6);
+}
+
+body.homepage .hero-scroll-label {
+	line-height: 1;
 }
 
 body.homepage .hero-cta-row {
@@ -4196,34 +4237,27 @@ body.take-flight-page.quickstudy-page .tf-overview .tf-media-ipad {
 }
 
 body.take-flight-page.quickstudy-page .tf-overview .tf-media-phone {
-	background: linear-gradient(155deg, #5f636c 0%, #3a3e45 18%, #16181d 52%, #0f1115 100%);
-	border: 1px solid rgba(220, 226, 239, 0.2);
-	border-radius: clamp(2rem, 3vw, 2.45rem);
+	background: #111;
+	border-radius: 40px;
 	box-shadow:
-		0 1.2rem 2rem rgba(0, 0, 0, 0.28),
-		inset 0 0 0 1px rgba(255, 255, 255, 0.08),
-		inset 0 -10px 18px rgba(0, 0, 0, 0.38);
+		inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+		0 0 0 1px rgba(0, 0, 0, 0.5),
+		0 16px 48px rgba(0, 0, 0, 0.45);
 	justify-self: center;
 	max-width: 340px;
-	padding: clamp(0.62rem, 1vw, 0.72rem) clamp(0.4rem, 0.68vw, 0.52rem) clamp(0.52rem, 0.84vw, 0.6rem);
+	padding: 7px;
 	position: relative;
 	isolation: isolate;
 	width: 100%;
 }
 
 body.take-flight-page.quickstudy-page .tf-overview .tf-media-phone::before {
-	border: 1px solid rgba(255, 255, 255, 0.2);
-	border-radius: inherit;
-	content: "";
-	inset: 2px;
-	pointer-events: none;
-	position: absolute;
-	z-index: 2;
+	display: none;
 }
 
 body.take-flight-page.quickstudy-page .tf-overview .tf-media-phone video {
 	aspect-ratio: 9 / 19.5;
-	border-radius: clamp(1.52rem, 2.2vw, 1.82rem);
+	border-radius: 34px;
 	display: block;
 	height: auto;
 	object-fit: cover;
@@ -4377,6 +4411,23 @@ body.take-flight-page.quickstudy-page .tf-owned {
 	background: linear-gradient(180deg, #efe4fb 0%, #eadcf9 100%);
 }
 
+body.take-flight-page.quickstudy-page .tf-owned-grid {
+	grid-template-columns: minmax(0, 760px);
+	max-width: 760px;
+}
+
+body.take-flight-page.quickstudy-page .tf-owned .tf-copy p + .tf-list {
+	margin-top: 0.3rem;
+}
+
+body.take-flight-page.quickstudy-page .tf-owned .tf-list {
+	margin-bottom: 1.1rem;
+}
+
+body.take-flight-page.quickstudy-page .tf-owned .tf-copy p:first-of-type {
+	margin-top: 0.5rem;
+}
+
 body.take-flight-page.quickstudy-page .tf-code-snippets {
 	background: linear-gradient(180deg, #e9def8 0%, #e2d3f5 100%);
 }
@@ -4431,7 +4482,69 @@ body.take-flight-page.quickstudy-page .tf-experience-grid::-webkit-scrollbar-thu
 	background: rgba(103, 63, 182, 0.55);
 }
 
+/* QuickStudy — Screenshots: 4-column grid */
+body.take-flight-page.quickstudy-page .tf-experience-grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	overflow-x: visible;
+	scroll-snap-type: none;
+	-webkit-overflow-scrolling: auto;
+	align-items: stretch;
+}
+
+body.take-flight-page.quickstudy-page .tf-experience-grid .tf-card {
+	flex: unset;
+	border-radius: 1rem;
+	overflow: hidden;
+}
+
+body.take-flight-page.quickstudy-page .tf-experience-media {
+	background: transparent;
+	flex: none;
+	overflow: visible;
+	padding: 1rem 1rem 0.6rem;
+}
+
+/* Modern iPhone frame — visible bezel */
+body.take-flight-page.quickstudy-page .tf-iphone-frame {
+	background: #111;
+	border-radius: 40px;
+	box-shadow:
+		inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+		0 0 0 1px rgba(0, 0, 0, 0.5),
+		0 16px 48px rgba(0, 0, 0, 0.45);
+	overflow: hidden;
+	padding: 7px;
+	width: 100%;
+}
+
+body.take-flight-page.quickstudy-page .tf-iphone-frame img {
+	aspect-ratio: 9 / 19.5;
+	border-radius: 34px;
+	display: block;
+	height: auto;
+	object-fit: cover;
+	width: 100%;
+}
+
+/* Equal-height caption boxes */
+body.take-flight-page.quickstudy-page .tf-experience-grid .tf-experience-copy {
+	flex: 1;
+	min-height: 7rem;
+}
+
+@media screen and (max-width: 1260px) {
+
+	body.take-flight-page.quickstudy-page .tf-flow-grid {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+}
+
 @media screen and (max-width: 960px) {
+
+	body.take-flight-page.quickstudy-page .tf-experience-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
 
 	body.take-flight-page.quickstudy-page .site-header {
 		background: linear-gradient(135deg, #2f1a57 0%, #4a2d84 100%);
@@ -4444,9 +4557,17 @@ body.take-flight-page.quickstudy-page .tf-experience-grid::-webkit-scrollbar-thu
 	body.take-flight-page.quickstudy-page .tf-overview .tf-media-phone {
 		max-width: 320px;
 	}
+
+	body.take-flight-page.quickstudy-page .tf-flow-grid {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
 }
 
 @media screen and (max-width: 736px) {
+
+	body.take-flight-page.quickstudy-page .tf-experience-grid {
+		grid-template-columns: 1fr;
+	}
 
 	body.take-flight-page.quickstudy-page .tf-overview .tf-project-link-wrap {
 		width: 100%;
@@ -4456,11 +4577,23 @@ body.take-flight-page.quickstudy-page .tf-experience-grid::-webkit-scrollbar-thu
 		flex: 1 1 100%;
 		text-align: center;
 	}
+
+	body.take-flight-page.quickstudy-page .tf-flow-grid {
+		grid-template-columns: 1fr;
+	}
 }
 
 /* QuickStudy — challenge number cards */
+body.take-flight-page.quickstudy-page .tf-flow-grid {
+	align-items: stretch;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 body.take-flight-page.quickstudy-page .tf-card-challenge {
 	border-left: 3px solid #7448d8;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
 	padding: 1.8rem 1.6rem 1.6rem 1.5rem;
 	position: relative;
 	transition: box-shadow 0.22s ease, transform 0.22s ease;
@@ -4515,7 +4648,7 @@ body.take-flight-page.quickstudy-page .tf-card-challenge p strong:nth-of-type(3)
 	color: #15803d;
 }
 
-/* QuickStudy — screenshot pending state */
+/* QuickStudy — screenshot pending state (unused, kept for reference) */
 body.take-flight-page.quickstudy-page .tf-experience-media--pending {
 	background: rgba(103, 63, 182, 0.08);
 	border: 1.5px dashed rgba(103, 63, 182, 0.3);
@@ -4558,6 +4691,62 @@ body.take-flight-page.quickstudy-page .tf-snippet-card p {
 }
 
 /* ========================================================
+   QuickStudy — Code Showcase
+   ======================================================== */
+
+body.take-flight-page.quickstudy-page .qs-code-showcase {
+	background: linear-gradient(180deg, #e9def8 0%, #e2d3f5 100%);
+	padding: 3.5rem 3.75rem 4.5rem;
+}
+
+body.take-flight-page.quickstudy-page .qs-snippet-header {
+	align-items: center;
+	display: flex;
+	gap: 0.75rem;
+	justify-content: space-between;
+	margin-bottom: 0.62rem;
+}
+
+body.take-flight-page.quickstudy-page .qs-snippet-header h4 {
+	align-items: center;
+	display: flex;
+	gap: 0.55rem;
+	margin: 0;
+}
+
+body.take-flight-page.quickstudy-page .qs-lang-badge {
+	background: rgba(116, 72, 216, 0.22);
+	border: 1px solid rgba(116, 72, 216, 0.45);
+	border-radius: 999px;
+	color: #c0a0ff;
+	display: inline-block;
+	font-size: 0.7rem;
+	font-weight: 800;
+	letter-spacing: 0.1em;
+	padding: 0.22rem 0.62rem;
+	text-transform: uppercase;
+}
+
+body.take-flight-page.quickstudy-page .qs-copy-btn {
+	background: rgba(116, 72, 216, 0.18);
+	border: 1px solid rgba(116, 72, 216, 0.38);
+	border-radius: 6px;
+	color: #c0a0ff;
+	cursor: pointer;
+	flex-shrink: 0;
+	font-size: 0.75rem;
+	font-weight: 700;
+	letter-spacing: 0.05em;
+	padding: 0.28rem 0.65rem;
+	transition: background 0.18s ease, color 0.18s ease;
+}
+
+body.take-flight-page.quickstudy-page .qs-copy-btn:hover {
+	background: rgba(116, 72, 216, 0.35);
+	color: #fff;
+}
+
+/* ========================================================
    Case Study — Next Project + CTA sections
    ======================================================== */
 
@@ -4566,7 +4755,37 @@ body.take-flight-page.quickstudy-page .tf-snippet-card p {
 }
 
 body.take-flight-page:not(.quickstudy-page) .cs-next-project {
-	background: #0f1520;
+	background: #d4d5db;
+}
+
+body.take-flight-page:not(.quickstudy-page) .cs-next-label {
+	color: rgba(30, 30, 40, 0.45);
+}
+
+body.take-flight-page:not(.quickstudy-page) .cs-next-card {
+	background: rgba(255, 255, 255, 0.55);
+	border-color: rgba(30, 30, 40, 0.12);
+}
+
+body.take-flight-page:not(.quickstudy-page) .cs-next-card:hover {
+	background: rgba(255, 255, 255, 0.8);
+	border-color: rgba(30, 30, 40, 0.22);
+}
+
+body.take-flight-page:not(.quickstudy-page) .cs-next-copy h4 {
+	color: #121318;
+}
+
+body.take-flight-page:not(.quickstudy-page) .cs-next-copy p {
+	color: rgba(30, 30, 40, 0.6);
+}
+
+body.take-flight-page:not(.quickstudy-page) .cs-next-arrow {
+	color: rgba(30, 30, 40, 0.4);
+}
+
+body.take-flight-page:not(.quickstudy-page) .cs-next-card:hover .cs-next-arrow {
+	color: rgba(30, 30, 40, 0.75);
 }
 
 body.take-flight-page.quickstudy-page .cs-next-project {
