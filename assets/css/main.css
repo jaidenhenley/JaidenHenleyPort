@@ -4757,3 +4757,194 @@ body.take-flight-page.quickstudy-page .cs-cta-button {
 		width: 72px;
 	}
 }
+
+/* ========================================================
+   CommonSight page theme
+   ======================================================== */
+
+body.take-flight-page.commonsight-page .tf-hero {
+	background: linear-gradient(135deg, #0b3a44 0%, #10505c 50%, #0d4450 100%);
+}
+
+body.take-flight-page.commonsight-page .tf-hero-oval {
+	background: rgba(255, 255, 255, 0.08);
+	border: 1.5px solid rgba(255, 255, 255, 0.3);
+}
+
+body.take-flight-page.commonsight-page .tf-hero-oval h2 {
+	color: #ffffff;
+}
+
+body.take-flight-page.commonsight-page .tf-hero-oval p {
+	color: rgba(255, 255, 255, 0.85);
+}
+
+body.take-flight-page.commonsight-page .site-header {
+	background: linear-gradient(135deg, #09303a 0%, #0d4450 100%);
+}
+
+body.take-flight-page.commonsight-page .site-name,
+body.take-flight-page.commonsight-page .site-nav a {
+	color: #ffffff;
+}
+
+body.take-flight-page.commonsight-page .site-nav a:hover {
+	color: rgba(255, 255, 255, 0.7);
+}
+
+body.take-flight-page.commonsight-page .tf-overview {
+	background: linear-gradient(180deg, #eaf4f6 0%, #e2f0f3 100%);
+}
+
+body.take-flight-page.commonsight-page .tf-game-flow {
+	background: linear-gradient(180deg, #e2f0f3 0%, #d8eaee 100%);
+}
+
+body.take-flight-page.commonsight-page .tf-experiences {
+	background: linear-gradient(180deg, #d8eaee 0%, #cfe6eb 100%);
+}
+
+body.take-flight-page.commonsight-page .tf-owned {
+	background: linear-gradient(180deg, #cfe6eb 0%, #c8e2e8 100%);
+}
+
+body.take-flight-page.commonsight-page .tf-code-snippets {
+	background: linear-gradient(180deg, #c8e2e8 0%, #c0dde4 100%);
+}
+
+body.take-flight-page.commonsight-page .tf-outcomes {
+	background: linear-gradient(180deg, #c0dde4 0%, #b8d8e0 100%);
+}
+
+body.take-flight-page.commonsight-page .tf-outcome-card {
+	background: rgba(255, 255, 255, 0.55);
+	border-color: rgba(16, 80, 92, 0.2);
+}
+
+body.take-flight-page.commonsight-page .tf-card {
+	background: rgba(255, 255, 255, 0.5);
+}
+
+/* Challenge cards */
+body.take-flight-page.commonsight-page .tf-card-challenge {
+	border-left-color: #10505c;
+}
+
+body.take-flight-page.commonsight-page .tf-card-challenge:hover {
+	box-shadow:
+		0 8px 24px rgba(16, 80, 92, 0.18),
+		0 2px 6px rgba(16, 80, 92, 0.1);
+}
+
+body.take-flight-page.commonsight-page .tf-challenge-number {
+	color: #10505c;
+}
+
+/* Tech chips */
+body.take-flight-page.commonsight-page .tf-tech-chips li {
+	background: rgba(16, 80, 92, 0.1);
+	border: 1.5px solid rgba(16, 80, 92, 0.3);
+	color: #0a3540;
+	font-size: 0.85rem;
+	font-weight: 700;
+	line-height: 1;
+	padding: 0.52rem 0.9rem;
+}
+
+body.take-flight-page.commonsight-page .tf-overview-tech h4 {
+	color: #0a3540;
+}
+
+/* Project links */
+body.take-flight-page.commonsight-page .tf-project-link {
+	background: linear-gradient(135deg, #10505c 0%, #0d4350 100%);
+}
+
+body.take-flight-page.commonsight-page .tf-project-link:hover {
+	background: linear-gradient(135deg, #0d4350 0%, #0a3844 100%);
+}
+
+body.take-flight-page.commonsight-page .tf-project-link-github {
+	background: rgba(16, 80, 92, 0.08);
+	border-color: rgba(16, 80, 92, 0.3);
+	color: #0a3540;
+}
+
+body.take-flight-page.commonsight-page .tf-project-link-github:hover {
+	background: rgba(16, 80, 92, 0.15);
+	color: #072830;
+}
+
+body.take-flight-page.commonsight-page .tf-project-link-disabled {
+	background: rgba(16, 80, 92, 0.05);
+	border-color: rgba(16, 80, 92, 0.18);
+	color: rgba(16, 80, 92, 0.4);
+}
+
+/* Screenshot pending */
+body.take-flight-page.commonsight-page .tf-experience-media--pending {
+	background: rgba(16, 80, 92, 0.07);
+	border-color: rgba(16, 80, 92, 0.25);
+}
+
+body.take-flight-page.commonsight-page .tf-screenshot-pending {
+	color: rgba(16, 80, 92, 0.5);
+}
+
+/* Snippet cards */
+body.take-flight-page.commonsight-page .tf-snippet-card {
+	background: #0b3a44;
+	border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.take-flight-page.commonsight-page .tf-snippet-card h4 {
+	color: #fff;
+}
+
+body.take-flight-page.commonsight-page .tf-snippet-card p {
+	color: rgba(255, 255, 255, 0.75);
+	font-size: 0.9rem;
+	line-height: 1.65;
+	margin: 0;
+}
+
+/* More Case Studies cards */
+body.take-flight-page.commonsight-page .cs-next-project {
+	background: #0b3a44;
+}
+
+body.take-flight-page.commonsight-page .cs-next-label {
+	color: rgba(255, 255, 255, 0.45);
+}
+
+body.take-flight-page.commonsight-page .cs-next-card {
+	background: rgba(255, 255, 255, 0.07);
+	border-color: rgba(255, 255, 255, 0.12);
+}
+
+body.take-flight-page.commonsight-page .cs-next-card:hover {
+	background: rgba(255, 255, 255, 0.13);
+	border-color: rgba(255, 255, 255, 0.22);
+}
+
+body.take-flight-page.commonsight-page .cs-next-copy h4 {
+	color: #fff;
+}
+
+body.take-flight-page.commonsight-page .cs-next-copy p {
+	color: rgba(255, 255, 255, 0.6);
+}
+
+body.take-flight-page.commonsight-page .cs-next-arrow {
+	color: rgba(255, 255, 255, 0.4);
+}
+
+body.take-flight-page.commonsight-page .cs-next-card:hover .cs-next-arrow {
+	color: rgba(255, 255, 255, 0.8);
+}
+
+@media screen and (max-width: 960px) {
+	body.take-flight-page.commonsight-page .site-header {
+		background: linear-gradient(135deg, #09303a 0%, #0d4450 100%);
+	}
+}
