@@ -43,7 +43,6 @@
 						</video>
 					</figure>
 					<div class="tf-copy">
-						<h3>Take Flight - A Bird Life</h3>
 						<p>
 							Take Flight is a Belle Isle inspired, 5-in-1 mini game collection built in
 							6 weeks at the Apple Developer Academy.
@@ -424,6 +423,21 @@ struct MainOnboardingView: View {
 		</footer>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-swift.min.js"></script>
+	<script type="module">
+		import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+		import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-analytics.js";
+		const firebaseConfig = {
+			apiKey: "AIzaSyDxHLzhoV1eDqQf9Xi94_kXOX5wdxUhkoQ",
+			authDomain: "jaiden-portfolio.firebaseapp.com",
+			projectId: "jaiden-portfolio",
+			storageBucket: "jaiden-portfolio.firebasestorage.app",
+			messagingSenderId: "351848253837",
+			appId: "1:351848253837:web:17901c1b8de243c42015c4",
+			measurementId: "G-8JMW1HT9LD"
+		};
+		const app = initializeApp(firebaseConfig);
+		const analytics = getAnalytics(app);
+	</script>
 	</body>
 </html>
 	

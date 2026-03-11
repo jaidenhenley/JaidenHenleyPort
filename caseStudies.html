@@ -54,5 +54,20 @@
 				<a class="footer-link footer-contact-button" href="contact.html">Contact Me</a>
 			</div>
 		</footer>
+	<script type="module">
+		import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+		import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-analytics.js";
+		const firebaseConfig = {
+			apiKey: "AIzaSyDxHLzhoV1eDqQf9Xi94_kXOX5wdxUhkoQ",
+			authDomain: "jaiden-portfolio.firebaseapp.com",
+			projectId: "jaiden-portfolio",
+			storageBucket: "jaiden-portfolio.firebasestorage.app",
+			messagingSenderId: "351848253837",
+			appId: "1:351848253837:web:17901c1b8de243c42015c4",
+			measurementId: "G-8JMW1HT9LD"
+		};
+		const app = initializeApp(firebaseConfig);
+		const analytics = getAnalytics(app);
+	</script>
 	</body>
 </html>
