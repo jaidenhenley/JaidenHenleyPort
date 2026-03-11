@@ -6,6 +6,22 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+	<style>
+		.cs-in-dev-badge {
+			display: inline-block;
+			font-size: 0.22em;
+			font-weight: 600;
+			letter-spacing: 0.06em;
+			text-transform: uppercase;
+			padding: 0.15em 0.4em;
+			border-radius: 999px;
+			border: 1.5px solid currentColor;
+			vertical-align: middle;
+			opacity: 0.75;
+			margin-left: 0.3em;
+			line-height: 1.6;
+		}
+	</style>
 	</head>
 	<body class="homepage take-flight-page commonsight-page">
 		<header class="site-header">
@@ -21,7 +37,7 @@
 		<main class="homepage-main">
 			<section class="tf-hero" id="top">
 				<div class="tf-hero-oval">
-					<h2>CommonSight</h2>
+					<h2>CommonSight <span class="cs-in-dev-badge">In Development</span></h2>
 					<p>
 						Turn local observations into organizing tools communities can act on.
 					</p>
@@ -39,17 +55,19 @@
 					<div class="tf-copy">
 						<p class="tf-overview-subtitle">Turn local observations into organizing tools communities can act on.</p>
 						<p class="tf-overview-description">
-							CommonSight came from a small business owner who needed a better way to document and act on neighborhood issues. People can log observations, see them on a map, and turn those reports into story cards that coalitions can use. The app combines Groundtruth reporting, a Narrative Alchemy flow powered by Foundation Models, and coalition features like campaigns and messaging.
+							CommonSight is a civic iOS app in active development, built to help Detroit neighborhoods document issues and organize action. I'm building the complete working demo as the full iOS engineer — from the Firebase backend (Authentication, Firestore with neighborhood-scoped data, and Cloud Messaging) to the SwiftUI interface, MapKit integration, and on-device AI powered by Foundation Models. The goal is a fully functional product, not a prototype.
 						</p>
 						<div class="tf-overview-highlights">
 							<h4>Highlights</h4>
 							<ul>
-								<li>Log neighborhood issues with structured Groundtruth reports</li>
-								<li>Map view showing community observations in real time</li>
-								<li>Narrative Alchemy flow turns reports into shareable story cards</li>
-								<li>Coalition tools including campaigns and in-app messaging</li>
-								<li>On-device AI powered by Apple&rsquo;s Foundation Models</li>
-								<li>Real-time sync with Firestore across all users</li>
+								<li>Building the full working demo end-to-end as the sole iOS engineer</li>
+								<li>Architected real-time Firestore database scoped per neighborhood across multiple user accounts</li>
+								<li>Firebase Authentication with full sign-up and session management</li>
+								<li>Cloud Messaging powering coalition campaigns and in-app communication</li>
+								<li>SwiftUI interface built across all app flows from scratch</li>
+								<li>Map view showing community observations tied to live Firestore data</li>
+								<li>Narrative Alchemy flow using on-device Foundation Models to generate story cards</li>
+								<li>Structured Groundtruth reporting for logging neighborhood issues</li>
 							</ul>
 						</div>
 						<div class="tf-overview-tech">
@@ -62,8 +80,8 @@
 								<li>Firebase Auth</li>
 							</ul>
 							<div class="tf-overview-meta">
-								<p><strong>Team:</strong> Solo</p>
-								<p><strong>Role:</strong> iOS Developer</p>
+								<p><strong>Team:</strong> 2 &mdash; co-built with a cohort classmate</p>
+								<p><strong>Role:</strong> Full iOS Engineer</p>
 								<p><strong>Timeline:</strong> 2025</p>
 							</div>
 						</div>
@@ -157,14 +175,13 @@
 					<div class="tf-copy">
 						<h3>What I Built</h3>
 						<ul class="tf-list">
-							<li><!-- TODO: Feature / system you owned --></li>
-							<li><!-- TODO: Feature / system you owned --></li>
-							<li><!-- TODO: Feature / system you owned --></li>
-							<li><!-- TODO: Feature / system you owned --></li>
-							<li><!-- TODO: Feature / system you owned --></li>
-							<li><!-- TODO: Feature / system you owned --></li>
-							<li><!-- TODO: Feature / system you owned --></li>
-							<li><!-- TODO: Feature / system you owned --></li>
+							<li><strong>Firebase Authentication</strong> &mdash; full sign-up, sign-in, and session management tied to real user accounts</li>
+							<li><strong>Firestore Data Architecture</strong> &mdash; data structured and scoped per neighborhood, live sync across accounts</li>
+							<li><strong>Firebase Cloud Messaging</strong> &mdash; in-app messaging for coalition communication and campaign updates</li>
+							<li><strong>SwiftUI Interface</strong> &mdash; end-to-end UI built across all app flows from scratch</li>
+							<li><strong>MapKit Integration</strong> &mdash; community observation map reading live from Firestore</li>
+							<li><strong>Foundation Models</strong> &mdash; on-device AI powering the Narrative Alchemy story card generation flow</li>
+							<li><strong>Groundtruth Reporting</strong> &mdash; structured issue logging flow for documenting neighborhood observations</li>
 						</ul>
 					</div>
 				</div>
