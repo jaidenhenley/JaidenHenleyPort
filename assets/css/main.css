@@ -3483,6 +3483,10 @@ body.homepage .current-location-city {
 		min-height: auto;
 	}
 
+	body.homepage .hero-scroll-cue {
+		display: none;
+	}
+
 	body.homepage .hero-content {
 		gap: 1.75rem;
 		grid-template-columns: 1fr;
@@ -3537,19 +3541,169 @@ body.homepage .current-location-city {
 	}
 }
 
+/* Hamburger button — hidden on desktop */
+body.homepage .nav-toggle {
+	display: none;
+}
+
 @media screen and (max-width: 736px) {
 
+	/* Keep header as a single row: logo left, hamburger right */
 	body.homepage .site-header {
-		align-items: flex-start;
-		flex-direction: column;
-		gap: 1rem;
+		align-items: center;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		gap: 0;
+		position: relative !important;
 	}
 
+	/* Show hamburger button */
+	body.homepage .nav-toggle {
+		align-items: center;
+		background: none;
+		border: none;
+		color: #111 !important;
+		cursor: pointer;
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
+		justify-content: center;
+		margin-left: auto;
+		padding: 0.5rem;
+	}
+
+	body.homepage .nav-toggle span {
+		background: currentColor;
+		border-radius: 2px;
+		display: block;
+		height: 2px;
+		transition: opacity 0.22s ease, transform 0.22s ease;
+		width: 22px;
+	}
+
+	/* Hamburger → X animation */
+	body.homepage .site-header.nav-open .nav-toggle span:nth-child(1) {
+		transform: translateY(7px) rotate(45deg);
+	}
+
+	body.homepage .site-header.nav-open .nav-toggle span:nth-child(2) {
+		opacity: 0;
+	}
+
+	body.homepage .site-header.nav-open .nav-toggle span:nth-child(3) {
+		transform: translateY(-7px) rotate(-45deg);
+	}
+
+	/* Mobile nav — hidden by default */
 	body.homepage .site-nav {
-		flex-wrap: wrap;
-		gap: 1rem 1.25rem;
+		background: #e7e7ec;
+		border-top: 1px solid rgba(0, 0, 0, 0.08);
+		box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+		display: none;
+		flex-direction: column;
+		gap: 0;
+		left: 0;
+		padding: 0.5rem 1.75rem 1rem;
+		position: absolute;
+		right: 0;
+		top: 100%;
+		z-index: 100;
+	}
+
+	body.homepage .site-nav a {
+		border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+		font-size: 1.1rem;
+		padding: 0.65rem 0;
+	}
+
+	body.homepage .site-nav a:last-child {
+		border-bottom: none;
+	}
+
+	/* Mobile nav — visible when open */
+	body.homepage .site-header.nav-open .site-nav {
+		display: flex;
+	}
+
+	/* QuickStudy — dark dropdown */
+	body.take-flight-page.quickstudy-page .site-header .site-nav {
+		background: #2f1a57;
+		border-top-color: rgba(255, 255, 255, 0.12);
+	}
+
+	body.take-flight-page.quickstudy-page .site-nav a {
+		border-bottom-color: rgba(255, 255, 255, 0.1);
+	}
+
+	/* CommonSight — dark dropdown */
+	body.take-flight-page.commonsight-page .site-header .site-nav {
+		background: #0d3a47;
+		border-top-color: rgba(255, 255, 255, 0.12);
+	}
+
+	body.take-flight-page.commonsight-page .site-nav a {
+		border-bottom-color: rgba(255, 255, 255, 0.1);
 	}
 }
+
+/* =========================================================
+   Scroll-aware sticky header
+   Uses transform + transition so the slide is stateful and
+   never restarts mid-way (unlike @keyframes animation).
+   ========================================================= */
+
+/* Pinned: fixed at top, visible */
+body.homepage .site-header.header-pinned {
+	left: 0;
+	position: fixed !important;
+	right: 0;
+	top: 0;
+	transform: translateY(0);
+	transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+	            box-shadow 0.32s ease;
+	z-index: 999;
+	padding-top: 0.75rem;
+	padding-bottom: 0.75rem;
+}
+
+/* Hidden: slide above the viewport (transition fires from current position) */
+body.homepage .site-header.header-hidden {
+	transform: translateY(-110%);
+}
+
+/* Homepage / Resume / Contact — light frosted */
+body.homepage.home-view .site-header.header-pinned,
+body.homepage.resume-page .site-header.header-pinned,
+body.homepage.contact-page .site-header.header-pinned {
+	background: rgba(231, 231, 236, 0.97);
+	backdrop-filter: blur(10px);
+	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Take Flight base — dark frosted */
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page) .site-header.header-pinned {
+	background: rgba(15, 15, 20, 0.95);
+	backdrop-filter: blur(10px);
+	box-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
+}
+
+/* QuickStudy — purple frosted */
+body.take-flight-page.quickstudy-page .site-header.header-pinned {
+	background: rgba(47, 26, 87, 0.97);
+	backdrop-filter: blur(10px);
+	box-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
+}
+
+/* CommonSight — teal frosted */
+body.take-flight-page.commonsight-page .site-header.header-pinned {
+	background: rgba(13, 58, 71, 0.97);
+	backdrop-filter: blur(10px);
+	box-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
+}
+
+/* =========================================================
+   End sticky header
+   ========================================================= */
 
 body.case-study-page .project-case-study {
 	margin: 0 auto;
@@ -3648,7 +3802,7 @@ body.take-flight-page .tf-hero-oval {
 
 body.take-flight-page .tf-hero-oval h2 {
 	color: #050505;
-	font-size: clamp(3.6rem, 8vw, 5.8rem);
+	font-size: clamp(2rem, 8vw, 5.8rem);
 	font-weight: 600;
 	letter-spacing: -0.04em;
 	line-height: 1.03;
@@ -4203,8 +4357,9 @@ body.take-flight-page.quickstudy-page .tf-hero::after {
 }
 
 body.take-flight-page.quickstudy-page .site-name,
-body.take-flight-page.quickstudy-page .site-nav a {
-	color: #ffffff;
+body.take-flight-page.quickstudy-page .site-nav a,
+body.take-flight-page.quickstudy-page .nav-toggle {
+	color: #ffffff !important;
 	text-shadow: 0 2px 10px rgba(20, 10, 36, 0.45);
 }
 
@@ -4567,6 +4722,8 @@ body.take-flight-page.quickstudy-page .tf-experience-grid .tf-experience-copy {
 	}
 }
 
+
+
 @media screen and (max-width: 960px) {
 
 	body.take-flight-page.quickstudy-page .tf-experience-grid {
@@ -4582,11 +4739,11 @@ body.take-flight-page.quickstudy-page .tf-experience-grid .tf-experience-copy {
 	}
 
 	body.take-flight-page.quickstudy-page .tf-overview .tf-media-phone {
-		max-width: 320px;
+		max-width: 420px;
 	}
 
 	body.take-flight-page.quickstudy-page .tf-flow-grid {
-		grid-template-columns: repeat(3, minmax(0, 1fr));
+		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
 }
 
@@ -5051,8 +5208,9 @@ body.take-flight-page.commonsight-page .site-header {
 }
 
 body.take-flight-page.commonsight-page .site-name,
-body.take-flight-page.commonsight-page .site-nav a {
-	color: #ffffff;
+body.take-flight-page.commonsight-page .site-nav a,
+body.take-flight-page.commonsight-page .nav-toggle {
+	color: #ffffff !important;
 }
 
 body.take-flight-page.commonsight-page .site-nav a:hover {
@@ -5153,7 +5311,7 @@ body.take-flight-page.commonsight-page .tf-overview .tf-media-phone video {
 
 @media screen and (max-width: 960px) {
 	body.take-flight-page.commonsight-page .tf-overview .tf-media-phone {
-		max-width: 320px;
+		max-width: 420px;
 	}
 }
 
@@ -5480,5 +5638,87 @@ body.resume-page .resume-skill-row dd {
 
 	body.resume-page .resume-skill-row dt {
 		min-width: unset;
+	}
+}
+
+/* =========================================================
+   Small phone fixes (≤480px)
+   ========================================================= */
+
+@media screen and (max-width: 480px) {
+
+	/* Homepage — tighten outer padding */
+	body.homepage .site-header {
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
+
+	body.homepage .homepage-main {
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
+
+	/* Homepage — scale down name and nav links */
+	body.homepage .site-name {
+		font-size: 1.65rem;
+	}
+
+	body.homepage .site-nav a {
+		font-size: 1rem;
+	}
+
+	/* Case study pages — tighten section padding */
+	body.take-flight-page .site-header,
+	body.take-flight-page .tf-overview,
+	body.take-flight-page .tf-game-flow,
+	body.take-flight-page .tf-experiences,
+	body.take-flight-page .tf-owned,
+	body.take-flight-page .tf-code-snippets,
+	body.take-flight-page .tf-outcomes {
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
+
+	/* Case study hero oval — tighten padding */
+	body.take-flight-page .tf-hero-oval {
+		border-radius: 1.25rem;
+		padding: 1.5rem 1.25rem;
+	}
+
+	body.take-flight-page.quickstudy-page .tf-hero-oval,
+	body.take-flight-page:not(.quickstudy-page) .tf-hero-oval {
+		padding: 1.5rem 1.25rem;
+	}
+
+	/* Case study hero — reduce min-height */
+	body.take-flight-page .tf-hero {
+		min-height: 50vh;
+	}
+
+	/* Case study — make challenge flow single-column */
+	body.take-flight-page .tf-flow-grid,
+	body.take-flight-page.quickstudy-page .tf-flow-grid {
+		grid-template-columns: 1fr;
+	}
+
+	/* Case study next-project section */
+	.cs-next-project {
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
+
+	/* Contact card */
+	body.contact-page .contact-card {
+		padding: 1.25rem 1rem;
+	}
+
+	/* Resume document */
+	body.resume-page .resume-document {
+		padding: 1.25rem 1rem;
+	}
+
+	body.resume-page .resume-hero {
+		padding-left: 1rem;
+		padding-right: 1rem;
 	}
 }
