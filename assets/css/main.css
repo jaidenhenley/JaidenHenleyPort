@@ -5233,3 +5233,235 @@ body.take-flight-page.commonsight-page .cs-next-card:hover .cs-next-arrow {
 		background: linear-gradient(135deg, #09303a 0%, #0d4450 100%);
 	}
 }
+
+/* =========================================================
+   Resume Page
+   ========================================================= */
+
+body.resume-page .resume-hero {
+	margin: 0 auto;
+	max-width: 800px;
+	padding: 2rem 0 1.25rem;
+	text-align: center;
+}
+
+body.resume-page .resume-hero h2 {
+	color: #111;
+	font-size: clamp(2.6rem, 5vw, 4.4rem);
+	font-weight: 500;
+	letter-spacing: -0.03em;
+	line-height: 1.05;
+	margin: 0.75rem 0 0;
+}
+
+body.resume-page .resume-download-btn {
+	align-items: center;
+	background: #2f6f9e;
+	border: 0;
+	border-radius: 999px;
+	color: #fff;
+	display: inline-flex;
+	font-size: 1rem;
+	font-weight: 600;
+	gap: 0.45rem;
+	line-height: 1;
+	padding: 0.7rem 1.2rem;
+	text-decoration: none;
+	transition: background 0.2s ease;
+}
+
+body.resume-page .resume-download-btn:hover {
+	background: #255b81;
+}
+
+body.resume-page .resume-document {
+	background: #fff;
+	border: 1px solid #e2e3e8;
+	border-radius: 0.5rem;
+	margin: 0 auto 3rem;
+	max-width: 800px;
+	padding: 2.5rem 2.75rem;
+}
+
+body.resume-page .resume-header {
+	border-bottom: 2px solid #111;
+	margin-bottom: 1.75rem;
+	padding-bottom: 1.25rem;
+}
+
+body.resume-page .resume-name {
+	color: #111;
+	font-size: 2.4rem;
+	font-weight: 600;
+	letter-spacing: -0.02em;
+	line-height: 1.1;
+	margin: 0 0 0.2rem;
+}
+
+body.resume-page .resume-title {
+	color: #555;
+	font-size: 1rem;
+	font-style: italic;
+	font-weight: 400;
+	line-height: 1.4;
+	margin: 0 0 0.45rem;
+}
+
+body.resume-page .resume-contact {
+	color: #444;
+	font-size: 0.9rem;
+	font-weight: 400;
+	line-height: 1.5;
+	margin: 0;
+}
+
+body.resume-page .resume-contact a {
+	border-bottom: 0;
+	color: #2f6f9e;
+	text-decoration: underline;
+	text-underline-offset: 0.15em;
+}
+
+body.resume-page .resume-contact a:hover {
+	color: #255b81;
+}
+
+body.resume-page .resume-section {
+	margin-bottom: 1.75rem;
+}
+
+body.resume-page .resume-section-title {
+	color: #111;
+	font-size: 0.8rem;
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	line-height: 1;
+	margin: 0 0 1rem;
+	text-transform: uppercase;
+	border-bottom: 1.5px solid #ddd;
+	padding-bottom: 0.4rem;
+}
+
+body.resume-page .resume-summary {
+	color: #333;
+	font-size: 0.95rem;
+	line-height: 1.65;
+	margin: 0;
+}
+
+body.resume-page .resume-entry {
+	margin-bottom: 1.25rem;
+}
+
+body.resume-page .resume-entry:last-child {
+	margin-bottom: 0;
+}
+
+body.resume-page .resume-entry-header {
+	align-items: baseline;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.3rem 0.6rem;
+	margin-bottom: 0.2rem;
+}
+
+body.resume-page .resume-entry-title {
+	color: #111;
+	font-size: 0.97rem;
+	font-weight: 700;
+	line-height: 1.3;
+}
+
+body.resume-page .resume-entry-tech {
+	color: #555;
+	font-size: 0.88rem;
+	font-style: italic;
+	font-weight: 400;
+	line-height: 1.3;
+}
+
+body.resume-page .resume-entry-meta {
+	color: #777;
+	font-size: 0.85rem;
+	font-style: italic;
+	line-height: 1.3;
+	margin-left: auto;
+}
+
+body.resume-page .resume-entry-org {
+	color: #555;
+	font-size: 0.88rem;
+	font-weight: 400;
+	line-height: 1.4;
+	margin: 0 0 0.45rem;
+}
+
+body.resume-page .resume-bullets {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+body.resume-page .resume-bullets li {
+	color: #333;
+	font-size: 0.92rem;
+	line-height: 1.6;
+	margin-bottom: 0.3rem;
+	padding-left: 1.1rem;
+	position: relative;
+}
+
+body.resume-page .resume-bullets li::before {
+	color: #888;
+	content: "\2022";
+	left: 0;
+	position: absolute;
+	top: 0;
+}
+
+body.resume-page .resume-skills {
+	margin: 0;
+}
+
+body.resume-page .resume-skill-row {
+	display: flex;
+	font-size: 0.92rem;
+	gap: 0.5rem;
+	line-height: 1.6;
+	margin-bottom: 0.2rem;
+}
+
+body.resume-page .resume-skill-row dt {
+	color: #111;
+	flex-shrink: 0;
+	font-weight: 700;
+	min-width: 160px;
+}
+
+body.resume-page .resume-skill-row dd {
+	color: #333;
+	margin: 0;
+}
+
+@media screen and (max-width: 860px) {
+	body.resume-page .resume-document {
+		padding: 1.75rem 1.25rem;
+	}
+
+	body.resume-page .resume-entry-meta {
+		margin-left: 0;
+		width: 100%;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	body.resume-page .resume-skill-row {
+		flex-direction: column;
+		gap: 0;
+		margin-bottom: 0.65rem;
+	}
+
+	body.resume-page .resume-skill-row dt {
+		min-width: unset;
+	}
+}

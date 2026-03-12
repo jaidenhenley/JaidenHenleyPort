@@ -2,13 +2,13 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebas
 import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-analytics.js";
 
 const firebaseConfig = {
-	apiKey: "AIzaSyDxHLzhoV1eDqQf9Xi94_kXOX5wdxUhkoQ",
-	authDomain: "jaiden-portfolio.firebaseapp.com",
-	projectId: "jaiden-portfolio",
-	storageBucket: "jaiden-portfolio.firebasestorage.app",
-	messagingSenderId: "351848253837",
-	appId: "1:351848253837:web:17901c1b8de243c42015c4",
-	measurementId: "G-8JMW1HT9LD"
+	apiKey: "__FIREBASE_API_KEY__",
+	authDomain: "__FIREBASE_AUTH_DOMAIN__",
+	projectId: "__FIREBASE_PROJECT_ID__",
+	storageBucket: "__FIREBASE_STORAGE_BUCKET__",
+	messagingSenderId: "__FIREBASE_MESSAGING_SENDER_ID__",
+	appId: "__FIREBASE_APP_ID__",
+	measurementId: "__FIREBASE_MEASUREMENT_ID__"
 };
 
 const app = initializeApp(firebaseConfig);
