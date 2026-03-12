@@ -2980,6 +2980,23 @@ body.homepage .about-skills-list li {
 	padding: 0.35rem 0.75rem;
 }
 
+body.homepage .about-resume-btn {
+	display: inline-block;
+	margin-top: 1.25rem;
+	background: #2f6f9e;
+	color: #fff;
+	border-radius: 999px;
+	font-size: 0.85rem;
+	font-weight: 600;
+	padding: 0.55rem 1.2rem;
+	text-decoration: none;
+	transition: background 0.2s ease;
+}
+
+body.homepage .about-resume-btn:hover {
+	background: #255b81;
+}
+
 @media screen and (max-width: 960px) {
 	body.homepage .about-grid {
 		grid-template-columns: 1fr;
