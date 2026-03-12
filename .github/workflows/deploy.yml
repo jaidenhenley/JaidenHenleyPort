@@ -21,14 +21,33 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Inject Firebase config
+        env:
+          FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
+          FIREBASE_AUTH_DOMAIN: ${{ secrets.FIREBASE_AUTH_DOMAIN }}
+          FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+          FIREBASE_STORAGE_BUCKET: ${{ secrets.FIREBASE_STORAGE_BUCKET }}
+          FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
+          FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+          FIREBASE_MEASUREMENT_ID: ${{ secrets.FIREBASE_MEASUREMENT_ID }}
         run: |
-          sed -i "s|__FIREBASE_API_KEY__|${{ secrets.FIREBASE_API_KEY }}|g" assets/js/analytics.js
-          sed -i "s|__FIREBASE_AUTH_DOMAIN__|${{ secrets.FIREBASE_AUTH_DOMAIN }}|g" assets/js/analytics.js
-          sed -i "s|__FIREBASE_PROJECT_ID__|${{ secrets.FIREBASE_PROJECT_ID }}|g" assets/js/analytics.js
-          sed -i "s|__FIREBASE_STORAGE_BUCKET__|${{ secrets.FIREBASE_STORAGE_BUCKET }}|g" assets/js/analytics.js
-          sed -i "s|__FIREBASE_MESSAGING_SENDER_ID__|${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}|g" assets/js/analytics.js
-          sed -i "s|__FIREBASE_APP_ID__|${{ secrets.FIREBASE_APP_ID }}|g" assets/js/analytics.js
-          sed -i "s|__FIREBASE_MEASUREMENT_ID__|${{ secrets.FIREBASE_MEASUREMENT_ID }}|g" assets/js/analytics.js
+          python3 << 'EOF'
+          import os
+          replacements = {
+            '__FIREBASE_API_KEY__': os.environ['FIREBASE_API_KEY'],
+            '__FIREBASE_AUTH_DOMAIN__': os.environ['FIREBASE_AUTH_DOMAIN'],
+            '__FIREBASE_PROJECT_ID__': os.environ['FIREBASE_PROJECT_ID'],
+            '__FIREBASE_STORAGE_BUCKET__': os.environ['FIREBASE_STORAGE_BUCKET'],
+            '__FIREBASE_MESSAGING_SENDER_ID__': os.environ['FIREBASE_MESSAGING_SENDER_ID'],
+            '__FIREBASE_APP_ID__': os.environ['FIREBASE_APP_ID'],
+            '__FIREBASE_MEASUREMENT_ID__': os.environ['FIREBASE_MEASUREMENT_ID'],
+          }
+          with open('assets/js/analytics.js', 'r') as f:
+            content = f.read()
+          for placeholder, value in replacements.items():
+            content = content.replace(placeholder, value)
+          with open('assets/js/analytics.js', 'w') as f:
+            f.write(content)
+          EOF
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
