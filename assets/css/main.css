@@ -3687,6 +3687,11 @@ body.take-flight-page:not(.quickstudy-page):not(.commonsight-page) .site-header.
 	box-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
 }
 
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page) .site-header.header-pinned .site-name,
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page) .site-header.header-pinned .site-nav a {
+	color: #fff;
+}
+
 /* QuickStudy — purple frosted */
 body.take-flight-page.quickstudy-page .site-header.header-pinned {
 	background: rgba(47, 26, 87, 0.97);
@@ -4061,6 +4066,62 @@ body.take-flight-page .tf-experience-grid::-webkit-scrollbar {
 body.take-flight-page .tf-experience-grid::-webkit-scrollbar-thumb {
 	background: rgba(39, 49, 68, 0.45);
 	border-radius: 999px;
+}
+
+/* Take Flight — Experiences: 2×2 iPad grid */
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page) .tf-experience-grid {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	overflow-x: visible;
+	scroll-snap-type: none;
+	-webkit-overflow-scrolling: auto;
+	align-items: stretch;
+}
+
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page) .tf-experience-grid .tf-card {
+	flex: unset;
+	border-radius: 1rem;
+	overflow: hidden;
+	transition: box-shadow 0.22s ease, transform 0.22s ease;
+}
+
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page) .tf-experience-grid .tf-card:hover {
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18), 0 2px 6px rgba(0, 0, 0, 0.1);
+	transform: translateY(-2px);
+}
+
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page) .tf-experience-media {
+	background: transparent;
+	flex: none;
+	overflow: visible;
+	padding: 1rem 1rem 0.6rem;
+}
+
+/* iPad frame for Take Flight experiences */
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page) .tf-ipad-frame {
+	background: #111;
+	border-radius: 20px;
+	box-shadow:
+		inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+		0 0 0 1px rgba(0, 0, 0, 0.5),
+		0 16px 48px rgba(0, 0, 0, 0.45);
+	overflow: hidden;
+	padding: 9px;
+	width: 100%;
+}
+
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page) .tf-ipad-frame img {
+	aspect-ratio: 4 / 3;
+	border-radius: 13px;
+	display: block;
+	height: auto;
+	object-fit: cover;
+	width: 100%;
+}
+
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page) .tf-experience-grid .tf-experience-copy {
+	flex: 1;
+	min-height: 5rem;
 }
 
 body.take-flight-page .tf-arrow {
@@ -5644,6 +5705,13 @@ body.resume-page .resume-skill-row dd {
 /* =========================================================
    Small phone fixes (≤480px)
    ========================================================= */
+
+@media screen and (max-width: 600px) {
+
+	body.take-flight-page:not(.quickstudy-page):not(.commonsight-page) .tf-experience-grid {
+		grid-template-columns: 1fr;
+	}
+}
 
 @media screen and (max-width: 480px) {
 
