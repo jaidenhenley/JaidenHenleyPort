@@ -79,36 +79,78 @@
 
 			<section class="tf-game-flow">
 				<h3>The Game Flow</h3>
-					<div class="tf-flow-grid">
-						<article class="tf-card tf-card-start">
-							<div class="tf-card-ipad-frame">
-								<img src="images/StartARun.png" alt="Take Flight start a run screen" />
+					<div class="tf-flow-grid tf-gf-grid">
+						<article class="tf-card tf-gf-card">
+							<div class="tf-gf-img-wrap">
+								<div class="tf-card-ipad-frame">
+									<img src="images/StartARun.png" alt="Take Flight start a run screen" />
+								</div>
 							</div>
-							<h4>Start a run!</h4>
-						<p>
-							Begin your journey on Belle Isle, jump into quick challenges, and start
-							building score momentum.
-						</p>
+							<div class="tf-gf-copy">
+								<h4>Start a run!</h4>
+								<p>Begin your journey on Belle Isle, jump into quick challenges, and start building score momentum.</p>
+							</div>
 						</article>
-						<article class="tf-card tf-card-tall">
-							<img src="images/QuickChallenges.png" alt="Take Flight quick challenges screen" />
-							<h4>Quick Challenges</h4>
-						<p>
-							Rotate through mini games that test memory, coordination, speed, and reflexes.
-						</p>
+						<article class="tf-card tf-gf-card">
+							<div class="tf-gf-img-wrap">
+								<img src="images/QuickChallenges.png" alt="Take Flight quick challenges screen" />
+							</div>
+							<div class="tf-gf-copy">
+								<h4>Quick Challenges</h4>
+								<p>Rotate through mini games that test memory, coordination, speed, and reflexes.</p>
+							</div>
 						</article>
-						<article class="tf-card">
-							<img src="images/BuildNest.png" alt="Take Flight score and progression gameplay" />
-							<h4>Build Score and Momentum!</h4>
-						<p>
-							Survive longer, manage multiple nests, and watch your high score climb.
-						</p>
+						<article class="tf-card tf-gf-card">
+							<div class="tf-gf-img-wrap">
+								<div class="tf-card-ipad-frame">
+									<img src="images/BuildNest.png" alt="Take Flight score and progression gameplay" />
+								</div>
+							</div>
+							<div class="tf-gf-copy">
+								<h4>Build Score and Momentum!</h4>
+								<p>Survive longer, manage multiple nests, and watch your high score climb.</p>
+							</div>
 						</article>
-						<article class="tf-card tf-card-phone">
-							<img src="images/FinishRestReplay.jpg" alt="Take Flight finish, rest, and replay screen" />
-							<h4>Finish, Rest, and Replay!</h4>
+						<article class="tf-card tf-gf-card">
+							<div class="tf-gf-img-wrap">
+								<img src="images/FinishRestReplay.jpg" alt="Take Flight finish, rest, and replay screen" />
+							</div>
+							<div class="tf-gf-copy">
+								<h4>Finish, Rest, and Replay!</h4>
+								<p>Track achievement progress and jump back in with smarter strategies each run.</p>
+							</div>
+						</article>
+					</div>
+			</section>
+
+			<section class="tf-game-flow tf-challenges">
+				<h3>Challenges &amp; Solutions</h3>
+				<div class="tf-flow-grid">
+					<article class="tf-card tf-card-challenge">
+						<span class="tf-challenge-number">01</span>
+						<h4>Learning SpriteKit</h4>
 						<p>
-							Track achievement progress and jump back in with smarter strategies each run.
+							<strong>Challenge:</strong> Take Flight was my first time using SpriteKit. I had to get up to speed on the scene graph, physics bodies, the <code>update</code> loop, and how nodes, cameras, and collision detection all fit together while actively building the game.<br /><br />
+							<strong>Solution:</strong> I leaned on Apple&rsquo;s documentation and broke the framework down system by system, building small isolated tests before wiring each piece into the real game. Pairing it with SwiftUI from the start also helped me understand where SpriteKit&rsquo;s responsibilities ended and my own code began.<br /><br />
+							<strong>Result:</strong> Shipped a full multi-scene SpriteKit game with a working physics-driven player, camera system, and collision logic.
+						</p>
+					</article>
+					<article class="tf-card tf-card-challenge">
+						<span class="tf-challenge-number">02</span>
+						<h4>One Loop Across Five Scenes</h4>
+						<p>
+							<strong>Challenge:</strong> Five separate mini-games each had their own scene and logic, but they all needed to share the same hunger bar, score, and progression state. Getting them to feel like one game instead of disconnected screens was the core design problem.<br /><br />
+							<strong>Solution:</strong> I built a centralized <code>RunState</code> model that every scene reads from and writes to. Scene transitions pass the same model forward so hunger, score, and context carry over seamlessly between challenges.<br /><br />
+							<strong>Result:</strong> The game feels like a single survival loop rather than a playlist of mini-games.
+						</p>
+					</article>
+					<article class="tf-card tf-card-challenge">
+						<span class="tf-challenge-number">03</span>
+						<h4>Input Across Devices</h4>
+						<p>
+							<strong>Challenge:</strong> The game needed to support touch-based joystick input on device and keyboard input in the simulator, both feeding the same SpriteKit movement system. Building one input layer that handled both without branching all over the codebase was tricky.<br /><br />
+							<strong>Solution:</strong> I created a custom SwiftUI joystick that normalizes drag input into a <code>CGPoint</code> velocity clamped to the joystick radius. Keyboard input writes the same velocity property. SpriteKit only ever reads one value regardless of source.<br /><br />
+							<strong>Result:</strong> Consistent player movement on both device and simulator with no platform-specific branching in the game logic.
 						</p>
 					</article>
 				</div>
@@ -172,39 +214,6 @@
 					</div>
 			</section>
 
-			<section class="tf-game-flow tf-challenges">
-				<h3>Challenges &amp; Solutions</h3>
-				<div class="tf-flow-grid">
-					<article class="tf-card tf-card-challenge">
-						<span class="tf-challenge-number">01</span>
-						<h4>Bridging SwiftUI &amp; SpriteKit</h4>
-						<p>
-							<strong>Challenge:</strong> The game needed SwiftUI for overlays and UI and SpriteKit for the actual game world. Passing real-time data like joystick velocity, hunger, and game state between the two frameworks without lag or race conditions was non-trivial.<br /><br />
-							<strong>Solution:</strong> I used a shared ViewModel with <code>@Published</code> properties as the single source of truth. SwiftUI writes joystick input and reads hunger/state, while SpriteKit scenes observe and mutate the same object through a weak reference on every update tick.<br /><br />
-							<strong>Result:</strong> Clean real-time communication between both layers with no duplicate state.
-						</p>
-					</article>
-					<article class="tf-card tf-card-challenge">
-						<span class="tf-challenge-number">02</span>
-						<h4>One Loop Across Five Scenes</h4>
-						<p>
-							<strong>Challenge:</strong> Five separate mini-games each had their own scene and logic, but they all needed to share the same hunger bar, score, and progression state. Getting them to feel like one game instead of disconnected screens was the core design problem.<br /><br />
-							<strong>Solution:</strong> I built a centralized <code>RunState</code> model that every scene reads from and writes to. Scene transitions pass the same model forward so hunger, score, and context carry over seamlessly between challenges.<br /><br />
-							<strong>Result:</strong> The game feels like a single survival loop rather than a playlist of mini-games.
-						</p>
-					</article>
-					<article class="tf-card tf-card-challenge">
-						<span class="tf-challenge-number">03</span>
-						<h4>Input Across Devices</h4>
-						<p>
-							<strong>Challenge:</strong> The game needed to support touch-based joystick input on device and keyboard input in the simulator, both feeding the same SpriteKit movement system. Building one input layer that handled both without branching all over the codebase was tricky.<br /><br />
-							<strong>Solution:</strong> I created a custom SwiftUI joystick that normalizes drag input into a <code>CGPoint</code> velocity clamped to the joystick radius. Keyboard input writes the same velocity property. SpriteKit only ever reads one value regardless of source.<br /><br />
-							<strong>Result:</strong> Consistent player movement on both device and simulator with no platform-specific branching in the game logic.
-						</p>
-					</article>
-				</div>
-			</section>
-
 			<section class="tf-owned">
 				<div class="tf-owned-grid">
 					<figure class="tf-media tf-media-ipad">
@@ -239,6 +248,7 @@
 					<div class="tf-snippet-grid">
 						<article class="tf-snippet-card">
 							<h4>Game Center - Auth + Achievements</h4>
+							<p class="tf-snippet-desc">Authenticates the local player with Game Center on launch and reports achievement completions with a native banner.</p>
 							<pre class="language-swift"><code class="language-swift">// Call once at app start or main menu.
 @MainActor
 func authenticateLocalPlayer(presentingViewController: UIViewController?) async {
@@ -275,6 +285,7 @@ func completeAchievement(id: String, showBanner: Bool = true) async {
 						</article>
 						<article class="tf-snippet-card">
 							<h4>Custom On-Screen Joystick</h4>
+							<p class="tf-snippet-desc">A SwiftUI joystick built with DragGesture that clamps input to a circle radius and writes a normalized CGPoint velocity into the shared ViewModel for SpriteKit to read each frame.</p>
 							<pre class="language-swift"><code class="language-swift">// Custom Joystick
 ZStack {
     Circle() // Background
@@ -319,6 +330,7 @@ ZStack {
 						</article>
 						<article class="tf-snippet-card">
 							<h4>Tutorial Mode</h4>
+							<p class="tf-snippet-desc">A RunState enum drives tutorial, active, and game-over phases. Contextual onboarding sheets fire at the right moments and dismiss cleanly into the active run.</p>
 							<pre class="language-swift"><code class="language-swift">if viewModel?.tutorialIsOn == true, viewModel?.inventoryFullOnce == false {
     viewModel?.showMainGameInstructions(type: .nestBuilding)
     viewModel?.inventoryFullOnce = true
@@ -367,6 +379,7 @@ struct MainOnboardingView: View {
 						</article>
 						<article class="tf-snippet-card">
 							<h4>Core Game Loop</h4>
+							<p class="tf-snippet-desc">The SpriteKit update loop clamps delta time to a safe range, ticks down hunger on an accumulator, persists player position every second, then drives movement and camera follow.</p>
 							<pre class="language-swift"><code class="language-swift">override func update(_ currentTime: TimeInterval) {
     handleKeyboardMapInput()
     if viewModel?.isMapMode == true { return }
