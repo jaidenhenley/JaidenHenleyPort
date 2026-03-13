@@ -172,6 +172,39 @@
 					</div>
 			</section>
 
+			<section class="tf-game-flow tf-challenges">
+				<h3>Challenges &amp; Solutions</h3>
+				<div class="tf-flow-grid">
+					<article class="tf-card tf-card-challenge">
+						<span class="tf-challenge-number">01</span>
+						<h4>Bridging SwiftUI &amp; SpriteKit</h4>
+						<p>
+							<strong>Challenge:</strong> The game needed SwiftUI for overlays and UI and SpriteKit for the actual game world. Passing real-time data like joystick velocity, hunger, and game state between the two frameworks without lag or race conditions was non-trivial.<br /><br />
+							<strong>Solution:</strong> I used a shared ViewModel with <code>@Published</code> properties as the single source of truth. SwiftUI writes joystick input and reads hunger/state, while SpriteKit scenes observe and mutate the same object through a weak reference on every update tick.<br /><br />
+							<strong>Result:</strong> Clean real-time communication between both layers with no duplicate state.
+						</p>
+					</article>
+					<article class="tf-card tf-card-challenge">
+						<span class="tf-challenge-number">02</span>
+						<h4>One Loop Across Five Scenes</h4>
+						<p>
+							<strong>Challenge:</strong> Five separate mini-games each had their own scene and logic, but they all needed to share the same hunger bar, score, and progression state. Getting them to feel like one game instead of disconnected screens was the core design problem.<br /><br />
+							<strong>Solution:</strong> I built a centralized <code>RunState</code> model that every scene reads from and writes to. Scene transitions pass the same model forward so hunger, score, and context carry over seamlessly between challenges.<br /><br />
+							<strong>Result:</strong> The game feels like a single survival loop rather than a playlist of mini-games.
+						</p>
+					</article>
+					<article class="tf-card tf-card-challenge">
+						<span class="tf-challenge-number">03</span>
+						<h4>Input Across Devices</h4>
+						<p>
+							<strong>Challenge:</strong> The game needed to support touch-based joystick input on device and keyboard input in the simulator, both feeding the same SpriteKit movement system. Building one input layer that handled both without branching all over the codebase was tricky.<br /><br />
+							<strong>Solution:</strong> I created a custom SwiftUI joystick that normalizes drag input into a <code>CGPoint</code> velocity clamped to the joystick radius. Keyboard input writes the same velocity property. SpriteKit only ever reads one value regardless of source.<br /><br />
+							<strong>Result:</strong> Consistent player movement on both device and simulator with no platform-specific branching in the game logic.
+						</p>
+					</article>
+				</div>
+			</section>
+
 			<section class="tf-owned">
 				<div class="tf-owned-grid">
 					<figure class="tf-media tf-media-ipad">

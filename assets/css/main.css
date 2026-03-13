@@ -3948,6 +3948,77 @@ body.take-flight-page .tf-flow-grid {
 	grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+/* Take Flight — Challenges & Solutions */
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page) .tf-challenges .tf-flow-grid {
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	align-items: stretch;
+}
+
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page) .tf-card-challenge {
+	border-left: 3px solid #2f6f9e;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	padding: 1.8rem 1.6rem 1.6rem 1.5rem;
+	position: relative;
+	transition: box-shadow 0.22s ease, transform 0.22s ease;
+}
+
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page) .tf-card-challenge:hover {
+	box-shadow:
+		0 8px 24px rgba(47, 111, 158, 0.18),
+		0 2px 6px rgba(47, 111, 158, 0.1);
+	transform: translateY(-2px);
+}
+
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page) .tf-challenge-number {
+	color: #2f6f9e;
+	font-size: 1rem;
+	font-weight: 900;
+	letter-spacing: -0.01em;
+	line-height: 1;
+	margin: 0 0 0.9rem;
+}
+
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page) .tf-card-challenge p strong {
+	border-radius: 4px;
+	display: inline-block;
+	font-size: 0.7rem;
+	font-weight: 800;
+	letter-spacing: 0.06em;
+	line-height: 1;
+	padding: 0.2rem 0.45rem;
+	text-transform: uppercase;
+	vertical-align: middle;
+	margin-right: 0.3rem;
+}
+
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page) .tf-card-challenge p strong:nth-of-type(1) {
+	background: rgba(220, 38, 38, 0.1);
+	border: 1px solid rgba(220, 38, 38, 0.25);
+	color: #b91c1c;
+}
+
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page) .tf-card-challenge p strong:nth-of-type(2) {
+	background: rgba(37, 99, 235, 0.1);
+	border: 1px solid rgba(37, 99, 235, 0.25);
+	color: #1d4ed8;
+}
+
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page) .tf-card-challenge p strong:nth-of-type(3) {
+	background: rgba(22, 163, 74, 0.1);
+	border: 1px solid rgba(22, 163, 74, 0.25);
+	color: #15803d;
+}
+
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page) .tf-card-challenge code {
+	background: rgba(47, 111, 158, 0.08);
+	border-radius: 3px;
+	font-family: monospace;
+	font-size: 0.85em;
+	padding: 0.1em 0.35em;
+}
+
 body.take-flight-page .tf-card {
 	background: #e7e7ec;
 }
@@ -4385,6 +4456,10 @@ body.take-flight-page .tf-owned .tf-media-ipad video {
 	}
 
 	body.take-flight-page .tf-snippet-grid {
+		grid-template-columns: 1fr;
+	}
+
+	body.take-flight-page:not(.quickstudy-page):not(.commonsight-page) .tf-challenges .tf-flow-grid {
 		grid-template-columns: 1fr;
 	}
 
