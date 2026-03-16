@@ -3043,7 +3043,7 @@ body.homepage .testimonials-inner h3 {
 body.homepage .testimonials-grid {
 	display: grid;
 	gap: 1.5rem;
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: repeat(2, 1fr);
 }
 
 body.homepage .testimonial-card {
@@ -3083,16 +3083,16 @@ body.homepage .testimonial-role {
 }
 
 @media screen and (max-width: 960px) {
-	body.homepage .testimonials-grid {
-		grid-template-columns: 1fr;
-	}
-
 	body.homepage .testimonials-section {
 		padding: 3.5rem 2rem;
 	}
 }
 
-@media screen and (max-width: 736px) {
+@media screen and (max-width: 600px) {
+	body.homepage .testimonials-grid {
+		grid-template-columns: 1fr;
+	}
+
 	body.homepage .testimonials-section {
 		padding: 2.5rem 1.25rem;
 	}
