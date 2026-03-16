@@ -3018,6 +3018,90 @@ body.homepage .about-resume-btn:hover {
 	}
 }
 
+/* ========================================================
+   Testimonials Section
+   ======================================================== */
+
+body.homepage .testimonials-section {
+	background: #fff;
+	padding: 5rem 3rem;
+}
+
+body.homepage .testimonials-inner {
+	margin: 0 auto;
+	max-width: 1060px;
+}
+
+body.homepage .testimonials-inner h3 {
+	color: #050505;
+	font-size: 1.9rem;
+	font-weight: 800;
+	letter-spacing: -0.02em;
+	margin: 0 0 2.5rem;
+}
+
+body.homepage .testimonials-grid {
+	display: grid;
+	gap: 1.5rem;
+	grid-template-columns: repeat(3, 1fr);
+}
+
+body.homepage .testimonial-card {
+	background: #f0f0f5;
+	border-radius: 12px;
+	margin: 0;
+	padding: 1.75rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+body.homepage .testimonial-card p {
+	color: #3a3a44;
+	font-size: 1rem;
+	line-height: 1.7;
+	margin: 0 0 1.25rem;
+	font-style: italic;
+}
+
+body.homepage .testimonial-card footer {
+	background: none;
+	display: flex;
+	flex-direction: column;
+	gap: 0.2rem;
+}
+
+body.homepage .testimonial-name {
+	color: #050505;
+	font-size: 0.9rem;
+	font-weight: 700;
+}
+
+body.homepage .testimonial-role {
+	color: #888;
+	font-size: 0.8rem;
+}
+
+@media screen and (max-width: 960px) {
+	body.homepage .testimonials-grid {
+		grid-template-columns: 1fr;
+	}
+
+	body.homepage .testimonials-section {
+		padding: 3.5rem 2rem;
+	}
+}
+
+@media screen and (max-width: 736px) {
+	body.homepage .testimonials-section {
+		padding: 2.5rem 1.25rem;
+	}
+
+	body.homepage .testimonials-inner h3 {
+		font-size: 1.5rem;
+	}
+}
+
 body.homepage .site-footer {
 	background: #d7d8dd;
 	margin-top: 2.5rem;
