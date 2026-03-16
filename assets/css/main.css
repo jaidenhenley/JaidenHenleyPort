@@ -4846,6 +4846,8 @@ body.take-flight-page.quickstudy-page .tf-snippet-card {
 body.take-flight-page.quickstudy-page .tf-snippet-card pre {
 	background: rgba(255, 255, 255, 0.05);
 	border-color: rgba(210, 193, 255, 0.22);
+	max-height: 340px;
+	overflow-y: auto;
 }
 
 body.take-flight-page.quickstudy-page .tf-experience-grid::-webkit-scrollbar-thumb {
