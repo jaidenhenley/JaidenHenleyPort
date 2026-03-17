@@ -3023,7 +3023,7 @@ body.homepage .about-resume-btn:hover {
    ======================================================== */
 
 body.homepage .testimonials-section {
-	background: #fff;
+	background: #f0f0f5;
 	padding: 5rem 3rem;
 }
 
@@ -3047,7 +3047,7 @@ body.homepage .testimonials-grid {
 }
 
 body.homepage .testimonial-card {
-	background: #f0f0f5;
+	background: #d9d9e0;
 	border-radius: 12px;
 	margin: 0;
 	padding: 1.75rem;
@@ -5533,18 +5533,86 @@ body.take-flight-page.commonsight-page .tf-card {
 }
 
 /* Challenge cards */
+/* CommonSight — challenge cards */
+body.take-flight-page.commonsight-page .tf-flow-grid {
+	align-items: stretch;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 body.take-flight-page.commonsight-page .tf-card-challenge {
-	border-left-color: #10505c;
+	border-left: 3px solid #10505c;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	padding: 1.8rem 1.6rem 1.6rem 1.5rem;
+	position: relative;
+	transition: box-shadow 0.22s ease, transform 0.22s ease;
 }
 
 body.take-flight-page.commonsight-page .tf-card-challenge:hover {
 	box-shadow:
 		0 8px 24px rgba(16, 80, 92, 0.18),
 		0 2px 6px rgba(16, 80, 92, 0.1);
+	transform: translateY(-2px);
 }
 
 body.take-flight-page.commonsight-page .tf-challenge-number {
 	color: #10505c;
+	font-size: 1rem;
+	font-weight: 900;
+	letter-spacing: -0.01em;
+	line-height: 1;
+	margin: 0 0 0.9rem;
+	position: static;
+}
+
+body.take-flight-page.commonsight-page .tf-card-challenge p strong {
+	border-radius: 4px;
+	display: inline-block;
+	font-size: 0.7rem;
+	font-weight: 800;
+	letter-spacing: 0.06em;
+	line-height: 1;
+	padding: 0.2rem 0.45rem;
+	text-transform: uppercase;
+	vertical-align: middle;
+	margin-right: 0.3rem;
+}
+
+body.take-flight-page.commonsight-page .tf-card-challenge p strong:nth-of-type(1) {
+	background: rgba(220, 38, 38, 0.1);
+	border: 1px solid rgba(220, 38, 38, 0.25);
+	color: #b91c1c;
+}
+
+body.take-flight-page.commonsight-page .tf-card-challenge p strong:nth-of-type(2) {
+	background: rgba(37, 99, 235, 0.1);
+	border: 1px solid rgba(37, 99, 235, 0.25);
+	color: #1d4ed8;
+}
+
+body.take-flight-page.commonsight-page .tf-card-challenge p strong:nth-of-type(3) {
+	background: rgba(22, 163, 74, 0.1);
+	border: 1px solid rgba(22, 163, 74, 0.25);
+	color: #15803d;
+}
+
+@media screen and (max-width: 1260px) {
+	body.take-flight-page.commonsight-page .tf-flow-grid {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+}
+
+@media screen and (max-width: 960px) {
+	body.take-flight-page.commonsight-page .tf-flow-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media screen and (max-width: 736px) {
+	body.take-flight-page.commonsight-page .tf-flow-grid {
+		grid-template-columns: 1fr;
+	}
 }
 
 /* Tech chips */
@@ -5623,14 +5691,87 @@ body.take-flight-page.commonsight-page .tf-project-link-disabled {
 	color: rgba(16, 80, 92, 0.4);
 }
 
-/* Screenshot pending */
-body.take-flight-page.commonsight-page .tf-experience-media--pending {
-	background: rgba(16, 80, 92, 0.07);
-	border-color: rgba(16, 80, 92, 0.25);
+/* CommonSight — Screenshots: 4-column grid */
+body.take-flight-page.commonsight-page .tf-experience-grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	overflow-x: visible;
+	scroll-snap-type: none;
+	-webkit-overflow-scrolling: auto;
+	align-items: stretch;
 }
 
+body.take-flight-page.commonsight-page .tf-experience-grid .tf-card {
+	flex: unset;
+	border-radius: 1rem;
+	overflow: hidden;
+	transition: box-shadow 0.22s ease, transform 0.22s ease;
+}
+
+body.take-flight-page.commonsight-page .tf-experience-grid .tf-card:hover {
+	box-shadow:
+		0 8px 24px rgba(16, 80, 92, 0.18),
+		0 2px 6px rgba(16, 80, 92, 0.1);
+	transform: translateY(-2px);
+}
+
+body.take-flight-page.commonsight-page .tf-experience-media {
+	background: transparent;
+	flex: none;
+	overflow: visible;
+	padding: 1rem 1rem 0.6rem;
+}
+
+body.take-flight-page.commonsight-page .tf-experience-grid .tf-experience-copy {
+	flex: 1;
+	min-height: 7rem;
+}
+
+/* iPhone frame */
+body.take-flight-page.commonsight-page .tf-iphone-frame {
+	background: #111;
+	border-radius: 40px;
+	box-shadow:
+		inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+		0 0 0 1px rgba(0, 0, 0, 0.5),
+		0 16px 48px rgba(0, 0, 0, 0.45);
+	overflow: hidden;
+	padding: 7px;
+	width: 100%;
+}
+
+body.take-flight-page.commonsight-page .tf-iphone-frame img {
+	aspect-ratio: 9 / 19.5;
+	border-radius: 34px;
+	display: block;
+	height: auto;
+	object-fit: cover;
+	width: 100%;
+}
+
+@media screen and (max-width: 960px) {
+	body.take-flight-page.commonsight-page .tf-experience-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media screen and (max-width: 736px) {
+	body.take-flight-page.commonsight-page .tf-experience-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* Screenshot pending */
 body.take-flight-page.commonsight-page .tf-screenshot-pending {
-	color: rgba(16, 80, 92, 0.5);
+	aspect-ratio: 9 / 19.5;
+	border-radius: 34px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: rgba(255, 255, 255, 0.35);
+	font-size: 0.85rem;
+	background: rgba(255, 255, 255, 0.04);
+	margin: 0;
 }
 
 /* Snippet cards */

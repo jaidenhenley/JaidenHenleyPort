@@ -103,29 +103,30 @@
 				<div class="tf-flow-grid">
 					<article class="tf-card tf-card-challenge">
 						<span class="tf-challenge-number">01</span>
-						<h4><!-- TODO: Challenge title --></h4>
+						<h4>Learning Firebase</h4>
 						<p>
-							<strong>Challenge:</strong> <!-- TODO: Describe the problem --><br /><br />
-							<strong>Solution:</strong> <!-- TODO: Describe your fix --><br /><br />
-							<strong>Result:</strong> <!-- TODO: Describe the outcome -->
+							<strong>Challenge:</strong>I never used Firebase before this project. I had to figure out how Authentication, Firestore and Messaging work and then wire them into a real app with real users.<br /><br />
+							<strong>Solution:</strong> I started with auth and got sign up, sign in, and session persistence working with real accounts first. Once that was in place, I built out the Firestore data layer and then added Cloud Messaging so coalitions could actually communicate with members inside the app. I learned each part by building and shipping it, not by just reading about it.<br /><br />
+							<strong>Result:</strong> A working app with real accounts and live-synced data, all built on a platform I picked up during this project.
+
 						</p>
 					</article>
 					<article class="tf-card tf-card-challenge">
 						<span class="tf-challenge-number">02</span>
-						<h4><!-- TODO: Challenge title --></h4>
+						<h4>Getting the Map to Work With Live Data</h4>
 						<p>
-							<strong>Challenge:</strong> <!-- TODO: Describe the problem --><br /><br />
-							<strong>Solution:</strong> <!-- TODO: Describe your fix --><br /><br />
-							<strong>Result:</strong> <!-- TODO: Describe the outcome -->
+							<strong>Challenge:</strong> Every observation is stored in Firestore and scoped to a specific neighborhood. Those need to show up on a MapKit view in real time as people submit them. Getting those two things to talk to each other cleanly took more work than I expected.<br /><br />
+							<strong>Solution:</strong> I set up Firestore listeners that feed directly into the map so observations appear as soon as they&rsquo;re submitted. Structured the data so the map only pulls what&rsquo;s relevant to the neighborhood you&rsquo;re looking at instead of loading everything at once.<br /><br />
+							<strong>Result:</strong> The map updates on its own and shows what&rsquo;s actually happening in your neighborhood without needing to refresh or dig through a list.
 						</p>
 					</article>
 					<article class="tf-card tf-card-challenge">
 						<span class="tf-challenge-number">03</span>
-						<h4><!-- TODO: Challenge title --></h4>
+						<h4>Making Raw Observations Worth Reading</h4>
 						<p>
-							<strong>Challenge:</strong> <!-- TODO: Describe the problem --><br /><br />
-							<strong>Solution:</strong> <!-- TODO: Describe your fix --><br /><br />
-							<strong>Result:</strong> <!-- TODO: Describe the outcome -->
+							<strong>Challenge:</strong> People submit short observations about things like rising property taxes or empty storefronts. On their own they&rsquo;re just a few sentences that don&rsquo;t really give anyone a reason to care or take action.<br /><br />
+							<strong>Solution:</strong> I built the Narrative Alchemy flow using Foundation Models to take those raw inputs and turn them into full story cards with real context, a narrative, and a call to action. Had to figure out how to shape messy user input into something the model could work with and get useful output back.<br /><br />
+							<strong>Result:</strong> Neighborhood issues turn into stories that people can actually read, share, and organize around instead of just sitting in a feed.
 						</p>
 					</article>
 				</div>
@@ -136,39 +137,47 @@
 				<button class="tf-arrow tf-arrow-left" aria-label="Previous screenshot">&larr;</button>
 				<div class="tf-experience-grid">
 					<article class="tf-card">
-						<div class="tf-experience-media tf-experience-media--pending">
-							<p class="tf-screenshot-pending">Screenshot coming soon</p>
+						<div class="tf-experience-media">
+							<div class="tf-iphone-frame">
+								<img src="images/CommonSightDash.png" alt="Dashboard screen" />
+							</div>
 						</div>
 						<div class="tf-experience-copy">
-							<h4><!-- TODO: Screen name --></h4>
-							<p><!-- TODO: What this screen shows --></p>
+							<h4>Home Screen</h4>
+							<p>The main hub where you can see events, coalition spotlights, and your submissions as sonn as you open the app. Everything you need to know about your neighborhood in one place.<p>
 						</div>
 					</article>
 					<article class="tf-card">
-						<div class="tf-experience-media tf-experience-media--pending">
-							<p class="tf-screenshot-pending">Screenshot coming soon</p>
+						<div class="tf-experience-media">
+							<div class="tf-iphone-frame">
+								<img src="images/CommonSightObservation.png" alt="Observation screen" />
+							</div>
 						</div>
 						<div class="tf-experience-copy">
-							<h4><!-- TODO: Screen name --></h4>
-							<p><!-- TODO: What this screen shows --></p>
+							<h4>New Observation</h4>
+							<p>This is how residents report what they see. Pick a catagory, add a location, describe what's going on, and submit.</p>
 						</div>
 					</article>
 					<article class="tf-card">
-						<div class="tf-experience-media tf-experience-media--pending">
-							<p class="tf-screenshot-pending">Screenshot coming soon</p>
+						<div class="tf-experience-media">
+							<div class="tf-iphone-frame">
+								<img src="images/CommonSIghtStoryCard.png" alt="Story Card screen" />
+							</div>
 						</div>
 						<div class="tf-experience-copy">
-							<h4><!-- TODO: Screen name --></h4>
-							<p><!-- TODO: What this screen shows --></p>
+							<h4>Story Card</h4>
+							<p>Stories are generated using Foundation Models, turning raw observations into something that people can actually read and share. This one covers rising property taxes pushing seniors out of Bagley.</p>
 						</div>
 					</article>
 					<article class="tf-card">
-						<div class="tf-experience-media tf-experience-media--pending">
-							<p class="tf-screenshot-pending">Screenshot coming soon</p>
+						<div class="tf-experience-media">
+							<div class="tf-iphone-frame">
+								<img src="images/CommonSightCoalition.png" alt="Coalition screen" />
+							</div>
 						</div>
 						<div class="tf-experience-copy">
-							<h4><!-- TODO: Screen name --></h4>
-							<p><!-- TODO: What this screen shows --></p>
+							<h4>Coalition View</h4>
+							<p>Coalitions are where the community organizes around and issue. Individual observations come together here to turn into something bigger.</p>
 						</div>
 					</article>
 				</div>
