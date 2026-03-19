@@ -5516,11 +5516,11 @@ body.take-flight-page.commonsight-page .tf-owned {
 }
 
 body.take-flight-page.commonsight-page .tf-code-snippets {
-	background: linear-gradient(180deg, #c8e2e8 0%, #c0dde4 100%);
+	background: linear-gradient(180deg, #6fa8b8 0%, #64a0b0 100%);
 }
 
 body.take-flight-page.commonsight-page .tf-outcomes {
-	background: linear-gradient(180deg, #c0dde4 0%, #b8d8e0 100%);
+	background: linear-gradient(180deg, #64a0b0 0%, #5a98a8 100%);
 }
 
 body.take-flight-page.commonsight-page .tf-outcome-card {

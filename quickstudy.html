@@ -192,9 +192,8 @@
 				<div class="tf-snippet-grid">
 					<article class="tf-snippet-card">
 					<h4>preprocessForHandwriting</h4>
-					<pre class="language-swift"><code class="language-swift">// Enhances image quality before OCR by applying desaturation, contrast boost,
-// exposure adjustment, and sharpening to improve handwriting recognition
-static func preprocessForHandwriting(_ image: UIImage) -> CGImage? {
+					<p class="tf-snippet-desc">Runs a Core Image pipeline to desaturate, boost contrast, and sharpen a captured image before passing it to Vision for OCR, significantly improving handwriting recognition accuracy.</p>
+					<pre class="language-swift"><code class="language-swift">static func preprocessForHandwriting(_ image: UIImage) -> CGImage? {
     guard let cgImage = image.cgImage else { return nil }
     let ciImage = CIImage(cgImage: cgImage)
 
@@ -218,10 +217,10 @@ static func preprocessForHandwriting(_ image: UIImage) -> CGImage? {
 					</article>
 					<article class="tf-snippet-card">
 						<h4>QuizGenerator</h4>
+						<p class="tf-snippet-desc">Builds multiple-choice questions from approved flashcards, preferring distractors with similar answer length to avoid obvious wrong answers and falling back to placeholder options when the pool is too small.</p>
 						<pre class="language-swift"><code class="language-swift">struct QuizGenerator {
     
-    // Generates multiple-choice quiz questions from approved flashcards with intelligent
-    // distractor selection based on answer similarity and length matching
+
     func generateQuiz(from flashcards: [Flashcard]) -> [QuizQuestion] {
         let approvedCards = flashcards.filter { $0.approved }
         guard !approvedCards.isEmpty else { return [] }
@@ -234,25 +233,20 @@ static func preprocessForHandwriting(_ image: UIImage) -> CGImage? {
         for (index, card) in approvedCards.enumerated() {
             let correctAnswer = card.answer
             let normalizedCorrect = normalizedAnswer(correctAnswer)
-            
-            // Build pool of wrong answers excluding the correct one
+    
             var pool = allAnswers.filter { normalizedAnswer($0) != normalizedCorrect }
-            
-            // Prefer distractors with similar length (within 10 characters)
-            // to avoid trivially obvious wrong answers
+
             let similarLengthPool = pool.filter { abs($0.count - correctAnswer.count) &lt;= 10 }
             if !similarLengthPool.isEmpty {
                 pool = similarLengthPool
             }
             
-            // Select 3 distractors randomly from the filtered pool
             var distractors: [String] = []
             for answer in pool.shuffled() {
                 distractors.append(answer)
                 if distractors.count == 3 { break }
             }
-            
-            // If insufficient unique answers exist, add fallback options
+
             if distractors.count &lt; 3 {
                 let fallbacks = ["None of the above", "Not sure", "Not listed"]
                 for fallback in fallbacks {
@@ -266,7 +260,6 @@ static func preprocessForHandwriting(_ image: UIImage) -> CGImage? {
                 }
             }
             
-            // Combine and shuffle choices
             var choices: [String] = [correctAnswer] + distractors
             choices.shuffle()
             
@@ -284,12 +277,10 @@ static func preprocessForHandwriting(_ image: UIImage) -> CGImage? {
         return questions
     }
     
-    // Normalizes answers for comparison by trimming and lowercasing
     private func normalizedAnswer(_ answer: String) -> String {
         answer.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
     }
     
-    // Extracts unique answers using normalized comparison while preserving original formatting
     private func uniqueAnswers(from answers: [String]) -> [String] {
         var seen: Set&lt;String&gt; = []
         var result: [String] = []
@@ -307,10 +298,9 @@ static func preprocessForHandwriting(_ image: UIImage) -> CGImage? {
 					</article>
 					<article class="tf-snippet-card">
 						<h4>AICardGenerator</h4>
+						<p class="tf-snippet-desc">Sends scanned text to an on-device LanguageModelSession and uses the @Generable macro for structured, type-safe output, returning ready-to-review flashcard pairs without any network calls.</p>
 						<pre class="language-swift"><code class="language-swift">struct AICardGenerator {
 
-    // Generates flashcards from text using on-device AI with structured output
-    // via FoundationModels @Generable macro for type-safe generation
     func generateCards(from text: String) async throws -> [Flashcard] {
         let session = LanguageModelSession()
 
@@ -322,7 +312,6 @@ static func preprocessForHandwriting(_ image: UIImage) -> CGImage? {
         \(text)
         """
 
-        // Structured generation ensures type-safe output matching FlashcardSetModel schema
         let response = try await session.respond(to: prompt, generating: FlashcardSetModel.self)
 
         return response.content.cards.map {
