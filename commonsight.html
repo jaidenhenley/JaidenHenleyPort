@@ -92,7 +92,7 @@
 						</div>
 						<p class="tf-project-link-wrap">
 							<a class="tf-project-link tf-project-link-github" href="https://github.com/jaidenhenley" target="_blank" rel="noopener noreferrer">View Project on GitHub</a>
-							<span class="tf-project-link tf-project-link-disabled" aria-disabled="true">TestFlight &mdash; Coming Soon</span>
+							<a class="tf-project-link" href="https://testflight.apple.com/join/rh7Ybt7K" target="_blank" rel="noopener noreferrer">Try on TestFlight</a>
 						</p>
 					</div>
 				</div>
@@ -204,20 +204,165 @@
 			<section class="qs-code-showcase">
 				<div class="tf-code-header">
 					<h3>Code Snippets</h3>
-					<p><!-- TODO: One-line description of what these snippets highlight --></p>
+					<p>Highlights from the core systems I owned and implemented in CommonSight.</p>
 				</div>
 				<div class="tf-snippet-grid">
 					<article class="tf-snippet-card">
-						<h4><!-- TODO: Function / struct name --></h4>
-						<pre class="language-swift"><code class="language-swift">// TODO: Paste code snippet here</code></pre>
+						<h4>On-Device AI Story Card Generation</h4>
+						<p class="tf-snippet-desc">Checks Apple Intelligence availability across five states, falls back gracefully to a handcrafted narrative when the model isn't ready, and assembles a StoryCard before persisting it to Firestore.</p>
+						<pre class="language-swift"><code class="language-swift">@MainActor
+func createStoryCard(from selectedIds: [UUID], observations: [Observation],
+                     authorId: String, authorName: String, communityCode: String?) async -> StoryCard? {
+    let selectedObs = observations.filter { selectedIds.contains($0.id) }
+    guard !selectedObs.isEmpty else { return nil }
+    isGeneratingStory = true
+    defer { isGeneratingStory = false }
+
+    let availability = checkModelAvailability()
+    let spec: CuratedStoryCardPrompt
+    switch availability {
+    case .available:
+        do {
+            spec = try await generateCuratedStoryCard(from: selectedObs)
+        } catch {
+            errorMessage = "Story generation failed. Using a draft story instead."
+            spec = fallbackStorySpec(from: selectedObs)
+        }
+    case .notEligible:
+        errorMessage = "Apple Intelligence isn't available on this device."
+        spec = fallbackStorySpec(from: selectedObs)
+    case .notEnabled:
+        errorMessage = "Apple Intelligence is disabled. Enable it in Settings to generate stories."
+        spec = fallbackStorySpec(from: selectedObs)
+    case .modelNotReady:
+        errorMessage = "Apple Intelligence is still preparing. Try again soon."
+        spec = fallbackStorySpec(from: selectedObs)
+    case .unknown:
+        errorMessage = "Story generation isn't available right now."
+        spec = fallbackStorySpec(from: selectedObs)
+    }
+
+    let card = StoryCard(
+        id: UUID(), title: spec.title.isEmpty ? "Community Story Card" : spec.title,
+        narrative: spec.narrative.isEmpty ? generateNarrative(for: selectedObs) : spec.narrative,
+        callToAction: spec.callToAction.isEmpty ? "Join us in addressing these community needs." : spec.callToAction,
+        observationIds: selectedIds, authorId: authorId, authorName: authorName,
+        tags: normalizedStoryTags(from: spec.tags, fallback: selectedObs),
+        createdDate: Date(), lastModifiedDate: Date(), status: .draft
+    )
+    stories.append(card)
+    _ = await saveStoryCard(card, communityCode: communityCode)
+    return card
+}</code></pre>
 					</article>
 					<article class="tf-snippet-card">
-						<h4><!-- TODO: Function / struct name --></h4>
-						<pre class="language-swift"><code class="language-swift">// TODO: Paste code snippet here</code></pre>
+						<h4>Firestore Real-Time Listener</h4>
+						<p class="tf-snippet-desc">Attaches a live snapshot listener to a community's story collection, decoding documents into StoryCard models and keeping the local array sorted by date with automatic cleanup on detach.</p>
+						<pre class="language-swift"><code class="language-swift">func startStoriesListener(communityCode: String) {
+    guard !communityCode.isEmpty else {
+        stories = []
+        stopStoriesListener()
+        return
+    }
+    stopStoriesListener()
+    isLoading = true
+    storiesListener = db.collection("communities")
+        .document(communityCode)
+        .collection("stories")
+        .addSnapshotListener { [weak self] snapshot, error in
+            guard let self else { return }
+            if let error {
+                DispatchQueue.main.async {
+                    self.errorMessage = "Failed to load stories."
+                    self.isLoading = false
+                }
+                return
+            }
+            guard let snapshot else { return }
+            let fetched = snapshot.documents.compactMap { doc in
+                try? doc.data(as: StoryCard.self)
+            }
+            DispatchQueue.main.async {
+                self.stories = fetched.sorted { $0.createdDate > $1.createdDate }
+                self.isLoading = false
+            }
+        }
+}
+
+func stopStoriesListener() {
+    storiesListener?.remove()
+    storiesListener = nil
+}</code></pre>
 					</article>
 					<article class="tf-snippet-card">
-						<h4><!-- TODO: Function / struct name --></h4>
-						<pre class="language-swift"><code class="language-swift">// TODO: Paste code snippet here</code></pre>
+						<h4>Structured AI Generation with Foundation Models</h4>
+						<p class="tf-snippet-desc">Defines a @Generable schema for type-safe on-device output, then uses LanguageModelSession to generate a coalition-ready story card grounded strictly in the selected observations.</p>
+						<pre class="language-swift"><code class="language-swift">@Generable(description: "Coalition-ready story card content for community organizing")
+struct CuratedStoryCardPrompt {
+    @Guide(description: "A compelling, coalition-ready title under 12 words")
+    var title: String
+
+    @Guide(description: "A clear, community-centered narrative (120–220 words) connecting observations to a shared problem. Plain, respectful tone.")
+    var narrative: String
+
+    @Guide(description: "A concrete call to action the coalition can take next (1–2 sentences).")
+    var callToAction: String
+
+    @Guide(description: "1–5 short tags in lowercase kebab-case (e.g., 'traffic-safety')", .count(1...5))
+    var tags: [String]
+}
+
+// ---
+
+private func generateCuratedStoryCard(from observations: [Observation]) async throws -> CuratedStoryCardPrompt {
+    let session = LanguageModelSession(
+        model: SystemLanguageModel.default,
+        instructions: "You are a community storytelling assistant. Create a coalition-ready story card that is accurate, respectful, and grounded only in the observations provided."
+    )
+    let response = try await session.respond(
+        to: buildStoryPrompt(from: observations),
+        generating: CuratedStoryCardPrompt.self,
+        includeSchemaInPrompt: true
+    )
+    return response.content
+}</code></pre>
+					</article>
+					<article class="tf-snippet-card">
+						<h4>Address Validation &amp; Geocoding</h4>
+						<p class="tf-snippet-desc">Validates a user-entered address before submission by geocoding it with CLGeocoder, caching the result to avoid redundant network calls, and surfacing inline error messages when the address can't be verified.</p>
+						<pre class="language-swift"><code class="language-swift">func submitObservation() async {
+    let trimmedLocation = locationName.trimmingCharacters(in: .whitespacesAndNewlines)
+    guard !trimmedLocation.isEmpty else {
+        addressValidationMessage = "Please enter a real address."
+        return
+    }
+
+    if let validatedCoordinate {
+        await createAndSubmit(with: validatedCoordinate)
+        return
+    }
+
+    isValidatingAddress = true
+    let geocodedCoordinate = await geocodeAddress(from: trimmedLocation)
+    isValidatingAddress = false
+
+    guard let geocodedCoordinate else {
+        addressValidationMessage = "We couldn't verify that address. Please enter a real address."
+        return
+    }
+
+    validatedCoordinate = geocodedCoordinate
+    await createAndSubmit(with: geocodedCoordinate)
+}
+
+func geocodeAddress(from address: String) async -> CLLocationCoordinate2D? {
+    do {
+        let placemarks = try await CLGeocoder().geocodeAddressString(address)
+        return placemarks.first?.location?.coordinate
+    } catch {
+        return nil
+    }
+}</code></pre>
 					</article>
 				</div>
 			</section>
