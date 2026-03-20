@@ -191,7 +191,7 @@
 				</div>
 				<div class="tf-snippet-grid">
 					<article class="tf-snippet-card">
-					<h4>preprocessForHandwriting</h4>
+					<h4>Handwritting Processing for OCR</h4>
 					<p class="tf-snippet-desc">Runs a Core Image pipeline to desaturate, boost contrast, and sharpen a captured image before passing it to Vision for OCR, significantly improving handwriting recognition accuracy.</p>
 					<pre class="language-swift"><code class="language-swift">static func preprocessForHandwriting(_ image: UIImage) -> CGImage? {
     guard let cgImage = image.cgImage else { return nil }
@@ -216,7 +216,7 @@
 }</code></pre>
 					</article>
 					<article class="tf-snippet-card">
-						<h4>QuizGenerator</h4>
+						<h4>Quiz Generation from Scanned Content</h4>
 						<p class="tf-snippet-desc">Builds multiple-choice questions from approved flashcards, preferring distractors with similar answer length to avoid obvious wrong answers and falling back to placeholder options when the pool is too small.</p>
 						<pre class="language-swift"><code class="language-swift">struct QuizGenerator {
     
@@ -297,7 +297,7 @@
 }</code></pre>
 					</article>
 					<article class="tf-snippet-card">
-						<h4>AICardGenerator</h4>
+						<h4>AI Flashcard Generation</h4>
 						<p class="tf-snippet-desc">Sends scanned text to an on-device LanguageModelSession and uses the @Generable macro for structured, type-safe output, returning ready-to-review flashcard pairs without any network calls.</p>
 						<pre class="language-swift"><code class="language-swift">struct AICardGenerator {
 
