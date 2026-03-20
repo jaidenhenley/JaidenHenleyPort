@@ -5741,7 +5741,23 @@ body.take-flight-page.commonsight-page .tf-iphone-frame {
 		0 16px 48px rgba(0, 0, 0, 0.45);
 	overflow: hidden;
 	padding: 7px;
+	position: relative;
+	isolation: isolate;
 	width: 100%;
+}
+
+body.take-flight-page.commonsight-page .tf-iphone-frame::before {
+	background: linear-gradient(180deg, #1f1f1f 0%, #050505 100%);
+	border-radius: 999px;
+	content: "";
+	height: 1.55rem;
+	left: 50%;
+	position: absolute;
+	top: 0.95rem;
+	transform: translateX(-50%);
+	width: 34%;
+	z-index: 2;
+	pointer-events: none;
 }
 
 body.take-flight-page.commonsight-page .tf-iphone-frame img {
