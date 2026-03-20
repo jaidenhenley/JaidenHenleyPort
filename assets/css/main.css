@@ -3817,6 +3817,98 @@ body.case-study-page .project-case-study h2 {
 	margin: 0 0 1.5rem;
 }
 
+body.case-study-page .project-intro {
+	color: #111;
+	font-size: clamp(1.1rem, 2.3vw, 1.45rem);
+	line-height: 1.6;
+	margin: 0 0 1.5rem;
+}
+
+body.case-study-page .featured-project-grid {
+	display: grid;
+	gap: 1.1rem;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+body.case-study-page .featured-project-card {
+	background: rgba(240, 241, 246, 0.9);
+	border: 1px solid rgba(165, 169, 182, 0.38);
+	border-radius: 0.55rem;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	min-width: 0;
+	overflow: hidden;
+	transition: box-shadow 0.22s ease, transform 0.22s ease;
+}
+
+body.case-study-page .featured-project-card:hover {
+	box-shadow:
+		0 8px 24px rgba(5, 5, 5, 0.1),
+		0 2px 6px rgba(5, 5, 5, 0.06);
+	transform: translateY(-2px);
+}
+
+body.case-study-page .featured-project-image {
+	border: 0;
+	display: block;
+}
+
+body.case-study-page .featured-project-image img {
+	aspect-ratio: 16 / 10;
+	display: block;
+	object-fit: cover;
+	width: 100%;
+}
+
+body.case-study-page .featured-project-body {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	padding: 0.8rem 0.9rem 0.9rem;
+}
+
+body.case-study-page .featured-project-body h4 {
+	margin: 0 0 0.42rem;
+}
+
+body.case-study-page .featured-project-body h4 a {
+	border: 0;
+	color: #121318;
+	font-size: 1.24rem;
+	font-weight: 700;
+	letter-spacing: -0.01em;
+	text-decoration: none;
+}
+
+body.case-study-page .featured-project-card .featured-project-body p {
+	color: #2b2d35;
+	font-size: 0.92rem;
+	font-weight: 600;
+	line-height: 1.45;
+	margin: 0;
+	max-width: none;
+}
+
+body.case-study-page .featured-project-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4rem;
+	margin-top: auto;
+	padding-top: 0.62rem;
+}
+
+body.case-study-page .featured-project-tags span {
+	background: #d4d6de;
+	border: 1px solid #c2c6d2;
+	border-radius: 999px;
+	color: #1a1b20;
+	font-size: 0.74rem;
+	font-weight: 700;
+	line-height: 1;
+	padding: 0.34rem 0.56rem;
+}
+
 body.case-study-page .project-hero-image {
 	margin: 0 0 2rem;
 }
@@ -3842,6 +3934,13 @@ body.case-study-page .project-back-link {
 	margin-top: 0.75rem;
 	text-decoration: underline;
 	text-underline-offset: 0.22em;
+}
+
+@media screen and (max-width: 736px) {
+
+	body.case-study-page .featured-project-grid {
+		grid-template-columns: 1fr;
+	}
 }
 
 body.take-flight-page .homepage-main {
