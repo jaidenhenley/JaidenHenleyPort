@@ -5519,6 +5519,10 @@ body.take-flight-page.commonsight-page .tf-code-snippets {
 	background: linear-gradient(180deg, #6fa8b8 0%, #64a0b0 100%);
 }
 
+body.take-flight-page.commonsight-page .qs-code-showcase {
+	padding: 3.5rem 3.75rem 4.5rem;
+}
+
 body.take-flight-page.commonsight-page .tf-outcomes {
 	background: linear-gradient(180deg, #64a0b0 0%, #5a98a8 100%);
 }
