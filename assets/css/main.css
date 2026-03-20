@@ -3988,12 +3988,12 @@ body.take-flight-page .tf-hero-oval p {
 	margin: 0;
 }
 
-body.take-flight-page:not(.quickstudy-page) .tf-hero-oval {
+body.take-flight-page:not(.quickstudy-page):not(.coastcast-page) .tf-hero-oval {
 	max-width: 760px;
 	padding: 2.1rem 3.1rem;
 }
 
-body.take-flight-page:not(.quickstudy-page) .tf-hero-oval p {
+body.take-flight-page:not(.quickstudy-page):not(.coastcast-page) .tf-hero-oval p {
 	font-size: clamp(1rem, 1.6vw, 1.55rem);
 	line-height: 1.3;
 }
@@ -4610,11 +4610,11 @@ body.take-flight-page .tf-owned .tf-media-ipad {
 	width: 100%;
 }
 
-body.take-flight-page:not(.quickstudy-page) .tf-overview .tf-media-ipad {
+body.take-flight-page:not(.quickstudy-page):not(.coastcast-page) .tf-overview .tf-media-ipad {
 	max-width: 700px;
 }
 
-body.take-flight-page:not(.quickstudy-page) .tf-overview .tf-media-ipad video {
+body.take-flight-page:not(.quickstudy-page):not(.coastcast-page) .tf-overview .tf-media-ipad video {
 	aspect-ratio: 4 / 3;
 	border-radius: clamp(1.22rem, 2vw, 1.62rem);
 	display: block;
@@ -4870,7 +4870,7 @@ body.take-flight-page.quickstudy-page .tf-overview-tech h4 {
 	color: #2d1a5c;
 }
 
-body.take-flight-page:not(.quickstudy-page) .tf-overview-tech h4 {
+body.take-flight-page:not(.quickstudy-page):not(.coastcast-page) .tf-overview-tech h4 {
 	color: #0d3050;
 }
 
@@ -4904,7 +4904,7 @@ body.take-flight-page.quickstudy-page .tf-overview-tech {
 	border-top-color: rgba(82, 47, 154, 0.18);
 }
 
-body.take-flight-page:not(.quickstudy-page) .tf-overview-tech {
+body.take-flight-page:not(.quickstudy-page):not(.coastcast-page) .tf-overview-tech {
 	border-top-color: rgba(47, 111, 158, 0.22);
 }
 
@@ -4917,7 +4917,7 @@ body.take-flight-page .tf-tech-chips {
 	padding: 0;
 }
 
-body.take-flight-page:not(.quickstudy-page) .tf-tech-chips li {
+body.take-flight-page:not(.quickstudy-page):not(.coastcast-page) .tf-tech-chips li {
 	background: rgba(47, 111, 158, 0.14);
 	border: 1.5px solid rgba(47, 111, 158, 0.45);
 	border-radius: 999px;
@@ -5304,37 +5304,37 @@ body.take-flight-page.quickstudy-page .qs-copy-btn:hover {
 	padding: 3.5rem 3rem;
 }
 
-body.take-flight-page:not(.quickstudy-page) .cs-next-project {
+body.take-flight-page:not(.quickstudy-page):not(.coastcast-page) .cs-next-project {
 	background: #d4d5db;
 }
 
-body.take-flight-page:not(.quickstudy-page) .cs-next-label {
+body.take-flight-page:not(.quickstudy-page):not(.coastcast-page) .cs-next-label {
 	color: rgba(30, 30, 40, 0.45);
 }
 
-body.take-flight-page:not(.quickstudy-page) .cs-next-card {
+body.take-flight-page:not(.quickstudy-page):not(.coastcast-page) .cs-next-card {
 	background: rgba(255, 255, 255, 0.55);
 	border-color: rgba(30, 30, 40, 0.12);
 }
 
-body.take-flight-page:not(.quickstudy-page) .cs-next-card:hover {
+body.take-flight-page:not(.quickstudy-page):not(.coastcast-page) .cs-next-card:hover {
 	background: rgba(255, 255, 255, 0.8);
 	border-color: rgba(30, 30, 40, 0.22);
 }
 
-body.take-flight-page:not(.quickstudy-page) .cs-next-copy h4 {
+body.take-flight-page:not(.quickstudy-page):not(.coastcast-page) .cs-next-copy h4 {
 	color: #121318;
 }
 
-body.take-flight-page:not(.quickstudy-page) .cs-next-copy p {
+body.take-flight-page:not(.quickstudy-page):not(.coastcast-page) .cs-next-copy p {
 	color: rgba(30, 30, 40, 0.6);
 }
 
-body.take-flight-page:not(.quickstudy-page) .cs-next-arrow {
+body.take-flight-page:not(.quickstudy-page):not(.coastcast-page) .cs-next-arrow {
 	color: rgba(30, 30, 40, 0.4);
 }
 
-body.take-flight-page:not(.quickstudy-page) .cs-next-card:hover .cs-next-arrow {
+body.take-flight-page:not(.quickstudy-page):not(.coastcast-page) .cs-next-card:hover .cs-next-arrow {
 	color: rgba(30, 30, 40, 0.75);
 }
 
@@ -5450,7 +5450,7 @@ body.take-flight-page.quickstudy-page .cs-next-card:hover .cs-next-arrow {
 	text-align: center;
 }
 
-body.take-flight-page:not(.quickstudy-page) .cs-cta {
+body.take-flight-page:not(.quickstudy-page):not(.coastcast-page) .cs-cta {
 	background: #080d16;
 }
 
@@ -5470,7 +5470,7 @@ body.take-flight-page.quickstudy-page .cs-cta {
 	margin: 0 0 0.75rem;
 }
 
-body.take-flight-page:not(.quickstudy-page) .cs-cta-inner h3 {
+body.take-flight-page:not(.quickstudy-page):not(.coastcast-page) .cs-cta-inner h3 {
 	color: #fff;
 }
 
@@ -5484,7 +5484,7 @@ body.take-flight-page.quickstudy-page .cs-cta-inner h3 {
 	margin: 0 0 2rem;
 }
 
-body.take-flight-page:not(.quickstudy-page) .cs-cta-inner p {
+body.take-flight-page:not(.quickstudy-page):not(.coastcast-page) .cs-cta-inner p {
 	color: rgba(255, 255, 255, 0.6);
 }
 
@@ -5507,7 +5507,7 @@ body.take-flight-page.quickstudy-page .cs-cta-inner p {
 	transform: translateY(-2px);
 }
 
-body.take-flight-page:not(.quickstudy-page) .cs-cta-button {
+body.take-flight-page:not(.quickstudy-page):not(.coastcast-page) .cs-cta-button {
 	background: linear-gradient(135deg, #2f6f9e 0%, #3a88bf 100%);
 	color: #fff;
 }
@@ -6220,7 +6220,7 @@ body.resume-page .resume-skill-row dd {
 	}
 
 	body.take-flight-page.quickstudy-page .tf-hero-oval,
-	body.take-flight-page:not(.quickstudy-page) .tf-hero-oval {
+	body.take-flight-page:not(.quickstudy-page):not(.coastcast-page) .tf-hero-oval {
 		padding: 1.5rem 1.25rem;
 	}
 
@@ -6255,4 +6255,336 @@ body.resume-page .resume-skill-row dd {
 		padding-left: 1rem;
 		padding-right: 1rem;
 	}
+
+	/* CoastCast hero oval — tighten padding on mobile */
+	body.take-flight-page.coastcast-page .tf-hero-oval {
+		padding: 1.5rem 1.25rem;
+	}
+}
+
+/* ========================================================
+   CoastCast — Dark Ocean Blue Theme
+   ======================================================== */
+
+body.take-flight-page.coastcast-page .tf-hero {
+	background:
+		radial-gradient(120% 120% at 12% 0%, rgba(125, 210, 252, 0.32) 0%, rgba(125, 210, 252, 0) 46%),
+		radial-gradient(130% 130% at 96% 94%, rgba(0, 90, 150, 0.55) 0%, rgba(0, 90, 150, 0) 58%),
+		linear-gradient(135deg, #020d1a 0%, #01233d 48%, #060c14 100%);
+}
+
+body.take-flight-page.coastcast-page .tf-hero::after {
+	background: #7dd3fa;
+}
+
+body.take-flight-page.coastcast-page .site-name,
+body.take-flight-page.coastcast-page .site-nav a,
+body.take-flight-page.coastcast-page .nav-toggle {
+	color: #ffffff !important;
+	text-shadow: 0 2px 10px rgba(0, 10, 25, 0.5);
+}
+
+body.take-flight-page.coastcast-page .site-nav a:hover,
+body.take-flight-page.coastcast-page .site-nav a:focus-visible {
+	color: #cce8f8;
+}
+
+body.take-flight-page.coastcast-page .tf-hero-oval {
+	background: rgba(224, 243, 254, 0.92);
+	box-shadow: 0 1.15rem 2.2rem rgba(0, 15, 35, 0.28);
+	max-width: 760px;
+	padding: 2.1rem 3.1rem;
+}
+
+body.take-flight-page.coastcast-page .tf-hero-oval h2 {
+	color: #011828;
+}
+
+body.take-flight-page.coastcast-page .tf-hero-oval p {
+	color: #014a7a;
+	font-size: clamp(1rem, 1.6vw, 1.55rem);
+	line-height: 1.3;
+}
+
+body.take-flight-page.coastcast-page .tf-overview,
+body.take-flight-page.coastcast-page .tf-game-flow,
+body.take-flight-page.coastcast-page .tf-experiences {
+	background: linear-gradient(180deg, #e3f2fd 0%, #d0eaf9 100%);
+}
+
+body.take-flight-page.coastcast-page .tf-overview {
+	padding-bottom: 1.35rem;
+	padding-top: 2.4rem;
+}
+
+body.take-flight-page.coastcast-page .tf-overview-grid {
+	align-items: center;
+	gap: 2rem;
+}
+
+body.take-flight-page.coastcast-page .tf-overview .tf-media-phone {
+	background: #111;
+	border-radius: 40px;
+	box-shadow:
+		inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+		0 0 0 1px rgba(0, 0, 0, 0.5),
+		0 16px 48px rgba(0, 0, 0, 0.45);
+	justify-self: center;
+	max-width: 340px;
+	padding: 7px;
+	position: relative;
+	isolation: isolate;
+	width: 100%;
+}
+
+body.take-flight-page.coastcast-page .tf-overview .tf-media-phone::before {
+	display: none;
+}
+
+body.take-flight-page.coastcast-page .tf-overview .tf-media-phone video,
+body.take-flight-page.coastcast-page .tf-overview .tf-media-phone img {
+	aspect-ratio: 9 / 19.5;
+	border-radius: 34px;
+	display: block;
+	height: auto;
+	object-fit: cover;
+	object-position: center;
+	position: relative;
+	width: 100%;
+	z-index: 1;
+}
+
+body.take-flight-page.coastcast-page .tf-overview .tf-copy {
+	padding-top: 0.08rem;
+}
+
+body.take-flight-page.coastcast-page .tf-overview-subtitle {
+	color: #014a7a;
+	font-size: clamp(1.08rem, 2vw, 1.36rem);
+	font-weight: 600;
+	line-height: 1.45;
+	margin: 0 0 0.72rem;
+}
+
+body.take-flight-page.coastcast-page .tf-overview-description {
+	margin: 0 0 0.3rem;
+	max-width: 56ch;
+}
+
+body.take-flight-page.coastcast-page .tf-overview-highlights {
+	margin: 0 0 1.02rem;
+}
+
+body.take-flight-page.coastcast-page .tf-overview-highlights h4,
+body.take-flight-page.coastcast-page .tf-overview-tech h4 {
+	color: #012a45;
+}
+
+body.take-flight-page.coastcast-page .tf-overview-highlights h4 {
+	font-size: 0.72rem;
+	font-weight: 800;
+	letter-spacing: 0.1em;
+	line-height: 1;
+	margin: 0 0 0.6rem;
+	text-transform: uppercase;
+}
+
+body.take-flight-page.coastcast-page .tf-overview-highlights ul {
+	list-style: disc;
+	margin: 0 0 0 1.2rem;
+}
+
+body.take-flight-page.coastcast-page .tf-overview-highlights li {
+	color: #011828;
+	font-size: 0.98rem;
+	line-height: 1.52;
+	margin: 0 0 0.22rem;
+}
+
+body.take-flight-page.coastcast-page .tf-overview-meta {
+	margin: 0.75rem 0 0;
+}
+
+body.take-flight-page.coastcast-page .tf-overview-meta p {
+	margin: 0 0 0.28rem;
+}
+
+body.take-flight-page.coastcast-page .tf-overview-tech {
+	border-top-color: rgba(0, 80, 130, 0.18);
+}
+
+body.take-flight-page.coastcast-page .tf-tech-chips li {
+	background: rgba(0, 100, 165, 0.12);
+	border: 1.5px solid rgba(0, 100, 165, 0.38);
+	border-radius: 999px;
+	color: #012a45;
+	font-size: 0.85rem;
+	font-weight: 700;
+	line-height: 1;
+	padding: 0.52rem 0.9rem;
+}
+
+body.take-flight-page.coastcast-page .tf-overview .tf-project-link-wrap {
+	margin-top: 0.1rem;
+}
+
+body.take-flight-page.coastcast-page .tf-owned {
+	background: linear-gradient(180deg, #cce5f5 0%, #c0ddf1 100%);
+}
+
+body.take-flight-page.coastcast-page .tf-owned-grid {
+	grid-template-columns: minmax(0, 760px);
+	max-width: 760px;
+}
+
+body.take-flight-page.coastcast-page .tf-owned .tf-copy p + .tf-list {
+	margin-top: 0.3rem;
+}
+
+body.take-flight-page.coastcast-page .tf-owned .tf-list {
+	margin-bottom: 1.1rem;
+}
+
+body.take-flight-page.coastcast-page .tf-owned .tf-copy p:first-of-type {
+	margin-top: 0.5rem;
+}
+
+body.take-flight-page.coastcast-page .tf-outcomes {
+	background: linear-gradient(180deg, #a4d1e8 0%, #98c9e2 100%);
+}
+
+body.take-flight-page.coastcast-page .tf-card {
+	background: #d4eaf9;
+}
+
+body.take-flight-page.coastcast-page .tf-experience-grid .tf-card {
+	background: #c8e4f8;
+}
+
+body.take-flight-page.coastcast-page .tf-outcome-card {
+	background: #e0f1fa;
+	border-color: rgba(0, 60, 110, 0.18);
+}
+
+body.take-flight-page.coastcast-page .tf-project-link {
+	background: linear-gradient(135deg, #0066a6 0%, #0088cc 100%);
+}
+
+body.take-flight-page.coastcast-page .tf-project-link:hover {
+	background: linear-gradient(135deg, #00527f 0%, #0077b3 100%);
+}
+
+body.take-flight-page.coastcast-page .tf-project-link-github {
+	background: rgba(0, 30, 55, 0.08);
+	border-color: rgba(0, 30, 55, 0.34);
+	color: #011828;
+}
+
+body.take-flight-page.coastcast-page .tf-project-link-github:hover {
+	background: rgba(0, 30, 55, 0.16);
+	color: #010e1a;
+}
+
+body.take-flight-page.coastcast-page .tf-snippet-card {
+	background: #020d18;
+	border-color: rgba(125, 210, 252, 0.16);
+}
+
+body.take-flight-page.coastcast-page .tf-snippet-card pre {
+	background: rgba(255, 255, 255, 0.05);
+	border-color: rgba(125, 210, 252, 0.22);
+	max-height: 340px;
+	overflow-y: auto;
+}
+
+body.take-flight-page.coastcast-page .tf-snippet-card p {
+	color: rgba(185, 230, 252, 0.8);
+	font-size: 0.9rem;
+	line-height: 1.65;
+	margin: 0;
+}
+
+body.take-flight-page.coastcast-page .tf-experience-grid::-webkit-scrollbar-thumb {
+	background: rgba(0, 100, 160, 0.55);
+}
+
+body.take-flight-page.coastcast-page .tf-experience-grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	overflow-x: visible;
+	scroll-snap-type: none;
+	-webkit-overflow-scrolling: auto;
+}
+
+body.take-flight-page.coastcast-page .tf-card-challenge {
+	border-left: 3px solid #0066a6;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	padding: 1.8rem 1.6rem 1.6rem 1.5rem;
+	position: relative;
+	transition: box-shadow 0.22s ease, transform 0.22s ease;
+}
+
+body.take-flight-page.coastcast-page .tf-card-challenge:hover {
+	box-shadow:
+		0 8px 24px rgba(0, 80, 140, 0.18),
+		0 2px 6px rgba(0, 80, 140, 0.1);
+	transform: translateY(-2px);
+}
+
+body.take-flight-page.coastcast-page .tf-challenge-number {
+	color: #0066a6;
+	font-size: 1rem;
+	font-weight: 900;
+	letter-spacing: -0.01em;
+	line-height: 1;
+	margin: 0 0 0.9rem;
+	position: static;
+}
+
+body.take-flight-page.coastcast-page .tf-card-challenge p strong {
+	border-radius: 4px;
+	display: inline-block;
+	font-size: 0.7rem;
+	font-weight: 800;
+	letter-spacing: 0.06em;
+	line-height: 1;
+	padding: 0.2rem 0.45rem;
+	text-transform: uppercase;
+	vertical-align: middle;
+	margin-right: 0.3rem;
+}
+
+body.take-flight-page.coastcast-page .tf-card-challenge p strong:nth-of-type(1) {
+	background: rgba(220, 38, 38, 0.1);
+	border: 1px solid rgba(220, 38, 38, 0.25);
+	color: #b91c1c;
+}
+
+body.take-flight-page.coastcast-page .tf-card-challenge p strong:nth-of-type(2) {
+	background: rgba(37, 99, 235, 0.1);
+	border: 1px solid rgba(37, 99, 235, 0.25);
+	color: #1d4ed8;
+}
+
+body.take-flight-page.coastcast-page .tf-card-challenge p strong:nth-of-type(3) {
+	background: rgba(22, 163, 74, 0.1);
+	border: 1px solid rgba(22, 163, 74, 0.25);
+	color: #15803d;
+}
+
+body.take-flight-page.coastcast-page .qs-code-showcase {
+	background: linear-gradient(180deg, #b8d9ec 0%, #accfe7 100%);
+	padding: 3.5rem 3.75rem 4.5rem;
+}
+
+body.take-flight-page.coastcast-page .site-header {
+	background: transparent;
+}
+
+body.take-flight-page.coastcast-page .site-header.header-pinned {
+	background: rgba(2, 15, 30, 0.92);
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
 }
