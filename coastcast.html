@@ -157,14 +157,25 @@
 				<div class="tf-owned-grid">
 					<div class="tf-copy">
 						<h3>What I Built</h3>
-						<ul class="tf-list">
-							<li>[Item 1]</li>
-							<li>[Item 2]</li>
-							<li>[Item 3]</li>
-							<li>[Item 4]</li>
-							<li>[Item 5]</li>
-							<li>[Item 6]</li>
-						</ul>
+						<div class="tf-built-section">
+							<span class="tf-built-label">Backend — Python + FastAPI</span>
+							<ul class="tf-list">
+								<li>REST API built with FastAPI and hosted on Render</li>
+								<li>Beach detail endpoint that stitches together weather, buoy, and alert data into one response</li>
+								<li>Parallel fetching with per-source error isolation so one failing source never breaks the rest</li>
+								<li>NDBC buoy parser for raw text format with missing value handling</li>
+								<li>Query parameter filtering for beaches by county, lake, and status</li>
+							</ul>
+						</div>
+						<div class="tf-built-section">
+							<span class="tf-built-label">Frontend — SwiftUI</span>
+							<ul class="tf-list">
+								<li>Beach list with search, regional grouping, and favorites backed by persistent storage</li>
+								<li>Beach detail view with temperature card, conditions grid, and alert banner</li>
+								<li>Unit conversion layer that reads API unit codes and supports a Fahrenheit/Celsius toggle</li>
+								<li>Pull-to-refresh and multi-state loading with stale data retention during background refreshes</li>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</section>
