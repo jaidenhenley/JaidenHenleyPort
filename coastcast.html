@@ -183,23 +183,113 @@
 			<section class="qs-code-showcase">
 				<div class="tf-code-header">
 					<h3>Code Snippets</h3>
-					<p>[Code showcase intro]</p>
+					<p>A few of the more interesting pieces from the backend and iOS client.</p>
 				</div>
 				<div class="tf-snippet-grid">
 					<article class="tf-snippet-card">
-						<h4>[Snippet 1 title]</h4>
-						<p class="tf-snippet-desc">[Snippet 1 description]</p>
-						<pre class="language-python"><code class="language-python"># [Paste snippet 1 here]</code></pre>
+						<h4>Multiple Data Fetches</h4>
+						<p class="tf-snippet-desc">Fetches weather, buoy, and alert data simultaneously for a single beach. Failed calls resolve to None so the rest of the response still returns clean.</p>
+						<pre class="language-python"><code class="language-python">@app.get("/beaches/{beach_id}/details")
+async def get_beach(beach_id: int):
+    beach = next((b for b in sample_beaches if b["id"] == beach_id), None)
+    if not beach:
+        raise HTTPException(status_code=404, detail="Beach not found")
+
+    weather_result, buoy_result, alerts_result = await asyncio.gather(
+        fetch_weather_conditions(beach["nws_station_id"]),
+        fetch_ndbc_conditions(beach["buoy_station"]),
+        fetch_nws_alerts(beach["latitude"], beach["longitude"]),
+        return_exceptions=True,
+    )
+
+    weather = weather_result if not isinstance(weather_result, Exception) else None
+    buoy = buoy_result if not isinstance(buoy_result, Exception) else None
+    alerts = alerts_result if not isinstance(alerts_result, Exception) else None
+
+    return {
+        "beach": beach["name"],
+        "weather": weather,
+        "buoy": buoy,
+        "alerts": alerts,
+    }</code></pre>
 					</article>
 					<article class="tf-snippet-card">
-						<h4>[Snippet 2 title]</h4>
-						<p class="tf-snippet-desc">[Snippet 2 description]</p>
-						<pre class="language-python"><code class="language-python"># [Paste snippet 2 here]</code></pre>
+						<h4>NDBC Text Parser</h4>
+						<p class="tf-snippet-desc">Parses the NDBC buoy API's plain text response into structured data. Handles missing readings marked as MM and validates row length before mapping.</p>
+						<pre class="language-python"><code class="language-python">async def fetch_ndbc_conditions(station_id: str) -> WaterConditions:
+    url = f"https://www.ndbc.noaa.gov/data/realtime2/{station_id}.txt"
+    headers = {"User-Agent": "MichiganWaterAPI/1.0 (learning project)"}
+
+    async with httpx.AsyncClient(timeout=10.0, headers=headers) as client:
+        response = await client.get(url)
+        response.raise_for_status()
+
+    lines = response.text.strip().splitlines()
+    if len(lines) &lt; 3:
+        raise ValueError(f"No usable NDBC data found for station {station_id}")
+
+    columns = lines[0].split()
+    first_row = lines[2].split()
+    if len(first_row) &lt; len(columns):
+        raise ValueError(f"Malformed NDBC row for station {station_id}")
+    row = dict(zip(columns, first_row))
+
+    return WaterConditions(
+        station_id=station_id,
+        water_temp_c=_parse_float(row.get("WTMP", "MM")),
+        wave_height_m=_parse_float(row.get("WVHT", "MM")),
+    )</code></pre>
 					</article>
 					<article class="tf-snippet-card">
-						<h4>[Snippet 3 title]</h4>
-						<p class="tf-snippet-desc">[Snippet 3 description]</p>
-						<pre class="language-swift"><code class="language-swift">// [Paste snippet 3 here]</code></pre>
+						<h4>Unit Conversion From API Values</h4>
+						<p class="tf-snippet-desc">Reads raw metric values from the NWS response and converts each measurement for display. Falls back to "--" when data is missing.</p>
+						<pre class="language-swift"><code class="language-swift">// Wind speed: API returns km/h
+if let speedKMH = observation.windSpeed.value {
+    let mph = speedKMH * 0.621371
+    windMPH = String(format: "%.1f mph", mph)
+} else {
+    windMPH = "--"
+}
+
+// Visibility: API returns meters
+if let meters = observation.visibility.value {
+    let miles = meters / 1609.34
+    visibility = String(format: "%.1f mi", miles)
+} else {
+    visibility = "--"
+}
+
+// Barometric pressure: API returns Pascals
+if let pa = observation.barometricPressure?.value {
+    let hpa = pa / 100.0
+    pressure = String(format: "%.1f hPa", hpa)
+} else {
+    pressure = nil
+}</code></pre>
+					</article>
+					<article class="tf-snippet-card">
+						<h4>Fahrenheit / Celsius Toggle</h4>
+						<p class="tf-snippet-desc">Stores raw Celsius from the API and recalculates the display string on toggle. The UI reads temperatureDisplay directly so the switch is instant with no refetch.</p>
+						<pre class="language-swift"><code class="language-swift">@Published var useCelsius: Bool = false
+private var rawTempCelsius: Double?
+
+func toggleUnit() {
+    useCelsius.toggle()
+    updateTemperatureDisplay()
+}
+
+private func updateTemperatureDisplay() {
+    guard let tempC = rawTempCelsius else {
+        temperatureDisplay = "--"
+        return
+    }
+    if useCelsius {
+        temperatureDisplay = "\(Int(tempC))°C"
+    } else {
+        let tempF = (tempC * 9.0 / 5.0) + 32.0
+        temperatureDisplay = "\(Int(tempF))°F"
+    }
+}</code></pre>
 					</article>
 				</div>
 			</section>
@@ -208,35 +298,18 @@
 				<div class="tf-outcomes-grid">
 					<article class="tf-outcome-card">
 						<h3>Next Iterations</h3>
-						<p>[Next iterations description]</p>
+						<p>Next I want to expand the beach list to pull live from the API instead of hardcoding five entries. I'd also add buoy data to the detail screen once the ice melts and the NDBC starts reporting again. Things like wave height, water temp, and wave period so users get the full picture before heading out. On the backend side I want to add caching so the API isn't hitting NWS and NDBC on every single request, and I'd look into adding hourly forecasts so users can plan around conditions changing later in the day.</p>
 					</article>
 					<article class="tf-outcome-card">
 						<h3>Outcome</h3>
-						<p>[Outcome description]</p>
+						<p>CoastCast started because I wanted real beach conditions for Michigan in one place instead of jumping between three different government sites. Building the Python API was the first time I owned the full backend, figuring out how to pull federal data sources, handle failures gracefully, and show a clean response that can be used in Swift. On the frontend side it reinforced how I think about state management and keeping the UI responsive when the data behind it is unpredictable. The app works end to end, one tap, one screen, everything you need to know before you go.</p>
 					</article>
 				</div>
 			</section>
 
 			<section class="cs-next-project">
 				<p class="cs-next-label">More Case Studies</p>
-				<div class="cs-next-grid">
-					<a class="cs-next-card" href="quickstudy.html">
-						<img src="images/PortQuickStudyIndexPic.png" alt="QuickStudy" />
-						<div class="cs-next-copy">
-							<h4>QuickStudy</h4>
-							<p>Turn scans and PDFs into a study-ready flashcard deck using on-device AI.</p>
-						</div>
-						<span class="cs-next-arrow">&rarr;</span>
-					</a>
-					<a class="cs-next-card" href="commonsight.html">
-						<img src="images/CommonSightDash1.png" alt="CommonSight" />
-						<div class="cs-next-copy">
-							<h4>CommonSight</h4>
-							<p>AI-assisted civic reporting and story cards built to help communities document issues.</p>
-						</div>
-						<span class="cs-next-arrow">&rarr;</span>
-					</a>
-				</div>
+				<div class="cs-next-grid" id="cs-next-grid"></div>
 			</section>
 		</main>
 
@@ -254,5 +327,6 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
 		<script type="module" src="assets/js/analytics.js"></script>
 		<script src="assets/js/nav.js"></script>
+		<script src="assets/js/cs-next.js"></script>
 	</body>
 </html>
