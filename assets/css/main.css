@@ -6580,6 +6580,23 @@ body.take-flight-page.coastcast-page .tf-iphone-frame img {
 	width: 100%;
 }
 
+body.take-flight-page.coastcast-page .tf-flow-grid {
+	align-items: stretch;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media screen and (max-width: 960px) {
+	body.take-flight-page.coastcast-page .tf-flow-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media screen and (max-width: 736px) {
+	body.take-flight-page.coastcast-page .tf-flow-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
 body.take-flight-page.coastcast-page .tf-card-challenge {
 	border-left: 3px solid #0066a6;
 	display: flex;

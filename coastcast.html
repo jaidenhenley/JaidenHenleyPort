@@ -84,29 +84,29 @@
 				<div class="tf-flow-grid">
 					<article class="tf-card tf-card-challenge">
 						<span class="tf-challenge-number">01</span>
-						<h4>[Challenge 1 title]</h4>
+						<h4>Combining Three Data Sources Into One Fast Request</h4>
 						<p>
-							<strong>Challenge:</strong> [Challenge 1 description]<br /><br />
-							<strong>Solution:</strong> [Solution 1 description]<br /><br />
-							<strong>Result:</strong> [Result 1 description]
+							<strong>Challenge:</strong> Each beach needs weather conditions, buoy readings, and active alerts, all pulled from different federal sources with different formats and reliability. Fetching them one at a time would make every request slow, and if one source went down it would block everything else.<br /><br />
+							<strong>Solution:</strong> Designed the backend to request all three sources at the same time rather than waiting for each one to finish before starting the next. Each result is handled independently, so if one source is unavailable, the others still come through.<br /><br />
+							<strong>Result:</strong> Beach detail pages load in the time of the slowest single source instead of the combined total. A buoy going offline no longer affects weather data.
 						</p>
 					</article>
 					<article class="tf-card tf-card-challenge">
 						<span class="tf-challenge-number">02</span>
-						<h4>[Challenge 2 title]</h4>
+						<h4>Delivering a Complete Beach Summary in One Request</h4>
 						<p>
-							<strong>Challenge:</strong> [Challenge 2 description]<br /><br />
-							<strong>Solution:</strong> [Solution 2 description]<br /><br />
-							<strong>Result:</strong> [Result 2 description]
+							<strong>Challenge:</strong> The app needed to show a full beach detail screen metadata, live weather, buoy conditions, and active alerts, all at once. That information lives in different places, and any piece of it could be missing at any given moment.<br /><br />
+							<strong>Solution:</strong> Built a single backend endpoint that looks up the beach first, then reaches out to each data source using that beach's specific identifiers. Everything gets packaged into one clean response. If a source fails, that section is left blank rather than crashing the whole response.<br /><br />
+							<strong>Result:</strong> The app makes one request and gets everything it needs to display the full detail screen. No extra calls, no assembly required on the client side.
 						</p>
 					</article>
 					<article class="tf-card tf-card-challenge">
 						<span class="tf-challenge-number">03</span>
-						<h4>[Challenge 3 title]</h4>
+						<h4>Translating Raw Government Data Into Readable Conditions</h4>
 						<p>
-							<strong>Challenge:</strong> [Challenge 3 description]<br /><br />
-							<strong>Solution:</strong> [Solution 3 description]<br /><br />
-							<strong>Result:</strong> [Result 3 description]
+							<strong>Challenge:</strong> The National Weather Service sends all measurements in metric units, temperature in Celsius, wind speed in kilometers per hour, visibility in meters, pressure in Pascals. Showing those raw values directly would be confusing for most users checking beach conditions.<br /><br />
+							<strong>Solution:</strong> Built the app to store the original values and convert each measurement into the right unit for display. Users get imperial units by default, with a single tap to switch to Celsius. Any measurement that comes back missing shows a clean dash instead of an error.<br /><br />
+							<strong>Result:</strong> Users see familiar, readable conditions at a glance. The unit toggle works across every measurement, and missing data never breaks the screen.
 						</p>
 					</article>
 				</div>
@@ -119,34 +119,34 @@
 					<article class="tf-card">
 						<div class="tf-experience-media">
 							<div class="tf-iphone-frame">
-								<img src="images/CoastCastDash.png" alt="[Screen 1 description]" />
+								<img src="images/CoastCastDash.png" alt="Michigan Beaches browse screen showing beaches grouped by region" />
 							</div>
 						</div>
 						<div class="tf-experience-copy">
-							<h4>[Screen 1 title]</h4>
-							<p>[Screen 1 description]</p>
+							<h4>Browse by Region</h4>
+							<p>Beaches organized by region with a search bar to filter by name or area.</p>
 						</div>
 					</article>
 					<article class="tf-card">
 						<div class="tf-experience-media">
 							<div class="tf-iphone-frame">
-								<img src="images/CoastCastF.png" alt="[Screen 2 description]" />
+								<img src="images/CoastCastF.png" alt="Beach detail screen for Tawas Point State Park showing live weather conditions in Fahrenheit" />
 							</div>
 						</div>
 						<div class="tf-experience-copy">
-							<h4>[Screen 2 title]</h4>
-							<p>[Screen 2 description]</p>
+							<h4>Live Beach Conditions</h4>
+							<p>Live conditions from the nearest weather station — temperature, wind, humidity, visibility, and more. Toggle between imperial and metric with one tap.</p>
 						</div>
 					</article>
 					<article class="tf-card">
 						<div class="tf-experience-media">
 							<div class="tf-iphone-frame">
-								<img src="images/CoastCastC.png" alt="[Screen 3 description]" />
+								<img src="images/CoastCastC.png" alt="Beach detail screen for Sleeping Bear Dunes showing live weather conditions in Celsius" />
 							</div>
 						</div>
 						<div class="tf-experience-copy">
-							<h4>[Screen 3 title]</h4>
-							<p>[Screen 3 description]</p>
+							<h4>Metric Unit Toggle</h4>
+							<p>Same view with Celsius active. The unit preference applies across every reading instantly.</p>
 						</div>
 					</article>
 					</div>
