@@ -4022,6 +4022,7 @@ body.take-flight-page .tf-overview,
 body.take-flight-page .tf-game-flow,
 body.take-flight-page .tf-experiences,
 body.take-flight-page .tf-owned,
+body.take-flight-page .qs-code-showcase,
 body.take-flight-page .tf-code-snippets,
 body.take-flight-page .tf-outcomes {
 	padding: 3.5rem 3.75rem 2rem;
@@ -6227,6 +6228,7 @@ body.resume-page .resume-skill-row dd {
 	body.take-flight-page .tf-game-flow,
 	body.take-flight-page .tf-experiences,
 	body.take-flight-page .tf-owned,
+	body.take-flight-page .qs-code-showcase,
 	body.take-flight-page .tf-code-snippets,
 	body.take-flight-page .tf-outcomes {
 		padding-left: 1rem;
@@ -6962,22 +6964,24 @@ body.take-flight-page.relationshipbuilder-page .tf-project-link-github:hover {
 }
 
 body.take-flight-page.relationshipbuilder-page .tf-snippet-grid {
-	align-items: stretch;
+	align-items: start;
 }
 
 body.take-flight-page.relationshipbuilder-page .tf-snippet-card {
 	background: #0d1f2d;
-	display: flex;
-	flex-direction: column;
-	height: 100%;
 }
 
 body.take-flight-page.relationshipbuilder-page .tf-snippet-card pre {
 	background: rgba(255, 255, 255, 0.05);
+	height: 320px;
+	overflow-y: auto;
 }
 
 body.take-flight-page.relationshipbuilder-page .tf-snippet-card p {
 	color: rgba(200, 230, 252, 0.8);
+	font-size: 0.9rem;
+	line-height: 1.65;
+	margin: 0;
 }
 
 body.take-flight-page.relationshipbuilder-page .tf-snippet-card h4 {
@@ -7112,6 +7116,7 @@ body.take-flight-page.relationshipbuilder-page .tf-card-challenge p strong:nth-o
 
 body.take-flight-page.relationshipbuilder-page .qs-code-showcase {
 	background: linear-gradient(180deg, #b8d8ec 0%, #a8cee6 100%);
+	padding: 3.5rem 3.75rem 4.5rem;
 }
 
 body.take-flight-page.relationshipbuilder-page .site-header {
