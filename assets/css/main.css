@@ -6994,7 +6994,8 @@ body.take-flight-page.relationshipbuilder-page .tf-iphone-frame {
 	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
 }
 
-body.take-flight-page.relationshipbuilder-page .tf-iphone-frame img {
+body.take-flight-page.relationshipbuilder-page .tf-iphone-frame img,
+body.take-flight-page.relationshipbuilder-page .tf-iphone-frame video {
 	aspect-ratio: 9 / 19.5;
 	width: 100%;
 	display: block;
