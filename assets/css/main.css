@@ -3709,6 +3709,16 @@ body.homepage .nav-toggle {
 		border-bottom-color: rgba(125, 210, 252, 0.12);
 	}
 
+	/* RelationshipBuilder — dark dropdown */
+	body.take-flight-page.relationshipbuilder-page .site-header .site-nav {
+		background: #1a1000;
+		border-top-color: rgba(252, 163, 17, 0.25);
+	}
+
+	body.take-flight-page.relationshipbuilder-page .site-nav a {
+		border-bottom-color: rgba(252, 163, 17, 0.15);
+	}
+
 	/* CommonSight — dark dropdown */
 	body.take-flight-page.commonsight-page .site-header .site-nav {
 		background: #0d3a47;
@@ -3755,14 +3765,14 @@ body.homepage.contact-page .site-header.header-pinned {
 }
 
 /* Take Flight base — dark frosted */
-body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page) .site-header.header-pinned {
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page):not(.relationshipbuilder-page) .site-header.header-pinned {
 	background: rgba(15, 15, 20, 0.95);
 	backdrop-filter: blur(10px);
 	box-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
 }
 
-body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page) .site-header.header-pinned .site-name,
-body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page) .site-header.header-pinned .site-nav a {
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page):not(.relationshipbuilder-page) .site-header.header-pinned .site-name,
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page):not(.relationshipbuilder-page) .site-header.header-pinned .site-nav a {
 	color: #fff;
 }
 
@@ -4012,6 +4022,7 @@ body.take-flight-page .tf-overview,
 body.take-flight-page .tf-game-flow,
 body.take-flight-page .tf-experiences,
 body.take-flight-page .tf-owned,
+body.take-flight-page .qs-code-showcase,
 body.take-flight-page .tf-code-snippets,
 body.take-flight-page .tf-outcomes {
 	padding: 3.5rem 3.75rem 2rem;
@@ -4125,16 +4136,16 @@ body.take-flight-page .tf-flow-grid {
 }
 
 /* Take Flight — Challenges & Solutions */
-body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page) .tf-challenges {
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page):not(.relationshipbuilder-page) .tf-challenges {
 	background: #d9d9df;
 }
 
-body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page) .tf-challenges .tf-flow-grid {
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page):not(.relationshipbuilder-page) .tf-challenges .tf-flow-grid {
 	grid-template-columns: repeat(3, minmax(0, 1fr));
 	align-items: stretch;
 }
 
-body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page) .tf-card-challenge {
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page):not(.relationshipbuilder-page) .tf-card-challenge {
 	border-left: 3px solid #2f6f9e;
 	display: flex;
 	flex-direction: column;
@@ -4144,14 +4155,14 @@ body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcas
 	transition: box-shadow 0.22s ease, transform 0.22s ease;
 }
 
-body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page) .tf-card-challenge:hover {
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page):not(.relationshipbuilder-page) .tf-card-challenge:hover {
 	box-shadow:
 		0 8px 24px rgba(47, 111, 158, 0.18),
 		0 2px 6px rgba(47, 111, 158, 0.1);
 	transform: translateY(-2px);
 }
 
-body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page) .tf-challenge-number {
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page):not(.relationshipbuilder-page) .tf-challenge-number {
 	color: #2f6f9e;
 	font-size: 1rem;
 	font-weight: 900;
@@ -4160,7 +4171,7 @@ body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcas
 	margin: 0 0 0.9rem;
 }
 
-body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page) .tf-card-challenge p strong {
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page):not(.relationshipbuilder-page) .tf-card-challenge p strong {
 	border-radius: 4px;
 	display: inline-block;
 	font-size: 0.7rem;
@@ -4173,25 +4184,25 @@ body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcas
 	margin-right: 0.3rem;
 }
 
-body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page) .tf-card-challenge p strong:nth-of-type(1) {
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page):not(.relationshipbuilder-page) .tf-card-challenge p strong:nth-of-type(1) {
 	background: rgba(220, 38, 38, 0.1);
 	border: 1px solid rgba(220, 38, 38, 0.25);
 	color: #b91c1c;
 }
 
-body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page) .tf-card-challenge p strong:nth-of-type(2) {
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page):not(.relationshipbuilder-page) .tf-card-challenge p strong:nth-of-type(2) {
 	background: rgba(37, 99, 235, 0.1);
 	border: 1px solid rgba(37, 99, 235, 0.25);
 	color: #1d4ed8;
 }
 
-body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page) .tf-card-challenge p strong:nth-of-type(3) {
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page):not(.relationshipbuilder-page) .tf-card-challenge p strong:nth-of-type(3) {
 	background: rgba(22, 163, 74, 0.1);
 	border: 1px solid rgba(22, 163, 74, 0.25);
 	color: #15803d;
 }
 
-body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page) .tf-card-challenge code {
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page):not(.relationshipbuilder-page) .tf-card-challenge code {
 	background: rgba(47, 111, 158, 0.08);
 	border-radius: 3px;
 	font-family: monospace;
@@ -4255,11 +4266,11 @@ body.take-flight-page .tf-gf-img-wrap:has(.tf-card-ipad-frame) {
 }
 
 /* Game Flow — redesigned white cards */
-body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page) .tf-gf-grid {
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page):not(.relationshipbuilder-page) .tf-gf-grid {
 	align-items: start;
 }
 
-body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page) .tf-gf-card {
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page):not(.relationshipbuilder-page) .tf-gf-card {
 	background: #fff;
 	border-radius: 1rem;
 	box-shadow:
@@ -4269,7 +4280,7 @@ body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcas
 	transition: box-shadow 0.22s ease, transform 0.22s ease;
 }
 
-body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page) .tf-gf-card:hover {
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page):not(.relationshipbuilder-page) .tf-gf-card:hover {
 	box-shadow:
 		0 6px 20px rgba(0, 0, 0, 0.11),
 		0 2px 6px rgba(0, 0, 0, 0.07);
@@ -4277,24 +4288,24 @@ body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcas
 }
 
 
-body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page) .tf-gf-img-wrap {
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page):not(.relationshipbuilder-page) .tf-gf-img-wrap {
 	border-radius: 0.55rem;
 	overflow: hidden;
 	width: 100%;
 }
 
-body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page) .tf-gf-img-wrap img {
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page):not(.relationshipbuilder-page) .tf-gf-img-wrap img {
 	display: block;
 	height: auto;
 	object-fit: unset;
 	width: 100%;
 }
 
-body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page) .tf-gf-copy {
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page):not(.relationshipbuilder-page) .tf-gf-copy {
 	margin-top: 1.1rem;
 }
 
-body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page) .tf-gf-card h4 {
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page):not(.relationshipbuilder-page) .tf-gf-card h4 {
 	font-size: clamp(1rem, 1.7vw, 1.3rem);
 	font-weight: 700;
 	letter-spacing: -0.015em;
@@ -4302,7 +4313,7 @@ body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcas
 	margin: 0 0 0.4rem;
 }
 
-body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page) .tf-gf-card p {
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page):not(.relationshipbuilder-page) .tf-gf-card p {
 	color: #555;
 	font-size: clamp(0.85rem, 1.2vw, 0.98rem);
 	line-height: 1.5;
@@ -4374,7 +4385,7 @@ body.take-flight-page .tf-experience-grid::-webkit-scrollbar-thumb {
 }
 
 /* Take Flight — Experiences: 2×2 iPad grid */
-body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page) .tf-experience-grid {
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page):not(.relationshipbuilder-page) .tf-experience-grid {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	overflow-x: visible;
@@ -4383,19 +4394,19 @@ body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcas
 	align-items: stretch;
 }
 
-body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page) .tf-experience-grid .tf-card {
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page):not(.relationshipbuilder-page) .tf-experience-grid .tf-card {
 	flex: unset;
 	border-radius: 1rem;
 	overflow: hidden;
 	transition: box-shadow 0.22s ease, transform 0.22s ease;
 }
 
-body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page) .tf-experience-grid .tf-card:hover {
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page):not(.relationshipbuilder-page) .tf-experience-grid .tf-card:hover {
 	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18), 0 2px 6px rgba(0, 0, 0, 0.1);
 	transform: translateY(-2px);
 }
 
-body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page) .tf-experience-media {
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page):not(.relationshipbuilder-page) .tf-experience-media {
 	background: transparent;
 	flex: none;
 	overflow: visible;
@@ -4403,7 +4414,7 @@ body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcas
 }
 
 /* iPad frame for Take Flight experiences */
-body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page) .tf-ipad-frame {
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page):not(.relationshipbuilder-page) .tf-ipad-frame {
 	background: #111;
 	border-radius: 20px;
 	box-shadow:
@@ -4415,7 +4426,7 @@ body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcas
 	width: 100%;
 }
 
-body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page) .tf-ipad-frame img {
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page):not(.relationshipbuilder-page) .tf-ipad-frame img {
 	aspect-ratio: 4 / 3;
 	border-radius: 13px;
 	display: block;
@@ -4424,7 +4435,7 @@ body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcas
 	width: 100%;
 }
 
-body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page) .tf-experience-grid .tf-experience-copy {
+body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page):not(.relationshipbuilder-page) .tf-experience-grid .tf-experience-copy {
 	flex: 1;
 	min-height: 5rem;
 }
@@ -4662,7 +4673,7 @@ body.take-flight-page .tf-owned .tf-media-ipad video {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
 
-	body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page) .tf-gf-grid {
+	body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page):not(.relationshipbuilder-page) .tf-gf-grid {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
 }
@@ -4697,7 +4708,7 @@ body.take-flight-page .tf-owned .tf-media-ipad video {
 		grid-template-columns: 1fr;
 	}
 
-	body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page) .tf-challenges .tf-flow-grid {
+	body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page):not(.relationshipbuilder-page) .tf-challenges .tf-flow-grid {
 		grid-template-columns: 1fr;
 	}
 
@@ -6184,7 +6195,7 @@ body.resume-page .resume-skill-row dd {
 
 @media screen and (max-width: 600px) {
 
-	body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page) .tf-experience-grid {
+	body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page):not(.relationshipbuilder-page) .tf-experience-grid {
 		grid-template-columns: 1fr;
 	}
 }
@@ -6217,6 +6228,7 @@ body.resume-page .resume-skill-row dd {
 	body.take-flight-page .tf-game-flow,
 	body.take-flight-page .tf-experiences,
 	body.take-flight-page .tf-owned,
+	body.take-flight-page .qs-code-showcase,
 	body.take-flight-page .tf-code-snippets,
 	body.take-flight-page .tf-outcomes {
 		padding-left: 1rem;
@@ -6732,6 +6744,425 @@ body.take-flight-page.coastcast-page .cs-next-arrow {
 
 body.take-flight-page.coastcast-page .site-header.header-pinned {
 	background: rgba(2, 15, 30, 0.92);
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+}
+
+/* ==========================================================
+   RelationshipBuilder — amber (#FCA311) + sky blue (#88B8E0)
+   ========================================================== */
+
+body.take-flight-page.relationshipbuilder-page .tf-hero {
+	background:
+		linear-gradient(180deg, #88B8E0 0%, #6AA2CC 100%);
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-hero::after {
+	background: #FCA311;
+}
+
+body.take-flight-page.relationshipbuilder-page .site-name,
+body.take-flight-page.relationshipbuilder-page .site-nav a,
+body.take-flight-page.relationshipbuilder-page .nav-toggle {
+	color: #ffffff !important;
+}
+
+body.take-flight-page.relationshipbuilder-page .site-nav a:hover,
+body.take-flight-page.relationshipbuilder-page .site-nav a:focus-visible {
+	color: #ffe8b8;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-hero-oval {
+	background: rgba(255, 248, 234, 0.94);
+	border-color: rgba(252, 163, 17, 0.25);
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-hero-oval h2 {
+	color: #1a0e00;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-hero-oval p {
+	color: #7a4700;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-overview,
+body.take-flight-page.relationshipbuilder-page .tf-game-flow,
+body.take-flight-page.relationshipbuilder-page .tf-experiences {
+	background: linear-gradient(180deg, #eaf4fc 0%, #ddeef8 100%);
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-overview {
+	padding-bottom: 1.35rem;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-overview-grid {
+	align-items: center;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-overview .tf-media-phone {
+	background: #111;
+	border-radius: 40px;
+	box-shadow:
+		inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+		0 0 0 1px rgba(0, 0, 0, 0.5),
+		0 16px 48px rgba(0, 0, 0, 0.45);
+	justify-self: center;
+	max-width: 340px;
+	padding: 7px;
+	position: relative;
+	isolation: isolate;
+	width: 100%;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-overview .tf-media-phone::before {
+	display: none;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-overview .tf-media-phone video,
+body.take-flight-page.relationshipbuilder-page .tf-overview .tf-media-phone img {
+	aspect-ratio: 9 / 19.5;
+	border-radius: 34px;
+	display: block;
+	height: auto;
+	object-fit: cover;
+	object-position: center;
+	position: relative;
+	width: 100%;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-overview .tf-copy {
+	padding-top: 0.08rem;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-overview-subtitle {
+	color: #7a4700;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-overview-description {
+	margin: 0 0 0.3rem;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-overview-highlights {
+	margin: 0 0 1.02rem;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-overview-highlights h4,
+body.take-flight-page.relationshipbuilder-page .tf-overview-tech h4 {
+	color: #3d2000;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-overview-highlights h4 {
+	font-size: 0.72rem;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-overview-highlights ul {
+	list-style: disc;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-overview-highlights li {
+	color: #1a0e00;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-overview-meta {
+	margin: 0.75rem 0 0;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-overview-meta p {
+	margin: 0 0 0.28rem;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-overview-tech {
+	border-top-color: rgba(136, 184, 224, 0.4);
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-tech-chips li {
+	background: rgba(136, 184, 224, 0.25);
+	color: #1a3a55;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-overview .tf-project-link-wrap {
+	margin-top: 0.1rem;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-owned {
+	background: linear-gradient(180deg, #d8ecf8 0%, #cce6f5 100%);
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-owned-grid {
+	grid-template-columns: minmax(0, 760px);
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-owned .tf-copy p + .tf-list {
+	margin-top: 0.3rem;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-owned .tf-list {
+	margin-bottom: 1.1rem;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-owned .tf-copy p:first-of-type {
+	margin-top: 0.5rem;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-built-section {
+	margin-bottom: 1.6rem;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-built-label {
+	display: inline-block;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-outcomes {
+	background: linear-gradient(180deg, #c4dff0 0%, #b8d8ec 100%);
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-card {
+	background: #e8f4fb;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-experience-grid .tf-card {
+	background: #deeef8;
+	flex: unset;
+	border-radius: 1rem;
+	overflow: hidden;
+	transition: box-shadow 0.22s ease, transform 0.22s ease;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-experience-grid .tf-card:hover {
+	box-shadow:
+		0 8px 24px rgba(252, 163, 17, 0.18),
+		0 2px 6px rgba(0, 0, 0, 0.08);
+	transform: translateY(-2px);
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-experience-grid .tf-experience-copy {
+	flex: 1;
+	min-height: 7rem;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-outcome-card {
+	background: #edf6fc;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-project-link {
+	background: linear-gradient(135deg, #d48800 0%, #FCA311 100%);
+	color: #fff;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-project-link:hover {
+	background: linear-gradient(135deg, #b87400 0%, #e09200 100%);
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-project-link-github {
+	background: rgba(26, 14, 0, 0.08);
+	color: #3d2000;
+	border-color: rgba(26, 14, 0, 0.18);
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-project-link-github:hover {
+	background: rgba(26, 14, 0, 0.16);
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-snippet-grid {
+	align-items: start;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-snippet-card {
+	background: #0d1f2d;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-snippet-card pre {
+	background: rgba(255, 255, 255, 0.05);
+	height: 320px;
+	overflow-y: auto;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-snippet-card p {
+	color: rgba(200, 230, 252, 0.8);
+	font-size: 0.9rem;
+	line-height: 1.65;
+	margin: 0;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-snippet-card h4 {
+	color: #e8f4fc;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-experience-grid::-webkit-scrollbar-thumb {
+	background: rgba(252, 163, 17, 0.5);
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-experience-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 1.5rem;
+	overflow-x: visible;
+}
+
+@media screen and (max-width: 960px) {
+	body.take-flight-page.relationshipbuilder-page .tf-experience-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media screen and (max-width: 736px) {
+	body.take-flight-page.relationshipbuilder-page .tf-experience-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-experience-grid .tf-experience-media {
+	background: transparent;
+	flex: none;
+	overflow: visible;
+	padding: 1.25rem 1.25rem 0.75rem;
+}
+
+/* iPhone frame for RelationshipBuilder screenshots */
+body.take-flight-page.relationshipbuilder-page .tf-iphone-frame {
+	background: #111;
+	border-radius: 12% / 5.66%;
+	box-shadow:
+		inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+		0 0 0 1px rgba(0, 0, 0, 0.5),
+		0 16px 48px rgba(0, 0, 0, 0.35);
+	overflow: hidden;
+	padding: 2%;
+	position: relative;
+	isolation: isolate;
+	width: 100%;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-iphone-frame img,
+body.take-flight-page.relationshipbuilder-page .tf-iphone-frame video {
+	aspect-ratio: 9 / 19.5;
+	border-radius: 10% / 4.6%;
+	display: block;
+	height: auto;
+	object-fit: cover;
+	width: 100%;
+}
+
+/* BridgeProfessionals — challenge number cards */
+body.take-flight-page.relationshipbuilder-page .tf-flow-grid {
+	align-items: stretch;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media screen and (max-width: 736px) {
+	body.take-flight-page.relationshipbuilder-page .tf-flow-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-card-challenge {
+	border-left: 3px solid #FCA311;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	padding: 2.2rem 2rem 2rem 1.8rem;
+	position: relative;
+	transition: box-shadow 0.22s ease, transform 0.22s ease;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-card-challenge:hover {
+	box-shadow:
+		0 8px 24px rgba(252, 163, 17, 0.18),
+		0 2px 6px rgba(252, 163, 17, 0.1);
+	transform: translateY(-2px);
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-challenge-number {
+	color: #FCA311;
+	font-size: 1rem;
+	font-weight: 900;
+	letter-spacing: -0.01em;
+	line-height: 1;
+	margin: 0 0 0.9rem;
+	position: static;
+}
+
+/* Challenge / Solution / Result inline badges */
+body.take-flight-page.relationshipbuilder-page .tf-card-challenge p strong {
+	border-radius: 4px;
+	display: inline-block;
+	font-size: 0.7rem;
+	font-weight: 800;
+	letter-spacing: 0.06em;
+	line-height: 1;
+	padding: 0.2rem 0.45rem;
+	text-transform: uppercase;
+	vertical-align: middle;
+	margin-right: 0.3rem;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-card-challenge p strong:nth-of-type(1) {
+	background: rgba(220, 38, 38, 0.1);
+	border: 1px solid rgba(220, 38, 38, 0.25);
+	color: #b91c1c;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-card-challenge p strong:nth-of-type(2) {
+	background: rgba(37, 99, 235, 0.1);
+	border: 1px solid rgba(37, 99, 235, 0.25);
+	color: #1d4ed8;
+}
+
+body.take-flight-page.relationshipbuilder-page .tf-card-challenge p strong:nth-of-type(3) {
+	background: rgba(22, 163, 74, 0.1);
+	border: 1px solid rgba(22, 163, 74, 0.25);
+	color: #15803d;
+}
+
+body.take-flight-page.relationshipbuilder-page .qs-code-showcase {
+	background: linear-gradient(180deg, #b8d8ec 0%, #a8cee6 100%);
+	padding: 3.5rem 3.75rem 4.5rem;
+}
+
+body.take-flight-page.relationshipbuilder-page .site-header {
+	background: transparent;
+}
+
+@media screen and (max-width: 960px) {
+	body.take-flight-page.relationshipbuilder-page .site-header {
+		background: linear-gradient(135deg, #3d2000 0%, #88B8E0 100%);
+	}
+}
+
+body.take-flight-page.relationshipbuilder-page .cs-next-project {
+	background: #1a1000;
+}
+
+body.take-flight-page.relationshipbuilder-page .cs-next-label {
+	color: rgba(252, 220, 160, 0.6);
+}
+
+body.take-flight-page.relationshipbuilder-page .cs-next-card {
+	background: rgba(255, 255, 255, 0.06);
+}
+
+body.take-flight-page.relationshipbuilder-page .cs-next-card:hover {
+	background: rgba(255, 255, 255, 0.1);
+}
+
+body.take-flight-page.relationshipbuilder-page .cs-next-copy h4 {
+	color: #fdf4e0;
+}
+
+body.take-flight-page.relationshipbuilder-page .cs-next-copy p {
+	color: rgba(252, 220, 160, 0.7);
+}
+
+body.take-flight-page.relationshipbuilder-page .cs-next-arrow {
+	color: rgba(252, 163, 17, 0.7);
+}
+
+body.take-flight-page.relationshipbuilder-page .cs-next-card:hover .cs-next-arrow {
+	color: rgba(252, 163, 17, 1);
+}
+
+body.take-flight-page.relationshipbuilder-page .site-header.header-pinned {
+	background: rgba(26, 14, 0, 0.92);
 	backdrop-filter: blur(12px);
 	-webkit-backdrop-filter: blur(12px);
 }

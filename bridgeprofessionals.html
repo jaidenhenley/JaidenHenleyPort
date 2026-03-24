@@ -1,0 +1,233 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Bridge Professionals | Case Study</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+	</head>
+	<body class="homepage take-flight-page relationshipbuilder-page">
+		<header class="site-header">
+			<h1 class="site-name">Jaiden Henley</h1>
+			<button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+				<span></span><span></span><span></span>
+			</button>
+			<nav class="site-nav" aria-label="Main navigation">
+				<a href="index.html#top">Home</a>
+				<a href="index.html#about">About</a>
+				<a href="caseStudies.html">Case Studies</a>
+				<a href="resume.html">Resume</a>
+				<a href="contact.html">Contact</a>
+			</nav>
+		</header>
+
+		<main class="homepage-main">
+			<section class="tf-hero" id="top">
+				<div class="tf-hero-oval">
+					<h2>Bridge Professionals</h2>
+					<p>
+						Gamified quizzes that grow your habits and your confidence.
+					</p>
+				</div>
+			</section>
+
+			<section class="tf-overview">
+				<div class="tf-overview-grid">
+						<figure class="tf-media tf-media-phone">
+						<video controls playsinline preload="metadata" poster="images/RelationshipBuilderIcon.png">
+							<source src="images/RelationshipBuilderDemo.mp4"/>
+							Your browser does not support the video tag.
+						</video>
+					</figure>
+					<div class="tf-copy">
+						<h3>Overview</h3>
+						<p class="tf-overview-subtitle">Gamified quizzes that grow your habits and your confidence.</p>
+						<p class="tf-overview-description">
+							Learn professional relationship building skills through a structured learning path. Complete short lessons, pass multiple-choice quizzes, and progress through four badge levels from Newbie to Guru. Each badge unlocks the next set of content, guiding you step by step toward stronger workplace communication and networking skills.
+						</p>
+						<div class="tf-overview-highlights">
+							<h4>Highlights</h4>
+							<ul>
+								<li>Short focused lessons on building professional relationships</li>
+								<li>Multiple-choice quizzes with instant feedback and sound effects</li>
+								<li>Four badge levels from Newbie to Guru, each unlocking the next set of content</li>
+							</ul>
+						</div>
+						<div class="tf-overview-tech">
+							<h4>Tech Stack</h4>
+							<ul class="tf-tech-chips">
+								<li>SwiftUI</li>
+								<li>AVKit</li>
+							</ul>
+							<div class="tf-overview-meta">
+								<p><strong>Team:</strong> 5</p>
+								<p><strong>Role:</strong> Lead iOS Developer</p>
+								<p><strong>Timeline:</strong> Nov 2025 &ndash; Dec 2025</p>
+							</div>
+						</div>
+						<p class="tf-project-link-wrap">
+							<a class="tf-project-link tf-project-link-github" href="https://github.com/jaidenhenley/RelationshipBuilder" target="_blank" rel="noopener noreferrer">View Project on GitHub</a>
+                            <a class="tf-project-link" href="https://testflight.apple.com/join/5C2sezFc" target="_blank" rel="noopener noreferrer">Try on TestFlight</a>
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section class="tf-game-flow">
+				<h3>Challenges &amp; Solutions</h3>
+				<div class="tf-flow-grid">
+					<article class="tf-card tf-card-challenge">
+						<span class="tf-challenge-number">01</span>
+						<h4>Persisting Progress Across Sessions</h4>
+						<p>
+							<strong>Challenge:</strong>Without persistence, users would lose all their progress every time they closed the app. This kills motivations quickly.<br /><br />
+							<strong>Solution:</strong>Used AppStorage and UserDefaults to store lesson completion, quiz results, and badge unlocks. Lightweight enough to skip CoreData or SwiftData while still tracking what is important.<br /><br />
+							<strong>Result:</strong> Users pick up exactly where they left off. Progress persists through app closures and device restarts.
+						</p>
+					</article>
+					<article class="tf-card tf-card-challenge">
+						<span class="tf-challenge-number">02</span>
+						<h4>Progressive Content Unlocking</h4>
+						<p>
+							<strong>Challenge:</strong>Users needed to follow a structured learning path without skipping ahead. Quizzes had to stay locked until the lesson was done, and entire badge sections had to stay gated behind passing the previous quiz.<br /><br />
+							<strong>Solution:</strong>Used @AppStorage to track whether each lesson was finished and whether each quiz was passed or failed. Finishing a lesson unlocks the quiz for that badge, and scoring 80% or higher on the quiz opens up the next badge section. Anything still locked shows as dimmed and disabled so users know they can't tap into it yet.<br /><br />
+							<strong>Result:</strong>Users go through the lessons first every time, and the next badge stays locked until they pass the quiz for the one they're on.
+						</p>
+					</article>
+				</div>
+			</section>
+
+			<section class="tf-experiences">
+				<h3>Screenshots</h3>
+				<button class="tf-arrow tf-arrow-left" aria-label="Previous screenshot">&larr;</button>
+				<div class="tf-experience-grid">
+					<article class="tf-card">
+						<div class="tf-experience-media">
+							<div class="tf-iphone-frame">
+								<img src="images/RelationshipBuilderDash.png" alt="Dashboard Screen" />
+							</div>
+						</div>
+						<div class="tf-experience-copy">
+							<h4>Dashboard</h4>
+							<p>Scroll through the learning path and see which lessons and quizzes are unlocked based on your current progress.</p>
+						</div>
+					</article>
+					<article class="tf-card">
+						<div class="tf-experience-media">
+							<div class="tf-iphone-frame">
+								<img src="images/RelationshipBuilderLearn.png" alt="Beach detail screen for Tawas Point State Park showing live weather conditions in Fahrenheit" />
+							</div>
+						</div>
+						<div class="tf-experience-copy">
+							<h4>Lesson View</h4>
+							<p>Read through short, focused lessons on professional relationship topics and make them done to unlock the quiz.</p>
+						</div>
+					</article>
+					<article class="tf-card">
+						<div class="tf-experience-media">
+							<div class="tf-iphone-frame">
+								<img src="images/RelationshipBuilderQuiz.png" alt="Beach detail screen for Sleeping Bear Dunes showing live weather conditions in Celsius" />
+							</div>
+						</div>
+						<div class="tf-experience-copy">
+							<h4>Quiz Mode</h4>
+							<p>Answer multiple-choice questions and get instant visual and haptic feedback on whether you got it right or wrong.</p>
+						</div>
+					</article>
+					</div>
+				<button class="tf-arrow tf-arrow-right" aria-label="Next screenshot">&rarr;</button>
+			</section>
+
+			<section class="tf-owned">
+				<div class="tf-owned-grid">
+					<div class="tf-copy">
+						<h3>What I Built</h3>
+							<ul class="tf-list">
+							<li>Onboarding that only shows on first launch</li>
+							<li>Scrollable map learning path with four badge sections</li>
+							<li>8 short lessons and 8 quizzes with 5 questions each</li>
+							<li>Feedback for answers using color changes, audio, and haptics</li>
+							<li>Badge view to inspect all badges</li>
+							<li>Progress tracking with AppStorage that persists across sessions</li>
+							<li>MVVM architecture with Observable view models</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<section class="qs-code-showcase">
+				<div class="tf-code-header">
+					<h3>Code Snippets</h3>
+					<p>A few of the more interesting pieces from the backend and iOS client.</p>
+				</div>
+				<div class="tf-snippet-grid">
+					<article class="tf-snippet-card">
+						<h4>Badge Progression</h4>
+						<p class="tf-snippet-desc">Controls access to quizzes based on lesson completion. Both lessons in a badge section have to be finished before the quiz tile becomes tappable. Locked quizzes show at reduced opacity so users can see what's next.</p>
+						<pre class="language-python"><code class="language-swift">NavigationLink {
+    QuizControllerView(
+        questions: sets.Set1
+    )
+} label: {
+    QuizMapTile(quiz: Quiz(name: "Quiz", assetName: "Pen"))
+        .opacity((learn1Completed && learn2Completed) ? 1.0 : 0.4)
+}
+.disabled(!(learn1Completed && learn2Completed == true))
+						</code></pre>
+					</article>
+					<article class="tf-snippet-card">
+						<h4>Quiz Answer Sound Feedback</h4>
+						<p class="tf-snippet-desc">Checks the selected answer against the correct one, plays a success or buzz sound, and flags the question as submitted so the UI can show visual feedback.<br /><br /></p>
+						<pre class="language-python"><code class="language-swift">func submitAnswer() {
+    guard let selected = selectedAnswer else { return }
+
+    if selected == questions[currentQuestionIndex].correctAnswer {
+        SoundManager.instance.playSound(sound: .success)
+        score += 1
+    } else {
+        SoundManager.instance.playSound(sound: .buzz)
+    }
+
+    hasSubmitted = true
+}</code></pre>
+					</article>
+				</div>
+			</section>
+
+			<section class="tf-outcomes">
+				<div class="tf-outcomes-grid">
+					<article class="tf-outcome-card">
+						<h3>Next Iterations</h3>
+						<p>Next I want to add a progress bar to the main map so users can see how far along they are at a glance. I'd also add animations on badge unlocks and quiz transitions so progression feels more interactive. For the code I want to move persistence to SwiftData or CloudKit so progress syncs across devices, and adding a reset option in settings for anyone who wants to start over. From there it's just more content, new badge tiers and topics beyond the current four levels.</p>
+					</article>
+					<article class="tf-outcome-card">
+						<h3>Outcome</h3>
+						<p>RelationshipBuilder started because I wanted professional development to feel less like a chore and more like something you'd actually come back to. The unlock system keeps users moving through the content in order, and the sound and color feedback on quizzes makes it feel interactive instead of passive. This project was my first time building a full gamified progression system from scratch, figuring out how to gate content cleanly, track everything with @AppStorage, and keep the codebase set up so adding more lessons and badges doesn't mean rewriting what's already there.</p>
+					</article>
+				</div>
+			</section>
+
+			<section class="cs-next-project">
+				<p class="cs-next-label">More Case Studies</p>
+				<div class="cs-next-grid" id="cs-next-grid"></div>
+			</section>
+		</main>
+
+		<footer class="site-footer">
+			<div class="site-footer-content">
+				<p class="footer-name">Jaiden Henley</p>
+				<a class="footer-link" href="mailto:jaidenhenleydev@gmail.com">jaidenhenleydev@gmail.com</a>
+				<a class="footer-link" href="https://www.linkedin.com/in/jaiden-henley" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+				<a class="footer-link" href="https://github.com/jaidenhenley" target="_blank" rel="noopener noreferrer">GitHub</a>
+				<a class="footer-link footer-contact-button" href="contact.html">Contact Me</a>
+			</div>
+		</footer>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-swift.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+		<script type="module" src="assets/js/analytics.js"></script>
+		<script src="assets/js/nav.js"></script>
+		<script src="assets/js/cs-next.js"></script>
+	</body>
+</html>
