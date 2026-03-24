@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>CoastCast | Case Study</title>
+		<title>Bridge Professionals | Case Study</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -25,7 +25,7 @@
 		<main class="homepage-main">
 			<section class="tf-hero" id="top">
 				<div class="tf-hero-oval">
-					<h2>Bridge Proffesionals</h2>
+					<h2>Bridge Professionals</h2>
 					<p>
 						Gamified quizzes that grow your habits and your confidence.
 					</p>
@@ -34,27 +34,24 @@
 
 			<section class="tf-overview">
 				<div class="tf-overview-grid">
-					<figure class="tf-media tf-media-phone">
-						<div class="tf-iphone-frame">
-							<video controls playsinline preload="metadata" poster="images/RelationshipBuilderIcon.png">
-								<source src="images/BridgeProffessionalsDemo.mp4"/>
-								Your browser does not support the video tag.
-							</video>
-						</div>
+						<figure class="tf-media tf-media-phone">
+						<video controls playsinline preload="metadata" poster="images/RelationshipBuilderIcon.png">
+							<source src="images/RelationshipBuilderDemo.mp4"/>
+							Your browser does not support the video tag.
+						</video>
 					</figure>
 					<div class="tf-copy">
 						<h3>Overview</h3>
 						<p class="tf-overview-subtitle">Gamified quizzes that grow your habits and your confidence.</p>
 						<p class="tf-overview-description">
-							An iOS app I built for checking live weather at Michigan's beaches. You can browse beaches by region, save favorites, and see real-time conditions like temperature, wind, humidity, and visibility. with pull-to-refresh, unit toggling, and weather alerts. The frontend is SwiftUI with MVVM and async/await, no third-party dependencies, and the backend is a Python REST API I built and deployed on Render that pulls data from National Weather Service stations.
+							Learn professional relationship building skills through a structured learning path. Complete short lessons, pass multiple-choice quizzes, and progress through four badge levels from Newbie to Guru. Each badge unlocks the next set of content, guiding you step by step toward stronger workplace communication and networking skills.
 						</p>
 						<div class="tf-overview-highlights">
 							<h4>Highlights</h4>
 							<ul>
-								<li>Built a FastAPI backend that delivers Michigan beach, weather, and water-condition data through clean REST endpoints.</li>
-								<li>Integrated real-time NOAA and National Weather Service data with async API calls and reliable error handling.</li>
-								<li>Clean separation across view model, service layer, and persistence manager, each with a single responsibility.</li>
-								<li>Pull-to-refresh, unit toggling, search filtering, favoriting with persistence, error states with retry, and material-backed card layouts.</li>
+								<li>Short focused lessons on building professional relationships</li>
+								<li>Multiple-choice quizzes with instant feedback and sound effects</li>
+								<li>Four badge levels from Newbie to Guru, each unlocking the next set of content</li>
 							</ul>
 						</div>
 						<div class="tf-overview-tech">
@@ -82,29 +79,20 @@
 				<div class="tf-flow-grid">
 					<article class="tf-card tf-card-challenge">
 						<span class="tf-challenge-number">01</span>
-						<h4>Combining Three Data Sources Into One Fast Request</h4>
+						<h4>Persisting Progress Across Sessions</h4>
 						<p>
-							<strong>Challenge:</strong> Each beach needs weather conditions, buoy readings, and active alerts, all pulled from different federal sources with different formats and reliability. Fetching them one at a time would make every request slow, and if one source went down it would block everything else.<br /><br />
-							<strong>Solution:</strong> Designed the backend to request all three sources at the same time rather than waiting for each one to finish before starting the next. Each result is handled independently, so if one source is unavailable, the others still come through.<br /><br />
-							<strong>Result:</strong> Beach detail pages load in the time of the slowest single source instead of the combined total. A buoy going offline no longer affects weather data.
+							<strong>Challenge:</strong>Without persistence, users would lose all their progress every time they closed the app. This kills motivations quickly.<br /><br />
+							<strong>Solution:</strong>Used AppStorage and UserDefaults to store lesson completion, quiz results, and badge unlocks. Lightweight enough to skip CoreData or SwiftData while still tracking what is important.<br /><br />
+							<strong>Result:</strong> Users pick up exactly where they left off. Progress persists through app closures and device restarts.
 						</p>
 					</article>
 					<article class="tf-card tf-card-challenge">
 						<span class="tf-challenge-number">02</span>
-						<h4>Delivering a Complete Beach Summary in One Request</h4>
+						<h4>Progressive Content Unlocking</h4>
 						<p>
-							<strong>Challenge:</strong> The app needed to show a full beach detail screen metadata, live weather, buoy conditions, and active alerts, all at once. That information lives in different places, and any piece of it could be missing at any given moment.<br /><br />
-							<strong>Solution:</strong> Built a single backend endpoint that looks up the beach first, then reaches out to each data source using that beach's specific identifiers. Everything gets packaged into one clean response. If a source fails, that section is left blank rather than crashing the whole response.<br /><br />
-							<strong>Result:</strong> The app makes one request and gets everything it needs to display the full detail screen. No extra calls, no assembly required on the client side.
-						</p>
-					</article>
-					<article class="tf-card tf-card-challenge">
-						<span class="tf-challenge-number">03</span>
-						<h4>Translating Raw Government Data Into Readable Conditions</h4>
-						<p>
-							<strong>Challenge:</strong> The National Weather Service sends all measurements in metric units, temperature in Celsius, wind speed in kilometers per hour, visibility in meters, pressure in Pascals. Showing those raw values directly would be confusing for most users checking beach conditions.<br /><br />
-							<strong>Solution:</strong> Built the app to store the original values and convert each measurement into the right unit for display. Users get imperial units by default, with a single tap to switch to Celsius. Any measurement that comes back missing shows a clean dash instead of an error.<br /><br />
-							<strong>Result:</strong> Users see familiar, readable conditions at a glance. The unit toggle works across every measurement, and missing data never breaks the screen.
+							<strong>Challenge:</strong>Users needed to follow a structured learning path without skipping ahead. Quizzes had to stay locked until the lesson was done, and entire badge sections had to stay gated behind passing the previous quiz.<br /><br />
+							<strong>Solution:</strong>Used @AppStorage to track whether each lesson was finished and whether each quiz was passed or failed. Finishing a lesson unlocks the quiz for that badge, and scoring 80% or higher on the quiz opens up the next badge section. Anything still locked shows as dimmed and disabled so users know they can't tap into it yet.<br /><br />
+							<strong>Result:</strong>Users go through the lessons first every time, and the next badge stays locked until they pass the quiz for the one they're on.
 						</p>
 					</article>
 				</div>
@@ -117,34 +105,34 @@
 					<article class="tf-card">
 						<div class="tf-experience-media">
 							<div class="tf-iphone-frame">
-								<img src="images/CoastCastDash.png" alt="Michigan Beaches browse screen showing beaches grouped by region" />
+								<img src="images/RelationshipBuilderDash.png" alt="Dashboard Screen" />
 							</div>
 						</div>
 						<div class="tf-experience-copy">
-							<h4>Browse by Region</h4>
-							<p>Beaches organized by region with a search bar to filter by name or area.</p>
+							<h4>Dashboard</h4>
+							<p>Scroll through the learning path and see which lessons and quizzes are unlocked based on your current progress.</p>
 						</div>
 					</article>
 					<article class="tf-card">
 						<div class="tf-experience-media">
 							<div class="tf-iphone-frame">
-								<img src="images/CoastCastF.png" alt="Beach detail screen for Tawas Point State Park showing live weather conditions in Fahrenheit" />
+								<img src="images/RelationshipBuilderLearn.png" alt="Beach detail screen for Tawas Point State Park showing live weather conditions in Fahrenheit" />
 							</div>
 						</div>
 						<div class="tf-experience-copy">
-							<h4>Live Beach Conditions</h4>
-							<p>Live conditions from the nearest weather station — temperature, wind, humidity, visibility, and more. Toggle between imperial and metric with one tap.</p>
+							<h4>Lesson View</h4>
+							<p>Read through short, focused lessons on professional relationship topics and make them done to unlock the quiz.</p>
 						</div>
 					</article>
 					<article class="tf-card">
 						<div class="tf-experience-media">
 							<div class="tf-iphone-frame">
-								<img src="images/CoastCastC.png" alt="Beach detail screen for Sleeping Bear Dunes showing live weather conditions in Celsius" />
+								<img src="images/RelationshipBuilderQuiz.png" alt="Beach detail screen for Sleeping Bear Dunes showing live weather conditions in Celsius" />
 							</div>
 						</div>
 						<div class="tf-experience-copy">
-							<h4>Metric Unit Toggle</h4>
-							<p>Same view with Celsius active. The unit preference applies across every reading instantly.</p>
+							<h4>Quiz Mode</h4>
+							<p>Answer multiple-choice questions and get instant visual and haptic feedback on whether you got it right or wrong.</p>
 						</div>
 					</article>
 					</div>
@@ -155,25 +143,15 @@
 				<div class="tf-owned-grid">
 					<div class="tf-copy">
 						<h3>What I Built</h3>
-						<div class="tf-built-section">
-							<span class="tf-built-label">Backend — Python + FastAPI</span>
 							<ul class="tf-list">
-								<li>REST API built with FastAPI and hosted on Render</li>
-								<li>Beach detail endpoint that stitches together weather, buoy, and alert data into one response</li>
-								<li>Parallel fetching with per-source error isolation so one failing source never breaks the rest</li>
-								<li>NDBC buoy parser for raw text format with missing value handling</li>
-								<li>Query parameter filtering for beaches by county, lake, and status</li>
-							</ul>
-						</div>
-						<div class="tf-built-section">
-							<span class="tf-built-label">Frontend — SwiftUI</span>
-							<ul class="tf-list">
-								<li>Beach list with search, regional grouping, and favorites backed by persistent storage</li>
-								<li>Beach detail view with temperature card, conditions grid, and alert banner</li>
-								<li>Unit conversion layer that reads API unit codes and supports a Fahrenheit/Celsius toggle</li>
-								<li>Pull-to-refresh and multi-state loading with stale data retention during background refreshes</li>
-							</ul>
-						</div>
+							<li>Onboarding that only shows on first launch</li>
+							<li>Scrollable map learning path with four badge sections</li>
+							<li>8 short lessons and 8 quizzes with 5 questions each</li>
+							<li>Feedback for answers using color changes, audio, and haptics</li>
+							<li>Badge view to inspect all badges</li>
+							<li>Progress tracking with AppStorage that persists across sessions</li>
+							<li>MVVM architecture with Observable view models</li>
+						</ul>
 					</div>
 				</div>
 			</section>
