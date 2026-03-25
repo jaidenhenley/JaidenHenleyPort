@@ -42,14 +42,14 @@
 						<h3>Overview</h3>
 						<p class="tf-overview-subtitle">Ordering from a Detroit Coffee Favorite.</p>
 						<p class="tf-overview-description">
-							Placeholder overview copy goes here. Replace this section with the final Roasting Plant summary, the user problem, and the product outcome you want the page to highlight.
+							Roasting Plant is a mobile ordering app for a local Detroit coffee shop, built entirely in SwiftUI. Users browse the menu, customize their drink, pick size, milk, sugar, iced, and add it to a multi-item cart with itemized pricing and tax. I built this as my first solo iOS project.
 						</p>
 						<div class="tf-overview-highlights">
 							<h4>Highlights</h4>
 							<ul>
-								<li>Placeholder highlight describing the first standout part of the experience</li>
-								<li>Placeholder highlight describing the second feature, flow, or decision</li>
-								<li>Placeholder highlight describing the third thing worth calling out</li>
+								<li>5 connected views sharing state through SwiftUI's binding</li>
+								<li>Size based pricing, alternative milk upcharges, iced upcharges, and tax calculated in the Coffee model</li>
+								<li>Full order flow from browsing to placing an order</li>
 							</ul>
 						</div>
 						<div class="tf-overview-tech">
@@ -202,11 +202,11 @@ func calculateDrinkPrice() -> Double {
 				<div class="tf-outcomes-grid">
 					<article class="tf-outcome-card">
 						<h3>Next Iterations</h3>
-						<p>Placeholder notes for what you would improve next, test further, or expand in a future version of the Roasting Plant experience.</p>
+						<p>Next I'd add user accounts so people can save their recent orders and reorder with one tap instead of rebuilding from scratch. I'd also add a live order status screen so users know when their drink is received, brewing, or ready for pickup. A simple rewards system to track purchases and earn points toward free drinks would give users a reason to keep coming back.</p>
 					</article>
 					<article class="tf-outcome-card">
 						<h3>Outcome</h3>
-						<p>Placeholder summary for the final result, what you learned, or the impact you want this project to communicate.</p>
+						<p>My first solo iOS project from start to finish. I went from an empty Xcode project to a fully functional ordering flow with menu browsing, drink customization, order confirmation, and a multi-item cart with real pricing. This is where I learned how SwiftUI's state management works. Passing data between views with @State and @Binding, structuring a model to handle pricing logic, building UI that feels like a real product.</p>
 					</article>
 				</div>
 			</section>
