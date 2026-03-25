@@ -1,0 +1,236 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Roasting Plant | Case Study</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+	</head>
+	<body class="homepage take-flight-page relationshipbuilder-page roastingplant-page">
+		<header class="site-header">
+			<h1 class="site-name">Jaiden Henley</h1>
+			<button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+				<span></span><span></span><span></span>
+			</button>
+			<nav class="site-nav" aria-label="Main navigation">
+				<a href="index.html#top">Home</a>
+				<a href="index.html#about">About</a>
+				<a href="caseStudies.html">Case Studies</a>
+				<a href="resume.html">Resume</a>
+				<a href="contact.html">Contact</a>
+			</nav>
+		</header>
+
+		<main class="homepage-main">
+			<section class="tf-hero" id="top">
+				<div class="tf-hero-oval">
+					<h2>Roasting Plant</h2>
+					<p>Ordering from a Detroit Coffee Favorite.</p>
+				</div>
+			</section>
+
+			<section class="tf-overview">
+				<div class="tf-overview-grid">
+					<figure class="tf-media tf-media-phone">
+						<video controls playsinline preload="metadata" poster="images/RoastingPlantIcon.png">
+							<source src="images/RoastingPlantDemo.mp4" type="video/mp4" />
+							Your browser does not support the video tag.
+						</video>
+					</figure>
+					<div class="tf-copy">
+						<h3>Overview</h3>
+						<p class="tf-overview-subtitle">Ordering from a Detroit Coffee Favorite.</p>
+						<p class="tf-overview-description">
+							Roasting Plant is a mobile ordering app for a local Detroit coffee shop, built entirely in SwiftUI. Users browse the menu, customize their drink, pick size, milk, sugar, iced, and add it to a multi-item cart with itemized pricing and tax. I built this as my first solo iOS project.
+						</p>
+						<div class="tf-overview-highlights">
+							<h4>Highlights</h4>
+							<ul>
+								<li>5 connected views sharing state through SwiftUI's binding</li>
+								<li>Size based pricing, alternative milk upcharges, iced upcharges, and tax calculated in the Coffee model</li>
+								<li>Full order flow from browsing to placing an order</li>
+							</ul>
+						</div>
+						<div class="tf-overview-tech">
+							<h4>Tech Stack</h4>
+							<ul class="tf-tech-chips">
+								<li>SwiftUI</li>
+							</ul>
+							<div class="tf-overview-meta">
+								<p><strong>Team:</strong> Solo</p>
+								<p><strong>Role:</strong> iOS Developer, UI/UX Designer</p>
+								<p><strong>Timeline:</strong> Oct 2025 - Oct 2025</p>
+							</div>
+						</div>
+						<p class="tf-project-link-wrap">
+							<a class="tf-project-link tf-project-link-github" href="https://github.com/jaidenhenley/RoastingPlantCoffeeProject">View Project on GitHub</a>
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<section class="tf-game-flow">
+				<h3>Challenges &amp; Solutions</h3>
+				<div class="tf-flow-grid">
+					<article class="tf-card tf-card-challenge">
+						<span class="tf-challenge-number">01</span>
+						<h4>Syncing Drink Data Across Views</h4>
+						<p>
+							<strong>Challenge:</strong> The app has three screens that all need the same drink data. Changes on one screen had to persist everywhere else without being changed.<br /><br />
+							<strong>Solution:</strong> Used @State as the main data point and passed data through views with @Binding. The Coffee struct holds all customization options, orderedCoffees array keeps track of the users ordered drinks.<br /><br />
+							<strong>Result:</strong> Adding a drink, confirming it in the sheet, and seeing it in the cart all works together as one shared array.
+						</p>
+					</article>
+					<article class="tf-card tf-card-challenge">
+						<span class="tf-challenge-number">02</span>
+						<h4>Pricing with Multiple Variables</h4>
+						<p>
+							<strong>Challenge:</strong> Each drink's price changes based on size, milk type, and whether it's iced. The cart has to show individual prices, upcharges, subtotal, and tax, and all of it needs to stay accurate as users add and remove drinks.<br /><br />
+							<strong>Solution:</strong><br /> Put the pricing logic inside the Coffee struct so each part of the price has its own function. The cart adds everything by looping through the array to get a subtotal and total.<br /><br />
+							<strong>Result:</strong> Prices calculate every time a drink is added or removed, so the subtotal, tax, and total in the cart always match what the user actually ordered.
+						</p>
+					</article>
+				</div>
+			</section>
+
+			<section class="tf-experiences">
+				<h3>Screenshots</h3>
+				<button class="tf-arrow tf-arrow-left" aria-label="Previous screenshot">&larr;</button>
+				<div class="tf-experience-grid">
+					<article class="tf-card">
+						<div class="tf-experience-media">
+							<div class="tf-iphone-frame">
+								<img src="images/RoastingPlantDash.png" alt="Import Source screen" />
+							</div>
+						</div>
+						<div class="tf-experience-copy">
+							<h4>Order Menu</h4>
+							<p>Browse espresso and drip coffee options with a search bar to find drinks fast.</p>
+						</div>
+					</article>
+					<article class="tf-card">
+						<div class="tf-experience-media">
+							<div class="tf-iphone-frame">
+								<img src="images/RoastingPlantOrder.png" alt="Import Source screen" />
+							</div>
+						</div>
+						<div class="tf-experience-copy">
+							<h4>Drink Customization</h4>
+							<p>Pick your size, milk type, sugar, and iced preference, then add it to your cart.</p>
+						</div>
+					</article>
+					<article class="tf-card">
+						<div class="tf-experience-media">
+							<div class="tf-iphone-frame">
+								<img src="images/RoastingPlantCart.png" alt="Import Source screen" />
+							</div>
+						</div>
+						<div class="tf-experience-copy">
+							<h4>Cart & Checkout</h4>
+							<p>Review your order with itemized pricing and tax before placing it.</p>
+						</div>
+					</article>
+				</div>
+				<button class="tf-arrow tf-arrow-right" aria-label="Next screenshot">&rarr;</button>
+			</section>
+
+			<section class="tf-owned">
+				<div class="tf-owned-grid">
+					<div class="tf-copy">
+						<h3>What I Built</h3>
+						<ul class="tf-list">
+							<li>Drink customization flow with size, milk type, sugar, iced/hot, special requests, and name tied to a single Coffee model with real price calculations</li>
+							<li>Multi-drink cart with swipe-to-delete and live itemized pricing including subtotal, tax, and total</li>
+							<li>Order confirmation sheet that lets users review each drink before adding it to the cart</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<section class="qs-code-showcase">
+				<div class="tf-code-header">
+					<h3>Code Snippets</h3>
+					<p>Placeholder intro copy for the code section. Replace this with the most interesting Roasting Plant implementation details.</p>
+				</div>
+				<div class="tf-snippet-grid">
+					<article class="tf-snippet-card">
+						<h4>Drink Price Calculation</h4>
+						<p class="tf-snippet-desc">Drink prices are calculated based on size, milk selection, and whether the drink is iced, each modifier adjusts the final cost.</p>
+						<pre class="language-swift"><code class="language-swift">func basePrice() -> Double {
+    var price = size.basePrice
+    if iced == true {
+        price += 0.5
+    }
+    return price
+}
+
+func calculateDrinkPrice() -> Double {
+    var price = size.basePrice
+    if milkType == .Oat { price += 0.65 }
+    if milkType == .Soy { price += 0.75 }
+    if milkType == .Almond { price += 0.5 }
+    if milkType == .Whole { price += 0 }
+    return price
+}</code></pre>
+					</article>
+					<article class="tf-snippet-card">
+						<h4>Cart Swipe Action</h4>
+						<p class="tf-snippet-desc">Displays each ordered coffee in a list with swipe-to-delete. Swiping left reveals a delete button that removes that drink from the cart.</p>
+						<pre class="language-json"><code class="language-swift">ForEach(orderedCoffees, id: \.self) { coffee in
+    HStack {
+        // drink detail code...
+    }
+    .swipeActions(allowsFullSwipe: true) {
+        Button(role: .destructive) {
+            if let index = orderedCoffees.firstIndex(where: {
+                $0.name == coffee.name && $0.assetName == coffee.assetName
+            }) {
+                orderedCoffees.remove(at: index)
+            }
+        } label: {
+            Label("Delete", systemImage: "trash")
+        }
+    }
+}
+</code></pre>
+					</article>
+				</div>
+			</section>
+
+			<section class="tf-outcomes">
+				<div class="tf-outcomes-grid">
+					<article class="tf-outcome-card">
+						<h3>Next Iterations</h3>
+						<p>Next I'd add user accounts so people can save their recent orders and reorder with one tap instead of rebuilding from scratch. I'd also add a live order status screen so users know when their drink is received, brewing, or ready for pickup. A simple rewards system to track purchases and earn points toward free drinks would give users a reason to keep coming back.</p>
+					</article>
+					<article class="tf-outcome-card">
+						<h3>Outcome</h3>
+						<p>My first solo iOS project from start to finish. I went from an empty Xcode project to a fully functional ordering flow with menu browsing, drink customization, order confirmation, and a multi-item cart with real pricing. This is where I learned how SwiftUI's state management works. Passing data between views with @State and @Binding, structuring a model to handle pricing logic, building UI that feels like a real product.</p>
+					</article>
+				</div>
+			</section>
+
+			<section class="cs-next-project">
+				<p class="cs-next-label">More Case Studies</p>
+				<div class="cs-next-grid" id="cs-next-grid"></div>
+			</section>
+		</main>
+
+		<footer class="site-footer">
+			<div class="site-footer-content">
+				<p class="footer-name">Jaiden Henley</p>
+				<a class="footer-link" href="mailto:jaidenhenleydev@gmail.com">jaidenhenleydev@gmail.com</a>
+				<a class="footer-link" href="https://www.linkedin.com/in/jaiden-henley" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+				<a class="footer-link" href="https://github.com/jaidenhenley" target="_blank" rel="noopener noreferrer">GitHub</a>
+				<a class="footer-link footer-contact-button" href="contact.html">Contact Me</a>
+			</div>
+		</footer>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-swift.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+		<script type="module" src="assets/js/analytics.js"></script>
+		<script src="assets/js/nav.js"></script>
+		<script src="assets/js/cs-next.js"></script>
+	</body>
+</html>
