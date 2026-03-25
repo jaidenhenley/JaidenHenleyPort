@@ -3324,11 +3324,27 @@ body.homepage.home-view .featured-project-card {
 	transition: box-shadow 0.22s ease, transform 0.22s ease;
 }
 
-body.homepage.home-view .featured-project-card:hover {
+body.homepage.home-view .featured-project-card:hover,
+body.homepage.home-view .featured-project-card:focus-within {
 	box-shadow:
 		0 8px 24px rgba(5, 5, 5, 0.1),
 		0 2px 6px rgba(5, 5, 5, 0.06);
 	transform: translateY(-2px);
+}
+
+body.homepage.home-view .featured-project-card-link {
+	border: 0;
+	color: inherit;
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	height: 100%;
+	text-decoration: none;
+}
+
+body.homepage.home-view .featured-project-card-link:focus-visible {
+	outline: 2px solid #121318;
+	outline-offset: -2px;
 }
 
 body.homepage.home-view .featured-project-image {
@@ -3352,15 +3368,10 @@ body.homepage.home-view .featured-project-body {
 
 body.homepage.home-view .featured-project-body h4 {
 	margin: 0 0 0.42rem;
-}
-
-body.homepage.home-view .featured-project-body h4 a {
-	border: 0;
 	color: #121318;
 	font-size: 1.24rem;
 	font-weight: 700;
 	letter-spacing: -0.01em;
-	text-decoration: none;
 }
 
 body.homepage.home-view .featured-project-body p {
@@ -3850,11 +3861,27 @@ body.case-study-page .featured-project-card {
 	transition: box-shadow 0.22s ease, transform 0.22s ease;
 }
 
-body.case-study-page .featured-project-card:hover {
+body.case-study-page .featured-project-card:hover,
+body.case-study-page .featured-project-card:focus-within {
 	box-shadow:
 		0 8px 24px rgba(5, 5, 5, 0.1),
 		0 2px 6px rgba(5, 5, 5, 0.06);
 	transform: translateY(-2px);
+}
+
+body.case-study-page .featured-project-card-link {
+	border: 0;
+	color: inherit;
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	height: 100%;
+	text-decoration: none;
+}
+
+body.case-study-page .featured-project-card-link:focus-visible {
+	outline: 2px solid #121318;
+	outline-offset: -2px;
 }
 
 body.case-study-page .featured-project-image {
@@ -3878,15 +3905,10 @@ body.case-study-page .featured-project-body {
 
 body.case-study-page .featured-project-body h4 {
 	margin: 0 0 0.42rem;
-}
-
-body.case-study-page .featured-project-body h4 a {
-	border: 0;
 	color: #121318;
 	font-size: 1.24rem;
 	font-weight: 700;
 	letter-spacing: -0.01em;
-	text-decoration: none;
 }
 
 body.case-study-page .featured-project-card .featured-project-body p {
