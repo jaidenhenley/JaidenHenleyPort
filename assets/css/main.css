@@ -3764,6 +3764,12 @@ body.homepage.contact-page .site-header.header-pinned {
 	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
 }
 
+body.homepage.case-study-page .site-header.header-pinned {
+	background: rgba(255, 255, 255, 0.98);
+	backdrop-filter: blur(10px);
+	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
 /* Take Flight base — dark frosted */
 body.take-flight-page:not(.quickstudy-page):not(.commonsight-page):not(.coastcast-page):not(.relationshipbuilder-page) .site-header.header-pinned {
 	background: rgba(15, 15, 20, 0.95);
@@ -7165,4 +7171,317 @@ body.take-flight-page.relationshipbuilder-page .site-header.header-pinned {
 	background: rgba(26, 14, 0, 0.92);
 	backdrop-filter: blur(12px);
 	-webkit-backdrop-filter: blur(12px);
+}
+
+/* Roasting Plant */
+body.take-flight-page.relationshipbuilder-page.roastingplant-page {
+	--rp-navy: #192F5C;
+	--rp-navy-deep: #192F5C;
+	--rp-slate: #192F5C;
+	--rp-slate-dark: #4b5865;
+	--rp-slate-light: #d6dde3;
+	--rp-mist: #bfbfbf;
+	--rp-cloud: #BFBFBF;
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-hero {
+	background:
+		radial-gradient(circle at top left, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 38%),
+		linear-gradient(135deg, var(--rp-navy-deep) 0%, var(--rp-navy) 52%, var(--rp-slate) 100%);
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-hero::after {
+	background: var(--rp-slate-light);
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .site-name,
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .site-nav a,
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .nav-toggle {
+	color: #f7fbff !important;
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .site-nav a:hover,
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .site-nav a:focus-visible {
+	color: #d9e6f2;
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .site-nav a {
+	border-bottom-color: rgba(214, 221, 227, 0.12);
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .site-header.header-pinned {
+	background: rgba(24, 39, 55, 0.92);
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-hero-oval {
+	background: rgba(246, 248, 250, 0.94);
+	border-color: rgba(34, 55, 77, 0.14);
+	box-shadow: 0 18px 40px rgba(24, 39, 55, 0.16);
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-hero-oval h2,
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-copy h3,
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-game-flow h3,
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-experiences h3,
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-code-header h3,
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-outcome-card h3 {
+	color: var(--rp-navy-deep);
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-hero-oval p,
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-overview-subtitle {
+	color: var(--rp-slate-dark);
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-overview,
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-game-flow,
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-experiences {
+	background: linear-gradient(180deg, #f4f7f9 0%, #e5ebf0 100%);
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-owned {
+	background: linear-gradient(180deg, #dce4ea 0%, #d0dae2 100%);
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .qs-code-showcase {
+	background: linear-gradient(180deg, #d0dae2 0%, #c2ced9 100%);
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-outcomes {
+	background: linear-gradient(180deg, #e4ebf0 0%, #d7e0e7 100%);
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-overview .tf-media-phone {
+	background: #121c27;
+	box-shadow:
+		inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+		0 0 0 1px rgba(0, 0, 0, 0.4),
+		0 18px 44px rgba(24, 39, 55, 0.34);
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-overview .tf-copy p,
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-overview-meta p,
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-card p,
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-code-header p,
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-outcome-card p,
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-overview-highlights li {
+	color: #213244;
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-overview-highlights h4,
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-overview-tech h4,
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-copy strong,
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-card h4 {
+	color: var(--rp-navy-deep);
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-overview-tech {
+	border-top-color: rgba(34, 55, 77, 0.15);
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-tech-chips li {
+	background: rgba(34, 55, 77, 0.08);
+	color: var(--rp-navy);
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-card {
+	background: var(--rp-mist);
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-game-flow .tf-card {
+	background: #f1f4f6;
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-experience-grid .tf-card {
+	background: #e8eef2;
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-experience-grid .tf-card:hover {
+	box-shadow:
+		0 8px 24px rgba(24, 39, 55, 0.18),
+		0 2px 6px rgba(24, 39, 55, 0.08);
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-outcome-card {
+	background: #eff4f7;
+	border-color: rgba(34, 55, 77, 0.08);
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-project-link {
+	background: linear-gradient(135deg, var(--rp-navy-deep) 0%, var(--rp-navy) 100%);
+	color: #fff;
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-project-link:hover {
+	background: linear-gradient(135deg, #12202d 0%, #1a2b3c 100%);
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-project-link-github {
+	background: rgba(34, 55, 77, 0.05);
+	border-color: rgba(34, 55, 77, 0.18);
+	color: var(--rp-navy);
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-project-link-github:hover {
+	background: rgba(34, 55, 77, 0.11);
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-snippet-card {
+	background: #0f1a25;
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-snippet-card h4 {
+	color: #eef4f8;
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-snippet-card p {
+	color: rgba(216, 228, 236, 0.78);
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-snippet-card pre {
+	background: rgba(255, 255, 255, 0.04);
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-experience-grid::-webkit-scrollbar-thumb {
+	background: rgba(34, 55, 77, 0.45);
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-game-flow .tf-flow-grid .tf-card.tf-card-challenge {
+	border-left-color: var(--rp-navy);
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-game-flow .tf-flow-grid .tf-card.tf-card-challenge:hover {
+	box-shadow:
+		0 8px 24px rgba(24, 39, 55, 0.18),
+		0 2px 6px rgba(24, 39, 55, 0.1);
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-game-flow .tf-card .tf-challenge-number {
+	color: var(--rp-navy);
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-game-flow .tf-card p strong:nth-of-type(1) {
+	background: rgba(109, 123, 137, 0.12);
+	border: 1px solid rgba(109, 123, 137, 0.24);
+	color: #566472;
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-game-flow .tf-card p strong:nth-of-type(2) {
+	background: rgba(34, 55, 77, 0.12);
+	border: 1px solid rgba(34, 55, 77, 0.24);
+	color: #1d3043;
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-game-flow .tf-card p strong:nth-of-type(3) {
+	background: rgba(75, 88, 101, 0.12);
+	border: 1px solid rgba(75, 88, 101, 0.24);
+	color: #40505f;
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-iphone-frame {
+	background: #121c27;
+	box-shadow:
+		inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+		0 0 0 1px rgba(0, 0, 0, 0.42),
+		0 16px 48px rgba(24, 39, 55, 0.3);
+	isolation: isolate;
+	position: relative;
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-iphone-frame::before {
+	background: linear-gradient(180deg, #1f1f1f 0%, #050505 100%);
+	border-radius: 999px;
+	content: "";
+	height: 4%;
+	left: 50%;
+	position: absolute;
+	top: 3.5%;
+	transform: translateX(-50%);
+	width: 34%;
+	z-index: 2;
+	pointer-events: none;
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .rp-device-screen {
+	aspect-ratio: 9 / 19.5;
+	background:
+		radial-gradient(circle at top, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0) 38%),
+		linear-gradient(180deg, #2b4158 0%, #182737 100%);
+	border-radius: 10% / 4.6%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 0.9rem;
+	padding: 1.5rem;
+	text-align: center;
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .rp-device-screen.rp-device-overview {
+	padding: 1.8rem;
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .rp-placeholder-logo {
+	border-radius: 1.1rem;
+	box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+	max-width: 42%;
+	width: 88px;
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .rp-placeholder-tag {
+	color: rgba(239, 244, 248, 0.75);
+	font-size: 0.72rem;
+	font-weight: 700;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .rp-placeholder-copy {
+	color: #f8fbfd;
+	font-size: 0.96rem;
+	line-height: 1.45;
+	margin: 0;
+	max-width: 16ch;
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .cs-next-project {
+	background: #172433;
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .cs-next-label {
+	color: rgba(214, 221, 227, 0.65);
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .cs-next-card {
+	background: rgba(255, 255, 255, 0.06);
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .cs-next-card:hover {
+	background: rgba(255, 255, 255, 0.1);
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .cs-next-copy h4 {
+	color: #f3f7fa;
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .cs-next-copy p {
+	color: rgba(214, 221, 227, 0.74);
+}
+
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .cs-next-arrow,
+body.take-flight-page.relationshipbuilder-page.roastingplant-page .cs-next-card:hover .cs-next-arrow {
+	color: rgba(214, 221, 227, 0.92);
+}
+
+@media screen and (max-width: 960px) {
+	body.take-flight-page.relationshipbuilder-page.roastingplant-page .site-header {
+		background: linear-gradient(135deg, var(--rp-navy-deep) 0%, var(--rp-slate) 100%);
+	}
+}
+
+@media screen and (max-width: 736px) {
+	body.take-flight-page.relationshipbuilder-page.roastingplant-page .site-header .site-nav {
+		background: rgba(24, 39, 55, 0.97);
+		border-top-color: rgba(214, 221, 227, 0.22);
+	}
 }

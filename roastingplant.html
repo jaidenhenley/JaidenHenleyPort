@@ -6,303 +6,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
-		<style>
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page {
-				--rp-navy: #192F5C;
-				--rp-navy-deep: #192F5C;
-				--rp-slate: #192F5C;
-				--rp-slate-dark: #4b5865;
-				--rp-slate-light: #d6dde3;
-				--rp-mist: #bfbfbf;
-				--rp-cloud: #BFBFBF;
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-hero {
-				background:
-					radial-gradient(circle at top left, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 38%),
-					linear-gradient(135deg, var(--rp-navy-deep) 0%, var(--rp-navy) 52%, var(--rp-slate) 100%);
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-hero::after {
-				background: var(--rp-slate-light);
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .site-name,
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .site-nav a,
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .nav-toggle {
-				color: #f7fbff !important;
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .site-nav a:hover,
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .site-nav a:focus-visible {
-				color: #d9e6f2;
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .site-nav a {
-				border-bottom-color: rgba(214, 221, 227, 0.12);
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .site-header.header-pinned {
-				background: rgba(24, 39, 55, 0.92);
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-hero-oval {
-				background: rgba(246, 248, 250, 0.94);
-				border-color: rgba(34, 55, 77, 0.14);
-				box-shadow: 0 18px 40px rgba(24, 39, 55, 0.16);
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-hero-oval h2,
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-copy h3,
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-game-flow h3,
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-experiences h3,
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-code-header h3,
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-outcome-card h3 {
-				color: var(--rp-navy-deep);
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-hero-oval p,
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-overview-subtitle {
-				color: var(--rp-slate-dark);
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-overview,
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-game-flow,
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-experiences {
-				background: linear-gradient(180deg, #f4f7f9 0%, #e5ebf0 100%);
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-owned {
-				background: linear-gradient(180deg, #dce4ea 0%, #d0dae2 100%);
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .qs-code-showcase {
-				background: linear-gradient(180deg, #d0dae2 0%, #c2ced9 100%);
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-outcomes {
-				background: linear-gradient(180deg, #e4ebf0 0%, #d7e0e7 100%);
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-overview .tf-media-phone {
-				background: #121c27;
-				box-shadow:
-					inset 0 0 0 1px rgba(255, 255, 255, 0.08),
-					0 0 0 1px rgba(0, 0, 0, 0.4),
-					0 18px 44px rgba(24, 39, 55, 0.34);
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-overview .tf-copy p,
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-overview-meta p,
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-card p,
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-code-header p,
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-outcome-card p,
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-overview-highlights li {
-				color: #213244;
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-overview-highlights h4,
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-overview-tech h4,
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-copy strong,
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-card h4 {
-				color: var(--rp-navy-deep);
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-overview-tech {
-				border-top-color: rgba(34, 55, 77, 0.15);
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-tech-chips li {
-				background: rgba(34, 55, 77, 0.08);
-				color: var(--rp-navy);
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-card {
-				background: var(--rp-mist);
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-game-flow .tf-card {
-				background: #f1f4f6;
-			}
-            
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-experience-grid .tf-card {
-				background: #e8eef2;
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-experience-grid .tf-card:hover {
-				box-shadow:
-					0 8px 24px rgba(24, 39, 55, 0.18),
-					0 2px 6px rgba(24, 39, 55, 0.08);
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-outcome-card {
-				background: #eff4f7;
-				border-color: rgba(34, 55, 77, 0.08);
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-project-link {
-				background: linear-gradient(135deg, var(--rp-navy-deep) 0%, var(--rp-navy) 100%);
-				color: #fff;
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-project-link:hover {
-				background: linear-gradient(135deg, #12202d 0%, #1a2b3c 100%);
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-project-link-github {
-				background: rgba(34, 55, 77, 0.05);
-				border-color: rgba(34, 55, 77, 0.18);
-				color: var(--rp-navy);
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-project-link-github:hover {
-				background: rgba(34, 55, 77, 0.11);
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-snippet-card {
-				background: #0f1a25;
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-snippet-card h4 {
-				color: #eef4f8;
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-snippet-card p {
-				color: rgba(216, 228, 236, 0.78);
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-snippet-card pre {
-				background: rgba(255, 255, 255, 0.04);
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-experience-grid::-webkit-scrollbar-thumb {
-				background: rgba(34, 55, 77, 0.45);
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-game-flow .tf-flow-grid .tf-card.tf-card-challenge {
-				border-left-color: var(--rp-navy);
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-game-flow .tf-flow-grid .tf-card.tf-card-challenge:hover {
-				box-shadow:
-					0 8px 24px rgba(24, 39, 55, 0.18),
-					0 2px 6px rgba(24, 39, 55, 0.1);
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-game-flow .tf-card .tf-challenge-number {
-				color: var(--rp-navy);
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-game-flow .tf-card p strong:nth-of-type(1) {
-				background: rgba(109, 123, 137, 0.12);
-				border: 1px solid rgba(109, 123, 137, 0.24);
-				color: #566472;
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-game-flow .tf-card p strong:nth-of-type(2) {
-				background: rgba(34, 55, 77, 0.12);
-				border: 1px solid rgba(34, 55, 77, 0.24);
-				color: #1d3043;
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-game-flow .tf-card p strong:nth-of-type(3) {
-				background: rgba(75, 88, 101, 0.12);
-				border: 1px solid rgba(75, 88, 101, 0.24);
-				color: #40505f;
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .tf-iphone-frame {
-				background: #121c27;
-				box-shadow:
-					inset 0 0 0 1px rgba(255, 255, 255, 0.08),
-					0 0 0 1px rgba(0, 0, 0, 0.42),
-					0 16px 48px rgba(24, 39, 55, 0.3);
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .rp-device-screen {
-				aspect-ratio: 9 / 19.5;
-				background:
-					radial-gradient(circle at top, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0) 38%),
-					linear-gradient(180deg, #2b4158 0%, #182737 100%);
-				border-radius: 10% / 4.6%;
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				justify-content: center;
-				gap: 0.9rem;
-				padding: 1.5rem;
-				text-align: center;
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .rp-device-screen.rp-device-overview {
-				padding: 1.8rem;
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .rp-placeholder-logo {
-				border-radius: 1.1rem;
-				box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
-				max-width: 42%;
-				width: 88px;
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .rp-placeholder-tag {
-				color: rgba(239, 244, 248, 0.75);
-				font-size: 0.72rem;
-				font-weight: 700;
-				letter-spacing: 0.16em;
-				text-transform: uppercase;
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .rp-placeholder-copy {
-				color: #f8fbfd;
-				font-size: 0.96rem;
-				line-height: 1.45;
-				margin: 0;
-				max-width: 16ch;
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .cs-next-project {
-				background: #172433;
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .cs-next-label {
-				color: rgba(214, 221, 227, 0.65);
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .cs-next-card {
-				background: rgba(255, 255, 255, 0.06);
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .cs-next-card:hover {
-				background: rgba(255, 255, 255, 0.1);
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .cs-next-copy h4 {
-				color: #f3f7fa;
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .cs-next-copy p {
-				color: rgba(214, 221, 227, 0.74);
-			}
-
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .cs-next-arrow,
-			body.take-flight-page.relationshipbuilder-page.roastingplant-page .cs-next-card:hover .cs-next-arrow {
-				color: rgba(214, 221, 227, 0.92);
-			}
-
-			@media screen and (max-width: 960px) {
-				body.take-flight-page.relationshipbuilder-page.roastingplant-page .site-header {
-					background: linear-gradient(135deg, var(--rp-navy-deep) 0%, var(--rp-slate) 100%);
-				}
-			}
-
-			@media screen and (max-width: 736px) {
-				body.take-flight-page.relationshipbuilder-page.roastingplant-page .site-header .site-nav {
-					background: rgba(24, 39, 55, 0.97);
-					border-top-color: rgba(214, 221, 227, 0.22);
-				}
-			}
-		</style>
 	</head>
 	<body class="homepage take-flight-page relationshipbuilder-page roastingplant-page">
 		<header class="site-header">
@@ -323,22 +26,21 @@
 			<section class="tf-hero" id="top">
 				<div class="tf-hero-oval">
 					<h2>Roasting Plant</h2>
-					<p>Placeholder hero copy for the Roasting Plant case study.</p>
+					<p>Ordering from a Detroit Coffee Favorite.</p>
 				</div>
 			</section>
 
 			<section class="tf-overview">
 				<div class="tf-overview-grid">
 					<figure class="tf-media tf-media-phone">
-						<div class="rp-device-screen rp-device-overview">
-							<img class="rp-placeholder-logo" src="images/RoastingPlantIcon.png" alt="Roasting Plant icon placeholder" />
-							<span class="rp-placeholder-tag">Placeholder Media</span>
-							<p class="rp-placeholder-copy">Swap this space with the final demo, mockup, or preview image.</p>
-						</div>
+						<video controls playsinline preload="metadata" poster="images/RoastingPlantIcon.png">
+							<source src="images/RoastingPlantDemo.mp4" type="video/mp4" />
+							Your browser does not support the video tag.
+						</video>
 					</figure>
 					<div class="tf-copy">
 						<h3>Overview</h3>
-						<p class="tf-overview-subtitle">Placeholder subtitle describing the main value of the project.</p>
+						<p class="tf-overview-subtitle">Ordering from a Detroit Coffee Favorite.</p>
 						<p class="tf-overview-description">
 							Placeholder overview copy goes here. Replace this section with the final Roasting Plant summary, the user problem, and the product outcome you want the page to highlight.
 						</p>
@@ -353,19 +55,16 @@
 						<div class="tf-overview-tech">
 							<h4>Tech Stack</h4>
 							<ul class="tf-tech-chips">
-								<li>Placeholder Tech 1</li>
-								<li>Placeholder Tech 2</li>
-								<li>Placeholder Tech 3</li>
+								<li>SwiftUI</li>
 							</ul>
 							<div class="tf-overview-meta">
-								<p><strong>Team:</strong> Placeholder</p>
-								<p><strong>Role:</strong> Placeholder</p>
-								<p><strong>Timeline:</strong> Placeholder</p>
+								<p><strong>Team:</strong> Solo</p>
+								<p><strong>Role:</strong> iOS Developer, UI/UX Designer</p>
+								<p><strong>Timeline:</strong> Oct 2025 - Oct 2025</p>
 							</div>
 						</div>
 						<p class="tf-project-link-wrap">
-							<a class="tf-project-link tf-project-link-github" href="#">Placeholder GitHub Link</a>
-							<a class="tf-project-link" href="#">Placeholder Product Link</a>
+							<a class="tf-project-link tf-project-link-github" href="https://github.com/jaidenhenley/RoastingPlantCoffeeProject">View Project on GitHub</a>
 						</p>
 					</div>
 				</div>
@@ -376,20 +75,20 @@
 				<div class="tf-flow-grid">
 					<article class="tf-card tf-card-challenge">
 						<span class="tf-challenge-number">01</span>
-						<h4>Placeholder Challenge One</h4>
+						<h4>Syncing Drink Data Across Views</h4>
 						<p>
-							<strong>Challenge:</strong> Add the first project challenge here with the context around what needed to be solved.<br /><br />
-							<strong>Solution:</strong> Replace this sentence with the approach, feature, or technical decision that addressed the challenge.<br /><br />
-							<strong>Result:</strong> Use this spot for the user-facing outcome, project impact, or what improved after the fix.
+							<strong>Challenge:</strong> The app has three screens that all need the same drink data. Changes on one screen had to persist everywhere else without being changed.<br /><br />
+							<strong>Solution:</strong> Used @State as the main data point and passed data through views with @Binding. The Coffee struct holds all customization options, orderedCoffees array keeps track of the users ordered drinks.<br /><br />
+							<strong>Result:</strong> Adding a drink, confirming it in the sheet, and seeing it in the cart all works together as one shared array.
 						</p>
 					</article>
 					<article class="tf-card tf-card-challenge">
 						<span class="tf-challenge-number">02</span>
-						<h4>Placeholder Challenge Two</h4>
+						<h4>Pricing with Multiple Variables</h4>
 						<p>
-							<strong>Challenge:</strong> Add the second challenge here so the section keeps the same Bridge-style layout and pacing.<br /><br />
-							<strong>Solution:</strong> Replace this line with the implementation details, system choice, or design decision that solved it.<br /><br />
-							<strong>Result:</strong> Summarize the final impact here once the real project story is ready.
+							<strong>Challenge:</strong> Each drink's price changes based on size, milk type, and whether it's iced. The cart has to show individual prices, upcharges, subtotal, and tax, and all of it needs to stay accurate as users add and remove drinks.<br /><br />
+							<strong>Solution:</strong><br /> Put the pricing logic inside the Coffee struct so each part of the price has its own function. The cart adds everything by looping through the array to get a subtotal and total.<br />
+							<strong>Result:</strong> Prices calculate every time a drink is added or removed, so the subtotal, tax, and total in the cart always match what the user actually ordered.
 						</p>
 					</article>
 				</div>
@@ -402,46 +101,34 @@
 					<article class="tf-card">
 						<div class="tf-experience-media">
 							<div class="tf-iphone-frame">
-								<div class="rp-device-screen">
-									<img class="rp-placeholder-logo" src="images/RoastingPlantIcon.png" alt="Roasting Plant placeholder screen one" />
-									<span class="rp-placeholder-tag">Placeholder Screen 01</span>
-									<p class="rp-placeholder-copy">Replace with the first key screen and final caption.</p>
-								</div>
+								<img src="images/RoastingPlantDash.png" alt="Import Source screen" />
 							</div>
 						</div>
 						<div class="tf-experience-copy">
-							<h4>Placeholder Screen One</h4>
-							<p>Placeholder caption for the first screenshot in the Roasting Plant flow.</p>
+							<h4>Order Menu</h4>
+							<p>Browse espresso and drip coffee options with a search bar to find drinks fast.</p>
 						</div>
 					</article>
 					<article class="tf-card">
 						<div class="tf-experience-media">
 							<div class="tf-iphone-frame">
-								<div class="rp-device-screen">
-									<img class="rp-placeholder-logo" src="images/RoastingPlantIcon.png" alt="Roasting Plant placeholder screen two" />
-									<span class="rp-placeholder-tag">Placeholder Screen 02</span>
-									<p class="rp-placeholder-copy">Replace with the second key screen and final caption.</p>
-								</div>
+								<img src="images/RoastingPlantOrder.png" alt="Import Source screen" />
 							</div>
 						</div>
 						<div class="tf-experience-copy">
-							<h4>Placeholder Screen Two</h4>
-							<p>Placeholder caption for the second screenshot in the Roasting Plant flow.</p>
+							<h4>Drink Customization</h4>
+							<p>Pick your size, milk type, sugar, and iced preference, then add it to your cart.</p>
 						</div>
 					</article>
 					<article class="tf-card">
 						<div class="tf-experience-media">
 							<div class="tf-iphone-frame">
-								<div class="rp-device-screen">
-									<img class="rp-placeholder-logo" src="images/RoastingPlantIcon.png" alt="Roasting Plant placeholder screen three" />
-									<span class="rp-placeholder-tag">Placeholder Screen 03</span>
-									<p class="rp-placeholder-copy">Replace with the third key screen and final caption.</p>
-								</div>
+								<img src="images/RoastingPlantCart.png" alt="Import Source screen" />
 							</div>
 						</div>
 						<div class="tf-experience-copy">
-							<h4>Placeholder Screen Three</h4>
-							<p>Placeholder caption for the third screenshot in the Roasting Plant flow.</p>
+							<h4>Cart & Checkout</h4>
+							<p>Review your order with itemized pricing and tax before placing it.</p>
 						</div>
 					</article>
 				</div>
@@ -453,11 +140,9 @@
 					<div class="tf-copy">
 						<h3>What I Built</h3>
 						<ul class="tf-list">
-							<li>Placeholder bullet for the first feature or system you want to mention</li>
-							<li>Placeholder bullet for another important flow, interaction, or technical contribution</li>
-							<li>Placeholder bullet for architecture, state management, or persistence work</li>
-							<li>Placeholder bullet for UI polish, motion, or design implementation details</li>
-							<li>Placeholder bullet for any launch-ready or iteration-ready functionality</li>
+							<li>Drink customization flow with size, milk type, sugar, iced/hot, special requests, and name tied to a single Coffee model with real price calculations</li>
+							<li>Multi-drink cart with swipe-to-delete and live itemized pricing including subtotal, tax, and total</li>
+							<li>Order confirmation sheet that lets users review each drink before adding it to the cart</li>
 						</ul>
 					</div>
 				</div>
@@ -470,25 +155,45 @@
 				</div>
 				<div class="tf-snippet-grid">
 					<article class="tf-snippet-card">
-						<h4>Placeholder Snippet One</h4>
-						<p class="tf-snippet-desc">Use this block for a focused explanation of an important screen, model, or ordering flow implementation.</p>
-						<pre class="language-swift"><code class="language-swift">struct PlaceholderOrderFlow {
-    let title = "Roasting Plant"
-    let note = "Replace with real SwiftUI code"
-
-    func nextStep() -&gt; String {
-        "Placeholder snippet one"
+						<h4>Drink Price Calculation</h4>
+						<p class="tf-snippet-desc">Drink prices are calculated based on size, milk selection, and whether the drink is iced, each modifier adjusts the final cost.</p>
+						<pre class="language-swift"><code class="language-swift">func basePrice() -> Double {
+    var price = size.basePrice
+    if iced == true {
+        price += 0.5
     }
+    return price
+}
+
+func calculateDrinkPrice() -> Double {
+    var price = size.basePrice
+    if milkType == .Oat { price += 0.65 }
+    if milkType == .Soy { price += 0.75 }
+    if milkType == .Almond { price += 0.5 }
+    if milkType == .Whole { price += 0 }
+    return price
 }</code></pre>
 					</article>
 					<article class="tf-snippet-card">
-						<h4>Placeholder Snippet Two</h4>
-						<p class="tf-snippet-desc">Use this block for a second example, such as state handling, checkout logic, or a reusable UI pattern.</p>
-						<pre class="language-json"><code class="language-json">{
-  "placeholder": true,
-  "section": "Roasting Plant case study",
-  "next_step": "Replace this block with final code"
-}</code></pre>
+						<h4>Cart Swipe Action</h4>
+						<p class="tf-snippet-desc">Displays each ordered coffee in a list with swipe-to-delete. Swiping left reveals a delete button that removes that drink from the cart.</p>
+						<pre class="language-json"><code class="language-swift">ForEach(orderedCoffees, id: \.self) { coffee in
+    HStack {
+        // drink detail code...
+    }
+    .swipeActions(allowsFullSwipe: true) {
+        Button(role: .destructive) {
+            if let index = orderedCoffees.firstIndex(where: {
+                $0.name == coffee.name && $0.assetName == coffee.assetName
+            }) {
+                orderedCoffees.remove(at: index)
+            }
+        } label: {
+            Label("Delete", systemImage: "trash")
+        }
+    }
+}
+</code></pre>
 					</article>
 				</div>
 			</section>
