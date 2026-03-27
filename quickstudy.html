@@ -216,110 +216,72 @@
 }</code></pre>
 					</article>
 					<article class="tf-snippet-card">
-						<h4>Quiz Generation from Scanned Content</h4>
-						<p class="tf-snippet-desc">Builds multiple-choice questions from approved flashcards, preferring distractors with similar answer length to avoid obvious wrong answers and falling back to placeholder options when the pool is too small.</p>
-						<pre class="language-swift"><code class="language-swift">struct QuizGenerator {
-    
-
-    func generateQuiz(from flashcards: [Flashcard]) -> [QuizQuestion] {
-        let approvedCards = flashcards.filter { $0.approved }
-        guard !approvedCards.isEmpty else { return [] }
-        
-        var questions: [QuizQuestion] = []
-        questions.reserveCapacity(approvedCards.count)
-        
-        let allAnswers = uniqueAnswers(from: flashcards.map { $0.answer })
-        
-        for (index, card) in approvedCards.enumerated() {
-            let correctAnswer = card.answer
-            let normalizedCorrect = normalizedAnswer(correctAnswer)
-    
-            var pool = allAnswers.filter { normalizedAnswer($0) != normalizedCorrect }
-
-            let similarLengthPool = pool.filter { abs($0.count - correctAnswer.count) &lt;= 10 }
-            if !similarLengthPool.isEmpty {
-                pool = similarLengthPool
-            }
-            
-            var distractors: [String] = []
-            for answer in pool.shuffled() {
-                distractors.append(answer)
-                if distractors.count == 3 { break }
-            }
-
-            if distractors.count &lt; 3 {
-                let fallbacks = ["None of the above", "Not sure", "Not listed"]
-                for fallback in fallbacks {
-                    let normalizedFallback = normalizedAnswer(fallback)
-                    // Ensure fallback isn't duplicate or matching correct answer
-                    if normalizedFallback != normalizedCorrect
-                        && !distractors.contains(where: { normalizedAnswer($0) == normalizedFallback }) {
-                        distractors.append(fallback)
-                    }
-                    if distractors.count == 3 { break }
-                }
-            }
-            
-            var choices: [String] = [correctAnswer] + distractors
-            choices.shuffle()
-            
-            let correctIndex = choices.firstIndex(of: correctAnswer) ?? 0
-            let question = QuizQuestion(
-                prompt: card.question,
-                choices: choices,
-                correctIndex: correctIndex,
-                explanation: card.answer,
-                sourceIndex: index
-            )
-            questions.append(question)
-        }
-        
-        return questions
-    }
-    
-    private func normalizedAnswer(_ answer: String) -> String {
-        answer.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-    }
-    
-    private func uniqueAnswers(from answers: [String]) -> [String] {
-        var seen: Set&lt;String&gt; = []
-        var result: [String] = []
-        result.reserveCapacity(answers.count)
-        
-        for answer in answers {
-            let key = normalizedAnswer(answer)
-            if seen.insert(key).inserted {
-                result.append(answer)
-            }
-        }
-        return result
-    }
+						<h4>Quiz Generation Protocol</h4>
+						<p class="tf-snippet-desc">Defines a shared interface for card generation so the app can swap between on-device and external AI without changing any calling code.</p>
+						<pre class="language-swift"><code class="language-swift">protocol CardGenerating {
+    func generateCards(from text: String) async throws -> [AIFlashcard]
+    func generateDistractors(
+        question: String, correctAnswer: String,
+        otherAnswers: [String], sourceText: String
+    ) async throws -> [String]
+    func generateQuiz(
+        cards: [(question: String, answer: String)],
+        sourceText: String
+    ) async throws -> [AIQuizQuestionModel]
 }</code></pre>
 					</article>
 					<article class="tf-snippet-card">
-						<h4>AI Flashcard Generation</h4>
-						<p class="tf-snippet-desc">Sends scanned text to an on-device LanguageModelSession and uses the @Generable macro for structured, type-safe output, returning ready-to-review flashcard pairs without any network calls.</p>
-						<pre class="language-swift"><code class="language-swift">struct AICardGenerator {
+						<h4>Different API Requests</h4>
+						<p class="tf-snippet-desc">Handles both OpenAI-compatible and Anthropic APIs through a single request path, switching auth headers and body format based on the selected provider.</p>
+						<pre class="language-swift"><code class="language-swift">switch apiFormat {
+case .openAI:
+    request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+    let body = OpenAIChatRequest(
+        model: model,
+        messages: [
+            .init(role: "system", content: systemMessage),
+            .init(role: "user", content: prompt)
+        ],
+        temperature: 0.3
+    )
+    request.httpBody = try JSONEncoder().encode(body)
 
-    func generateCards(from text: String) async throws -> [Flashcard] {
-        let session = LanguageModelSession()
+case .anthropic:
+    request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
+    request.setValue("2023-06-01", forHTTPHeaderField: "anthropic-version")
+    let body = AnthropicMessagesRequest(
+        model: model,
+        max_tokens: 4096,
+        system: systemMessage,
+        messages: [.init(role: "user", content: prompt)],
+        temperature: 0.3
+    )
+    request.httpBody = try JSONEncoder().encode(body)
+}</code></pre>
+					</article>
+					<article class="tf-snippet-card">
+						<h4>Secure API Key Storage</h4>
+						<p class="tf-snippet-desc">Stores API keys as encrypted generic passwords using iOS Keychain Services, keeping credentials out of plaintext storage.</p>
+						<pre class="language-swift"><code class="language-swift">enum KeychainManager {
+    private static let service = "com.jaidenhenley.quickstudy"
+    private static let account = "external-api-key"
 
-        let prompt = """
-        Analyze the following scanned text and extract the most important concepts.
-        Create a set of high quality flashcards for a student.
-
-        TEXT:
-        \(text)
-        """
-
-        let response = try await session.respond(to: prompt, generating: FlashcardSetModel.self)
-
-        return response.content.cards.map {
-            Flashcard(question: $0.question, answer: $0.answer, approved: false)
+    static func saveAPIKey(_ key: String) throws {
+        let data = Data(key.utf8)
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService as String: service,
+            kSecAttrAccount as String: account
+        ]
+        SecItemDelete(query as CFDictionary)
+        let attributes = query.merging([kSecValueData as String: data]) { _, new in new }
+        let status = SecItemAdd(attributes as CFDictionary, nil)
+        guard status == errSecSuccess else {
+            throw CardGenerationError.keychainError(status)
         }
     }
 }</code></pre>
-					</article>
+				</article>
 				</div>
 			</section>
 

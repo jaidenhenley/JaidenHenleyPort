@@ -5057,12 +5057,20 @@ body.take-flight-page.quickstudy-page .tf-project-link-github:hover {
 body.take-flight-page.quickstudy-page .tf-snippet-card {
 	background: #171128;
 	border-color: rgba(210, 193, 255, 0.16);
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	min-height: 29rem;
 }
 
 body.take-flight-page.quickstudy-page .tf-snippet-card pre {
 	background: rgba(255, 255, 255, 0.05);
 	border-color: rgba(210, 193, 255, 0.22);
-	max-height: 340px;
+	flex: 1 1 auto;
+	height: 16rem;
+	margin-top: auto;
+	max-height: none;
+	min-height: 16rem;
 	overflow-y: auto;
 }
 
@@ -5288,6 +5296,10 @@ body.take-flight-page.quickstudy-page .tf-snippet-card p {
 	font-size: 0.9rem;
 	line-height: 1.65;
 	margin: 0;
+}
+
+body.take-flight-page.quickstudy-page .tf-snippet-card .tf-snippet-desc {
+	min-height: 4.75rem;
 }
 
 /* ========================================================
