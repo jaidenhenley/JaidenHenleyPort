@@ -187,7 +187,10 @@
 				</div>
 				<div class="tf-snippet-grid">
 					<article class="tf-snippet-card">
-						<h4>Multiple Data Fetches</h4>
+						<div class="cc-snippet-header">
+							<h4>Multiple Data Fetches</h4>
+							<span class="cc-lang-badge">Python</span>
+						</div>
 						<p class="tf-snippet-desc">Fetches weather, buoy, and alert data simultaneously for a single beach. Failed calls resolve to None so the rest of the response still returns clean.</p>
 						<pre class="language-python"><code class="language-python">@app.get("/beaches/{beach_id}/details")
 async def get_beach(beach_id: int):
@@ -211,10 +214,13 @@ async def get_beach(beach_id: int):
         "weather": weather,
         "buoy": buoy,
         "alerts": alerts,
-    }</code></pre>
+					}</code></pre>
 					</article>
 					<article class="tf-snippet-card">
-						<h4>NDBC Text Parser</h4>
+						<div class="cc-snippet-header">
+							<h4>NDBC Text Parser</h4>
+							<span class="cc-lang-badge">Python</span>
+						</div>
 						<p class="tf-snippet-desc">Parses the NDBC buoy API's plain text response into structured data. Handles missing readings marked as MM and validates row length before mapping.</p>
 						<pre class="language-python"><code class="language-python">async def fetch_ndbc_conditions(station_id: str) -> WaterConditions:
     url = f"https://www.ndbc.noaa.gov/data/realtime2/{station_id}.txt"
@@ -241,7 +247,10 @@ async def get_beach(beach_id: int):
     )</code></pre>
 					</article>
 					<article class="tf-snippet-card">
-						<h4>Unit Conversion From API Values</h4>
+						<div class="cc-snippet-header">
+							<h4>Unit Conversion From API Values</h4>
+							<span class="cc-lang-badge">Swift</span>
+						</div>
 						<p class="tf-snippet-desc">Reads raw metric values from the NWS response and converts each measurement for display. Falls back to "--" when data is missing.</p>
 						<pre class="language-swift"><code class="language-swift">// Wind speed: API returns km/h
 if let speedKMH = observation.windSpeed.value {
@@ -268,7 +277,10 @@ if let pa = observation.barometricPressure?.value {
 }</code></pre>
 					</article>
 					<article class="tf-snippet-card">
-						<h4>Fahrenheit / Celsius Toggle</h4>
+						<div class="cc-snippet-header">
+							<h4>Fahrenheit / Celsius Toggle</h4>
+							<span class="cc-lang-badge">Swift</span>
+						</div>
 						<p class="tf-snippet-desc">Stores raw Celsius from the API and recalculates the display string on toggle. The UI reads temperatureDisplay directly so the switch is instant with no refetch.</p>
 						<pre class="language-swift"><code class="language-swift">@Published var useCelsius: Bool = false
 private var rawTempCelsius: Double?
