@@ -6371,45 +6371,45 @@ body.resume-page .resume-skill-row dd {
 }
 
 /* ========================================================
-   CoastCast — Dark Ocean Blue Theme
+   CoastCast — Teal & Gold Theme
    ======================================================== */
 
 body.take-flight-page.coastcast-page .tf-hero {
 	background:
-		radial-gradient(120% 120% at 12% 0%, rgba(125, 210, 252, 0.22) 0%, rgba(125, 210, 252, 0) 46%),
-		radial-gradient(130% 130% at 96% 94%, rgba(0, 90, 150, 0.4) 0%, rgba(0, 90, 150, 0) 58%),
-		#020d18;
+		radial-gradient(120% 120% at 12% 0%, rgba(186, 228, 236, 0.22) 0%, rgba(186, 228, 236, 0) 46%),
+		radial-gradient(130% 130% at 96% 94%, rgba(46, 117, 133, 0.4) 0%, rgba(46, 117, 133, 0) 58%),
+		#1A3F4D;
 }
 
 body.take-flight-page.coastcast-page .tf-hero::after {
-	background: #7dd3fa;
+	background: #F5C830;
 }
 
 body.take-flight-page.coastcast-page .site-name,
 body.take-flight-page.coastcast-page .site-nav a,
 body.take-flight-page.coastcast-page .nav-toggle {
 	color: #ffffff !important;
-	text-shadow: 0 2px 10px rgba(0, 10, 25, 0.5);
+	text-shadow: 0 2px 10px rgba(0, 30, 40, 0.5);
 }
 
 body.take-flight-page.coastcast-page .site-nav a:hover,
 body.take-flight-page.coastcast-page .site-nav a:focus-visible {
-	color: #cce8f8;
+	color: #BAE8EE;
 }
 
 body.take-flight-page.coastcast-page .tf-hero-oval {
-	background: rgba(224, 243, 254, 0.92);
-	box-shadow: 0 1.15rem 2.2rem rgba(0, 15, 35, 0.28);
+	background: rgba(210, 238, 244, 0.92);
+	box-shadow: 0 1.15rem 2.2rem rgba(0, 35, 45, 0.28);
 	max-width: 760px;
 	padding: 2.1rem 3.1rem;
 }
 
 body.take-flight-page.coastcast-page .tf-hero-oval h2 {
-	color: #011828;
+	color: #0F2B34;
 }
 
 body.take-flight-page.coastcast-page .tf-hero-oval p {
-	color: #014a7a;
+	color: #1A5F70;
 	font-size: clamp(1rem, 1.6vw, 1.55rem);
 	line-height: 1.3;
 }
@@ -6417,7 +6417,7 @@ body.take-flight-page.coastcast-page .tf-hero-oval p {
 body.take-flight-page.coastcast-page .tf-overview,
 body.take-flight-page.coastcast-page .tf-game-flow,
 body.take-flight-page.coastcast-page .tf-experiences {
-	background: linear-gradient(180deg, #e3f2fd 0%, #d0eaf9 100%);
+	background: linear-gradient(180deg, #DDF0F4 0%, #CCE8EE 100%);
 }
 
 body.take-flight-page.coastcast-page .tf-overview {
@@ -6467,7 +6467,7 @@ body.take-flight-page.coastcast-page .tf-overview .tf-copy {
 }
 
 body.take-flight-page.coastcast-page .tf-overview-subtitle {
-	color: #014a7a;
+	color: #1A5F70;
 	font-size: clamp(1.08rem, 2vw, 1.36rem);
 	font-weight: 600;
 	line-height: 1.45;
@@ -6485,7 +6485,7 @@ body.take-flight-page.coastcast-page .tf-overview-highlights {
 
 body.take-flight-page.coastcast-page .tf-overview-highlights h4,
 body.take-flight-page.coastcast-page .tf-overview-tech h4 {
-	color: #012a45;
+	color: #12404E;
 }
 
 body.take-flight-page.coastcast-page .tf-overview-highlights ul {
@@ -6494,7 +6494,7 @@ body.take-flight-page.coastcast-page .tf-overview-highlights ul {
 }
 
 body.take-flight-page.coastcast-page .tf-overview-highlights li {
-	color: #011828;
+	color: #0F2B34;
 	font-size: 0.98rem;
 	line-height: 1.52;
 	margin: 0 0 0.22rem;
@@ -6509,14 +6509,14 @@ body.take-flight-page.coastcast-page .tf-overview-meta p {
 }
 
 body.take-flight-page.coastcast-page .tf-overview-tech {
-	border-top-color: rgba(0, 80, 130, 0.18);
+	border-top-color: rgba(46, 117, 133, 0.18);
 }
 
 body.take-flight-page.coastcast-page .tf-tech-chips li {
-	background: rgba(0, 100, 165, 0.12);
-	border: 1.5px solid rgba(0, 100, 165, 0.38);
+	background: rgba(46, 117, 133, 0.12);
+	border: 1.5px solid rgba(46, 117, 133, 0.38);
 	border-radius: 999px;
-	color: #012a45;
+	color: #12404E;
 	font-size: 0.85rem;
 	font-weight: 700;
 	line-height: 1;
@@ -6528,7 +6528,7 @@ body.take-flight-page.coastcast-page .tf-overview .tf-project-link-wrap {
 }
 
 body.take-flight-page.coastcast-page .tf-owned {
-	background: linear-gradient(180deg, #cce5f5 0%, #c0ddf1 100%);
+	background: linear-gradient(180deg, #BEE4EA 0%, #B0D8DE 100%);
 }
 
 body.take-flight-page.coastcast-page .tf-owned-grid {
@@ -6554,8 +6554,8 @@ body.take-flight-page.coastcast-page .tf-built-section {
 
 body.take-flight-page.coastcast-page .tf-built-label {
 	display: inline-block;
-	background: rgba(0, 80, 140, 0.12);
-	color: #004a8c;
+	background: rgba(46, 117, 133, 0.12);
+	color: #1A5F70;
 	font-size: 0.8rem;
 	font-weight: 700;
 	letter-spacing: 0.07em;
@@ -6566,15 +6566,15 @@ body.take-flight-page.coastcast-page .tf-built-label {
 }
 
 body.take-flight-page.coastcast-page .tf-outcomes {
-	background: linear-gradient(180deg, #a4d1e8 0%, #98c9e2 100%);
+	background: linear-gradient(180deg, #8ECAD6 0%, #80C0CA 100%);
 }
 
 body.take-flight-page.coastcast-page .tf-card {
-	background: #d4eaf9;
+	background: #C8E8EE;
 }
 
 body.take-flight-page.coastcast-page .tf-experience-grid .tf-card {
-	background: #c8e4f8;
+	background: #BCDEE6;
 	flex: unset;
 	border-radius: 1rem;
 	overflow: hidden;
@@ -6583,8 +6583,8 @@ body.take-flight-page.coastcast-page .tf-experience-grid .tf-card {
 
 body.take-flight-page.coastcast-page .tf-experience-grid .tf-card:hover {
 	box-shadow:
-		0 8px 24px rgba(0, 80, 140, 0.18),
-		0 2px 6px rgba(0, 80, 140, 0.1);
+		0 8px 24px rgba(46, 117, 133, 0.2),
+		0 2px 6px rgba(46, 117, 133, 0.1);
 	transform: translateY(-2px);
 }
 
@@ -6594,27 +6594,27 @@ body.take-flight-page.coastcast-page .tf-experience-grid .tf-experience-copy {
 }
 
 body.take-flight-page.coastcast-page .tf-outcome-card {
-	background: #e0f1fa;
-	border-color: rgba(0, 60, 110, 0.18);
+	background: #D2EEF2;
+	border-color: rgba(46, 117, 133, 0.2);
 }
 
 body.take-flight-page.coastcast-page .tf-project-link {
-	background: linear-gradient(135deg, #0066a6 0%, #0088cc 100%);
+	background: linear-gradient(135deg, #2E7585 0%, #4B9DAF 100%);
 }
 
 body.take-flight-page.coastcast-page .tf-project-link:hover {
-	background: linear-gradient(135deg, #00527f 0%, #0077b3 100%);
+	background: linear-gradient(135deg, #1F606E 0%, #3A8898 100%);
 }
 
 body.take-flight-page.coastcast-page .tf-project-link-github {
-	background: rgba(0, 30, 55, 0.08);
-	border-color: rgba(0, 30, 55, 0.34);
-	color: #011828;
+	background: rgba(15, 43, 52, 0.08);
+	border-color: rgba(15, 43, 52, 0.34);
+	color: #0F2B34;
 }
 
 body.take-flight-page.coastcast-page .tf-project-link-github:hover {
-	background: rgba(0, 30, 55, 0.16);
-	color: #010e1a;
+	background: rgba(15, 43, 52, 0.16);
+	color: #0A1E26;
 }
 
 body.take-flight-page.coastcast-page .tf-snippet-grid {
@@ -6622,8 +6622,8 @@ body.take-flight-page.coastcast-page .tf-snippet-grid {
 }
 
 body.take-flight-page.coastcast-page .tf-snippet-card {
-	background: #020d18;
-	border-color: rgba(125, 210, 252, 0.16);
+	background: #0F2B34;
+	border-color: rgba(74, 157, 175, 0.18);
 }
 
 body.take-flight-page.coastcast-page .cc-snippet-header {
@@ -6639,10 +6639,10 @@ body.take-flight-page.coastcast-page .cc-snippet-header h4 {
 }
 
 body.take-flight-page.coastcast-page .cc-lang-badge {
-	background: rgba(125, 210, 252, 0.14);
-	border: 1px solid rgba(125, 210, 252, 0.38);
+	background: rgba(245, 200, 48, 0.16);
+	border: 1px solid rgba(245, 200, 48, 0.4);
 	border-radius: 999px;
-	color: #b9e6fc;
+	color: #F5C830;
 	display: inline-block;
 	flex-shrink: 0;
 	font-size: 0.68rem;
@@ -6655,18 +6655,18 @@ body.take-flight-page.coastcast-page .cc-lang-badge {
 
 body.take-flight-page.coastcast-page .tf-snippet-card pre {
 	background: rgba(255, 255, 255, 0.05);
-	border-color: rgba(125, 210, 252, 0.22);
+	border-color: rgba(74, 157, 175, 0.22);
 }
 
 body.take-flight-page.coastcast-page .tf-snippet-card p {
-	color: rgba(185, 230, 252, 0.8);
+	color: rgba(186, 228, 236, 0.8);
 	font-size: 0.9rem;
 	line-height: 1.65;
 	margin: 0;
 }
 
 body.take-flight-page.coastcast-page .tf-experience-grid::-webkit-scrollbar-thumb {
-	background: rgba(0, 100, 160, 0.55);
+	background: rgba(46, 117, 133, 0.55);
 }
 
 body.take-flight-page.coastcast-page .tf-experience-grid {
@@ -6743,7 +6743,7 @@ body.take-flight-page.coastcast-page .tf-flow-grid {
 }
 
 body.take-flight-page.coastcast-page .tf-card-challenge {
-	border-left: 3px solid #0066a6;
+	border-left: 3px solid #2E7585;
 	display: flex;
 	flex-direction: column;
 	height: 100%;
@@ -6754,13 +6754,13 @@ body.take-flight-page.coastcast-page .tf-card-challenge {
 
 body.take-flight-page.coastcast-page .tf-card-challenge:hover {
 	box-shadow:
-		0 8px 24px rgba(0, 80, 140, 0.18),
-		0 2px 6px rgba(0, 80, 140, 0.1);
+		0 8px 24px rgba(46, 117, 133, 0.2),
+		0 2px 6px rgba(46, 117, 133, 0.1);
 	transform: translateY(-2px);
 }
 
 body.take-flight-page.coastcast-page .tf-challenge-number {
-	color: #0066a6;
+	color: #2E7585;
 	font-size: 1rem;
 	font-weight: 900;
 	letter-spacing: -0.01em;
@@ -6801,7 +6801,7 @@ body.take-flight-page.coastcast-page .tf-card-challenge p strong:nth-of-type(3) 
 }
 
 body.take-flight-page.coastcast-page .qs-code-showcase {
-	background: linear-gradient(180deg, #b8d9ec 0%, #accfe7 100%);
+	background: linear-gradient(180deg, #A2CDD6 0%, #96C5CE 100%);
 	padding: 3.5rem 3.75rem 4.5rem;
 }
 
@@ -6811,21 +6811,21 @@ body.take-flight-page.coastcast-page .site-header {
 
 @media screen and (max-width: 960px) {
 	body.take-flight-page.coastcast-page .site-header {
-		background: linear-gradient(135deg, #010e1f 0%, #013a6b 100%);
+		background: linear-gradient(135deg, #1A3848 0%, #286070 100%);
 	}
 }
 
 body.take-flight-page.coastcast-page .cs-next-project {
-	background: #020d18;
+	background: #102C38;
 }
 
 body.take-flight-page.coastcast-page .cs-next-label {
-	color: rgba(180, 220, 252, 0.6);
+	color: rgba(186, 228, 236, 0.65);
 }
 
 body.take-flight-page.coastcast-page .cs-next-card {
 	background: rgba(255, 255, 255, 0.06);
-	border-color: rgba(125, 210, 252, 0.15);
+	border-color: rgba(74, 157, 175, 0.15);
 }
 
 body.take-flight-page.coastcast-page .cs-next-card:hover {
@@ -6833,19 +6833,19 @@ body.take-flight-page.coastcast-page .cs-next-card:hover {
 }
 
 body.take-flight-page.coastcast-page .cs-next-copy h4 {
-	color: #e8f4fd;
+	color: #DCF0F4;
 }
 
 body.take-flight-page.coastcast-page .cs-next-copy p {
-	color: rgba(180, 220, 252, 0.7);
+	color: rgba(186, 228, 236, 0.7);
 }
 
 body.take-flight-page.coastcast-page .cs-next-arrow {
-	color: rgba(125, 210, 252, 0.7);
+	color: rgba(245, 200, 48, 0.85);
 }
 
 body.take-flight-page.coastcast-page .site-header.header-pinned {
-	background: rgba(2, 15, 30, 0.92);
+	background: rgba(15, 43, 52, 0.92);
 	backdrop-filter: blur(12px);
 	-webkit-backdrop-filter: blur(12px);
 }
