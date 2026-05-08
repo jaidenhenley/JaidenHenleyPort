@@ -4016,6 +4016,110 @@ body.case-study-page .project-back-link {
 	text-underline-offset: 0.22em;
 }
 
+body.case-study-page .highlighted-project-card {
+	background: rgba(20, 110, 100, 0.07);
+	border: 1.5px solid rgba(20, 110, 100, 0.28);
+	grid-column: 1 / -1;
+}
+
+body.case-study-page .highlighted-project-card .featured-project-card-link {
+	flex-direction: row;
+}
+
+body.case-study-page .highlighted-project-card .featured-project-image {
+	flex: 0 0 52%;
+	max-width: 52%;
+}
+
+body.case-study-page .highlighted-project-card .featured-project-image img {
+	aspect-ratio: 16 / 10;
+	height: 100%;
+	object-fit: cover;
+	width: 100%;
+}
+
+body.case-study-page .highlighted-project-card .featured-project-body {
+	flex: 1;
+	justify-content: center;
+	padding: 1.6rem 1.4rem;
+}
+
+body.case-study-page .highlighted-project-card .featured-project-body h4 {
+	font-size: 1.6rem;
+}
+
+body.case-study-page .highlighted-project-card .featured-project-card .featured-project-body p {
+	font-size: 1rem;
+}
+
+body.case-study-page .highlighted-stats {
+	border-bottom: 1px solid rgba(20, 110, 100, 0.18);
+	border-top: 1px solid rgba(20, 110, 100, 0.18);
+	display: flex;
+	gap: 0;
+	margin: 0.9rem 0 0.9rem;
+	padding: 0.75rem 0;
+}
+
+body.case-study-page .highlighted-stat {
+	border-right: 1px solid rgba(20, 110, 100, 0.18);
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	gap: 0.15rem;
+	padding: 0 1rem;
+}
+
+body.case-study-page .highlighted-stat:first-child {
+	padding-left: 0;
+}
+
+body.case-study-page .highlighted-stat:last-child {
+	border-right: none;
+}
+
+body.case-study-page .highlighted-stat-value {
+	color: #0d6b60;
+	font-size: 1.7rem;
+	font-weight: 700;
+	letter-spacing: -0.03em;
+	line-height: 1;
+}
+
+body.case-study-page .highlighted-stat-label {
+	color: #3a4a48;
+	font-size: 0.72rem;
+	font-weight: 600;
+	letter-spacing: 0.01em;
+	line-height: 1.3;
+}
+
+body.case-study-page .highlighted-label {
+	background: rgba(20, 110, 100, 0.14);
+	border: 1px solid rgba(20, 110, 100, 0.3);
+	border-radius: 999px;
+	color: #0d6b60;
+	display: inline-block;
+	font-size: 0.72rem;
+	font-weight: 700;
+	letter-spacing: 0.07em;
+	margin-bottom: 0.6rem;
+	padding: 0.28rem 0.65rem;
+	text-transform: uppercase;
+}
+
+@media screen and (max-width: 736px) {
+
+	body.case-study-page .highlighted-project-card .featured-project-card-link {
+		flex-direction: column;
+	}
+
+	body.case-study-page .highlighted-project-card .featured-project-image {
+		flex: unset;
+		max-width: 100%;
+	}
+}
+
 @media screen and (max-width: 736px) {
 
 	body.case-study-page .featured-project-grid {
@@ -6412,6 +6516,73 @@ body.take-flight-page.coastcast-page .tf-hero-oval p {
 	color: #1A5F70;
 	font-size: clamp(1rem, 1.6vw, 1.55rem);
 	line-height: 1.3;
+}
+
+body.take-flight-page.coastcast-page .cc-stats-bar {
+	background: #e8f5f7;
+	border-bottom: 1px solid rgba(20, 110, 100, 0.15);
+	border-top: 1px solid rgba(20, 110, 100, 0.15);
+	padding: 2rem 3.75rem;
+}
+
+body.take-flight-page.coastcast-page .cc-stats-inner {
+	display: flex;
+	gap: 0;
+	margin: 0 auto;
+	max-width: 900px;
+}
+
+body.take-flight-page.coastcast-page .cc-stat {
+	border-right: 1px solid rgba(20, 110, 100, 0.2);
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	gap: 0.2rem;
+	padding: 0 2rem;
+}
+
+body.take-flight-page.coastcast-page .cc-stat:first-child {
+	padding-left: 0;
+}
+
+body.take-flight-page.coastcast-page .cc-stat:last-child {
+	border-right: none;
+}
+
+body.take-flight-page.coastcast-page .cc-stat-value {
+	color: #0d6b60;
+	font-size: 2.4rem;
+	font-weight: 700;
+	letter-spacing: -0.04em;
+	line-height: 1;
+}
+
+body.take-flight-page.coastcast-page .cc-stat-label {
+	color: #2a4a48;
+	font-size: 0.8rem;
+	font-weight: 600;
+	line-height: 1.3;
+}
+
+@media screen and (max-width: 736px) {
+	body.take-flight-page.coastcast-page .cc-stats-bar {
+		padding: 1.5rem 1.5rem;
+	}
+
+	body.take-flight-page.coastcast-page .cc-stats-inner {
+		flex-wrap: wrap;
+		gap: 1.25rem 0;
+	}
+
+	body.take-flight-page.coastcast-page .cc-stat {
+		border-right: none;
+		flex: 0 0 50%;
+		padding: 0 1rem;
+	}
+
+	body.take-flight-page.coastcast-page .cc-stat:nth-child(odd) {
+		padding-left: 0;
+	}
 }
 
 body.take-flight-page.coastcast-page .tf-overview,
