@@ -6575,9 +6575,13 @@ body.take-flight-page.coastcast-page .tf-card {
 
 body.take-flight-page.coastcast-page .tf-experience-grid .tf-card {
 	background: #BCDEE6;
-	flex: unset;
+	display: flex;
+	flex-direction: column;
+	flex: 0 0 min(300px, 82vw);
+	height: auto;
 	border-radius: 1rem;
 	overflow: hidden;
+	scroll-snap-align: start;
 	transition: box-shadow 0.22s ease, transform 0.22s ease;
 }
 
@@ -6590,7 +6594,7 @@ body.take-flight-page.coastcast-page .tf-experience-grid .tf-card:hover {
 
 body.take-flight-page.coastcast-page .tf-experience-grid .tf-experience-copy {
 	flex: 1;
-	min-height: 7rem;
+	padding: 0.9rem 1rem 1.1rem;
 }
 
 body.take-flight-page.coastcast-page .tf-outcome-card {
@@ -6670,24 +6674,14 @@ body.take-flight-page.coastcast-page .tf-experience-grid::-webkit-scrollbar-thum
 }
 
 body.take-flight-page.coastcast-page .tf-experience-grid {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: 1.5rem;
-	overflow-x: visible;
-	scroll-snap-type: none;
-	-webkit-overflow-scrolling: auto;
-}
-
-@media screen and (max-width: 960px) {
-	body.take-flight-page.coastcast-page .tf-experience-grid {
-		grid-template-columns: repeat(2, 1fr);
-	}
-}
-
-@media screen and (max-width: 736px) {
-	body.take-flight-page.coastcast-page .tf-experience-grid {
-		grid-template-columns: 1fr;
-	}
+	align-items: stretch;
+	display: flex;
+	flex-direction: row;
+	gap: 1.25rem;
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+	-webkit-overflow-scrolling: touch;
+	padding: 0.2rem 0 1rem;
 }
 
 body.take-flight-page.coastcast-page .tf-experience-grid .tf-experience-media {
