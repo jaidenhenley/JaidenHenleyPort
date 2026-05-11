@@ -4016,22 +4016,22 @@ body.case-study-page .project-back-link {
 	text-underline-offset: 0.22em;
 }
 
-body.case-study-page .highlighted-appstore-badge {
-	position: absolute;
-	bottom: 1rem;
-	right: 1.2rem;
-	z-index: 1;
-}
-
-body.case-study-page .highlighted-appstore-badge img {
-	display: block;
-}
-
 body.case-study-page .highlighted-project-card {
 	background: rgba(20, 110, 100, 0.07);
 	border: 1.5px solid rgba(20, 110, 100, 0.28);
 	grid-column: 1 / -1;
-	position: relative;
+}
+
+body.case-study-page .highlighted-appstore-badge {
+	bottom: 1rem;
+	display: block;
+	position: absolute;
+	right: 1.2rem;
+	z-index: 2;
+}
+
+body.case-study-page .highlighted-appstore-badge img {
+	display: block;
 }
 
 body.case-study-page .highlighted-project-card .featured-project-card-link {
@@ -4053,7 +4053,12 @@ body.case-study-page .highlighted-project-card .featured-project-image img {
 body.case-study-page .highlighted-project-card .featured-project-body {
 	flex: 1;
 	justify-content: center;
-	padding: 1.6rem 1.4rem;
+	padding: 1.6rem 1.4rem 3.5rem;
+	position: relative;
+}
+
+body.case-study-page .highlighted-project-card .featured-project-body .featured-project-tags {
+	max-width: calc(100% - 180px);
 }
 
 body.case-study-page .highlighted-project-card .featured-project-body h4 {
