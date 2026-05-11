@@ -4019,46 +4019,43 @@ body.case-study-page .project-back-link {
 body.case-study-page .highlighted-project-card {
 	background: rgba(20, 110, 100, 0.07);
 	border: 1.5px solid rgba(20, 110, 100, 0.28);
+	flex-direction: row;
 	grid-column: 1 / -1;
 }
 
-body.case-study-page .highlighted-appstore-badge {
-	bottom: 1rem;
+body.case-study-page .highlighted-image-link {
+	border: 0;
 	display: block;
-	position: absolute;
-	right: 1.2rem;
-	z-index: 2;
-}
-
-body.case-study-page .highlighted-appstore-badge img {
-	display: block;
-}
-
-body.case-study-page .highlighted-project-card .featured-project-card-link {
-	flex-direction: row;
-}
-
-body.case-study-page .highlighted-project-card .featured-project-image {
 	flex: 0 0 52%;
-	max-width: 52%;
+	overflow: hidden;
+	text-decoration: none;
 }
 
-body.case-study-page .highlighted-project-card .featured-project-image img {
-	aspect-ratio: 16 / 10;
+body.case-study-page .highlighted-image-link .featured-project-image {
+	height: 100%;
+}
+
+body.case-study-page .highlighted-image-link .featured-project-image img {
 	height: 100%;
 	object-fit: cover;
 	width: 100%;
 }
 
+body.case-study-page .highlighted-right {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	min-width: 0;
+}
+
+body.case-study-page .highlighted-right .featured-project-card-link {
+	flex: 1;
+}
+
 body.case-study-page .highlighted-project-card .featured-project-body {
 	flex: 1;
 	justify-content: center;
-	padding: 1.6rem 1.4rem 3.5rem;
-	position: relative;
-}
-
-body.case-study-page .highlighted-project-card .featured-project-body .featured-project-tags {
-	max-width: calc(100% - 180px);
+	padding: 1.6rem 1.4rem;
 }
 
 body.case-study-page .highlighted-project-card .featured-project-body h4 {
@@ -4127,13 +4124,13 @@ body.case-study-page .highlighted-label {
 
 @media screen and (max-width: 736px) {
 
-	body.case-study-page .highlighted-project-card .featured-project-card-link {
+	body.case-study-page .highlighted-project-card {
 		flex-direction: column;
 	}
 
-	body.case-study-page .highlighted-project-card .featured-project-image {
-		flex: unset;
-		max-width: 100%;
+	body.case-study-page .highlighted-image-link {
+		flex: 0 0 auto;
+		width: 100%;
 	}
 }
 
