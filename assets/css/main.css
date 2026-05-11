@@ -4052,8 +4052,15 @@ body.case-study-page .highlighted-project-card .featured-project-image img {
 
 body.case-study-page .highlighted-project-card .featured-project-body {
 	flex: 1;
-	justify-content: center;
-	padding: 1.6rem 1.4rem;
+	justify-content: flex-start;
+	padding: 1.6rem 1.4rem 1.8rem;
+}
+
+body.case-study-page .highlighted-project-card .featured-project-body .featured-project-tags {
+	flex-wrap: wrap;
+	margin-top: auto;
+	max-width: calc(100% - 160px);
+	padding-top: 0.5rem;
 }
 
 body.case-study-page .highlighted-project-card .featured-project-body h4 {
@@ -4069,7 +4076,7 @@ body.case-study-page .highlighted-stats {
 	border-top: 1px solid rgba(20, 110, 100, 0.18);
 	display: flex;
 	gap: 0;
-	margin: 0.9rem 0 0.9rem;
+	margin: 0.9rem 0 0;
 	padding: 0.75rem 0;
 }
 
@@ -6693,6 +6700,12 @@ body.take-flight-page.coastcast-page .tf-overview-meta p {
 
 body.take-flight-page.coastcast-page .tf-overview-tech {
 	border-top-color: rgba(46, 117, 133, 0.18);
+	margin: 0.15rem 0 0.2rem;
+	padding-top: 0.3rem;
+}
+
+body.take-flight-page.coastcast-page .tf-overview-tech h4 {
+	margin: 0 0 0.35rem;
 }
 
 body.take-flight-page.coastcast-page .tf-tech-chips li {
