@@ -1,7 +1,7 @@
 const caseStudies = [
   {
     href: 'coastcast.html',
-    img: 'images/CoastCastPortImage.png',
+    img: 'images/CoastCastMain.png',
     alt: 'CoastCast',
     title: 'CoastCast',
     desc: 'Live weather from dunes to shoreline across Michigan.',

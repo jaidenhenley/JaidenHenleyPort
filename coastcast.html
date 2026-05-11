@@ -65,15 +65,15 @@
 						<h3>Overview</h3>
 						<p class="tf-overview-subtitle">Live weather from dunes to shoreline across Michigan.</p>
 						<p class="tf-overview-description">
-							An iOS app I built for checking live weather at Michigan's beaches. You can browse beaches by region, save favorites, and see real-time conditions like temperature, wind, humidity, and visibility. with pull-to-refresh, unit toggling, and weather alerts. The frontend is SwiftUI with MVVM and async/await, no third-party dependencies, and the backend is a Python REST API I built and deployed on Render that pulls data from National Weather Service stations.
+							An iOS app I built because I was tired of jumping between different websites just to check beach conditions in Michigan. You can browse beaches by region, save your favorites, and see live conditions like temperature, wind, and humidity. I built the whole thing - the SwiftUI app on the front end and a Python API on the back end that pulls live data from National Weather Service stations.
 						</p>
 						<div class="tf-overview-highlights">
 							<h4>Highlights</h4>
 							<ul>
-								<li>Built a FastAPI backend that delivers Michigan beach, weather, and water-condition data through clean REST endpoints.</li>
-								<li>Integrated real-time NOAA and National Weather Service data with async API calls and reliable error handling.</li>
-								<li>Clean separation across view model, service layer, and persistence manager, each with a single responsibility.</li>
-								<li>Pull-to-refresh, unit toggling, search filtering, favoriting with persistence, error states with retry, and material-backed card layouts.</li>
+								<li>Built a Python API with FastAPI that serves beach and weather data to the app.</li>
+								<li>Connected to NOAA and NWS for real data, and made sure the app keeps working when one of those sources goes down.</li>
+								<li>Kept the Swift code organized with separate files for fetching data, storing it, and showing it.</li>
+								<li>Added pull-to-refresh, search, favorites that save between sessions, and proper error messages when something fails.</li>
 							</ul>
 						</div>
 						<div class="tf-overview-tech">
@@ -89,7 +89,7 @@
 							<div class="tf-overview-meta">
 								<p><strong>Team:</strong> 2</p>
 								<p><strong>Role:</strong> Full-Stack Developer</p>
-								<p><strong>Timeline:</strong> Mar 2026 &ndash; Mar 2026</p>
+								<p><strong>Timeline:</strong> Mar 2026 &ndash; May 2026</p>
 							</div>
 						</div>
 						<p class="tf-project-link-wrap">
@@ -105,29 +105,29 @@
 				<div class="tf-flow-grid">
 					<article class="tf-card tf-card-challenge">
 						<span class="tf-challenge-number">01</span>
-						<h4>Combining Three Data Sources Into One Fast Request</h4>
+						<h4>Getting Data from Three Sources Without Slowing Everything Down</h4>
 						<p>
-							<strong>Challenge:</strong> Each beach needs weather conditions, buoy readings, and active alerts, all pulled from different federal sources with different formats and reliability. Fetching them one at a time would make every request slow, and if one source went down it would block everything else.<br /><br />
-							<strong>Solution:</strong> Designed the backend to request all three sources at the same time rather than waiting for each one to finish before starting the next. Each result is handled independently, so if one source is unavailable, the others still come through.<br /><br />
-							<strong>Result:</strong> Beach detail pages load in the time of the slowest single source instead of the combined total. A buoy going offline no longer affects weather data.
+							<strong>Challenge:</strong> Each beach needs weather, buoy readings, and alerts, and they all come from different government sources. If I fetched them one at a time, the page would be slow, and if one source was down it would hold up everything else.<br /><br />
+							<strong>Solution:</strong> Made the backend kick off all three requests at the same time instead of waiting for each one to finish. Each result is handled on its own, so if one source fails the others still come back fine.<br /><br />
+							<strong>Result:</strong> The beach detail page loads as fast as the slowest single source, not all three added together. A buoy going offline doesn't affect the weather data at all.
 						</p>
 					</article>
 					<article class="tf-card tf-card-challenge">
 						<span class="tf-challenge-number">02</span>
-						<h4>Delivering a Complete Beach Summary in One Request</h4>
+						<h4>Showing Everything on One Screen Without Extra Calls</h4>
 						<p>
-							<strong>Challenge:</strong> The app needed to show a full beach detail screen metadata, live weather, buoy conditions, and active alerts, all at once. That information lives in different places, and any piece of it could be missing at any given moment.<br /><br />
-							<strong>Solution:</strong> Built a single backend endpoint that looks up the beach first, then reaches out to each data source using that beach's specific identifiers. Everything gets packaged into one clean response. If a source fails, that section is left blank rather than crashing the whole response.<br /><br />
-							<strong>Result:</strong> The app makes one request and gets everything it needs to display the full detail screen. No extra calls, no assembly required on the client side.
+							<strong>Challenge:</strong> The detail screen needed to show the beach info, live weather, buoy conditions, and any alerts all at the same time. That data lives in different places and any of it could be missing.<br /><br />
+							<strong>Solution:</strong> Built one endpoint that grabs the beach first, then uses that info to go fetch everything else. It packages it all into one response. If one source fails, that part just comes back empty instead of breaking everything.<br /><br />
+							<strong>Result:</strong> The app only makes one request to load the full detail screen. No extra calls needed.
 						</p>
 					</article>
 					<article class="tf-card tf-card-challenge">
 						<span class="tf-challenge-number">03</span>
-						<h4>Translating Raw Government Data Into Readable Conditions</h4>
+						<h4>Converting Government Data Into Units People Actually Use</h4>
 						<p>
-							<strong>Challenge:</strong> The National Weather Service sends all measurements in metric units, temperature in Celsius, wind speed in kilometers per hour, visibility in meters, pressure in Pascals. Showing those raw values directly would be confusing for most users checking beach conditions.<br /><br />
-							<strong>Solution:</strong> Built the app to store the original values and convert each measurement into the right unit for display. Users get imperial units by default, with a single tap to switch to Celsius. Any measurement that comes back missing shows a clean dash instead of an error.<br /><br />
-							<strong>Result:</strong> Users see familiar, readable conditions at a glance. The unit toggle works across every measurement, and missing data never breaks the screen.
+							<strong>Challenge:</strong> NWS sends everything in metric - Celsius, km/h, meters, Pascals. Showing those numbers directly would just confuse people trying to check beach conditions.<br /><br />
+							<strong>Solution:</strong> The app stores the original values and converts each one before showing it. You get imperial by default with one tap to switch to Celsius. If a reading is missing it just shows a dash instead of an error.<br /><br />
+							<strong>Result:</strong> Everything looks normal at a glance. The unit toggle works on every measurement and missing data never breaks the screen.
 						</p>
 					</article>
 				</div>
@@ -143,8 +143,8 @@
 							</div>
 						</div>
 						<div class="tf-experience-copy">
-							<h4>Personalized Home Feed</h4>
-							<p>The Plan tab surfaces nearby beaches and curated recommendations up front, with category shortcuts for Hiking, Fishing, Camping, and State Parks.</p>
+							<h4>Home Screen</h4>
+							<p>Shows nearby beaches and recommendations right when you open the app, with shortcuts to filter by activity type.</p>
 						</div>
 					</article>
 					<article class="tf-card">
@@ -177,7 +177,7 @@
 						</div>
 						<div class="tf-experience-copy">
 							<h4>Full Beach Conditions</h4>
-							<p>Air and water temperature, UV index with protection guidance, and a scrollable hourly forecast — all pulled live from the nearest NWS station.</p>
+							<p>Air and water temperature, UV index with protection guidance, and a scrollable hourly forecast - all pulled live from the nearest NWS station.</p>
 						</div>
 					</article>
 					<article class="tf-card">
@@ -188,7 +188,7 @@
 						</div>
 						<div class="tf-experience-copy">
 							<h4>Best Day to Visit</h4>
-							<p>A 7-day outlook highlights the optimal beach day in gold based on forecasted conditions, so you can plan ahead instead of guessing.</p>
+							<p>Shows a 7-day forecast and highlights the best day to visit in gold so you don't have to guess.</p>
 						</div>
 					</article>
 					<article class="tf-card">
@@ -210,7 +210,7 @@
 						</div>
 						<div class="tf-experience-copy">
 							<h4>Favorites</h4>
-							<p>Save any beach with one tap. The Favorites tab keeps them in a persistent list with photos and tags, ready to pull up whenever you're heading out.</p>
+							<p>Save any beach with one tap. The Favorites tab keeps them saved with photos and tags, ready whenever you need them.</p>
 						</div>
 					</article>
 				</div>
@@ -221,22 +221,22 @@
 					<div class="tf-copy">
 						<h3>What I Built</h3>
 						<div class="tf-built-section">
-							<span class="tf-built-label">Backend — Python + FastAPI</span>
+							<span class="tf-built-label">Backend - Python + FastAPI</span>
 							<ul class="tf-list">
 								<li>REST API built with FastAPI and hosted on Render</li>
-								<li>Beach detail endpoint that stitches together weather, buoy, and alert data into one response</li>
-								<li>Parallel fetching with per-source error isolation so one failing source never breaks the rest</li>
-								<li>NDBC buoy parser for raw text format with missing value handling</li>
-								<li>Query parameter filtering for beaches by county, lake, and status</li>
+								<li>Beach detail endpoint that combines weather, buoy, and alert data into one response</li>
+								<li>Fetches all data at the same time - if one source fails the rest still come through</li>
+								<li>Parser for NOAA's buoy data, which comes back as plain text with its own format for missing values</li>
+								<li>Filter beaches by county, lake, and status using query params</li>
 							</ul>
 						</div>
 						<div class="tf-built-section">
-							<span class="tf-built-label">Frontend — SwiftUI</span>
+							<span class="tf-built-label">Frontend - SwiftUI</span>
 							<ul class="tf-list">
-								<li>Beach list with search, regional grouping, and favorites backed by persistent storage</li>
-								<li>Beach detail view with temperature card, conditions grid, and alert banner</li>
-								<li>Unit conversion layer that reads API unit codes and supports a Fahrenheit/Celsius toggle</li>
-								<li>Pull-to-refresh and multi-state loading with stale data retention during background refreshes</li>
+								<li>Beach list with search, grouped by region, with favorites that stay saved between sessions</li>
+								<li>Beach detail screen with temperature, conditions, and an alert banner</li>
+								<li>Converts all the metric values from the API to imperial, with a toggle to switch to Celsius</li>
+								<li>Pull-to-refresh that keeps showing old data while new stuff loads in the background</li>
 							</ul>
 						</div>
 					</div>
@@ -246,124 +246,107 @@
 			<section class="qs-code-showcase">
 				<div class="tf-code-header">
 					<h3>Code Snippets</h3>
-					<p>A few of the more interesting pieces from the backend and iOS client.</p>
+					<p>A few pieces from the backend and iOS app that I thought were worth showing.</p>
 				</div>
 				<div class="tf-snippet-grid">
 					<article class="tf-snippet-card">
 						<div class="cc-snippet-header">
-							<h4>Multiple Data Fetches</h4>
+							<h4>Running Blocking Code Inside an Async API</h4>
 							<span class="cc-lang-badge">Python</span>
 						</div>
-						<p class="tf-snippet-desc">Fetches weather, buoy, and alert data simultaneously for a single beach. Failed calls resolve to None so the rest of the response still returns clean.</p>
-						<pre class="language-python"><code class="language-python">@app.get("/beaches/{beach_id}/details")
-async def get_beach(beach_id: int):
-    beach = next((b for b in sample_beaches if b["id"] == beach_id), None)
-    if not beach:
-        raise HTTPException(status_code=404, detail="Beach not found")
+						<p class="tf-snippet-desc">The pandas data processing is blocking code, but the rest of the API is async. asyncio.to_thread() lets me run it without rewriting it. return_exceptions=True means if one source fails, the rest of the response still comes back clean.</p>
+						<pre class="language-python"><code class="language-python">alerts_result, water_quality = await asyncio.gather(
+    get_beach_alerts_safe(beach["lake"]),
+    asyncio.to_thread(get_water_quality_safe, beach_id),
+    return_exceptions=True,
+)
 
-    weather_result, buoy_result, alerts_result = await asyncio.gather(
-        fetch_weather_conditions(beach["nws_station_id"]),
-        fetch_ndbc_conditions(beach["buoy_station"]),
-        fetch_nws_alerts(beach["latitude"], beach["longitude"]),
-        return_exceptions=True,
-    )
-
-    weather = weather_result if not isinstance(weather_result, Exception) else None
-    buoy = buoy_result if not isinstance(buoy_result, Exception) else None
-    alerts = alerts_result if not isinstance(alerts_result, Exception) else None
-
-    return {
-        "beach": beach["name"],
-        "weather": weather,
-        "buoy": buoy,
-        "alerts": alerts,
-					}</code></pre>
+alerts = alerts_result if not isinstance(alerts_result, Exception) else []
+wq = water_quality if not isinstance(water_quality, Exception) else None</code></pre>
 					</article>
 					<article class="tf-snippet-card">
 						<div class="cc-snippet-header">
-							<h4>NDBC Text Parser</h4>
+							<h4>Parsing NOAA's Plain Text Buoy Data</h4>
 							<span class="cc-lang-badge">Python</span>
 						</div>
-						<p class="tf-snippet-desc">Parses the NDBC buoy API's plain text response into structured data. Handles missing readings marked as MM and validates row length before mapping.</p>
-						<pre class="language-python"><code class="language-python">async def fetch_ndbc_conditions(station_id: str) -> WaterConditions:
-    url = f"https://www.ndbc.noaa.gov/data/realtime2/{station_id}.txt"
-    headers = {"User-Agent": "MichiganWaterAPI/1.0 (learning project)"}
+						<p class="tf-snippet-desc">NOAA sends buoy readings as plain text and uses "MM" to mean a value is missing. Using row.get("WTMP", "MM") means even if a column is completely missing from the response, it still falls back to "MM" and gets handled the same way as a real missing reading.</p>
+						<pre class="language-python"><code class="language-python">columns = lines[0].split()
+first_row = lines[2].split()
+if len(first_row) &lt; len(columns):
+    raise ValueError(f"Malformed NDBC row for station {station_id}")
+row = dict(zip(columns, first_row))
 
-    async with httpx.AsyncClient(timeout=10.0, headers=headers) as client:
-        response = await client.get(url)
-        response.raise_for_status()
-
-    lines = response.text.strip().splitlines()
-    if len(lines) &lt; 3:
-        raise ValueError(f"No usable NDBC data found for station {station_id}")
-
-    columns = lines[0].split()
-    first_row = lines[2].split()
-    if len(first_row) &lt; len(columns):
-        raise ValueError(f"Malformed NDBC row for station {station_id}")
-    row = dict(zip(columns, first_row))
-
-    return WaterConditions(
-        station_id=station_id,
-        water_temp_c=_parse_float(row.get("WTMP", "MM")),
-        wave_height_m=_parse_float(row.get("WVHT", "MM")),
-    )</code></pre>
+return WaterConditions(
+    water_temp_c=_parse_float(row.get("WTMP", "MM")),
+    wave_height_m=_parse_float(row.get("WVHT", "MM"))
+)</code></pre>
 					</article>
 					<article class="tf-snippet-card">
 						<div class="cc-snippet-header">
-							<h4>Unit Conversion From API Values</h4>
+							<h4>Predicting Crowd Levels from Three Sources</h4>
 							<span class="cc-lang-badge">Swift</span>
 						</div>
-						<p class="tf-snippet-desc">Reads raw metric values from the NWS response and converts each measurement for display. Falls back to "--" when data is missing.</p>
-						<pre class="language-swift"><code class="language-swift">// Wind speed: API returns km/h
-if let speedKMH = observation.windSpeed.value {
-    let mph = speedKMH * 0.621371
-    windMPH = String(format: "%.1f mph", mph)
-} else {
-    windMPH = "--"
-}
+						<p class="tf-snippet-desc">Takes the WeatherKit forecast, buoy water temp, and a CoreML model I trained and runs each day of the week through the crowd predictor. The whole thing runs on-device so there's no extra API call.</p>
+						<pre class="language-swift"><code class="language-swift">func loadCrowdPredictions(response: BeachDetailResponse) {
+    let waterTemp = buoyData?.waterTempC.map { $0 * 9/5 + 32 }
 
-// Visibility: API returns meters
-if let meters = observation.visibility.value {
-    let miles = meters / 1609.34
-    visibility = String(format: "%.1f mi", miles)
-} else {
-    visibility = "--"
-}
+    guard let today = weatherKitService.dailyForecast.first else { return }
+    todayCrowd = crowdPredictor.predict(
+        for: .now,
+        tempMax: Double(today.highF), tempMin: Double(today.lowF),
+        precipitation: today.chanceOfPrecipitation,
+        windMax: today.windSpeed.converted(to: .milesPerHour).value,
+        waterTemp: waterTemp, isHoliday: response.holiday
+    )
 
-// Barometric pressure: API returns Pascals
-if let pa = observation.barometricPressure?.value {
-    let hpa = pa / 100.0
-    pressure = String(format: "%.1f hPa", hpa)
-} else {
-    pressure = nil
+    forecastCrowd = weatherKitService.dailyForecast.map { day in
+        crowdPredictor.predict(
+            for: day.date,
+            tempMax: Double(day.highF), tempMin: Double(day.lowF),
+            precipitation: day.chanceOfPrecipitation,
+            windMax: day.windSpeed.converted(to: .milesPerHour).value,
+            waterTemp: waterTemp, isHoliday: response.holiday
+        )
+    }
 }</code></pre>
 					</article>
 					<article class="tf-snippet-card">
 						<div class="cc-snippet-header">
-							<h4>Fahrenheit / Celsius Toggle</h4>
+							<h4>Refreshing All Favorites at Once</h4>
 							<span class="cc-lang-badge">Swift</span>
 						</div>
-						<p class="tf-snippet-desc">Stores raw Celsius from the API and recalculates the display string on toggle. The UI reads temperatureDisplay directly so the switch is instant with no refetch.</p>
-						<pre class="language-swift"><code class="language-swift">@Published var useCelsius: Bool = false
-private var rawTempCelsius: Double?
+						<p class="tf-snippet-desc">When the app refreshes, it fetches weather and alerts for all your saved beaches at the same time instead of one by one. Once everything comes back it checks if any beaches are worth a notification - a great beach day, conditions hitting a threshold, or a severe weather alert.</p>
+						<pre class="language-swift"><code class="language-swift">func refresh(
+    favorites: [Beach], scoringService: BeachScoringService,
+    weatherService: WeatherKitService, apiService: MichiganWaterAPIService,
+    userLocation: CLLocation?, at time: Date
+) async {
+    guard !favorites.isEmpty else { cancelAll(); return }
 
-func toggleUnit() {
-    useCelsius.toggle()
-    updateTemperatureDisplay()
-}
+    var conditions: [Int: BeachConditions] = [:]
+    var alertsByBeach: [Int: [AlertFeature]] = [:]
 
-private func updateTemperatureDisplay() {
-    guard let tempC = rawTempCelsius else {
-        temperatureDisplay = "--"
-        return
+    await withTaskGroup(of: (Int, BeachConditions?, [AlertFeature]).self) { group in
+        for beach in favorites {
+            group.addTask {
+                async let weather = weatherService.fetchConditions(
+                    latitude: beach.coordinates.latitude,
+                    longitude: beach.coordinates.longitude)
+                async let details = try? apiService.fetchBeachDetails(beachID: beach.id)
+                let (w, d) = await (weather, details)
+                return (beach.id, w, d?.alerts ?? [])
+            }
+        }
+        for await (id, condition, alerts) in group {
+            if let condition { conditions[id] = condition }
+            alertsByBeach[id] = alerts
+        }
     }
-    if useCelsius {
-        temperatureDisplay = "\(Int(tempC))°C"
-    } else {
-        let tempF = (tempC * 9.0 / 5.0) + 32.0
-        temperatureDisplay = "\(Int(tempF))°F"
-    }
+
+    cancelAll()
+    scheduleTopFavoriteAlert(...)
+    scheduleThresholdAlert(...)
+    scheduleSevereAlertIfNeeded(alertsByBeach: alertsByBeach, favorites: favorites)
 }</code></pre>
 					</article>
 				</div>
