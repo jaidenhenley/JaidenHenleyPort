@@ -4052,15 +4052,8 @@ body.case-study-page .highlighted-project-card .featured-project-image img {
 
 body.case-study-page .highlighted-project-card .featured-project-body {
 	flex: 1;
-	justify-content: flex-start;
-	padding: 1.6rem 1.4rem 1.8rem;
-}
-
-body.case-study-page .highlighted-project-card .featured-project-body .featured-project-tags {
-	flex-wrap: wrap;
-	margin-top: auto;
-	max-width: calc(100% - 160px);
-	padding-top: 0.5rem;
+	justify-content: center;
+	padding: 1.6rem 1.4rem;
 }
 
 body.case-study-page .highlighted-project-card .featured-project-body h4 {
@@ -4076,7 +4069,7 @@ body.case-study-page .highlighted-stats {
 	border-top: 1px solid rgba(20, 110, 100, 0.18);
 	display: flex;
 	gap: 0;
-	margin: 0.9rem 0 0;
+	margin: 0.9rem 0 0.9rem;
 	padding: 0.75rem 0;
 }
 
