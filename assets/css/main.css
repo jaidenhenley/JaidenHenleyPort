@@ -3057,6 +3057,20 @@ body.homepage .testimonial-card {
 	justify-content: space-between;
 }
 
+body.homepage .testimonial-card--featured {
+	grid-column: 1 / -1;
+	background: #cacad4;
+	border-left: 4px solid #050505;
+}
+
+body.homepage .testimonial-card--featured p {
+	font-size: 1.05rem;
+}
+
+body.homepage .testimonial-card--featured .testimonial-name {
+	font-size: 1rem;
+}
+
 body.homepage .testimonial-card p {
 	color: #3a3a44;
 	font-size: 1rem;
