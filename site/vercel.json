@@ -1,0 +1,25 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/caseStudies", "destination": "/case-studies", "permanent": true },
+    { "source": "/caseStudies.html", "destination": "/case-studies", "permanent": true },
+    { "source": "/bridgeprofessionals", "destination": "/case-studies", "permanent": true },
+    { "source": "/bridgeprofessionals.html", "destination": "/case-studies", "permanent": true }
+  ],
+  "headers": [
+    {
+      "source": "/_astro/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/videos/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    }
+  ]
+}

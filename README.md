@@ -77,6 +77,26 @@ Plus a resume, contact form, and the privacy and support pages the App Store req
 
 ## Deployment
 
-Pushing to `main` triggers `.github/workflows/deploy.yml`, which installs dependencies, injects the Firebase Analytics keys from repository secrets, builds `site/`, and publishes `site/dist` to GitHub Pages. The custom domain comes from `site/public/CNAME`.
+Hosted on Vercel, which builds from `site/` on every push.
 
-Analytics stays inert until those secrets are substituted, so local development and forks never report to Firebase.
+Project settings that matter:
+
+| Setting | Value |
+| --- | --- |
+| Root Directory | `site` |
+| Framework Preset | Astro (auto-detected) |
+| Build Command | `npm run build` (default) |
+| Output Directory | `dist` (default) |
+
+`site/vercel.json` handles clean URLs, permanent redirects for the two renamed
+pages, and long-lived cache headers for hashed assets and videos.
+
+### Environment variables
+
+Firebase Analytics reads its config from `PUBLIC_` variables, listed in
+`site/.env.example`. Set them in the Vercel project for Production and Preview.
+
+Astro inlines them at build time, so they appear in the shipped bundle. That is
+normal for a Firebase web config, which is not a secret. When the variables are
+absent, `Analytics.astro` renders nothing at all, so local development, forks,
+and preview builds without the vars never report to Firebase.

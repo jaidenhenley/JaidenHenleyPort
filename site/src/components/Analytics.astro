@@ -1,0 +1,98 @@
+---
+/**
+ * Firebase Analytics.
+ *
+ * Config comes from PUBLIC_ env vars, which Astro inlines at build time, so
+ * this works on any host (Vercel, Netlify, Pages) without a deploy step that
+ * rewrites a static file. Missing vars mean the whole block is omitted, so
+ * local dev and forks never report.
+ */
+const config = {
+	apiKey: import.meta.env.PUBLIC_FIREBASE_API_KEY,
+	authDomain: import.meta.env.PUBLIC_FIREBASE_AUTH_DOMAIN,
+	projectId: import.meta.env.PUBLIC_FIREBASE_PROJECT_ID,
+	storageBucket: import.meta.env.PUBLIC_FIREBASE_STORAGE_BUCKET,
+	messagingSenderId: import.meta.env.PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+	appId: import.meta.env.PUBLIC_FIREBASE_APP_ID,
+	measurementId: import.meta.env.PUBLIC_FIREBASE_MEASUREMENT_ID,
+};
+
+const enabled = Boolean(config.apiKey && config.projectId);
+---
+
+{
+	enabled && (
+		<script type="module" define:vars={{ config }}>
+			const { initializeApp } = await import(
+				'https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js'
+			);
+			const { getAnalytics, logEvent } = await import(
+				'https://www.gstatic.com/firebasejs/11.4.0/firebase-analytics.js'
+			);
+
+			const analytics = getAnalytics(initializeApp(config));
+
+			let milestones = new Set();
+			addEventListener(
+				'scroll',
+				() => {
+					const scrolled =
+						((scrollY + innerHeight) / document.documentElement.scrollHeight) * 100;
+					for (const m of [25, 50, 75, 100]) {
+						if (scrolled >= m && !milestones.has(m)) {
+							milestones.add(m);
+							logEvent(analytics, 'scroll_depth', { percent: m, page: document.title });
+						}
+					}
+				},
+				{ passive: true }
+			);
+
+			let pageLoadTime = Date.now();
+			addEventListener('beforeunload', () => {
+				const seconds = Math.round((Date.now() - pageLoadTime) / 1000);
+				if (seconds > 0) logEvent(analytics, 'time_on_page', { seconds, page: document.title });
+			});
+
+			// Delegated, so events keep firing after a client-side navigation.
+			document.addEventListener('click', (event) => {
+				const link = event.target.closest('a');
+				if (!link) return;
+				const label = link.textContent.trim();
+				const destination = link.getAttribute('href');
+
+				if (link.closest('.site-header .nav, .site-header .mobile-nav')) {
+					logEvent(analytics, 'nav_click', { label, destination });
+				} else if (link.closest('.site-footer, .cta-footer')) {
+					logEvent(analytics, 'footer_link_click', { label, destination });
+				} else if (link.closest('.socials')) {
+					logEvent(analytics, 'social_link_click', { platform: label, destination });
+				} else if (link.closest('.card.project, .card.featured, .next')) {
+					const card = link.closest('.card.project, .card.featured, .next');
+					const project = card?.querySelector('h3, .next-title')?.textContent.trim();
+					logEvent(analytics, 'case_study_click', { project, destination });
+				} else if (link.classList.contains('btn')) {
+					logEvent(analytics, 'cta_click', { label });
+				}
+			});
+
+			document.addEventListener('submit', (event) => {
+				const form = event.target.closest('form');
+				if (!form) return;
+				logEvent(analytics, 'contact_form_submit', {
+					subject: form.querySelector("[name='subject']")?.value || 'unknown',
+				});
+			});
+
+			document.addEventListener('astro:page-load', () => {
+				milestones = new Set();
+				pageLoadTime = Date.now();
+				logEvent(analytics, 'page_view', {
+					page_title: document.title,
+					page_location: location.href,
+					page_path: location.pathname,
+				});
+			});
+		</script>
+	)
+}

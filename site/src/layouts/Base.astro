@@ -5,6 +5,7 @@ import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import CaseStudyFooter from '../components/CaseStudyFooter.astro';
 import ScrollMotion from '../components/ScrollMotion.astro';
+import Analytics from '../components/Analytics.astro';
 import { ClientRouter } from 'astro:transitions';
 
 interface Props {
@@ -34,7 +35,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 
 		<ClientRouter />
 
-		<script type="module" src="/js/analytics.js" is:inline></script>
+		<Analytics />
 
 		<script is:inline>
 			// Applied before first paint so the page never flashes the wrong theme.
