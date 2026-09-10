@@ -1,0 +1,66 @@
+---
+import Doc from '../layouts/Doc.astro';
+
+const faqs = [
+	{
+		heading: 'Requirements',
+		question: null,
+		body: 'Take Flight requires iOS 18 or later and an iPhone or iPad. For the best experience, an iPad with a larger screen is recommended. Game Center features require an active Apple ID signed into Game Center.',
+	},
+	{
+		heading: 'Game Center Not Working',
+		question: "Leaderboards or achievements aren't showing up.",
+		body: 'Make sure you’re signed into Game Center in iOS Settings › Game Center. If you recently signed in, it may take a moment for scores and achievements to sync. Ensure you have an active internet connection when Game Center features are first loaded.',
+	},
+	{
+		heading: 'Performance Issues',
+		question: 'The game is running slowly or dropping frames.',
+		body: "Take Flight uses SpriteKit with physics and multiple active scenes. Close background apps to free up memory, and make sure your device isn't in low-power mode, which can limit CPU and GPU performance. Restarting the app usually resolves any slowdowns after extended play sessions.",
+	},
+	{
+		heading: 'Progress Not Saving',
+		question: 'My high score or progress disappeared.',
+		body: "Take Flight saves your progress locally using SwiftData. If progress was lost, it may have been cleared by uninstalling and reinstalling the app. Your Game Center leaderboard scores are stored by Apple and will persist across reinstalls as long as you're signed into the same Apple ID.",
+	},
+	{
+		heading: 'Controls & Joystick',
+		question: 'The joystick feels unresponsive or drifts.',
+		body: 'The on-screen joystick is designed for one-handed play - place your thumb near the center of the joystick base and drag in any direction. If input feels off, try restarting the current run. The joystick automatically resets to center when you lift your thumb.',
+	},
+	{
+		heading: 'TestFlight Access',
+		question: 'My TestFlight invite expired or stopped working.',
+		body: 'TestFlight builds expire after 90 days and invite links can expire earlier. If your access has lapsed, reach out via email below and I can send a fresh invite link.',
+	},
+];
+---
+
+<Doc
+	title="Support | Take Flight"
+	description="Support and frequently asked questions for Take Flight, a 5-in-1 survival game for iOS."
+	eyebrow="Take Flight"
+	heading="Support"
+	intro="Answers to common questions, and a direct line if you need more help."
+>
+	{
+		faqs.map((faq) => (
+			<section>
+				<h2>{faq.heading}</h2>
+				{faq.question && <p class="question">{faq.question}</p>}
+				<p>{faq.body}</p>
+			</section>
+		))
+	}
+
+	<section class="help">
+		<h2>Still need help?</h2>
+		<p>
+			If you're experiencing an issue not covered above, send me an email and I'll get back to you
+			as soon as I can.
+		</p>
+		<div class="help-actions">
+			<a class="btn btn-primary" href="mailto:jaidenhenleydev@gmail.com">Email support</a>
+			<a class="btn btn-secondary" href="/takeflight-privacy.html">View privacy policy</a>
+		</div>
+	</section>
+</Doc>

@@ -1,0 +1,185 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+
+const directLinks = [
+	{ label: 'jaidenhenleydev@gmail.com', href: 'mailto:jaidenhenleydev@gmail.com' },
+	{ label: 'linkedin.com/in/jaiden-henley', href: 'https://www.linkedin.com/in/jaiden-henley' },
+	{ label: 'github.com/jaidenhenley', href: 'https://github.com/jaidenhenley' },
+];
+---
+
+<Base
+	title="Contact | Jaiden Henley"
+	description="Get in touch with Jaiden Henley about iOS roles, contract work, or collaboration."
+>
+	<PageHeader
+		eyebrow="Send a message"
+		title="Contact"
+		intro="If you want to collaborate, discuss an iOS role, or review my case studies, send me a message and I will respond as soon as I can."
+	/>
+
+	<section class="section contact-section">
+		<div class="container grid">
+			<form class="card form" action="https://formsubmit.co/jaidenhenleydev@gmail.com" method="POST">
+				<input type="hidden" name="_subject" value="New Portfolio Contact Form Message" />
+				<input type="hidden" name="_captcha" value="false" />
+				<input type="text" name="_honey" class="visually-hidden" tabindex="-1" autocomplete="off" />
+
+				<div class="row">
+					<label class="field">
+						<span>Name</span>
+						<input type="text" name="name" autocomplete="name" required />
+					</label>
+					<label class="field">
+						<span>Email</span>
+						<input type="email" name="email" autocomplete="email" required />
+					</label>
+				</div>
+
+				<label class="field">
+					<span>Subject</span>
+					<input type="text" name="subject" required />
+				</label>
+
+				<label class="field">
+					<span>Message</span>
+					<textarea name="message" rows="7" required></textarea>
+				</label>
+
+				<button class="btn btn-primary submit" type="submit">Send message</button>
+			</form>
+
+			<aside class="direct">
+				<span class="eyebrow">Reach out directly</span>
+				<ul class="links">
+					{
+						directLinks.map((link) => (
+							<li>
+								<a
+									href={link.href}
+									target={link.href.startsWith('http') ? '_blank' : undefined}
+									rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+								>
+									{link.label}
+								</a>
+							</li>
+						))
+					}
+				</ul>
+				<p class="note">Based in Detroit, Michigan. Open to iOS roles and contract work.</p>
+			</aside>
+		</div>
+	</section>
+</Base>
+
+<style>
+	.contact-section {
+		padding-block: 0 var(--section-y);
+	}
+
+	.grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) 320px;
+		gap: clamp(32px, 5vw, 64px);
+		align-items: start;
+	}
+
+	.form {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+		padding: clamp(24px, 3vw, 34px);
+	}
+
+	.row {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 20px;
+	}
+
+	.field {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+	}
+
+	.field span {
+		font-size: var(--step--1);
+		font-weight: 550;
+		color: var(--fg-2);
+	}
+
+	.field input,
+	.field textarea {
+		width: 100%;
+		min-height: 48px;
+		padding: 12px 14px;
+		border: 1px solid var(--hairline);
+		border-radius: var(--radius-md);
+		background: var(--bg);
+		color: var(--fg);
+		font-family: inherit;
+		font-size: var(--step-0);
+		line-height: 1.5;
+		transition: border-color 0.18s ease, box-shadow 0.18s ease;
+	}
+
+	.field textarea {
+		resize: vertical;
+	}
+
+	.field input:focus,
+	.field textarea:focus {
+		outline: none;
+		border-color: var(--accent);
+		box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 18%, transparent);
+	}
+
+	.submit {
+		align-self: flex-start;
+	}
+
+	.direct {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+
+	.links {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.links a {
+		font-size: var(--step-0);
+		color: var(--fg-2);
+		overflow-wrap: anywhere;
+	}
+
+	.links a:hover {
+		color: var(--accent);
+	}
+
+	.note {
+		font-size: var(--step--1);
+		line-height: 1.6;
+		color: var(--fg-3);
+	}
+
+	@media (max-width: 900px) {
+		.grid {
+			grid-template-columns: minmax(0, 1fr);
+		}
+	}
+
+	@media (max-width: 600px) {
+		.row {
+			grid-template-columns: minmax(0, 1fr);
+		}
+	}
+</style>

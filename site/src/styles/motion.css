@@ -1,0 +1,136 @@
+/* ==========================================================================
+   Motion
+   Scroll choreography in the iOS/Apple idiom: short travel, a decelerating
+   curve that settles rather than stops, and distance scaled to what an element
+   actually is. Everything is opt-in behind .js so content stays visible
+   without scripting.
+   ========================================================================== */
+
+:root {
+	/* The curve Apple uses for sheets and page transitions. */
+	--ease-out-soft: cubic-bezier(0.32, 0.72, 0, 1);
+	--ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* --------------------------------------------------------------------------
+   Reveal intents. Travel and duration follow visual weight: body copy barely
+   moves, a device mockup carries real presence.
+   -------------------------------------------------------------------------- */
+
+.js [data-reveal] {
+	opacity: 0;
+	transition:
+		opacity var(--reveal-duration, 0.6s) var(--ease-out-soft),
+		transform var(--reveal-duration, 0.6s) var(--ease-out-soft);
+	transition-delay: var(--reveal-delay, 0ms);
+}
+
+.js [data-reveal='text'] {
+	--reveal-duration: 0.55s;
+	transform: translate3d(0, 12px, 0);
+}
+
+.js [data-reveal='surface'] {
+	--reveal-duration: 0.6s;
+	transform: translate3d(0, 24px, 0);
+}
+
+.js [data-reveal='media'] {
+	--reveal-duration: 0.75s;
+	transform: translate3d(0, 34px, 0) scale(0.965);
+}
+
+.js [data-reveal].is-revealed {
+	opacity: 1;
+	transform: none;
+}
+
+/* Promoted only while actually animating, then released, so a long page does
+   not hold dozens of compositor layers it is not using. */
+.js [data-reveal].is-animating {
+	will-change: opacity, transform;
+}
+
+/* ==========================================================================
+   Micro-interactions
+   Guarded so a tap on a touch device does not leave a stuck hover state.
+   ========================================================================== */
+
+.card,
+.approach li,
+.next,
+.phone,
+.col-media,
+.btn,
+.badge-link {
+	transition:
+		transform 0.5s var(--ease-out-soft),
+		border-color 0.5s var(--ease-out-soft),
+		box-shadow 0.5s var(--ease-out-soft),
+		background 0.4s var(--ease-out-soft),
+		filter 0.4s var(--ease-out-soft);
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.card:hover,
+	.approach li:hover {
+		transform: translate3d(0, -4px, 0);
+	}
+
+	.next:hover {
+		transform: translate3d(0, -3px, 0);
+	}
+
+	.screens figure:hover .phone {
+		transform: translate3d(0, -6px, 0) scale(1.012);
+	}
+
+	.btn:hover,
+	.badge-link:hover {
+		transform: translate3d(0, -1px, 0);
+	}
+}
+
+.btn:active,
+.badge-link:active {
+	transform: scale(0.97);
+	transition-duration: 0.1s;
+}
+
+/* The nav grows a hairline and deeper blur once the page moves under it. */
+.site-header {
+	transition:
+		background 0.4s var(--ease-in-out-soft),
+		border-color 0.4s var(--ease-in-out-soft),
+		box-shadow 0.4s var(--ease-in-out-soft);
+	border-bottom-color: transparent;
+}
+
+.site-header.is-scrolled {
+	border-bottom-color: var(--hairline);
+	box-shadow: 0 1px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* ==========================================================================
+   Reduced motion: keep the state changes, drop the travel.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+	.js [data-reveal],
+	.js [data-reveal='text'],
+	.js [data-reveal='surface'],
+	.js [data-reveal='media'] {
+		opacity: 1;
+		transform: none;
+		transition: none;
+	}
+
+	.card:hover,
+	.approach li:hover,
+	.next:hover,
+	.btn:hover,
+	.badge-link:hover,
+	.screens figure:hover .phone {
+		transform: none;
+	}
+}

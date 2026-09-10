@@ -1,0 +1,61 @@
+---
+import Doc from '../layouts/Doc.astro';
+
+const faqs = [
+	{
+		heading: 'Requirements',
+		question: null,
+		body: 'QuickStudy requires iOS 26 or later and an iPhone or iPad that supports Apple Intelligence. On-device AI features rely on Apple Foundation Models, which are available on Apple Silicon devices.',
+	},
+	{
+		heading: 'Scan Quality',
+		question: 'The scan result looks blurry or incomplete.',
+		body: 'For best results, hold your device steady in good lighting and ensure the document fills most of the camera frame. Avoid scanning at an angle - QuickStudy works best when the page is flat and parallel to the camera.',
+	},
+	{
+		heading: 'PDF Import',
+		question: "I can't import my PDF / the import isn't working.",
+		body: 'QuickStudy supports standard PDF files. Very large PDFs (over ~50 pages) may take a moment to process. If import fails, try splitting the PDF into smaller sections or re-exporting it from the original source application.',
+	},
+	{
+		heading: 'Offline Usage',
+		question: 'Does QuickStudy need an internet connection?',
+		body: 'No. All features - scanning, AI summarisation, and study card generation - run entirely on-device. QuickStudy works fully offline and never requires a network connection.',
+	},
+	{
+		heading: 'Data & Storage',
+		question: 'Where is my data stored? Can I back it up?',
+		body: 'All your documents and study cards are stored locally on your device using iOS standard storage. Your data is included in standard iOS device backups (iCloud Backup or iTunes/Finder). Nothing is stored on external servers.',
+	},
+];
+---
+
+<Doc
+	title="Support | QuickStudy"
+	description="Support and frequently asked questions for QuickStudy, the on-device AI flashcard tool for iOS."
+	eyebrow="QuickStudy"
+	heading="Support"
+	intro="Answers to common questions, and a direct line if you need more help."
+>
+	{
+		faqs.map((faq) => (
+			<section>
+				<h2>{faq.heading}</h2>
+				{faq.question && <p class="question">{faq.question}</p>}
+				<p>{faq.body}</p>
+			</section>
+		))
+	}
+
+	<section class="help">
+		<h2>Still need help?</h2>
+		<p>
+			If you're experiencing an issue not covered above, send me an email and I'll get back to you
+			as soon as I can.
+		</p>
+		<div class="help-actions">
+			<a class="btn btn-primary" href="mailto:jaidenhenleydev@gmail.com">Email support</a>
+			<a class="btn btn-secondary" href="/quickstudy-privacy.html">View privacy policy</a>
+		</div>
+	</section>
+</Doc>

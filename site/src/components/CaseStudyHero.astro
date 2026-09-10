@@ -1,0 +1,160 @@
+---
+import { Image } from 'astro:assets';
+import type { CaseStudy } from '../data/case-studies';
+
+interface Props {
+	title: string;
+	study: CaseStudy;
+}
+
+const { title, study } = Astro.props;
+const kicker = `${study.number} - ${study.category}`;
+const isAppStore = study.primaryCta.href.includes('apps.apple.com');
+---
+
+<header class="hero">
+	<div class="col-type">
+		<div class="meta">
+			<span class="eyebrow">{kicker} &middot; {study.tech}</span>
+			<span class="status">{study.status}</span>
+		</div>
+		<h1>{title}</h1>
+		<p class="lead">{study.lead}</p>
+		<div class="cta-row">
+			{
+				isAppStore ? (
+					<a class="badge-link" href={study.primaryCta.href} target="_blank" rel="noopener noreferrer">
+						<img
+							src="/images/AppStoreBadge.svg"
+							alt={`Download ${title} on the App Store`}
+							width="150"
+							height="50"
+						/>
+					</a>
+				) : (
+					<a class="btn btn-primary" href={study.primaryCta.href} target="_blank" rel="noopener noreferrer">
+						{study.primaryCta.label}
+					</a>
+				)
+			}
+			<a class="btn btn-secondary" href={study.secondaryCta.href} target="_blank" rel="noopener noreferrer">
+				{study.secondaryCta.label}
+			</a>
+		</div>
+	</div>
+
+	<figure class="col-media">
+		<Image
+			src={study.hero}
+			alt={study.heroAlt}
+			widths={[440, 680, 880]}
+			sizes="(max-width: 900px) 340px, 440px"
+		/>
+	</figure>
+</header>
+
+<style>
+	.hero {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 440px);
+		align-items: center;
+		gap: 56px;
+		padding-block: 44px 8px;
+	}
+
+	.col-type {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 18px;
+	}
+
+	.meta {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: 12px 18px;
+	}
+
+	.status {
+		font-size: 12px;
+		font-weight: 600;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		color: var(--accent);
+		background: color-mix(in oklab, var(--accent) 10%, transparent);
+		border-radius: 999px;
+		padding: 4px 12px;
+	}
+
+	h1 {
+		font-size: clamp(38px, 5vw, 66px);
+	}
+
+	.lead {
+		max-width: 46ch;
+		font-size: var(--step-1);
+		line-height: 1.5;
+		color: var(--fg-2);
+	}
+
+	.cta-row {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 12px;
+		margin-top: 6px;
+	}
+
+	/* Official App Store badge: fixed art, so only the hit area is styled. */
+	.badge-link {
+		display: inline-flex;
+		align-items: center;
+		border-radius: var(--radius-md);
+		transition: transform 0.18s ease;
+	}
+
+	.badge-link:active {
+		transform: scale(0.98);
+	}
+
+	.badge-link img {
+		height: 50px;
+		width: auto;
+	}
+
+	/* Square frame sized for app icon artwork. */
+	.col-media {
+		margin: 0;
+		aspect-ratio: 1 / 1;
+		overflow: hidden;
+		border: 1px solid var(--hairline);
+		border-radius: 22.5%;
+		background: var(--surface-2);
+		box-shadow: var(--shadow);
+	}
+
+	.col-media :global(img) {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	@media (max-width: 900px) {
+		.hero {
+			grid-template-columns: minmax(0, 1fr);
+			gap: 32px;
+			padding-block: 36px 0;
+		}
+
+		.col-media {
+			max-width: 340px;
+		}
+	}
+
+	@media (max-width: 700px) {
+		.cta-row .btn {
+			flex: 1 1 auto;
+		}
+	}
+</style>

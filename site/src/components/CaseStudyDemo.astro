@@ -1,0 +1,134 @@
+---
+import { getImage } from 'astro:assets';
+import PhoneFrame from './PhoneFrame.astro';
+import type { CaseStudy } from '../data/case-studies';
+
+interface Props {
+	title: string;
+	study: CaseStudy;
+}
+
+const { title, study } = Astro.props;
+const demo = study.demo;
+const isPhone = demo.aspect === 'phone';
+
+// With a poster, nothing but that still loads until the viewer presses play.
+// Without one, metadata alone is fetched so the browser can show the first frame.
+const poster = demo.poster
+	? await getImage({ src: demo.poster, width: isPhone ? 600 : 1200, format: 'webp' })
+	: undefined;
+const preload = poster ? 'none' : 'metadata';
+---
+
+<section class:list={['demo', isPhone ? 'is-phone' : 'is-wide']}>
+	<div class="media">
+		{
+			isPhone ? (
+				<PhoneFrame>
+					<video
+						src={demo.video}
+						poster={poster?.src}
+						controls
+						preload={preload}
+						playsinline
+						aria-label={`${title} demo video`}
+					/>
+				</PhoneFrame>
+			) : (
+				<div class="wide-frame">
+					<video
+						src={demo.video}
+						poster={poster?.src}
+						controls
+						preload={preload}
+						playsinline
+						aria-label={`${title} demo video`}
+					/>
+				</div>
+			)
+		}
+	</div>
+
+	<div class="copy">
+		<span class="eyebrow">Demo</span>
+		<h2>{demo.heading}</h2>
+		<span class="rule" aria-hidden="true"></span>
+		<p>{demo.body}</p>
+	</div>
+</section>
+
+<style>
+	.demo {
+		display: grid;
+		align-items: center;
+	}
+
+	/* Same two-column track and gutter as the screens gallery, so the demo
+	   device renders at exactly the width of a screenshot. */
+	.is-phone {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 32px;
+	}
+
+	/* A 16:9 demo has no screenshot to match, so it takes the full column. */
+	.is-wide {
+		grid-template-columns: minmax(0, 1fr);
+		gap: 28px;
+	}
+
+	.is-wide .copy {
+		order: -1;
+	}
+
+	.copy {
+		display: flex;
+		flex-direction: column;
+		gap: 14px;
+	}
+
+	.copy p {
+		max-width: 54ch;
+		color: var(--fg-2);
+	}
+
+	.rule {
+		width: 44px;
+		height: 3px;
+		margin-top: -4px;
+		border-radius: 999px;
+		background: var(--accent);
+	}
+
+	.wide-frame {
+		aspect-ratio: 16 / 9;
+		overflow: hidden;
+		border: 1px solid var(--hairline);
+		border-radius: var(--radius-lg);
+		background: #000;
+		box-shadow: var(--shadow);
+	}
+
+	.wide-frame video {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	@media (max-width: 900px) {
+		.demo {
+			grid-template-columns: minmax(0, 1fr);
+			gap: 32px;
+		}
+
+		.copy {
+			order: -1;
+		}
+
+		.is-phone .media {
+			width: 100%;
+			max-width: 400px;
+			margin-inline: auto;
+		}
+	}
+</style>
