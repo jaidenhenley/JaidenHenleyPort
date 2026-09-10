@@ -23,13 +23,24 @@ const experience = [
 		],
 	},
 	{
-		role: 'iOS Developer, Apple Developer Academy',
+		role: 'iOS/visionOS Developer, Renaissance Apple Developer Academy',
 		org: 'Michigan State University',
 		location: 'Detroit, MI',
-		dates: 'Aug 2025 to May 2026',
+		dates: 'Aug 2026 to Present',
 		bullets: [
-			'Built and shipped 5+ SwiftUI apps across professional development, productivity, and games in an Apple-backed program.',
-			'Delivered live demos and pitch decks to industry partners.',
+			'Selected as 1 of 25 learners for the highly competitive 2026-2027 second-year cohort.',
+			'Building a visionOS application for an external client alongside a peer development team.',
+		],
+	},
+	{
+		role: 'iOS Developer Intern',
+		org: 'Cognition Daily',
+		location: 'Remote',
+		dates: 'Jun 2026 to Sep 2026',
+		bullets: [
+			'Sole iOS developer for a brain health nonprofit, porting a validated web research instrument to native SwiftUI without altering question wording or scoring logic that would invalidate the collected data.',
+			'Integrated HealthKit sleep, activity, and mindfulness reads against a client-managed Supabase backend, with an offline write queue that reconciles local entries on reconnect.',
+			'Implemented Sign in with Apple and Google authentication with Keychain-only credential storage, NSFileProtectionComplete data protection, and a maintained privacy manifest to meet HIPAA handling requirements and App Store review.',
 		],
 	},
 	{
@@ -75,9 +86,10 @@ const projectEntries = [
 
 const education = [
 	{
-		school: 'Apple Developer Academy, Michigan State University',
-		dates: 'Expected May 2026',
-		detail: 'Certificate of Completion, iOS Development. Detroit, MI',
+		school: 'iOS Developer, Apple Developer Academy',
+		dates: 'Aug 2025 to May 2026',
+		detail:
+			'Michigan State University, Detroit, MI. Built and shipped 5+ SwiftUI apps across professional development, productivity, and games in an Apple-backed program, and delivered live demos and pitch decks to industry partners.',
 	},
 	{
 		school: '100 Days of SwiftUI, Paul Hudson',
@@ -91,7 +103,7 @@ const skills = [
 	{
 		label: 'Apple frameworks',
 		value:
-			'SwiftUI, SpriteKit, SwiftData, AVKit, MapKit, Foundation Models, Game Center, WeatherKit, Core ML, VisionKit, WidgetKit, AppIntents',
+			'SwiftUI, SpriteKit, SwiftData, HealthKit, AVKit, MapKit, Foundation Models, Game Center, WeatherKit, Core ML, VisionKit, WidgetKit, AppIntents',
 	},
 	{
 		label: 'Backend and services',
@@ -104,7 +116,7 @@ const skills = [
 
 <Base
 	title="Resume | Jaiden Henley"
-	description="Resume for Jaiden Henley, iOS developer in Detroit: experience, projects, education, and skills."
+	description="Resume for Jaiden Henley, iOS and visionOS developer in Detroit: experience, projects, education, and skills."
 >
 	<PageHeader eyebrow="Jaiden Henley" title="Resume">
 		<p class="contact-line">
@@ -134,10 +146,11 @@ const skills = [
 		<section class="block">
 			<h2>Summary</h2>
 			<p class="lede">
-				iOS developer with five years of team leadership experience. Shipped multiple apps to the
-				App Store, co-founded a software LLC with two active contracts, and built production
-				systems across SwiftUI, Core ML, FastAPI, and Supabase. Focused on clean architecture and
-				shipping things that are intuitive.
+				iOS developer with three apps live on the App Store. Currently building a visionOS
+				application for an external client as 1 of 25 learners selected for the Apple Developer
+				Academy's Renaissance 2026-2027 cohort, after shipping a HealthKit research app under
+				HIPAA constraints for a brain health nonprofit. Co-founder of CH Studios LLC, a software
+				development studio with active contracts across iOS, Android, and web.
 			</p>
 		</section>
 

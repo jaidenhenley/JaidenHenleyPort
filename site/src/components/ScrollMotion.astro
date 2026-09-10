@@ -3,8 +3,12 @@
  * Portfolio-wide scroll choreography.
  *
  * Targets are matched by selector rather than hand-tagged, so every page picks
- * up the same rhythm. Each group declares an intent that sets how far and how
- * long it travels: text barely moves, media carries weight.
+ * up the same rhythm. Each group declares an intent (see motion.css) that sets
+ * the kind of reveal it gets: headlines pull into focus, media opens or rises,
+ * rules wipe, chips pop, body copy barely moves.
+ *
+ * Groups are matched in order and an element belongs to the first group that
+ * claims it, so the specific selectors sit above the broad ones.
  *
  * Stagger is decided when a batch actually reveals, not by DOM order at load,
  * so a grid whose second row sits a full viewport lower does not inherit a
@@ -13,15 +17,59 @@
 ---
 
 <script>
-	type Intent = 'text' | 'surface' | 'media';
+	type Intent =
+		| 'text'
+		| 'headline'
+		| 'words'
+		| 'surface'
+		| 'aside'
+		| 'media'
+		| 'frame'
+		| 'rule'
+		| 'pop'
+		| 'stat';
 
 	const GROUPS: { selector: string; intent: Intent }[] = [
+		// Page titles, one word at a time.
+		{ selector: '.hero-copy h1', intent: 'words' },
+		{ selector: '.hero .col-type h1', intent: 'words' },
+		{ selector: '.page-header h1', intent: 'words' },
+
+		// Section titles pull into focus.
+		{ selector: '.section-head h2', intent: 'headline' },
+		{ selector: '.about-copy h2', intent: 'headline' },
+		{ selector: '.section.testimonials h2', intent: 'headline' },
+		{ selector: '.main .block h2', intent: 'headline' },
+		{ selector: '.demo .copy h2', intent: 'headline' },
+
+		// Accent rules wipe in beneath their titles.
+		{ selector: '.main .block .rule', intent: 'rule' },
+		{ selector: '.demo .copy .rule', intent: 'rule' },
+
+		// Big numbers count up out of a clip; their labels follow quietly.
+		{ selector: '.stats .stat .value', intent: 'stat' },
+		{ selector: '.stats .stat .label', intent: 'text' },
+
+		// Tags pop, but only where they are the content rather than a detail
+		// inside something that is already animating.
+		{ selector: '.about-skills .chip', intent: 'pop' },
+		{ selector: '.facts .chip', intent: 'pop' },
+
+		// Sidebars drift in from the edge they live on.
+		{ selector: '.about-skills', intent: 'aside' },
+		{ selector: '.facts', intent: 'aside' },
+
+		// Rectangular pictures open from a mask; devices rise into place.
+		{ selector: '.portrait img', intent: 'frame' },
+		{ selector: '.portrait figcaption', intent: 'text' },
+		{ selector: '.demo.is-wide .media', intent: 'frame' },
+		{ selector: '.demo.is-phone .media', intent: 'media' },
+
 		// Home
 		{ selector: '.hero-copy > *', intent: 'text' },
-		{ selector: '.portrait', intent: 'media' },
 		{ selector: '.section.work > .container > *', intent: 'text' },
 		{ selector: '.project-grid > *', intent: 'media' },
-		{ selector: '.about-grid > *', intent: 'surface' },
+		{ selector: '.about-copy > *', intent: 'text' },
 		{ selector: '.section.testimonials > .container > *', intent: 'text' },
 		{ selector: '.quote-grid > *', intent: 'surface' },
 
@@ -33,14 +81,11 @@
 		{ selector: '.cs > .crumb', intent: 'text' },
 		{ selector: '.hero .col-type > *', intent: 'text' },
 		{ selector: '.hero .col-media', intent: 'media' },
-		{ selector: '.demo .media', intent: 'media' },
 		{ selector: '.demo .copy > *', intent: 'text' },
 		{ selector: '.main > .block > *', intent: 'text' },
 		{ selector: '.approach li', intent: 'surface' },
 		{ selector: '.screens figure', intent: 'media' },
-		{ selector: '.facts', intent: 'surface' },
-		{ selector: '.outcome > *', intent: 'text' },
-		{ selector: '.stats .stat', intent: 'surface' },
+		{ selector: '.outcome > :not(.stats)', intent: 'text' },
 		{ selector: '.next', intent: 'surface' },
 
 		// Resume, contact, footers
@@ -48,17 +93,60 @@
 		{ selector: '.contact-section .grid > *', intent: 'surface' },
 		{ selector: '.cta-footer .inner > *', intent: 'text' },
 		{ selector: '.site-footer .inner > *', intent: 'text' },
-		{ selector: '.page-header > *', intent: 'text' },
+		{ selector: '.page-header .inner > *', intent: 'text' },
 	];
 
-	const STAGGER_MS = 50;
-	const MAX_DELAY_MS = 250;
+	/**
+	 * Cascade step per intent. Small things cascade tightly so a row of chips
+	 * ripples; big things cascade slowly so each one gets its own moment.
+	 */
+	const STAGGER_MS: Record<Intent, number> = {
+		text: 50,
+		headline: 60,
+		words: 0,
+		surface: 60,
+		aside: 0,
+		media: 80,
+		frame: 0,
+		rule: 0,
+		pop: 32,
+		stat: 90,
+	};
+	const MAX_DELAY_MS = 320;
 
 	/** Disposes the previous page's observer and listeners across navigation. */
 	let teardown: (() => void) | null = null;
 	// Trigger just below the fold so motion reads as the page settling ahead of
 	// the reader rather than reacting after they have already arrived.
 	const LEAD_RATIO = 0.1;
+
+	/**
+	 * Wraps each word of a plain text heading so it can reveal on its own.
+	 * Headings with markup inside are left whole and fall back to a headline
+	 * reveal, so nothing is ever restructured that was not just text.
+	 */
+	function splitWords(el: HTMLElement): boolean {
+		if (el.children.length || el.dataset.split === 'true') return el.dataset.split === 'true';
+		const text = el.textContent ?? '';
+		if (!text.trim()) return false;
+
+		el.textContent = '';
+		let index = 0;
+		text.split(/(\s+)/).forEach((part) => {
+			if (!part) return;
+			if (/^\s+$/.test(part)) {
+				el.append(part);
+				return;
+			}
+			const span = document.createElement('span');
+			span.className = 'w';
+			span.style.setProperty('--w', String(index++));
+			span.textContent = part;
+			el.append(span);
+		});
+		el.dataset.split = 'true';
+		return true;
+	}
 
 	function init() {
 		const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -69,7 +157,7 @@
 			for (const el of document.querySelectorAll<HTMLElement>(selector)) {
 				if (claimed.has(el)) continue;
 				claimed.add(el);
-				el.dataset.reveal = intent;
+				el.dataset.reveal = intent === 'words' && !reduced && !splitWords(el) ? 'headline' : intent;
 				targets.push(el);
 			}
 		}
@@ -85,7 +173,8 @@
 		/**
 		 * Reveals a set together, cascading in visual reading order. Delay is
 		 * assigned here rather than at load, so it always reflects what is
-		 * genuinely entering at the same moment.
+		 * genuinely entering at the same moment. Each intent counts its own
+		 * cascade so a rule or a headline never inherits a chip's position.
 		 */
 		const revealBatch = (batch: HTMLElement[]) => {
 			if (!batch.length) return;
@@ -97,20 +186,32 @@
 				return Math.abs(ra.top - rb.top) > 4 ? ra.top - rb.top : ra.left - rb.left;
 			});
 
-			batch.forEach((el, i) => {
-				const delay = Math.min(i * STAGGER_MS, MAX_DELAY_MS);
+			const seen: Partial<Record<Intent, number>> = {};
+
+			batch.forEach((el) => {
+				const intent = (el.dataset.reveal ?? 'text') as Intent;
+				const index = seen[intent] ?? 0;
+				seen[intent] = index + 1;
+
+				const delay = Math.min(index * STAGGER_MS[intent], MAX_DELAY_MS);
 				el.style.setProperty('--reveal-delay', `${delay}ms`);
 				el.classList.add('is-animating', 'is-revealed');
 				pending.delete(el);
 				observer.unobserve(el);
 
-				// Release the compositor layer once the motion is done.
+				// Release the compositor layer once the motion is done. Word
+				// reveals end on their children, so the timer is what closes them.
+				let finished = false;
 				const done = () => {
+					if (finished) return;
+					finished = true;
 					el.classList.remove('is-animating');
 					el.style.removeProperty('--reveal-delay');
 				};
-				el.addEventListener('transitionend', done, { once: true });
-				setTimeout(done, delay + 1200);
+				el.addEventListener('transitionend', (event) => {
+					if (event.target === el) done();
+				});
+				setTimeout(done, delay + 1600);
 			});
 		};
 

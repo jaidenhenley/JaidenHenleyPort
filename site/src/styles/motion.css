@@ -4,51 +4,192 @@
    curve that settles rather than stops, and distance scaled to what an element
    actually is. Everything is opt-in behind .js so content stays visible
    without scripting.
+
+   Every reveal is one of a small family of intents, assigned in
+   ScrollMotion.astro. They share a curve and a restraint but differ in kind,
+   so a page reads as a set of related gestures rather than one repeated one:
+
+     text      fade with a short rise                     body copy, captions
+     headline  blur clears as the line settles into place section titles
+     words     headline, one word at a time               page h1
+     surface   fade with a longer rise                    cards, panels
+     aside     drifts in from the side                    sidebars
+     media     rises and scales up to full size           devices, covers
+     frame     opens out from a soft mask                 portrait, wide video
+     rule      wipes in from the left                     accent rules
+     pop       springs up from slightly smaller           chips, tags
+     stat      rises out of a clip like a counter         big numbers
    ========================================================================== */
 
 :root {
 	/* The curve Apple uses for sheets and page transitions. */
 	--ease-out-soft: cubic-bezier(0.32, 0.72, 0, 1);
 	--ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
+	/* A touch of overshoot for small things that should feel springy. */
+	--ease-out-spring: cubic-bezier(0.34, 1.3, 0.64, 1);
 }
 
 /* --------------------------------------------------------------------------
-   Reveal intents. Travel and duration follow visual weight: body copy barely
-   moves, a device mockup carries real presence.
+   Base: every intent shares the hidden state and the transition; each one
+   then sets its own starting transform, duration, and any extra property.
    -------------------------------------------------------------------------- */
 
 .js [data-reveal] {
 	opacity: 0;
 	transition:
-		opacity var(--reveal-duration, 0.6s) var(--ease-out-soft),
-		transform var(--reveal-duration, 0.6s) var(--ease-out-soft);
+		opacity var(--reveal-duration, 0.6s) var(--reveal-ease, var(--ease-out-soft)),
+		transform var(--reveal-duration, 0.6s) var(--reveal-ease, var(--ease-out-soft)),
+		filter var(--reveal-duration, 0.6s) var(--reveal-ease, var(--ease-out-soft)),
+		clip-path var(--reveal-duration, 0.6s) var(--reveal-ease, var(--ease-out-soft));
 	transition-delay: var(--reveal-delay, 0ms);
-}
-
-.js [data-reveal='text'] {
-	--reveal-duration: 0.55s;
-	transform: translate3d(0, 12px, 0);
-}
-
-.js [data-reveal='surface'] {
-	--reveal-duration: 0.6s;
-	transform: translate3d(0, 24px, 0);
-}
-
-.js [data-reveal='media'] {
-	--reveal-duration: 0.75s;
-	transform: translate3d(0, 34px, 0) scale(0.965);
 }
 
 .js [data-reveal].is-revealed {
 	opacity: 1;
 	transform: none;
+	filter: none;
 }
 
 /* Promoted only while actually animating, then released, so a long page does
    not hold dozens of compositor layers it is not using. */
 .js [data-reveal].is-animating {
 	will-change: opacity, transform;
+}
+
+/* Text ------------------------------------------------------------------- */
+
+.js [data-reveal='text'] {
+	--reveal-duration: 0.55s;
+	transform: translate3d(0, 12px, 0);
+}
+
+/* Headline: the blur is what makes it feel like focus being pulled rather
+   than a slide. Travel stays short so the type never looks like it is
+   arriving from somewhere. */
+.js [data-reveal='headline'] {
+	--reveal-duration: 0.9s;
+	transform: translate3d(0, 14px, 0);
+	filter: blur(10px);
+}
+
+/* Words: the h1 itself stays put and each word carries its own reveal, timed
+   off its index so the line reads left to right. */
+.js [data-reveal='words'] {
+	opacity: 1;
+	transform: none;
+	filter: none;
+	transition: none;
+}
+
+.js [data-reveal='words'] .w {
+	display: inline-block;
+	opacity: 0;
+	transform: translate3d(0, 0.3em, 0);
+	filter: blur(8px);
+	transition:
+		opacity 0.8s var(--ease-out-soft),
+		transform 0.8s var(--ease-out-soft),
+		filter 0.8s var(--ease-out-soft);
+	transition-delay: calc(var(--reveal-delay, 0ms) + var(--w, 0) * 60ms);
+}
+
+.js [data-reveal='words'].is-revealed .w {
+	opacity: 1;
+	transform: none;
+	filter: none;
+}
+
+/* Surfaces --------------------------------------------------------------- */
+
+.js [data-reveal='surface'] {
+	--reveal-duration: 0.6s;
+	transform: translate3d(0, 24px, 0);
+}
+
+.js [data-reveal='aside'] {
+	--reveal-duration: 0.7s;
+	transform: translate3d(22px, 0, 0);
+}
+
+/* Media ------------------------------------------------------------------ */
+
+.js [data-reveal='media'] {
+	--reveal-duration: 0.75s;
+	transform: translate3d(0, 34px, 0) scale(0.965);
+}
+
+/* Frame: the picture is slightly enlarged behind a soft inset mask, and the
+   mask opens as the picture settles to true size, the way a photo resolves
+   on Apple product pages. The mask overshoots past the edge so the shadow
+   fades in over the last stretch, and is dropped entirely once settled. */
+.js [data-reveal='frame'] {
+	--reveal-duration: 1s;
+	transform: scale(1.06);
+	clip-path: inset(7% round 28px);
+}
+
+.js [data-reveal='frame'].is-revealed {
+	clip-path: inset(-80px round 0);
+}
+
+.js [data-reveal='frame'].is-revealed:not(.is-animating),
+.js [data-reveal='stat'].is-revealed:not(.is-animating) {
+	clip-path: none;
+}
+
+/* Details ---------------------------------------------------------------- */
+
+.js [data-reveal='rule'] {
+	--reveal-duration: 0.7s;
+	transform: scaleX(0);
+	transform-origin: left center;
+}
+
+.js [data-reveal='pop'] {
+	--reveal-duration: 0.5s;
+	--reveal-ease: var(--ease-out-spring);
+	transform: translate3d(0, 6px, 0) scale(0.88);
+}
+
+/* Stat: the number rises out of its own baseline, clipped so it appears to
+   count up into place. Padding on the clip keeps descenders intact. */
+.js [data-reveal='stat'] {
+	--reveal-duration: 0.8s;
+	transform: translate3d(0, 55%, 0);
+	clip-path: inset(-0.1em -0.1em 100% -0.1em);
+}
+
+.js [data-reveal='stat'].is-revealed {
+	clip-path: inset(-0.1em -0.1em -0.15em -0.1em);
+}
+
+/* ==========================================================================
+   Hero recede
+   As the reader scrolls away, the hero eases up and dims, so the page feels
+   like it is moving beneath a settled first screen. Scroll driven, so it
+   tracks the thumb exactly. Applied to the grid, never to a reveal target,
+   so the two systems never fight over the same transform.
+   ========================================================================== */
+
+@supports (animation-timeline: scroll()) {
+	@keyframes hero-recede {
+		to {
+			opacity: 0.35;
+			transform: translate3d(0, -28px, 0) scale(0.985);
+		}
+	}
+
+	/* Only where the hero fits in one screen; on narrow layouts it stacks
+	   taller than the viewport and would dim while still being read. */
+	@media (min-width: 900px) {
+		.hero-grid,
+		.cs .hero {
+			animation: hero-recede linear both;
+			animation-timeline: scroll(root);
+			animation-range: 0 80vh;
+			transform-origin: center top;
+		}
+	}
 }
 
 /* ==========================================================================
@@ -62,7 +203,8 @@
 .phone,
 .col-media,
 .btn,
-.badge-link {
+.badge-link,
+.chip {
 	transition:
 		transform 0.5s var(--ease-out-soft),
 		border-color 0.5s var(--ease-out-soft),
@@ -88,6 +230,11 @@
 	.btn:hover,
 	.badge-link:hover {
 		transform: translate3d(0, -1px, 0);
+	}
+
+	.chip:hover {
+		transform: translate3d(0, -1px, 0);
+		border-color: var(--hairline);
 	}
 }
 
@@ -117,12 +264,17 @@
 
 @media (prefers-reduced-motion: reduce) {
 	.js [data-reveal],
-	.js [data-reveal='text'],
-	.js [data-reveal='surface'],
-	.js [data-reveal='media'] {
+	.js [data-reveal] .w {
 		opacity: 1;
 		transform: none;
+		filter: none;
+		clip-path: none;
 		transition: none;
+	}
+
+	.hero-grid,
+	.cs .hero {
+		animation: none;
 	}
 
 	.card:hover,
@@ -130,6 +282,7 @@
 	.next:hover,
 	.btn:hover,
 	.badge-link:hover,
+	.chip:hover,
 	.screens figure:hover .phone {
 		transform: none;
 	}
