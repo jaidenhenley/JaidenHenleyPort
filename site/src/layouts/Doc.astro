@@ -1,0 +1,108 @@
+---
+import Base from './Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+
+interface Props {
+	title: string;
+	description: string;
+	eyebrow: string;
+	heading: string;
+	intro?: string;
+	footnote?: string;
+}
+
+const { title, description, eyebrow, heading, intro, footnote } = Astro.props;
+---
+
+<Base title={title} description={description}>
+	<PageHeader eyebrow={eyebrow} title={heading} intro={intro} />
+
+	<div class="container doc">
+		<slot />
+		{footnote && <p class="footnote">{footnote}</p>}
+	</div>
+</Base>
+
+<style>
+	.doc {
+		display: flex;
+		flex-direction: column;
+		gap: clamp(32px, 4vw, 44px);
+		max-width: 780px;
+		margin-inline: auto;
+		padding-bottom: var(--section-y);
+	}
+
+	.doc :global(section) {
+		display: flex;
+		flex-direction: column;
+		gap: 14px;
+	}
+
+	.doc :global(h2) {
+		font-size: clamp(21px, 2.2vw, 26px);
+		font-weight: 640;
+		letter-spacing: -0.02em;
+	}
+
+	.doc :global(p) {
+		font-size: var(--step-1);
+		line-height: 1.68;
+		color: var(--fg-2);
+	}
+
+	.doc :global(.question) {
+		font-weight: 600;
+		color: var(--fg);
+	}
+
+	.doc :global(ul) {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		margin: 0;
+		padding-inline-start: 22px;
+	}
+
+	.doc :global(li) {
+		font-size: var(--step-1);
+		line-height: 1.68;
+		color: var(--fg-2);
+	}
+
+	.doc :global(li::marker) {
+		color: var(--fg-3);
+	}
+
+	.doc :global(a) {
+		color: var(--accent);
+	}
+
+	.doc :global(strong) {
+		color: var(--fg);
+		font-weight: 600;
+	}
+
+	.doc :global(.help) {
+		gap: 16px;
+		align-items: flex-start;
+		padding: clamp(24px, 3vw, 32px);
+		background: var(--surface);
+		border: 1px solid var(--hairline);
+		border-radius: var(--radius-lg);
+		box-shadow: var(--shadow);
+	}
+
+	.doc :global(.help-actions) {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px;
+	}
+
+	.footnote {
+		padding-top: 24px;
+		border-top: 1px solid var(--hairline);
+		font-size: var(--step--1);
+		color: var(--fg-3);
+	}
+</style>

@@ -1,0 +1,240 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { projects } from '../data/projects';
+
+const featured = projects.find((project) => project.featured)!;
+const rest = projects.filter((project) => project !== featured);
+---
+
+<Base
+	title="Case Studies | Jaiden Henley"
+	description="iOS case studies from Jaiden Henley, covering CoastCast, QuickStudy, Take Flight, CommonSight, and Roasting Plant."
+>
+	<PageHeader
+		eyebrow="Portfolio"
+		title="Case studies"
+		intro="Select a project to see the full breakdown: the problem, the decisions, and what shipped."
+	/>
+
+	<section class="section featured-section">
+		<div class="container">
+			<article class="card featured">
+				<a class="cover" href={`/${featured.slug}`} tabindex="-1" aria-hidden="true">
+					<Image
+						src={featured.cover}
+						alt={featured.coverAlt}
+						widths={[560, 1120]}
+						sizes="(max-width: 900px) 100vw, 560px"
+					/>
+				</a>
+
+				<div class="body">
+					<span class="badge">Featured project</span>
+					<h2><a class="title-link" href={`/${featured.slug}`}>{featured.title}</a></h2>
+					<p class="summary">{featured.summary}</p>
+
+					{
+						featured.stats && (
+							<dl class="stats">
+								{featured.stats.map((stat) => (
+									<div class="stat">
+										<dt class="stat-value">{stat.value}</dt>
+										<dd class="stat-label">{stat.label}</dd>
+									</div>
+								))}
+							</dl>
+						)
+					}
+
+					<div class="foot">
+						<ul class="chip-row">
+							{featured.tags.map((tag) => <li class="chip">{tag}</li>)}
+						</ul>
+						{
+							featured.appStoreUrl && (
+								<a href={featured.appStoreUrl} target="_blank" rel="noopener noreferrer">
+									<img
+										src="/images/AppStoreBadge.svg"
+										alt={`Download ${featured.title} on the App Store`}
+										width="120"
+										height="40"
+									/>
+								</a>
+							)
+						}
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+
+	<section class="section rest-section">
+		<div class="container">
+			<div class="grid">
+				{
+					rest.map((project) => (
+						<ProjectCard
+							title={project.title}
+							summary={project.summary}
+							cover={project.cover}
+							coverAlt={project.coverAlt}
+							tags={project.tags}
+							href={`/${project.slug}`}
+							appStoreUrl={project.appStoreUrl}
+						/>
+					))
+				}
+			</div>
+		</div>
+	</section>
+</Base>
+
+<style>
+	.featured-section {
+		padding-block: 0 clamp(32px, 4vw, 48px);
+	}
+
+	.rest-section {
+		padding-block: 0 var(--section-y);
+	}
+
+	.featured {
+		position: relative;
+		display: grid;
+		grid-template-columns: minmax(0, 560px) minmax(0, 1fr);
+		align-items: stretch;
+	}
+
+	/* App icon presented on a panel rather than cropped to fill. */
+	.cover {
+		display: grid;
+		place-items: center;
+		padding: clamp(32px, 5vw, 64px);
+		background: var(--surface-2);
+		border-inline-end: 1px solid var(--hairline-2);
+		overflow: hidden;
+	}
+
+	.cover :global(img) {
+		width: min(100%, 300px);
+		height: auto;
+		aspect-ratio: 1 / 1;
+		border-radius: 22.5%;
+		box-shadow: var(--shadow);
+	}
+
+	.body {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 16px;
+		padding: clamp(28px, 3.5vw, 40px);
+	}
+
+	.badge {
+		font-size: 11.5px;
+		font-weight: 600;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--accent);
+		background: color-mix(in oklab, var(--accent) 10%, transparent);
+		border-radius: 999px;
+		padding: 5px 12px;
+	}
+
+	.title-link::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+	}
+
+	.summary {
+		font-size: var(--step-1);
+		line-height: 1.6;
+		color: var(--fg-2);
+	}
+
+	.stats {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 20px 24px;
+		width: 100%;
+		margin: 8px 0 0;
+		padding-top: 20px;
+		border-top: 1px solid var(--hairline-2);
+	}
+
+	.stat {
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+	}
+
+	.stat-value {
+		font-size: 30px;
+		font-weight: 660;
+		letter-spacing: -0.03em;
+		line-height: 1.1;
+		color: var(--fg);
+	}
+
+	.stat-label {
+		margin: 0;
+		font-size: var(--step--1);
+		line-height: 1.4;
+		color: var(--fg-3);
+	}
+
+	.foot {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 16px;
+		width: 100%;
+		margin-top: auto;
+		padding-top: 24px;
+	}
+
+	.foot a {
+		position: relative;
+		z-index: 1;
+	}
+
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 28px;
+	}
+
+	@media (max-width: 1040px) {
+		.grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 900px) {
+		.featured {
+			grid-template-columns: minmax(0, 1fr);
+		}
+
+		.cover {
+			border-inline-end: none;
+			border-bottom: 1px solid var(--hairline-2);
+			aspect-ratio: 16 / 10;
+		}
+	}
+
+	@media (max-width: 680px) {
+		.grid {
+			grid-template-columns: minmax(0, 1fr);
+		}
+
+		.stats {
+			grid-template-columns: minmax(0, 1fr);
+		}
+	}
+</style>

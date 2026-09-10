@@ -1,0 +1,123 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+	title: string;
+	summary: string;
+	cover: ImageMetadata;
+	coverAlt: string;
+	tags: string[];
+	href: string;
+	appStoreUrl?: string;
+}
+
+const { title, summary, cover, coverAlt, tags, href, appStoreUrl } = Astro.props;
+---
+
+<article class="card project">
+	<a class="cover" href={href} tabindex="-1" aria-hidden="true">
+		<Image src={cover} alt={coverAlt} widths={[400, 620, 1240]} sizes="(max-width: 900px) 100vw, 576px" />
+	</a>
+
+	<div class="body">
+		<h3><a class="title-link" href={href}>{title}</a></h3>
+		<p class="summary">{summary}</p>
+
+		<ul class="chip-row">
+			{tags.map((tag) => <li class="chip">{tag}</li>)}
+		</ul>
+
+		<div class="footer">
+			<a class="read" href={href}>Read case study &rsaquo;</a>
+			{
+				appStoreUrl && (
+					<a href={appStoreUrl} target="_blank" rel="noopener noreferrer">
+						<img
+							src="/images/AppStoreBadge.svg"
+							alt={`Download ${title} on the App Store`}
+							width="120"
+							height="40"
+						/>
+					</a>
+				)
+			}
+		</div>
+	</div>
+</article>
+
+<style>
+	/* Lift and easing come from motion.css so every card behaves the same
+	   and the hover state stays behind a hover-capable guard. */
+	.project {
+		display: flex;
+		flex-direction: column;
+	}
+
+	/* App icon presented on a panel rather than cropped to a banner. Sized in
+	   container units because a percentage height on a centred grid item has no
+	   definite basis to resolve against and falls back to the intrinsic size. */
+	.cover {
+		display: grid;
+		place-items: center;
+		container-type: inline-size;
+		aspect-ratio: 16 / 10;
+		background: var(--surface-2);
+		border-bottom: 1px solid var(--hairline-2);
+		overflow: hidden;
+	}
+
+	.cover :global(img) {
+		width: 38cqw;
+		height: auto;
+		aspect-ratio: 1 / 1;
+		border-radius: 22.5%;
+		box-shadow: var(--shadow);
+	}
+
+	.body {
+		display: flex;
+		flex-direction: column;
+		gap: 14px;
+		flex-grow: 1;
+		padding: 28px;
+	}
+
+	/* The whole card is clickable, but the link text stays the accessible target. */
+	.title-link::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+	}
+
+	.project {
+		position: relative;
+	}
+
+	.summary {
+		font-size: var(--step-0);
+		line-height: 1.58;
+		color: var(--fg-2);
+	}
+
+	.footer {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 16px;
+		margin-top: auto;
+		padding-top: 22px;
+		border-top: 1px solid var(--hairline-2);
+	}
+
+	.read {
+		font-size: var(--step-0);
+		font-weight: 550;
+		color: var(--accent);
+	}
+
+	.footer a {
+		position: relative;
+		z-index: 1;
+	}
+</style>

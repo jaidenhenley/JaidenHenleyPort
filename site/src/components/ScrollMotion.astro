@@ -1,0 +1,198 @@
+---
+/**
+ * Portfolio-wide scroll choreography.
+ *
+ * Targets are matched by selector rather than hand-tagged, so every page picks
+ * up the same rhythm. Each group declares an intent that sets how far and how
+ * long it travels: text barely moves, media carries weight.
+ *
+ * Stagger is decided when a batch actually reveals, not by DOM order at load,
+ * so a grid whose second row sits a full viewport lower does not inherit a
+ * delay meant to cascade off the first row.
+ */
+---
+
+<script>
+	type Intent = 'text' | 'surface' | 'media';
+
+	const GROUPS: { selector: string; intent: Intent }[] = [
+		// Home
+		{ selector: '.hero-copy > *', intent: 'text' },
+		{ selector: '.portrait', intent: 'media' },
+		{ selector: '.section.work > .container > *', intent: 'text' },
+		{ selector: '.project-grid > *', intent: 'media' },
+		{ selector: '.about-grid > *', intent: 'surface' },
+		{ selector: '.section.testimonials > .container > *', intent: 'text' },
+		{ selector: '.quote-grid > *', intent: 'surface' },
+
+		// Case study index
+		{ selector: '.featured-section .card', intent: 'media' },
+		{ selector: '.rest-section .grid > *', intent: 'media' },
+
+		// Case study
+		{ selector: '.cs > .crumb', intent: 'text' },
+		{ selector: '.hero .col-type > *', intent: 'text' },
+		{ selector: '.hero .col-media', intent: 'media' },
+		{ selector: '.demo .media', intent: 'media' },
+		{ selector: '.demo .copy > *', intent: 'text' },
+		{ selector: '.main > .block > *', intent: 'text' },
+		{ selector: '.approach li', intent: 'surface' },
+		{ selector: '.screens figure', intent: 'media' },
+		{ selector: '.facts', intent: 'surface' },
+		{ selector: '.outcome > *', intent: 'text' },
+		{ selector: '.stats .stat', intent: 'surface' },
+		{ selector: '.next', intent: 'surface' },
+
+		// Resume, contact, footers
+		{ selector: '.resume .block', intent: 'surface' },
+		{ selector: '.contact-section .grid > *', intent: 'surface' },
+		{ selector: '.cta-footer .inner > *', intent: 'text' },
+		{ selector: '.site-footer .inner > *', intent: 'text' },
+		{ selector: '.page-header > *', intent: 'text' },
+	];
+
+	const STAGGER_MS = 50;
+	const MAX_DELAY_MS = 250;
+
+	/** Disposes the previous page's observer and listeners across navigation. */
+	let teardown: (() => void) | null = null;
+	// Trigger just below the fold so motion reads as the page settling ahead of
+	// the reader rather than reacting after they have already arrived.
+	const LEAD_RATIO = 0.1;
+
+	function init() {
+		const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+		const claimed = new Set<Element>();
+		const targets: HTMLElement[] = [];
+
+		for (const { selector, intent } of GROUPS) {
+			for (const el of document.querySelectorAll<HTMLElement>(selector)) {
+				if (claimed.has(el)) continue;
+				claimed.add(el);
+				el.dataset.reveal = intent;
+				targets.push(el);
+			}
+		}
+
+		if (reduced || !('IntersectionObserver' in window)) {
+			targets.forEach((el) => el.classList.add('is-revealed'));
+			teardown = null;
+			return;
+		}
+
+		const pending = new Set(targets);
+
+		/**
+		 * Reveals a set together, cascading in visual reading order. Delay is
+		 * assigned here rather than at load, so it always reflects what is
+		 * genuinely entering at the same moment.
+		 */
+		const revealBatch = (batch: HTMLElement[]) => {
+			if (!batch.length) return;
+
+			batch.sort((a, b) => {
+				const ra = a.getBoundingClientRect();
+				const rb = b.getBoundingClientRect();
+				// Treat near-equal tops as one row so a grid cascades left to right.
+				return Math.abs(ra.top - rb.top) > 4 ? ra.top - rb.top : ra.left - rb.left;
+			});
+
+			batch.forEach((el, i) => {
+				const delay = Math.min(i * STAGGER_MS, MAX_DELAY_MS);
+				el.style.setProperty('--reveal-delay', `${delay}ms`);
+				el.classList.add('is-animating', 'is-revealed');
+				pending.delete(el);
+				observer.unobserve(el);
+
+				// Release the compositor layer once the motion is done.
+				const done = () => {
+					el.classList.remove('is-animating');
+					el.style.removeProperty('--reveal-delay');
+				};
+				el.addEventListener('transitionend', done, { once: true });
+				setTimeout(done, delay + 1200);
+			});
+		};
+
+		const observer = new IntersectionObserver(
+			(entries) => {
+				revealBatch(
+					entries.filter((e) => e.isIntersecting).map((e) => e.target as HTMLElement)
+				);
+			},
+			{ rootMargin: `0px 0px ${LEAD_RATIO * 100}% 0px`, threshold: 0.01 }
+		);
+
+		targets.forEach((el) => observer.observe(el));
+
+		// The observer can miss elements that are jumped past rather than scrolled
+		// through: an anchor link, a restored scroll position, or a flung scroll
+		// that never renders an intermediate frame. Sweep whatever is left behind.
+		let sweeping = false;
+		const sweep = () => {
+			sweeping = false;
+			if (!pending.size) {
+				removeEventListener('scroll', onScroll);
+				removeEventListener('resize', onScroll);
+				return;
+			}
+			const limit = innerHeight * (1 + LEAD_RATIO);
+			revealBatch([...pending].filter((el) => el.getBoundingClientRect().top < limit));
+		};
+		const onScroll = () => {
+			if (sweeping) return;
+			sweeping = true;
+			requestAnimationFrame(sweep);
+		};
+
+		addEventListener('scroll', onScroll, { passive: true });
+		addEventListener('resize', onScroll, { passive: true });
+		requestAnimationFrame(sweep);
+
+		teardown = () => {
+			observer.disconnect();
+			removeEventListener('scroll', onScroll);
+			removeEventListener('resize', onScroll);
+			teardown = null;
+		};
+	}
+
+	/**
+	 * The header carries transition:persist, so it survives navigation and must
+	 * only ever be bound once. The flag lives on the element itself.
+	 */
+	function header() {
+		const el = document.querySelector<HTMLElement>('.site-header');
+		if (!el) return;
+
+		const update = () => el.classList.toggle('is-scrolled', window.scrollY > 8);
+		update();
+
+		if (el.dataset.scrollBound === 'true') return;
+		el.dataset.scrollBound = 'true';
+
+		let ticking = false;
+		addEventListener(
+			'scroll',
+			() => {
+				if (ticking) return;
+				ticking = true;
+				requestAnimationFrame(() => {
+					update();
+					ticking = false;
+				});
+			},
+			{ passive: true }
+		);
+	}
+
+	function start() {
+		teardown?.();
+		init();
+		header();
+	}
+
+	// astro:page-load fires on first paint and again after every client-side
+	// navigation, which DOMContentLoaded does not once the router is in play.
+	document.addEventListener('astro:page-load', start);
+</script>

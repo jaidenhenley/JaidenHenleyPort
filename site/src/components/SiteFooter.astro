@@ -1,0 +1,95 @@
+---
+const links = [
+	{ label: 'jaidenhenleydev@gmail.com', href: 'mailto:jaidenhenleydev@gmail.com' },
+	{ label: 'LinkedIn', href: 'https://www.linkedin.com/in/jaiden-henley' },
+	{ label: 'GitHub', href: 'https://github.com/jaidenhenley' },
+];
+---
+
+<footer class="site-footer">
+	<div class="container inner">
+		<div class="identity">
+			<span class="name">Jaiden Henley</span>
+			<span class="meta">iOS developer, Detroit, Michigan</span>
+		</div>
+		<nav class="links" aria-label="Footer">
+			{
+				links.map((link) => (
+					<a
+						href={link.href}
+						rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+						target={link.href.startsWith('http') ? '_blank' : undefined}
+					>
+						{link.label}
+					</a>
+				))
+			}
+			<a class="btn btn-primary contact" href="/contact">Get in touch</a>
+		</nav>
+	</div>
+</footer>
+
+<style>
+	.site-footer {
+		background: var(--surface-2);
+		border-top: 1px solid var(--hairline-2);
+		padding-block: 56px;
+		margin-top: auto;
+	}
+
+	.inner {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: 32px;
+	}
+
+	.identity {
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+	}
+
+	.name {
+		font-size: var(--step-0);
+		font-weight: 600;
+	}
+
+	.meta {
+		font-size: 14px;
+		color: var(--fg-3);
+	}
+
+	.links {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 28px;
+	}
+
+	.links a {
+		font-size: 14px;
+		font-weight: 450;
+		color: var(--fg-2);
+	}
+
+	.links a:hover {
+		color: var(--fg);
+	}
+
+	/* Matches .links a on specificity and wins on order, so the button keeps its
+	   own foreground instead of inheriting the muted link colour. */
+	.links a.contact,
+	.links a.contact:hover {
+		min-height: 40px;
+		padding: 0 18px;
+		border-radius: var(--radius-md);
+		font-size: 14px;
+		color: var(--accent-fg);
+	}
+
+	.contact:hover {
+		color: var(--accent-fg);
+	}
+</style>

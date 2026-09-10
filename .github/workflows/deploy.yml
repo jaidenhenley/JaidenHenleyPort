@@ -10,6 +10,14 @@ permissions:
   pages: write
   id-token: write
 
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+defaults:
+  run:
+    working-directory: site
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -20,6 +28,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Runs before the build so the values are baked into the copy Astro
+      # publishes from public/.
       - name: Inject Firebase config
         env:
           FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
@@ -30,7 +50,7 @@ jobs:
           FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
           FIREBASE_MEASUREMENT_ID: ${{ secrets.FIREBASE_MEASUREMENT_ID }}
         run: |
-          python3 << 'EOF'
+          python3 << 'PY'
           import os
           replacements = {
             '__FIREBASE_API_KEY__': os.environ['FIREBASE_API_KEY'],
@@ -41,13 +61,17 @@ jobs:
             '__FIREBASE_APP_ID__': os.environ['FIREBASE_APP_ID'],
             '__FIREBASE_MEASUREMENT_ID__': os.environ['FIREBASE_MEASUREMENT_ID'],
           }
-          with open('assets/js/analytics.js', 'r') as f:
+          path = 'public/js/analytics.js'
+          with open(path) as f:
             content = f.read()
           for placeholder, value in replacements.items():
             content = content.replace(placeholder, value)
-          with open('assets/js/analytics.js', 'w') as f:
+          with open(path, 'w') as f:
             f.write(content)
-          EOF
+          PY
+
+      - name: Build
+        run: npm run build
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -55,7 +79,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
+          path: site/dist
 
       - name: Deploy to GitHub Pages
         id: deployment

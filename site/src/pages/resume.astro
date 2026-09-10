@@ -1,0 +1,360 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+
+const contactLine = [
+	{ label: 'He/Him' },
+	{ label: '(810) 772-3768', href: 'tel:+18107723768' },
+	{ label: 'jaidenhenleydev@gmail.com', href: 'mailto:jaidenhenleydev@gmail.com' },
+	{ label: 'Detroit, MI' },
+	{ label: 'LinkedIn', href: 'https://www.linkedin.com/in/jaiden-henley' },
+	{ label: 'GitHub', href: 'https://github.com/jaidenhenley' },
+];
+
+const experience = [
+	{
+		role: 'Co-Founder, iOS Developer',
+		org: 'CH Studios, LLC',
+		location: 'Detroit, MI',
+		dates: 'Apr 2026 to Present',
+		bullets: [
+			'Tripsetta (contract): retained to maintain and build features across iOS (SwiftUI), Android (Kotlin), and web (HTML/CSS/JS) codebases for an AI-powered travel planning platform.',
+			'CommonSight (contract): built the full Firebase backend from scratch, then led migration to Supabase including auth rewrite, Postgres schema design, RLS policies, and conference demo polish.',
+		],
+	},
+	{
+		role: 'iOS Developer, Apple Developer Academy',
+		org: 'Michigan State University',
+		location: 'Detroit, MI',
+		dates: 'Aug 2025 to May 2026',
+		bullets: [
+			'Built and shipped 5+ SwiftUI apps across professional development, productivity, and games in an Apple-backed program.',
+			'Delivered live demos and pitch decks to industry partners.',
+		],
+	},
+	{
+		role: 'Bakery Manager',
+		org: 'M Street Baking Company',
+		location: 'Howell, MI',
+		dates: 'Jun 2020 to Present',
+		bullets: [
+			'Promoted from dishwasher to bakery manager over 5 years.',
+			'Managed a team of 10+ across daily operations, inventory, training, and quality control.',
+		],
+	},
+];
+
+const projectEntries = [
+	{
+		name: 'CoastCast',
+		stack: 'SwiftUI, Core ML, WeatherKit, FastAPI',
+		dates: 'Mar 2026 to May 2026',
+		bullets: [
+			'Built a Michigan beach conditions app with a custom FastAPI backend deployed on Render, a Core ML crowd prediction model trained end to end on real visitation data, and realtime buoy, weather, and E. coli water quality integration.',
+			'Implemented WidgetKit, AppIntents and Siri Shortcuts, and background push notifications using BGAppRefreshTask.',
+		],
+	},
+	{
+		name: 'QuickStudy',
+		stack: 'SwiftUI',
+		dates: 'Nov 2025 to Feb 2026',
+		bullets: [
+			'Built and shipped a study tool on the App Store that converts scanned notes and PDFs into flashcards with practice mode and multiple-choice quizzes, using an OCR pipeline built with VisionKit.',
+			'Implemented local persistence, PDF import, and MVVM architecture, and added multi-provider AI support (OpenAI, Anthropic) with Keychain storage.',
+		],
+	},
+	{
+		name: 'Take Flight',
+		stack: 'SpriteKit, SwiftUI, Game Center',
+		dates: 'Jan 2026 to Feb 2026',
+		bullets: [
+			'Built a 5-in-1 mini-game survival experience set on Belle Isle. Shipped to the App Store with Game Center, iPad touch controls, and macOS keyboard support.',
+		],
+	},
+];
+
+const education = [
+	{
+		school: 'Apple Developer Academy, Michigan State University',
+		dates: 'Expected May 2026',
+		detail: 'Certificate of Completion, iOS Development. Detroit, MI',
+	},
+	{
+		school: '100 Days of SwiftUI, Paul Hudson',
+		dates: 'Nov 2025 to Jan 2026',
+		detail: 'Certificate of Merit, iOS Development. Online',
+	},
+];
+
+const skills = [
+	{ label: 'Languages', value: 'Swift, Python, Kotlin, HTML, CSS, JavaScript' },
+	{
+		label: 'Apple frameworks',
+		value:
+			'SwiftUI, SpriteKit, SwiftData, AVKit, MapKit, Foundation Models, Game Center, WeatherKit, Core ML, VisionKit, WidgetKit, AppIntents',
+	},
+	{
+		label: 'Backend and services',
+		value: 'Firebase (Auth, Firestore), Supabase (Auth, Postgres, RLS), FastAPI (Render)',
+	},
+	{ label: 'Architecture', value: 'MVVM, NavigationStack routing, JSON persistence, state management' },
+	{ label: 'Tools', value: 'Xcode, VS Code, Git and GitHub, Sketch' },
+];
+---
+
+<Base
+	title="Resume | Jaiden Henley"
+	description="Resume for Jaiden Henley, iOS developer in Detroit: experience, projects, education, and skills."
+>
+	<PageHeader eyebrow="Jaiden Henley" title="Resume">
+		<p class="contact-line">
+			{
+				contactLine.map((item, index) => (
+					<>
+						{index > 0 && <span class="sep" aria-hidden="true">·</span>}
+						{item.href ? (
+							<a
+								href={item.href}
+								target={item.href.startsWith('http') ? '_blank' : undefined}
+								rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+							>
+								{item.label}
+							</a>
+						) : (
+							<span>{item.label}</span>
+						)}
+					</>
+				))
+			}
+		</p>
+		<a class="btn btn-primary" href="/Jaiden_Henley_Resume.pdf" download>Download PDF</a>
+	</PageHeader>
+
+	<div class="container resume">
+		<section class="block">
+			<h2>Summary</h2>
+			<p class="lede">
+				iOS developer with five years of team leadership experience. Shipped multiple apps to the
+				App Store, co-founded a software LLC with two active contracts, and built production
+				systems across SwiftUI, Core ML, FastAPI, and Supabase. Focused on clean architecture and
+				shipping things that are intuitive.
+			</p>
+		</section>
+
+		<section class="block">
+			<h2>Experience</h2>
+			<ol class="entries">
+				{
+					experience.map((job) => (
+						<li class="entry">
+							<div class="entry-head">
+								<h3>{job.role}</h3>
+								<span class="dates">{job.dates}</span>
+							</div>
+							<p class="org">
+								{job.org} · {job.location}
+							</p>
+							<ul class="bullets">
+								{job.bullets.map((bullet) => (
+									<li>{bullet}</li>
+								))}
+							</ul>
+						</li>
+					))
+				}
+			</ol>
+		</section>
+
+		<section class="block">
+			<h2>Projects</h2>
+			<ol class="entries">
+				{
+					projectEntries.map((project) => (
+						<li class="entry">
+							<div class="entry-head">
+								<h3>{project.name}</h3>
+								<span class="dates">{project.dates}</span>
+							</div>
+							<p class="org">{project.stack}</p>
+							<ul class="bullets">
+								{project.bullets.map((bullet) => (
+									<li>{bullet}</li>
+								))}
+							</ul>
+						</li>
+					))
+				}
+			</ol>
+		</section>
+
+		<section class="block">
+			<h2>Education</h2>
+			<ol class="entries">
+				{
+					education.map((item) => (
+						<li class="entry">
+							<div class="entry-head">
+								<h3>{item.school}</h3>
+								<span class="dates">{item.dates}</span>
+							</div>
+							<p class="org">{item.detail}</p>
+						</li>
+					))
+				}
+			</ol>
+		</section>
+
+		<section class="block">
+			<h2>Skills</h2>
+			<dl class="skills">
+				{
+					skills.map((skill) => (
+						<div class="skill-row">
+							<dt>{skill.label}</dt>
+							<dd>{skill.value}</dd>
+						</div>
+					))
+				}
+			</dl>
+		</section>
+	</div>
+</Base>
+
+<style>
+	.contact-line {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 8px;
+		font-size: var(--step-0);
+		color: var(--fg-2);
+	}
+
+	.contact-line a {
+		color: var(--fg-2);
+	}
+
+	.contact-line a:hover {
+		color: var(--accent);
+	}
+
+	.sep {
+		color: var(--fg-3);
+	}
+
+	.resume {
+		display: flex;
+		flex-direction: column;
+		gap: clamp(40px, 5vw, 56px);
+		padding-bottom: var(--section-y);
+	}
+
+	.block {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	}
+
+	.block h2 {
+		font-size: clamp(24px, 2.6vw, 30px);
+		padding-bottom: 14px;
+		border-bottom: 1px solid var(--hairline);
+	}
+
+	.entries {
+		display: flex;
+		flex-direction: column;
+		gap: 32px;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.entry {
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+	}
+
+	.entry-head {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 8px 24px;
+	}
+
+	.entry-head h3 {
+		font-size: var(--step-1);
+		font-weight: 620;
+		letter-spacing: -0.014em;
+	}
+
+	.dates {
+		font-size: var(--step--1);
+		color: var(--fg-3);
+		white-space: nowrap;
+	}
+
+	.org {
+		font-size: var(--step-0);
+		color: var(--fg-2);
+	}
+
+	.bullets {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+		margin: 8px 0 0;
+		padding-inline-start: 20px;
+	}
+
+	.bullets li {
+		font-size: var(--step-0);
+		line-height: 1.6;
+		color: var(--fg-2);
+	}
+
+	.bullets li::marker {
+		color: var(--fg-3);
+	}
+
+	.skills {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		margin: 0;
+	}
+
+	.skill-row {
+		display: grid;
+		grid-template-columns: 190px minmax(0, 1fr);
+		gap: 8px 24px;
+	}
+
+	.skill-row dt {
+		font-size: var(--step-0);
+		font-weight: 600;
+		color: var(--fg);
+	}
+
+	.skill-row dd {
+		margin: 0;
+		font-size: var(--step-0);
+		line-height: 1.6;
+		color: var(--fg-2);
+	}
+
+	@media (max-width: 680px) {
+		.skill-row {
+			grid-template-columns: minmax(0, 1fr);
+			gap: 4px;
+		}
+	}
+
+	@media print {
+		.resume {
+			gap: 24px;
+		}
+	}
+</style>

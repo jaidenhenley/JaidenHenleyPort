@@ -1,0 +1,89 @@
+---
+const email = 'jaidenhenleydev@gmail.com';
+---
+
+<footer class="cta-footer">
+	<div class="inner">
+		<h2>Let's build something.</h2>
+		<p>Open to iOS roles and contract work, based in Detroit, Michigan.</p>
+		<div class="row">
+			<a class="btn btn-invert" href={`mailto:${email}`}>{email}</a>
+			<a href="https://www.linkedin.com/in/jaiden-henley" target="_blank" rel="noopener noreferrer">
+				LinkedIn
+			</a>
+			<a href="https://github.com/jaidenhenley" target="_blank" rel="noopener noreferrer">
+				GitHub
+			</a>
+		</div>
+	</div>
+</footer>
+
+<style>
+	.cta-footer {
+		margin-top: auto;
+		padding-block: clamp(64px, 9vw, 104px);
+		background: #0b0b0f;
+		color: #f5f5f7;
+	}
+
+	.inner {
+		width: 100%;
+		max-width: 1280px;
+		margin-inline: auto;
+		padding-inline: 44px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		gap: 14px;
+	}
+
+	h2 {
+		color: #f5f5f7;
+		font-size: var(--step-4);
+	}
+
+	p {
+		max-width: 46ch;
+		color: #a6a6ae;
+		font-size: var(--step-0);
+	}
+
+	.row {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+		gap: 12px 28px;
+		margin-top: 14px;
+	}
+
+	.row a:not(.btn) {
+		display: inline-flex;
+		align-items: center;
+		min-height: 44px;
+		font-size: var(--step-0);
+		font-weight: 500;
+		color: #a6a6ae;
+	}
+
+	.row a:not(.btn):hover {
+		color: #f5f5f7;
+	}
+
+	.btn-invert {
+		background: #f5f5f7;
+		color: #0b0b0f;
+	}
+
+	.btn-invert:hover {
+		color: #0b0b0f;
+		background: #ffffff;
+	}
+
+	@media (max-width: 700px) {
+		.inner {
+			padding-inline: 20px;
+		}
+	}
+</style>

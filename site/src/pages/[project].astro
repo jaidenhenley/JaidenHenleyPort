@@ -1,0 +1,583 @@
+---
+import { Image } from 'astro:assets';
+
+import Base from '../layouts/Base.astro';
+import CaseStudyHero from '../components/CaseStudyHero.astro';
+import CaseStudyDemo from '../components/CaseStudyDemo.astro';
+import PhoneFrame from '../components/PhoneFrame.astro';
+import CodeBlock from '../components/CodeBlock.astro';
+import { projects } from '../data/projects';
+import { caseStudies } from '../data/case-studies';
+import { projectCode } from '../data/code-snippets';
+
+export function getStaticPaths() {
+	return projects.map((project, index) => ({
+		params: { project: project.slug },
+		props: {
+			project,
+			next: projects[(index + 1) % projects.length],
+			total: projects.length,
+		},
+	}));
+}
+
+const { project, next, total } = Astro.props;
+const study = caseStudies[project.slug];
+const nextStudy = caseStudies[next.slug];
+const totalLabel = String(total).padStart(2, '0');
+const isAppStore = study.primaryCta.href.includes('apps.apple.com');
+const code = projectCode[project.slug];
+---
+
+<Base
+	title={`${project.title} case study | Jaiden Henley`}
+	description={study.lead}
+	footerVariant="cta"
+>
+	<div class="cs">
+		<nav class="crumb" aria-label="Breadcrumb">
+			<a href="/case-studies">Case Studies</a>
+			<span aria-hidden="true">/</span>
+			<span aria-current="page">{project.title}</span>
+		</nav>
+
+		<CaseStudyHero title={project.title} study={study} />
+
+		<div class="body">
+			<div class="main">
+				<CaseStudyDemo title={project.title} study={study} />
+
+				<section class="block">
+					<span class="eyebrow">Overview</span>
+					{study.overview.map((paragraph) => <p>{paragraph}</p>)}
+				</section>
+
+				<section class="block">
+					<h2>The problem</h2>
+					<span class="rule" aria-hidden="true"></span>
+					<p>{study.problem.intro}</p>
+					<ul class="bullets">
+						{study.problem.points.map((point) => <li>{point}</li>)}
+					</ul>
+				</section>
+
+				<section class="block">
+					<h2>Approach</h2>
+					<span class="rule" aria-hidden="true"></span>
+					<ol class="approach">
+						{
+							study.approach.map((step, index) => (
+								<li>
+									<span class="num">{String(index + 1).padStart(2, '0')}</span>
+									<h3>{step.title}</h3>
+									<p>{step.body}</p>
+								</li>
+							))
+						}
+					</ol>
+				</section>
+
+				<section class="block">
+					<h2>Technical highlights</h2>
+					<span class="rule" aria-hidden="true"></span>
+					<ul class="bullets">
+						{
+							study.highlights.map((item) => (
+								<li>
+									<strong>{item.term}</strong> - {item.body}
+								</li>
+							))
+						}
+					</ul>
+				</section>
+
+				<section class="block">
+					<h2>Screens</h2>
+					<span class="rule" aria-hidden="true"></span>
+					<div class="screens">
+						{
+							study.screens.map((screen) => (
+								<figure>
+									<PhoneFrame>
+										<Image
+											src={screen.image}
+											alt={screen.imageAlt}
+											widths={[420, 840]}
+											sizes="(max-width: 700px) 100vw, 400px"
+										/>
+									</PhoneFrame>
+									<figcaption>
+										<h3>{screen.caption}</h3>
+										<p>{screen.body}</p>
+									</figcaption>
+								</figure>
+							))
+						}
+					</div>
+				</section>
+
+				{
+					code && code.snippets.length > 0 && (
+						<section class="block">
+							<h2>Code</h2>
+							<span class="rule" aria-hidden="true" />
+							<div class="snippets">
+								{code.snippets.map((snippet) => (
+									<CodeBlock
+										title={snippet.title}
+										language={snippet.language}
+										description={snippet.description}
+										code={snippet.code}
+									/>
+								))}
+							</div>
+						</section>
+					)
+				}
+
+				{
+					code && code.nextIterations && (
+						<section class="block">
+							<h2>What is next</h2>
+							<span class="rule" aria-hidden="true" />
+							<p>{code.nextIterations}</p>
+						</section>
+					)
+				}
+			</div>
+
+			<aside class="sidebar">
+				<div class="facts">
+					<div class="fact">
+						<span class="label">Role</span>
+						<span class="value">{study.role}</span>
+					</div>
+					<div class="fact">
+						<span class="label">Timeline</span>
+						<span class="value">{study.timeline}</span>
+					</div>
+					<div class="fact">
+						<span class="label">Platform</span>
+						<span class="value">{study.platform}</span>
+					</div>
+					<div class="fact">
+						<span class="label">Stack</span>
+						<ul class="chip-row">
+							{study.stack.map((item) => <li class="chip">{item}</li>)}
+						</ul>
+					</div>
+					<div class="fact fact-cta">
+						{
+							isAppStore ? (
+								<a
+									class="badge-link"
+									href={study.primaryCta.href}
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<img
+										src="/images/AppStoreBadge.svg"
+										alt={`Download ${project.title} on the App Store`}
+										width="150"
+										height="50"
+									/>
+								</a>
+							) : (
+								<a
+									class="btn btn-primary"
+									href={study.primaryCta.href}
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									{study.primaryCta.label}
+								</a>
+							)
+						}
+					</div>
+				</div>
+			</aside>
+		</div>
+
+		<section class="outcome">
+			<span class="eyebrow">Outcome</span>
+			<div class="stats">
+				{
+					study.stats.map((stat) => (
+						<div class="stat">
+							<span class="value">{stat.value}</span>
+							<span class="label">{stat.label}</span>
+						</div>
+					))
+				}
+			</div>
+			<p class="reflection">{study.reflection}</p>
+		</section>
+
+		<a class="next" href={`/${next.slug}`}>
+			<span class="next-left">
+				<span class="eyebrow">Next case study</span>
+				<span class="next-title">
+					{next.title}
+					<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+						<path d="M5 12h13M12.5 5.5 19 12l-6.5 6.5"></path>
+					</svg>
+				</span>
+			</span>
+			<span class="next-pill" aria-hidden="true">{nextStudy.number} of {totalLabel}</span>
+		</a>
+	</div>
+</Base>
+
+<style>
+	.cs {
+		width: 100%;
+		max-width: 1280px;
+		margin-inline: auto;
+		padding-inline: 44px;
+		padding-block: 40px 96px;
+	}
+
+	/* Breadcrumb ------------------------------------------------------------ */
+
+	.crumb {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		font-size: var(--step--1);
+		color: var(--fg-3);
+	}
+
+	.crumb a {
+		color: var(--fg-3);
+	}
+
+	.crumb a:hover {
+		color: var(--accent);
+	}
+
+	/* Body ------------------------------------------------------------------ */
+
+	.body {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) 300px;
+		gap: 56px;
+		align-items: start;
+		padding-block: 72px 0;
+	}
+
+	.main {
+		display: flex;
+		flex-direction: column;
+		gap: 44px;
+	}
+
+	.block {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+
+	.block p {
+		color: var(--fg-2);
+	}
+
+	.block .eyebrow + p {
+		font-size: var(--step-2);
+		line-height: 1.5;
+		color: var(--fg);
+	}
+
+	.rule {
+		width: 44px;
+		height: 3px;
+		margin-top: -6px;
+		border-radius: 999px;
+		background: var(--accent);
+	}
+
+	.bullets {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+		margin: 0;
+		padding-left: 20px;
+		color: var(--fg-2);
+	}
+
+	.bullets li::marker {
+		color: var(--fg-3);
+	}
+
+	.bullets strong {
+		color: var(--fg);
+		font-weight: 600;
+	}
+
+	/* Approach cards -------------------------------------------------------- */
+
+	.approach {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 16px;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.approach li {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+		padding: 24px;
+		background: var(--surface);
+		border: 1px solid var(--hairline);
+		border-radius: var(--radius-lg);
+	}
+
+	.approach .num {
+		font-size: var(--step--1);
+		font-weight: 600;
+		letter-spacing: 0.06em;
+		color: var(--accent);
+	}
+
+	.approach h3 {
+		font-size: var(--step-1);
+		font-weight: 600;
+	}
+
+	.approach p {
+		font-size: var(--step-0);
+		line-height: 1.55;
+	}
+
+	/* Screens --------------------------------------------------------------- */
+
+	.screens {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 48px 32px;
+	}
+
+	.screens figure {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		margin: 0;
+	}
+
+	.screens h3 {
+		font-size: var(--step-1);
+		font-weight: 600;
+	}
+
+	.screens figcaption p {
+		margin-top: 6px;
+		max-width: 42ch;
+		font-size: var(--step-0);
+		line-height: 1.5;
+		color: var(--fg-3);
+	}
+
+	.snippets {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+
+	/* Sidebar --------------------------------------------------------------- */
+
+	/* Clears the 61px sticky site header so the card top is never hidden,
+	   and scrolls internally on short viewports instead of being unreachable. */
+	.sidebar {
+		position: sticky;
+		top: 85px;
+		max-height: calc(100vh - 109px);
+		overflow-y: auto;
+		overscroll-behavior: contain;
+	}
+
+	.facts {
+		background: var(--surface);
+		border: 1px solid var(--hairline);
+		border-radius: var(--radius-lg);
+		overflow: hidden;
+	}
+
+	.fact {
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+		padding: 18px 20px;
+		border-bottom: 1px solid var(--hairline-2);
+	}
+
+	.fact .label {
+		font-size: 11.5px;
+		font-weight: 600;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--fg-3);
+	}
+
+	.fact .value {
+		font-size: var(--step-0);
+		color: var(--fg);
+	}
+
+	.fact-cta {
+		border-bottom: 0;
+		padding: 20px;
+	}
+
+	.fact-cta .btn {
+		width: 100%;
+	}
+
+	.fact-cta .badge-link {
+		display: flex;
+		justify-content: center;
+		transition: transform 0.18s ease;
+	}
+
+	.fact-cta .badge-link:active {
+		transform: scale(0.98);
+	}
+
+	.fact-cta .badge-link img {
+		height: 48px;
+		width: auto;
+	}
+
+	/* Outcome --------------------------------------------------------------- */
+
+	.outcome {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+		margin-top: 80px;
+		padding-top: 44px;
+		border-top: 1px solid var(--hairline);
+	}
+
+	.stats {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		border: 1px solid var(--hairline);
+		border-radius: var(--radius-lg);
+		overflow: hidden;
+	}
+
+	.stat {
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+		padding: 26px 24px;
+		border-left: 1px solid var(--hairline);
+	}
+
+	.stat:first-child {
+		border-left: 0;
+	}
+
+	.stat .value {
+		font-size: var(--step-4);
+		font-weight: 650;
+		letter-spacing: -0.03em;
+		line-height: 1;
+	}
+
+	.stat .label {
+		font-size: var(--step--1);
+		color: var(--fg-3);
+	}
+
+	.reflection {
+		max-width: 70ch;
+		color: var(--fg-2);
+	}
+
+	/* Next ------------------------------------------------------------------ */
+
+	.next {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 20px;
+		margin-top: 72px;
+		padding: 32px;
+		background: var(--surface);
+		border: 1px solid var(--hairline);
+		border-radius: var(--radius-lg);
+	}
+
+	.next:hover {
+		border-color: var(--accent);
+		color: var(--fg);
+	}
+
+	.next-left {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+	}
+
+	.next-title {
+		display: inline-flex;
+		align-items: center;
+		gap: 12px;
+		font-size: var(--step-4);
+		font-weight: 650;
+		letter-spacing: -0.028em;
+		line-height: 1.1;
+	}
+
+	.next:hover .next-title {
+		color: var(--accent);
+	}
+
+	.next-pill {
+		font-size: var(--step--1);
+		font-weight: 550;
+		color: var(--fg-3);
+		background: var(--surface-2);
+		border: 1px solid var(--hairline-2);
+		border-radius: 999px;
+		padding: 7px 16px;
+	}
+
+	/* Responsive ------------------------------------------------------------ */
+
+	@media (max-width: 900px) {
+		.body {
+			grid-template-columns: minmax(0, 1fr);
+			gap: 44px;
+		}
+
+		.sidebar {
+			position: static;
+		}
+	}
+
+	@media (max-width: 700px) {
+		.cs {
+			padding-inline: 20px;
+		}
+
+		.approach,
+		.screens,
+		.stats {
+			grid-template-columns: minmax(0, 1fr);
+		}
+
+		.stat {
+			border-left: 0;
+			border-top: 1px solid var(--hairline);
+		}
+
+		.stat:first-child {
+			border-top: 0;
+		}
+	}
+</style>

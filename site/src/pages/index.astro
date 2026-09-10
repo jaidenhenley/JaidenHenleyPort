@@ -1,0 +1,404 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import portrait from '../assets/images/pic08.jpeg';
+import coastcast from '../assets/images/CoastCastMain.png';
+import quickstudy from '../assets/images/PortQuickStudyIndexPic.png';
+
+const skills = [
+	'Swift',
+	'SwiftUI',
+	'SpriteKit',
+	'SwiftData',
+	'Foundation Models',
+	'VisionKit',
+	'Firebase',
+	'Game Center',
+	'AVFoundation',
+	'MapKit',
+	'Git',
+	'Xcode',
+];
+
+const socials = [
+	{ label: 'GitHub', href: 'https://github.com/jaidenhenley' },
+	{ label: 'LinkedIn', href: 'https://www.linkedin.com/in/jaiden-henley' },
+	{ label: 'Email', href: 'mailto:jaidenhenleydev@gmail.com' },
+];
+
+const testimonials = [
+	{
+		quote:
+			'Jaiden has consistently demonstrated the kind of mindset and work ethic that makes a lasting impact on any team he is part of. As both a teammate and mentee, he has been dependable, motivated, and highly engaged. He brings positive energy, takes initiative without needing to be asked, and approaches every opportunity with a genuine drive to learn and contribute. Jaiden is the type of learner and teammate every mentor hopes to work with.',
+		name: 'Ron P. Marshall',
+		role: 'Project Manager and Marketing Mentor, Apple Developer Academy Detroit',
+	},
+	{
+		quote:
+			'Jaiden brought a rare combination of curiosity, precision, and initiative to our MVP build. His ability to take complex ideas and translate them into clear, actionable progress made a real difference in moving this work forward.',
+		name: 'Ashlee Cunningham',
+		role: 'Founder, We Change Community Consulting',
+	},
+	{
+		quote:
+			'Jaiden took a higher level approach when working with me to truly understand why decisions were being made. His development was consistently high quality, timely, and explained in a way that nontechnical team members could understand.',
+		name: 'David Wasilewski',
+		role: 'Director, Cognition Daily',
+	},
+];
+---
+
+<Base
+	title="Jaiden Henley, iOS Developer"
+	description="iOS developer from Detroit building apps that ship: AI tools, games, and civic tech that solves real problems for real people."
+>
+	<section class="section hero">
+		<div class="container hero-grid">
+			<div class="hero-copy">
+				<span class="eyebrow">iOS Developer</span>
+				<h1>Jaiden Henley</h1>
+				<p class="hero-lede">
+					iOS developer from Detroit. I build apps that ship: AI tools, games, and civic tech
+					that solves real problems for real people.
+				</p>
+
+				<div class="cta-row">
+					<a class="btn btn-primary" href="/case-studies">View case studies</a>
+					<a class="btn btn-secondary" href="#about">About me</a>
+				</div>
+
+				<ul class="socials">
+					{
+						socials.map((social) => (
+							<li>
+								<a
+									href={social.href}
+									target={social.href.startsWith('http') ? '_blank' : undefined}
+									rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+								>
+									{social.label}
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+
+			<figure class="portrait">
+				<Image
+					src={portrait}
+					alt="Portrait of Jaiden Henley"
+					width={400}
+					height={500}
+					densities={[1, 2]}
+					loading="eager"
+					fetchpriority="high"
+				/>
+				<figcaption>
+					Apple Developer Academy, Detroit<br />
+					Co-founder, CH Studios LLC
+				</figcaption>
+			</figure>
+		</div>
+	</section>
+
+	<section class="section work" id="work">
+		<div class="container">
+			<header class="section-head">
+				<h2>Featured work</h2>
+				<p class="lede">Production iOS work, shipped to the App Store.</p>
+			</header>
+
+			<div class="project-grid">
+				<ProjectCard
+					title="CoastCast"
+					summary="A SwiftUI weather app that pulls live NWS data for Michigan beaches, with search, favorites, and real-time alerts."
+					cover={coastcast}
+					coverAlt="CoastCast app preview"
+					tags={['Swift', 'Python', 'CoreML', 'MapKit']}
+					href="/coastcast"
+					appStoreUrl="https://apps.apple.com/us/app/coastcast/id6760917476"
+				/>
+				<ProjectCard
+					title="QuickStudy"
+					summary="A flashcard tool that turns scans and PDFs into study-ready cards using on-device AI."
+					cover={quickstudy}
+					coverAlt="QuickStudy app preview"
+					tags={['SwiftUI', 'Foundation Models', 'VisionKit', 'PDF import']}
+					href="/quickstudy"
+					appStoreUrl="https://apps.apple.com/us/app/quickstudy-flashcard-tool/id6759993537"
+				/>
+			</div>
+
+			<div class="work-footer">
+				<a class="btn btn-secondary" href="/case-studies">View all case studies</a>
+			</div>
+		</div>
+	</section>
+
+	<section class="section about" id="about">
+		<div class="container about-grid">
+			<div class="about-copy">
+				<h2>About</h2>
+				<p class="lede">
+					I am a Swift and SwiftUI developer finishing at the Apple Developer Academy in
+					Detroit, with two apps on the App Store and a co-founded studio with a paying client.
+				</p>
+				<p class="lede">
+					My work ranges from a CoreML-powered beach conditions app to an on-device AI flashcard
+					tool built for real student workflows. I care about clean architecture, thoughtful UX,
+					and using Apple's frameworks the way they were intended.
+				</p>
+				<p class="lede">
+					Detroit shapes how I build. It pushes you toward things that are real and useful, not
+					just polished demos. That carries into everything I ship.
+				</p>
+				<p class="lede">
+					When I am not coding I am gaming, cooking, hitting the gym, or finding a new spot
+					along the Riverwalk.
+				</p>
+			</div>
+
+			<aside class="about-skills">
+				<span class="eyebrow">Toolkit</span>
+				<ul class="chip-row">
+					{skills.map((skill) => <li class="chip">{skill}</li>)}
+				</ul>
+				<a class="btn btn-secondary" href="/resume">View resume</a>
+			</aside>
+		</div>
+	</section>
+
+	<section class="section testimonials">
+		<div class="container">
+			<h2>What people say</h2>
+
+			<blockquote class="card featured">
+				<p>
+					"Jaiden is my co-founder at CH Studios and the person I trust most on a hard
+					engineering problem. We have built this company from the ground up and have been
+					taking on real client work together since day one."
+				</p>
+				<footer>
+					<span class="quote-name">George Clinkscales Jr.</span>
+					<span class="quote-role">Co-founder, CH Studios LLC</span>
+				</footer>
+			</blockquote>
+
+			<div class="quote-grid">
+				{
+					testimonials.map((item) => (
+						<blockquote class="card quote">
+							<p>"{item.quote}"</p>
+							<footer>
+								<span class="quote-name">{item.name}</span>
+								<span class="quote-role">{item.role}</span>
+							</footer>
+						</blockquote>
+					))
+				}
+			</div>
+		</div>
+	</section>
+</Base>
+
+<style>
+	.hero-grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) 400px;
+		gap: clamp(40px, 6vw, 72px);
+		align-items: center;
+	}
+
+	.hero-copy {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 24px;
+	}
+
+	.hero-lede {
+		font-size: var(--step-2);
+		line-height: 1.5;
+		letter-spacing: -0.015em;
+		color: var(--fg-2);
+		max-width: 600px;
+	}
+
+	.cta-row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px;
+		margin-top: 8px;
+	}
+
+	.socials {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 26px;
+		margin: 8px 0 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.socials a {
+		font-size: 14px;
+		font-weight: 450;
+		color: var(--fg-2);
+	}
+
+	.socials a:hover {
+		color: var(--accent);
+	}
+
+	.portrait {
+		display: flex;
+		flex-direction: column;
+		gap: 18px;
+		margin: 0;
+	}
+
+	.portrait :global(img) {
+		width: 100%;
+		aspect-ratio: 4 / 5;
+		object-fit: cover;
+		border-radius: var(--radius-xl);
+		border: 1px solid var(--hairline-2);
+		box-shadow: var(--shadow);
+	}
+
+	.portrait figcaption {
+		font-size: var(--step--1);
+		line-height: 1.5;
+		color: var(--fg-3);
+	}
+
+	.section-head {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+		margin-bottom: 40px;
+	}
+
+	.project-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 28px;
+	}
+
+	.work-footer {
+		display: flex;
+		justify-content: center;
+		margin-top: 40px;
+	}
+
+	.about {
+		background: var(--surface-2);
+		border-block: 1px solid var(--hairline-2);
+	}
+
+	.about-grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) 408px;
+		gap: clamp(40px, 6vw, 72px);
+	}
+
+	.about-copy {
+		display: flex;
+		flex-direction: column;
+		gap: 18px;
+	}
+
+	.about-skills {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 16px;
+	}
+
+	.about-skills .btn {
+		min-height: 46px;
+		margin-top: 8px;
+	}
+
+	.testimonials h2 {
+		margin-bottom: 28px;
+	}
+
+	.featured,
+	.quote {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+		margin: 0;
+	}
+
+	.featured {
+		padding: 34px;
+		margin-bottom: 24px;
+	}
+
+	.featured p {
+		font-size: var(--step-2);
+		line-height: 1.55;
+		letter-spacing: -0.014em;
+		color: var(--fg);
+	}
+
+	.quote {
+		padding: 30px;
+	}
+
+	.quote p {
+		font-size: 16.5px;
+		line-height: 1.6;
+		color: var(--fg-2);
+		flex-grow: 1;
+	}
+
+	.quote-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 24px;
+	}
+
+	.featured footer,
+	.quote footer {
+		display: flex;
+		flex-direction: column;
+		gap: 3px;
+	}
+
+	.quote-name {
+		font-size: 14.5px;
+		font-weight: 600;
+		color: var(--fg);
+	}
+
+	.quote-role {
+		font-size: var(--step--1);
+		color: var(--fg-3);
+	}
+
+	@media (max-width: 900px) {
+		.hero-grid,
+		.about-grid {
+			grid-template-columns: minmax(0, 1fr);
+		}
+
+		.hero-grid {
+			gap: 40px;
+		}
+
+		.portrait {
+			order: -1;
+			max-width: 340px;
+		}
+
+		.project-grid,
+		.quote-grid {
+			grid-template-columns: minmax(0, 1fr);
+		}
+	}
+</style>
