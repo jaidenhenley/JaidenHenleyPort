@@ -108,13 +108,11 @@ const rest = projects.filter((project) => project !== featured);
 		align-items: stretch;
 	}
 
-	/* App icon presented on a panel rather than cropped to fill. */
+	/* Icon sits directly on the card, with no panel or tint behind it. */
 	.cover {
 		display: grid;
 		place-items: center;
 		padding: clamp(32px, 5vw, 64px);
-		background: var(--surface-2);
-		border-inline-end: 1px solid var(--hairline-2);
 		overflow: hidden;
 	}
 
@@ -222,8 +220,6 @@ const rest = projects.filter((project) => project !== featured);
 		}
 
 		.cover {
-			border-inline-end: none;
-			border-bottom: 1px solid var(--hairline-2);
 			aspect-ratio: 16 / 10;
 		}
 	}

@@ -3,8 +3,9 @@ import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import portrait from '../assets/images/pic08.jpeg';
-import coastcast from '../assets/images/CoastCastMain.png';
-import quickstudy from '../assets/images/PortQuickStudyIndexPic.png';
+// Cards read from the shared project data so the home page cannot drift
+// out of sync with the case study index.
+import { featuredProjects } from '../data/projects';
 
 const skills = [
 	'Swift',
@@ -111,24 +112,19 @@ const testimonials = [
 			</header>
 
 			<div class="project-grid">
-				<ProjectCard
-					title="CoastCast"
-					summary="A SwiftUI weather app that pulls live NWS data for Michigan beaches, with search, favorites, and real-time alerts."
-					cover={coastcast}
-					coverAlt="CoastCast app preview"
-					tags={['Swift', 'Python', 'CoreML', 'MapKit']}
-					href="/coastcast"
-					appStoreUrl="https://apps.apple.com/us/app/coastcast/id6760917476"
-				/>
-				<ProjectCard
-					title="QuickStudy"
-					summary="A flashcard tool that turns scans and PDFs into study-ready cards using on-device AI."
-					cover={quickstudy}
-					coverAlt="QuickStudy app preview"
-					tags={['SwiftUI', 'Foundation Models', 'VisionKit', 'PDF import']}
-					href="/quickstudy"
-					appStoreUrl="https://apps.apple.com/us/app/quickstudy-flashcard-tool/id6759993537"
-				/>
+				{
+					featuredProjects.map((project) => (
+						<ProjectCard
+							title={project.title}
+							summary={project.summary}
+							cover={project.cover}
+							coverAlt={project.coverAlt}
+							tags={project.tags}
+							href={`/${project.slug}`}
+							appStoreUrl={project.appStoreUrl}
+						/>
+					))
+				}
 			</div>
 
 			<div class="work-footer">
