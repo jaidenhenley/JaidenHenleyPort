@@ -37,10 +37,10 @@
 .js [data-reveal] {
 	opacity: 0;
 	transition:
-		opacity var(--reveal-duration, 0.6s) var(--reveal-ease, var(--ease-out-soft)),
-		transform var(--reveal-duration, 0.6s) var(--reveal-ease, var(--ease-out-soft)),
-		filter var(--reveal-duration, 0.6s) var(--reveal-ease, var(--ease-out-soft)),
-		clip-path var(--reveal-duration, 0.6s) var(--reveal-ease, var(--ease-out-soft));
+		opacity var(--reveal-duration, 0.9s) var(--reveal-ease, var(--ease-out-soft)),
+		transform var(--reveal-duration, 0.9s) var(--reveal-ease, var(--ease-out-soft)),
+		filter var(--reveal-duration, 0.9s) var(--reveal-ease, var(--ease-out-soft)),
+		clip-path var(--reveal-duration, 0.9s) var(--reveal-ease, var(--ease-out-soft));
 	transition-delay: var(--reveal-delay, 0ms);
 }
 
@@ -59,7 +59,7 @@
 /* Text ------------------------------------------------------------------- */
 
 .js [data-reveal='text'] {
-	--reveal-duration: 0.55s;
+	--reveal-duration: 0.85s;
 	transform: translate3d(0, 12px, 0);
 }
 
@@ -67,7 +67,7 @@
    than a slide. Travel stays short so the type never looks like it is
    arriving from somewhere. */
 .js [data-reveal='headline'] {
-	--reveal-duration: 0.9s;
+	--reveal-duration: 1.35s;
 	transform: translate3d(0, 14px, 0);
 	filter: blur(10px);
 }
@@ -87,10 +87,10 @@
 	transform: translate3d(0, 0.3em, 0);
 	filter: blur(8px);
 	transition:
-		opacity 0.8s var(--ease-out-soft),
-		transform 0.8s var(--ease-out-soft),
-		filter 0.8s var(--ease-out-soft);
-	transition-delay: calc(var(--reveal-delay, 0ms) + var(--w, 0) * 60ms);
+		opacity 1.2s var(--ease-out-soft),
+		transform 1.2s var(--ease-out-soft),
+		filter 1.2s var(--ease-out-soft);
+	transition-delay: calc(var(--reveal-delay, 0ms) + var(--w, 0) * 90ms);
 }
 
 .js [data-reveal='words'].is-revealed .w {
@@ -102,19 +102,19 @@
 /* Surfaces --------------------------------------------------------------- */
 
 .js [data-reveal='surface'] {
-	--reveal-duration: 0.6s;
+	--reveal-duration: 0.9s;
 	transform: translate3d(0, 24px, 0);
 }
 
 .js [data-reveal='aside'] {
-	--reveal-duration: 0.7s;
+	--reveal-duration: 1.05s;
 	transform: translate3d(22px, 0, 0);
 }
 
 /* Media ------------------------------------------------------------------ */
 
 .js [data-reveal='media'] {
-	--reveal-duration: 0.75s;
+	--reveal-duration: 1.15s;
 	transform: translate3d(0, 34px, 0) scale(0.965);
 }
 
@@ -123,7 +123,7 @@
    on Apple product pages. The mask overshoots past the edge so the shadow
    fades in over the last stretch, and is dropped entirely once settled. */
 .js [data-reveal='frame'] {
-	--reveal-duration: 1s;
+	--reveal-duration: 1.5s;
 	transform: scale(1.06);
 	clip-path: inset(7% round 28px);
 }
@@ -140,13 +140,13 @@
 /* Details ---------------------------------------------------------------- */
 
 .js [data-reveal='rule'] {
-	--reveal-duration: 0.7s;
+	--reveal-duration: 1.05s;
 	transform: scaleX(0);
 	transform-origin: left center;
 }
 
 .js [data-reveal='pop'] {
-	--reveal-duration: 0.5s;
+	--reveal-duration: 0.75s;
 	--reveal-ease: var(--ease-out-spring);
 	transform: translate3d(0, 6px, 0) scale(0.88);
 }
@@ -154,13 +154,67 @@
 /* Stat: the number rises out of its own baseline, clipped so it appears to
    count up into place. Padding on the clip keeps descenders intact. */
 .js [data-reveal='stat'] {
-	--reveal-duration: 0.8s;
+	--reveal-duration: 1.2s;
 	transform: translate3d(0, 55%, 0);
 	clip-path: inset(-0.1em -0.1em 100% -0.1em);
 }
 
 .js [data-reveal='stat'].is-revealed {
 	clip-path: inset(-0.1em -0.1em -0.15em -0.1em);
+}
+
+/* Overture ---------------------------------------------------------------
+   The first screen, given more room than the scroll reveals: the same
+   decelerating curve and the same short travel, held longer and cleared out
+   of a deeper blur, with the order hand-timed in ScrollMotion.astro so the
+   portrait, the name, and the line about the work arrive one after another.
+   No overshoot and no long slides here: prominence comes from the length of
+   the settle and the focus pull, not from distance.
+   ------------------------------------------------------------------------ */
+
+.js [data-reveal][data-overture] {
+	--reveal-duration: 1.2s;
+}
+
+.js [data-reveal='text'][data-overture] {
+	transform: translate3d(0, 18px, 0);
+	filter: blur(6px);
+}
+
+.js [data-reveal='frame'][data-overture] {
+	--reveal-duration: 1.7s;
+	transform: scale(1.09);
+	clip-path: inset(10% round 34px);
+}
+
+.js [data-reveal='headline'][data-overture] {
+	--reveal-duration: 1.6s;
+	filter: blur(14px);
+}
+
+.js [data-reveal='words'][data-overture] .w {
+	transform: translate3d(0, 0.36em, 0);
+	filter: blur(13px);
+	transition-duration: 1.5s;
+	transition-delay: calc(var(--reveal-delay, 0ms) + var(--w, 0) * 110ms);
+}
+
+/* These sit after the shared .is-revealed rule at equal weight, so the
+   overture has to restate the settled state or its blur and mask would never
+   clear. */
+
+.js [data-reveal][data-overture].is-revealed {
+	transform: none;
+	filter: none;
+}
+
+.js [data-reveal='frame'][data-overture].is-revealed {
+	clip-path: inset(-80px round 0);
+}
+
+.js [data-reveal='words'][data-overture].is-revealed .w {
+	transform: none;
+	filter: none;
 }
 
 /* ==========================================================================
@@ -264,7 +318,9 @@
 
 @media (prefers-reduced-motion: reduce) {
 	.js [data-reveal],
-	.js [data-reveal] .w {
+	.js [data-reveal][data-overture],
+	.js [data-reveal] .w,
+	.js [data-reveal][data-overture] .w {
 		opacity: 1;
 		transform: none;
 		filter: none;

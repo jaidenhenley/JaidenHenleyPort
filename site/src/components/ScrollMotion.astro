@@ -97,22 +97,38 @@
 	];
 
 	/**
+	 * The first screen gets its own opening rather than the same cascade as the
+	 * rest of the page: a hand-timed ladder, so the portrait arrives, then the
+	 * name, then the line about the work. Delays here are absolute and are used
+	 * in place of the stagger, which is why they ignore MAX_DELAY_MS.
+	 */
+	const OVERTURE: { selector: string; delay: number }[] = [
+		{ selector: '.hero .portrait img', delay: 0 },
+		{ selector: '.hero-copy .eyebrow', delay: 260 },
+		{ selector: '.hero-copy h1', delay: 420 },
+		{ selector: '.hero-copy .hero-lede', delay: 820 },
+		{ selector: '.hero .portrait figcaption', delay: 1000 },
+		{ selector: '.hero-copy .cta-row', delay: 1120 },
+		{ selector: '.hero-copy .socials', delay: 1300 },
+	];
+
+	/**
 	 * Cascade step per intent. Small things cascade tightly so a row of chips
 	 * ripples; big things cascade slowly so each one gets its own moment.
 	 */
 	const STAGGER_MS: Record<Intent, number> = {
-		text: 50,
-		headline: 60,
+		text: 75,
+		headline: 90,
 		words: 0,
-		surface: 60,
+		surface: 90,
 		aside: 0,
-		media: 80,
+		media: 120,
 		frame: 0,
 		rule: 0,
-		pop: 32,
-		stat: 90,
+		pop: 48,
+		stat: 135,
 	};
-	const MAX_DELAY_MS = 320;
+	const MAX_DELAY_MS = 480;
 
 	/** Disposes the previous page's observer and listeners across navigation. */
 	let teardown: (() => void) | null = null;
@@ -162,6 +178,19 @@
 			}
 		}
 
+		// Hero elements keep their intent but trade the batch stagger for the
+		// overture's own timing, and take the heavier treatment in motion.css.
+		const overture = new Map<Element, number>();
+		if (!reduced) {
+			for (const { selector, delay } of OVERTURE) {
+				for (const el of document.querySelectorAll<HTMLElement>(selector)) {
+					if (!el.dataset.reveal || overture.has(el)) continue;
+					overture.set(el, delay);
+					el.dataset.overture = '';
+				}
+			}
+		}
+
 		if (reduced || !('IntersectionObserver' in window)) {
 			targets.forEach((el) => el.classList.add('is-revealed'));
 			teardown = null;
@@ -190,10 +219,15 @@
 
 			batch.forEach((el) => {
 				const intent = (el.dataset.reveal ?? 'text') as Intent;
-				const index = seen[intent] ?? 0;
-				seen[intent] = index + 1;
+				const fixed = overture.get(el);
+				let delay = fixed ?? 0;
 
-				const delay = Math.min(index * STAGGER_MS[intent], MAX_DELAY_MS);
+				if (fixed === undefined) {
+					const index = seen[intent] ?? 0;
+					seen[intent] = index + 1;
+					delay = Math.min(index * STAGGER_MS[intent], MAX_DELAY_MS);
+				}
+
 				el.style.setProperty('--reveal-delay', `${delay}ms`);
 				el.classList.add('is-animating', 'is-revealed');
 				pending.delete(el);
@@ -211,7 +245,7 @@
 				el.addEventListener('transitionend', (event) => {
 					if (event.target === el) done();
 				});
-				setTimeout(done, delay + 1600);
+				setTimeout(done, delay + (fixed === undefined ? 2400 : 3400));
 			});
 		};
 
