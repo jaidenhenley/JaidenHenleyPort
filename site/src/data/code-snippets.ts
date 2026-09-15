@@ -17,6 +17,12 @@ export interface ProjectCode {
 }
 
 export const projectCode: Record<string, ProjectCode> = {
+	'cognition-daily': {
+		snippets: [],
+		nextIterations:
+			'Deeper Apple Health coverage, richer longitudinal views as users accumulate months of data rather than weeks, and continued work with the research team on which instruments are validated enough to ship next.',
+	},
+
 	coastcast: {
 		snippets: [
 			{

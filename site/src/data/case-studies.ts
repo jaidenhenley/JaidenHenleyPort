@@ -1,5 +1,7 @@
 import type { ImageMetadata } from 'astro';
 
+import cognitionHero from '../assets/icons/cognition-daily.png';
+
 import coastcastHero from '../assets/icons/coastcast.png';
 import coastcastHome from '../assets/images/CoastCastHome.png';
 import coastcastSearch from '../assets/images/CoastCastSearch.png';
@@ -68,19 +70,113 @@ export interface CaseStudy {
 	problem: { intro: string; points: [string, string, string] };
 	approach: { title: string; body: string }[];
 	highlights: { term: string; body: string }[];
-	screens: CaseStudyScreen[];
-	demo: CaseStudyDemo;
+	/** Omitted while a study is still waiting on device screenshots. */
+	screens?: CaseStudyScreen[];
+	demo?: CaseStudyDemo;
 	role: string;
 	timeline: string;
 	platform: string;
 	stack: string[];
 	stats: { value: string; label: string }[];
-	reflection: string;
+	/** A single paragraph, or several rendered in order. */
+	reflection: string | string[];
 }
 
 export const caseStudies: Record<string, CaseStudy> = {
-	coastcast: {
+	'cognition-daily': {
 		number: '01',
+		category: 'Brain health',
+		tech: 'SwiftUI and HealthKit',
+		status: 'Live on the App Store',
+		lead: 'A free brain health app built to HIPAA standards from the first commit, where validated clinical screeners, Apple Health data, and a Brain Health Score all live under a privacy bar that was set before any feature was designed.',
+		primaryCta: {
+			label: 'View on the App Store',
+			href: 'https://apps.apple.com/us/app/cognition-daily/id6789218350',
+		},
+		secondaryCta: { label: 'Visit the site', href: 'https://cognitiondaily.net/' },
+		hero: cognitionHero,
+		heroAlt: 'Cognition Daily app icon',
+		overview: [
+			'Cognition Daily helps people build and keep the everyday habits that support brain health. You track physical activity, diet, sleep, mindfulness, and social connection, play cognitive games, and take screening tools at your own pace. All of it rolls up into a single Brain Health Score with a breakdown by pillar, so the daily choices that matter are visible in one place instead of scattered across five different apps.',
+			'I am the sole developer and designer. I built every screen, every service, and every piece of the data layer across a four month solo build. What I did not own was the medicine. A medical research team owned instrument selection, question wording, and scoring validity, and my job was to implement their work exactly rather than improve on it. That division is the whole story of this project: it is the first app I have built where the constraints came from outside the code, and where being right mattered more than being clever.',
+		],
+		problem: {
+			intro:
+				'Most apps can treat privacy as a checklist item near the end. An app that reads Apple Health, asks about depression and anxiety, and stores a person\u2019s medical history cannot. The compliance bar had to be set before the architecture, because almost every default convenience in iOS development quietly violates it.',
+			points: [
+				'Health data rules out the normal conveniences. No print debugging against real data, no caching responses to UserDefaults, no analytics SDK anywhere near a HealthKit read. The usual ways to make a feature easier to build are all closed.',
+				'The clinical content is a validated instrument, not copy. Question wording, scale labels, and scoring are fixed by the research team. Paraphrasing a question to fit a screen or rounding a score to look cleaner invalidates the data the app exists to collect.',
+				'Deletion has to be real. A user who asks to leave has to actually be gone, locally and remotely, which is a meaningfully harder engineering problem than flipping a soft delete flag and hiding some rows.',
+			],
+		},
+		approach: [
+			{
+				title: 'Decide what is allowed to touch disk',
+				body: 'Before writing features I drew a line through the data model: credentials and session tokens go to Keychain, non-identifying preferences go to UserDefaults, and everything clinical stays server side behind the user\u2019s session. Nothing sensitive is written to a local file, and the app ships with a data protection entitlement so anything that does land on disk is unreadable while the device is locked. Drawing that line first meant I never had to go back and audit for leaks, because there was no path for one to get written in the first place.',
+			},
+			{
+				title: 'Debug without ever printing the data',
+				body: 'Losing print debugging on the data that matters most sounds small and is not. I leaned on tests instead, sixty five suites written in Swift Testing that exercise scoring, health imports, and purging against synthetic inputs. When something was wrong in production the fix came from reproducing it in a test with fake data, not from logging a real user\u2019s answers to the console.',
+			},
+			{
+				title: 'Read from Apple Health, never write, never forward',
+				body: 'The app reads steps, exercise minutes, workouts, sleep, and mindful sessions so weekly tracking fills itself in. It writes nothing back, and the usage string says so in plain language rather than leaving users to guess. HealthKit values are firewalled from every third party boundary in the app, which is a rule I had to enforce by hand at each integration point because nothing in the SDK enforces it for you.',
+			},
+			{
+				title: 'Implement the instruments exactly, then get out of the way',
+				body: 'Every screener question, scale label, and option string is copied character for character from the validated source, apostrophes and punctuation included. Where my scoring disagreed with the reference implementation, the reference won and I changed my code. Screening results open behind a consent sheet with crisis resources, and nothing in the app uses diagnostic language, because a screener indicating a risk is not a diagnosis and the interface is not allowed to imply otherwise.',
+			},
+		],
+		highlights: [
+			{
+				term: 'Keychain only for credentials',
+				body: 'Session tokens live in Keychain and never in UserDefaults or a plist. The launch route resolver reads Keychain state directly to decide where to send a returning user, so the routing decision does not require a less secure copy of auth state somewhere else.',
+			},
+			{
+				term: 'Real deletion, both ends',
+				body: 'Account deletion runs a local purge alongside the server side removal, and Apple sign in users are re-authenticated before it proceeds. A pending deletion state handles the window where the request is placed but not yet finished, so the app never shows a half deleted account as if it were healthy.',
+			},
+			{
+				term: 'Privacy cover on backgrounding',
+				body: 'Sensitive screens are masked in the app switcher, so a screener in progress does not end up in a system snapshot sitting on disk. It cuts against SwiftUI\u2019s normal lifecycle assumptions and took more care than the one line it looks like.',
+			},
+			{
+				term: 'A privacy manifest that matches reality',
+				body: 'Ten collected data types, every one linked to the user, every one marked as not used for tracking, and zero tracking domains. Required reason declarations cover both the app\u2019s own UserDefaults access and the system boot time clock the keystroke timing uses. The manifest was maintained as features landed rather than filled out the week of submission.',
+			},
+			{
+				term: 'Modern concurrency under isolation',
+				body: 'Thirty six observable models and forty four files under actor or main actor isolation, with async await throughout and no completion handlers or dispatch queues anywhere. Weekly pillar scores are fetched concurrently and composed into one dashboard state, so a slow pillar does not serialize behind the others.',
+			},
+			{
+				term: 'Accessibility as part of the instrument',
+				body: 'Dynamic Type is supported across the app and OpenDyslexic is available as a font preference. Inter and Merriweather are bundled deliberately rather than substituted with system fonts, because for an app people are asked to read carefully and answer honestly, legibility is part of the measurement.',
+			},
+		],
+		demo: {
+			video: '/videos/CognitionDailyDemo.mp4',
+			aspect: 'phone',
+			heading: 'From habit to score',
+			body: 'Logging a day of tracking, playing through a game, and watching both land in the Brain Health Score on the dashboard.',
+		},
+		role: 'Sole developer and designer, clinically supervised',
+		timeline: 'Jun 2026 to Sep 2026',
+		platform: 'iPhone and iPad',
+		stack: ['SwiftUI', 'Swift Concurrency', 'Observation', 'HealthKit', 'Supabase', 'Keychain Services', 'Sign in with Apple', 'Swift Charts', 'Swift Testing'],
+		stats: [
+			{ value: '5', label: 'Brain health pillars' },
+			{ value: '5', label: 'Validated screeners' },
+			{ value: '10', label: 'Declared data types' },
+			{ value: '0', label: 'Tracking domains' },
+		],
+		reflection: [
+			'I went in thinking compliance was a checklist I would work through before submission. It is not. It is a design constraint that reaches back into the first file you write, and it removes tools you did not realize you depended on. Not being able to print a value, cache a response, or reach for an analytics SDK forced a discipline on this codebase that I would not have arrived at on my own, and the app is better built for it.',
+			'The other lesson was learning to build to a specification I was not allowed to improve. My instinct on every prior project was to fix anything that looked wrong. Here, wording I would have tightened and scoring I would have rounded were both off limits, because the value of the data depends on the instrument staying identical to the validated version. Giving up that authorship was harder than any of the engineering, and it is the part I expect to matter most in the work I do next.',
+		],
+	},
+
+	coastcast: {
+		number: '02',
 		category: 'Weather',
 		tech: 'SwiftUI and Python',
 		status: 'Live on the App Store',
@@ -196,7 +292,7 @@ export const caseStudies: Record<string, CaseStudy> = {
 	},
 
 	quickstudy: {
-		number: '02',
+		number: '03',
 		category: 'Study tools',
 		tech: 'On-device AI',
 		status: 'Live on the App Store',
@@ -308,7 +404,7 @@ export const caseStudies: Record<string, CaseStudy> = {
 	},
 
 	'take-flight': {
-		number: '03',
+		number: '04',
 		category: 'Games',
 		tech: 'SpriteKit and SwiftUI',
 		status: 'Live on the App Store',
@@ -417,7 +513,7 @@ export const caseStudies: Record<string, CaseStudy> = {
 	},
 
 	commonsight: {
-		number: '04',
+		number: '05',
 		category: 'Civic tech',
 		tech: 'Firebase and Foundation Models',
 		status: 'In development',
@@ -522,7 +618,7 @@ export const caseStudies: Record<string, CaseStudy> = {
 	},
 
 	roastingplant: {
-		number: '05',
+		number: '06',
 		category: 'Commerce',
 		tech: 'SwiftUI',
 		status: 'First solo build',

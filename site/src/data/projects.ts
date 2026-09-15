@@ -1,5 +1,6 @@
 import type { ImageMetadata } from 'astro';
 
+import cognitionCover from '../assets/icons/cognition-daily.png';
 import coastcastCover from '../assets/icons/coastcast.png';
 import quickstudyCover from '../assets/icons/quickstudy.png';
 import takeflightCover from '../assets/icons/take-flight.png';
@@ -25,6 +26,23 @@ export interface Project {
 
 export const projects: Project[] = [
 	{
+		slug: 'cognition-daily',
+		title: 'Cognition Daily',
+		summary:
+			'A free brain health app built to HIPAA standards, pairing validated clinical screeners with Apple Health data in a single Brain Health Score.',
+		cover: cognitionCover,
+		coverAlt: 'Cognition Daily app icon',
+		tags: ['SwiftUI', 'HealthKit', 'Supabase', 'Swift Testing'],
+		appStoreUrl: 'https://apps.apple.com/us/app/cognition-daily/id6789218350',
+		featured: true,
+		stats: [
+			{ value: '5', label: 'Brain health pillars' },
+			{ value: '5', label: 'Validated screeners' },
+			{ value: '10', label: 'Declared data types' },
+			{ value: '0', label: 'Tracking domains' },
+		],
+	},
+	{
 		slug: 'coastcast',
 		title: 'CoastCast',
 		summary:
@@ -33,7 +51,6 @@ export const projects: Project[] = [
 		coverAlt: 'CoastCast app icon',
 		tags: ['Swift', 'Python', 'CoreML', 'MapKit'],
 		appStoreUrl: 'https://apps.apple.com/us/app/coastcast/id6760917476',
-		featured: true,
 		stats: [
 			{ value: '3', label: 'Live data sources' },
 			{ value: '4', label: 'Great Lakes covered' },
@@ -82,5 +99,5 @@ export const projects: Project[] = [
 ];
 
 export const featuredProjects = projects.filter((project) =>
-	['coastcast', 'quickstudy'].includes(project.slug)
+	['cognition-daily', 'coastcast'].includes(project.slug)
 );

@@ -45,7 +45,7 @@ const code = projectCode[project.slug];
 
 		<div class="body">
 			<div class="main">
-				<CaseStudyDemo title={project.title} study={study} />
+				{study.demo && <CaseStudyDemo title={project.title} demo={study.demo} />}
 
 				<section class="block">
 					<span class="eyebrow">Overview</span>
@@ -91,30 +91,34 @@ const code = projectCode[project.slug];
 					</ul>
 				</section>
 
-				<section class="block">
-					<h2>Screens</h2>
-					<span class="rule" aria-hidden="true"></span>
-					<div class="screens">
-						{
-							study.screens.map((screen) => (
-								<figure>
-									<PhoneFrame>
-										<Image
-											src={screen.image}
-											alt={screen.imageAlt}
-											widths={[420, 840]}
-											sizes="(max-width: 700px) 100vw, 400px"
-										/>
-									</PhoneFrame>
-									<figcaption>
-										<h3>{screen.caption}</h3>
-										<p>{screen.body}</p>
-									</figcaption>
-								</figure>
-							))
-						}
-					</div>
-				</section>
+				{
+					study.screens && study.screens.length > 0 && (
+						<section class="block">
+							<h2>Screens</h2>
+							<span class="rule" aria-hidden="true" />
+							<div class="screens">
+								{
+									study.screens.map((screen) => (
+										<figure>
+											<PhoneFrame>
+												<Image
+													src={screen.image}
+													alt={screen.imageAlt}
+													widths={[420, 840]}
+													sizes="(max-width: 700px) 100vw, 400px"
+												/>
+											</PhoneFrame>
+											<figcaption>
+												<h3>{screen.caption}</h3>
+												<p>{screen.body}</p>
+											</figcaption>
+										</figure>
+									))
+								}
+							</div>
+						</section>
+					)
+				}
 
 				{
 					code && code.snippets.length > 0 && (
@@ -210,7 +214,11 @@ const code = projectCode[project.slug];
 					))
 				}
 			</div>
-			<p class="reflection">{study.reflection}</p>
+			{
+				(Array.isArray(study.reflection) ? study.reflection : [study.reflection]).map(
+					(paragraph) => <p class="reflection">{paragraph}</p>
+				)
+			}
 		</section>
 
 		<a class="next" href={`/${next.slug}`}>

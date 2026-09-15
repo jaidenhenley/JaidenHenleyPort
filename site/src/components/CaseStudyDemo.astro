@@ -1,15 +1,14 @@
 ---
 import { getImage } from 'astro:assets';
 import PhoneFrame from './PhoneFrame.astro';
-import type { CaseStudy } from '../data/case-studies';
+import type { CaseStudyDemo } from '../data/case-studies';
 
 interface Props {
 	title: string;
-	study: CaseStudy;
+	demo: CaseStudyDemo;
 }
 
-const { title, study } = Astro.props;
-const demo = study.demo;
+const { title, demo } = Astro.props;
 const isPhone = demo.aspect === 'phone';
 
 // With a poster, nothing but that still loads until the viewer presses play.
