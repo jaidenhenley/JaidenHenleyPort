@@ -40,14 +40,22 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 		<script is:inline>
 			// Applied before first paint so the page never flashes the wrong theme.
 			(() => {
-				try {
-					const stored = localStorage.getItem('theme');
-					if (stored === 'light' || stored === 'dark') {
-						document.documentElement.dataset.theme = stored;
-					}
-				} catch {}
-				// Gates every reveal style, so content stays visible if JS never runs.
-				document.documentElement.classList.add('js');
+				const applyRootState = (doc) => {
+					try {
+						const stored = localStorage.getItem('theme');
+						if (stored === 'light' || stored === 'dark') {
+							doc.documentElement.dataset.theme = stored;
+						}
+					} catch {}
+					// Gates every reveal style, so content stays visible if JS never runs.
+					doc.documentElement.classList.add('js');
+				};
+				applyRootState(document);
+				// ClientRouter replaces <html> attributes with the incoming page's on
+				// every navigation, so re-apply the saved theme before the swap.
+				document.addEventListener('astro:before-swap', (event) => {
+					applyRootState(event.newDocument);
+				});
 			})();
 		</script>
 	</head>
