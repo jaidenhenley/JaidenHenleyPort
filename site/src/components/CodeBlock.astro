@@ -17,6 +17,7 @@ const { title, language, description, code } = Astro.props;
 			<button class="copy" type="button" data-copy aria-label={`Copy the ${title} code`}>
 				Copy
 			</button>
+			<span class="visually-hidden" role="status" data-copy-status></span>
 		</div>
 	</header>
 	<p>{description}</p>
@@ -98,14 +99,32 @@ const { title, language, description, code } = Astro.props;
 			if (btn.dataset.bound === 'true') continue;
 			btn.dataset.bound = 'true';
 			btn.addEventListener('click', async () => {
-				const code = btn.closest('.snippet')?.querySelector('code')?.textContent ?? '';
+				const codeEl = btn.closest('.snippet')?.querySelector('code');
+				const status = btn.parentElement?.querySelector<HTMLElement>('[data-copy-status]');
+				const code = codeEl?.textContent ?? '';
 				try {
 					await navigator.clipboard.writeText(code);
 					btn.textContent = 'Copied';
+					if (status) status.textContent = 'Code copied';
 				} catch {
-					btn.textContent = 'Press Cmd C';
+					// Select the code so user can press Cmd/Ctrl+C
+					if (codeEl) {
+						const range = document.createRange();
+						range.selectNodeContents(codeEl);
+						const selection = window.getSelection();
+						if (selection) {
+							selection.removeAllRanges();
+							selection.addRange(range);
+						}
+					}
+					const isMac = /Mac|iPhone|iPad|iPod/.test(navigator.platform || navigator.userAgent);
+					btn.textContent = isMac ? 'Press ⌘C' : 'Press Ctrl+C';
+					if (status) status.textContent = `Code selected, ${btn.textContent} to copy`;
 				}
-				setTimeout(() => (btn.textContent = 'Copy'), 2000);
+				setTimeout(() => {
+					btn.textContent = 'Copy';
+					if (status) status.textContent = '';
+				}, 2000);
 			});
 		}
 	});

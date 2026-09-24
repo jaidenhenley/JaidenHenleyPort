@@ -105,7 +105,7 @@ const code = projectCode[project.slug];
 													src={screen.image}
 													alt={screen.imageAlt}
 													widths={[420, 840]}
-													sizes="(max-width: 700px) 100vw, 400px"
+													sizes="300px"
 												/>
 											</PhoneFrame>
 											<figcaption>
@@ -370,8 +370,19 @@ const code = projectCode[project.slug];
 	.screens figure {
 		display: flex;
 		flex-direction: column;
+		align-items: center;
 		gap: 16px;
 		margin: 0;
+		text-align: center;
+	}
+
+	.screens figcaption p {
+		margin-inline: auto;
+	}
+
+	/* Capped so the whole phone and its caption fit in one viewport. */
+	.screens figure > :global(.phone) {
+		width: min(300px, 100%);
 	}
 
 	.screens h3 {
@@ -445,12 +456,8 @@ const code = projectCode[project.slug];
 	.fact-cta .badge-link {
 		display: flex;
 		justify-content: center;
-		transition: transform 0.18s ease;
 	}
 
-	.fact-cta .badge-link:active {
-		transform: scale(0.98);
-	}
 
 	.fact-cta .badge-link img {
 		height: 48px;

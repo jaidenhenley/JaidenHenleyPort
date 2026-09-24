@@ -1,6 +1,6 @@
 ---
 const links = [
-	{ label: 'Work', href: '/case-studies' },
+	{ label: 'Case Studies', href: '/case-studies' },
 	{ label: 'About', href: '/#about' },
 	{ label: 'Resume', href: '/resume' },
 	{ label: 'Contact', href: '/contact' },
@@ -32,7 +32,7 @@ const links = [
 		</div>
 	</div>
 
-	<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile" hidden>
+	<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile" inert hidden>
 		<div class="container">
 			{links.map((link) => <a href={link.href}>{link.label}</a>)}
 		</div>
@@ -40,32 +40,89 @@ const links = [
 </header>
 
 <script>
+	// This <script> is bundled as a single module and evaluated once, even
+	// though the header persists across view transitions (transition:persist),
+	// so these listeners are only ever bound a single time.
 	const root = document.documentElement;
 	const toggle = document.querySelector<HTMLButtonElement>('.theme-toggle');
 	const navToggle = document.querySelector<HTMLButtonElement>('.nav-toggle');
 	const mobileNav = document.querySelector<HTMLElement>('.mobile-nav');
+	const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+	const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+	function effectiveTheme(): 'light' | 'dark' {
+		if (root.dataset.theme === 'light' || root.dataset.theme === 'dark') {
+			return root.dataset.theme;
+		}
+		return prefersDark.matches ? 'dark' : 'light';
+	}
 
 	toggle?.addEventListener('click', () => {
-		// Light is the default, so anything other than an explicit dark choice
-		// counts as light and toggles into dark.
-		const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+		const next = effectiveTheme() === 'dark' ? 'light' : 'dark';
+
+		if (!prefersReducedMotion.matches) {
+			root.classList.add('theme-transition');
+			window.setTimeout(() => root.classList.remove('theme-transition'), 350);
+		}
+
 		root.dataset.theme = next;
 		try {
 			localStorage.setItem('theme', next);
 		} catch {}
 	});
 
+	let navOpenTimeout: ReturnType<typeof setTimeout> | undefined;
+
+	function closeMobileNav(returnFocus = false) {
+		if (!mobileNav || !navToggle) return;
+		if (navToggle.getAttribute('aria-expanded') !== 'true') return;
+
+		navToggle.setAttribute('aria-expanded', 'false');
+		mobileNav.dataset.state = 'closed';
+		mobileNav.inert = true;
+
+		clearTimeout(navOpenTimeout);
+		const delay = prefersReducedMotion.matches ? 0 : 220;
+		navOpenTimeout = setTimeout(() => {
+			mobileNav.hidden = true;
+		}, delay);
+
+		if (returnFocus) navToggle.focus();
+	}
+
+	function openMobileNav() {
+		if (!mobileNav || !navToggle) return;
+		clearTimeout(navOpenTimeout);
+		mobileNav.hidden = false;
+		mobileNav.inert = false;
+		// Force layout so the browser picks up `hidden` being removed before
+		// flipping the data-state, which is what actually animates.
+		void mobileNav.offsetHeight;
+		mobileNav.dataset.state = 'open';
+		navToggle.setAttribute('aria-expanded', 'true');
+	}
+
 	navToggle?.addEventListener('click', () => {
 		const open = navToggle.getAttribute('aria-expanded') === 'true';
-		navToggle.setAttribute('aria-expanded', String(!open));
-		if (mobileNav) mobileNav.hidden = open;
+		if (open) {
+			closeMobileNav();
+		} else {
+			openMobileNav();
+		}
 	});
 
 	mobileNav?.addEventListener('click', (event) => {
 		if ((event.target as HTMLElement).tagName !== 'A') return;
-		navToggle?.setAttribute('aria-expanded', 'false');
-		mobileNav.hidden = true;
+		closeMobileNav();
 	});
+
+	document.addEventListener('keydown', (event) => {
+		if (event.key !== 'Escape') return;
+		if (navToggle?.getAttribute('aria-expanded') !== 'true') return;
+		closeMobileNav(true);
+	});
+
+	document.addEventListener('astro:before-swap', () => closeMobileNav());
 </script>
 
 <style>
@@ -77,6 +134,23 @@ const links = [
 		-webkit-backdrop-filter: saturate(180%) blur(20px);
 		backdrop-filter: saturate(180%) blur(20px);
 		border-bottom: 1px solid var(--hairline-2);
+	}
+
+	@media (prefers-reduced-transparency: reduce) {
+		.site-header {
+			background: var(--bg);
+			-webkit-backdrop-filter: none;
+			backdrop-filter: none;
+		}
+	}
+
+	@media (prefers-contrast: more) {
+		.site-header {
+			background: var(--bg);
+			-webkit-backdrop-filter: none;
+			backdrop-filter: none;
+			border-bottom: 1px solid var(--fg-3);
+		}
 	}
 
 	.inner {
@@ -102,7 +176,7 @@ const links = [
 	}
 
 	.nav a {
-		font-size: 14px;
+		font-size: 0.875rem;
 		font-weight: 450;
 		color: var(--fg-2);
 	}
@@ -151,6 +225,16 @@ const links = [
 		display: block;
 	}
 
+	@media (prefers-color-scheme: dark) {
+		:global(:root:not([data-theme='light'])) .icon-sun {
+			display: none;
+		}
+
+		:global(:root:not([data-theme='light'])) .icon-moon {
+			display: block;
+		}
+	}
+
 	.nav-toggle {
 		display: none;
 		flex-direction: column;
@@ -163,11 +247,36 @@ const links = [
 		height: 1.5px;
 		border-radius: 2px;
 		background: currentColor;
+		transition: transform 0.2s ease, opacity 0.2s ease;
+	}
+
+	.nav-toggle[aria-expanded='true'] span:first-child {
+		transform: translateY(3.25px) rotate(45deg);
+	}
+
+	.nav-toggle[aria-expanded='true'] span:last-child {
+		transform: translateY(-3.25px) rotate(-45deg);
 	}
 
 	.mobile-nav {
 		border-top: 1px solid var(--hairline-2);
 		padding-block: 8px 16px;
+		transform-origin: top;
+		opacity: 0;
+		transform: translateY(-8px);
+		transition: opacity 0.22s ease-out, transform 0.22s ease-out;
+	}
+
+	.mobile-nav[data-state='open'] {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.mobile-nav {
+			transform: none;
+			transition: opacity 0.12s linear;
+		}
 	}
 
 	.mobile-nav :global(.container) {

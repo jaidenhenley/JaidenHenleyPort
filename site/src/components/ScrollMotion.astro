@@ -5,7 +5,7 @@
  * Targets are matched by selector rather than hand-tagged, so every page picks
  * up the same rhythm. Each group declares an intent (see motion.css) that sets
  * the kind of reveal it gets: headlines pull into focus, media opens or rises,
- * rules wipe, chips pop, body copy barely moves.
+ * rules wipe, chips settle, body copy barely moves.
  *
  * Groups are matched in order and an element belongs to the first group that
  * claims it, so the specific selectors sit above the broad ones.
@@ -13,6 +13,11 @@
  * Stagger is decided when a batch actually reveals, not by DOM order at load,
  * so a grid whose second row sits a full viewport lower does not inherit a
  * delay meant to cascade off the first row.
+ *
+ * Only the first page of a visit gets the overture and the first-screen
+ * reveals. After a client-side navigation, whatever is already on screen is
+ * settled at once with no transition, so moving between pages never blanks
+ * the screen or replays an opening; only content below the fold reveals.
  */
 ---
 
@@ -100,16 +105,19 @@
 	 * The first screen gets its own opening rather than the same cascade as the
 	 * rest of the page: a hand-timed ladder, so the portrait arrives, then the
 	 * name, then the line about the work. Delays here are absolute and are used
-	 * in place of the stagger, which is why they ignore MAX_DELAY_MS.
+	 * in place of the stagger, which is why they ignore MAX_DELAY_MS. The ladder
+	 * is kept tight (last step at 600ms, everything settled by about 1.5s) so
+	 * the order reads without the reader waiting on it, and it only ever plays
+	 * on the first page load of a visit.
 	 */
 	const OVERTURE: { selector: string; delay: number }[] = [
 		{ selector: '.hero .portrait img', delay: 0 },
-		{ selector: '.hero-copy .eyebrow', delay: 260 },
-		{ selector: '.hero-copy h1', delay: 420 },
-		{ selector: '.hero-copy .hero-lede', delay: 820 },
-		{ selector: '.hero .portrait figcaption', delay: 1000 },
-		{ selector: '.hero-copy .cta-row', delay: 1120 },
-		{ selector: '.hero-copy .socials', delay: 1300 },
+		{ selector: '.hero-copy .eyebrow', delay: 120 },
+		{ selector: '.hero-copy h1', delay: 200 },
+		{ selector: '.hero-copy .hero-lede', delay: 380 },
+		{ selector: '.hero .portrait figcaption', delay: 460 },
+		{ selector: '.hero-copy .cta-row', delay: 520 },
+		{ selector: '.hero-copy .socials', delay: 600 },
 	];
 
 	/**
@@ -117,21 +125,27 @@
 	 * ripples; big things cascade slowly so each one gets its own moment.
 	 */
 	const STAGGER_MS: Record<Intent, number> = {
-		text: 75,
-		headline: 90,
+		text: 60,
+		headline: 70,
 		words: 0,
-		surface: 90,
+		surface: 70,
 		aside: 0,
-		media: 120,
+		media: 90,
 		frame: 0,
 		rule: 0,
-		pop: 48,
-		stat: 135,
+		pop: 36,
+		stat: 100,
 	};
-	const MAX_DELAY_MS = 480;
+	const MAX_DELAY_MS = 320;
 
 	/** Disposes the previous page's observer and listeners across navigation. */
 	let teardown: (() => void) | null = null;
+	/**
+	 * True until the first page has been set up. The module is evaluated once
+	 * and survives ClientRouter navigations, so this marks the difference
+	 * between arriving at the site and moving around within it.
+	 */
+	let firstLoad = true;
 	// Trigger just below the fold so motion reads as the page settling ahead of
 	// the reader rather than reacting after they have already arrived.
 	const LEAD_RATIO = 0.1;
@@ -166,6 +180,8 @@
 
 	function init() {
 		const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+		const arriving = firstLoad;
+		firstLoad = false;
 		const claimed = new Set<Element>();
 		const targets: HTMLElement[] = [];
 
@@ -180,8 +196,9 @@
 
 		// Hero elements keep their intent but trade the batch stagger for the
 		// overture's own timing, and take the heavier treatment in motion.css.
+		// Only on arrival: coming back to the home page does not replay it.
 		const overture = new Map<Element, number>();
-		if (!reduced) {
+		if (arriving && !reduced) {
 			for (const { selector, delay } of OVERTURE) {
 				for (const el of document.querySelectorAll<HTMLElement>(selector)) {
 					if (!el.dataset.reveal || overture.has(el)) continue;
@@ -191,13 +208,32 @@
 			}
 		}
 
-		if (reduced || !('IntersectionObserver' in window)) {
+		if (!('IntersectionObserver' in window)) {
 			targets.forEach((el) => el.classList.add('is-revealed'));
 			teardown = null;
 			return;
 		}
 
 		const pending = new Set(targets);
+
+		// After a client-side navigation, settle everything already on screen
+		// at once. .is-instant switches transitions off (see motion.css) for the
+		// frame the settled state is committed in, and is dropped two frames
+		// later so hover and press transitions work as normal afterwards. All
+		// positions are read before any class is written, to avoid a layout per
+		// element.
+		if (!arriving) {
+			const onScreen = targets.filter((el) => el.getBoundingClientRect().top < innerHeight);
+			onScreen.forEach((el) => {
+				el.classList.add('is-instant', 'is-revealed');
+				pending.delete(el);
+			});
+			if (onScreen.length) {
+				requestAnimationFrame(() =>
+					requestAnimationFrame(() => onScreen.forEach((el) => el.classList.remove('is-instant')))
+				);
+			}
+		}
 
 		/**
 		 * Reveals a set together, cascading in visual reading order. Delay is
@@ -222,7 +258,8 @@
 				const fixed = overture.get(el);
 				let delay = fixed ?? 0;
 
-				if (fixed === undefined) {
+				// Reduced motion is a plain cross-fade, so there is no cascade.
+				if (fixed === undefined && !reduced) {
 					const index = seen[intent] ?? 0;
 					seen[intent] = index + 1;
 					delay = Math.min(index * STAGGER_MS[intent], MAX_DELAY_MS);
@@ -245,7 +282,7 @@
 				el.addEventListener('transitionend', (event) => {
 					if (event.target === el) done();
 				});
-				setTimeout(done, delay + (fixed === undefined ? 2400 : 3400));
+				setTimeout(done, delay + (fixed === undefined ? 1200 : 1600));
 			});
 		};
 
@@ -258,7 +295,7 @@
 			{ rootMargin: `0px 0px ${LEAD_RATIO * 100}% 0px`, threshold: 0.01 }
 		);
 
-		targets.forEach((el) => observer.observe(el));
+		pending.forEach((el) => observer.observe(el));
 
 		// The observer can miss elements that are jumped past rather than scrolled
 		// through: an anchor link, a restored scroll position, or a flung scroll
@@ -330,4 +367,10 @@
 	// astro:page-load fires on first paint and again after every client-side
 	// navigation, which DOMContentLoaded does not once the router is in play.
 	document.addEventListener('astro:page-load', start);
+
+	// iOS Safari only applies :active on touch when a touchstart listener exists
+	// somewhere above the element. An empty passive one on the document is
+	// enough for the card and button press states in motion.css, and since the
+	// module runs once it is bound once, surviving navigation with the document.
+	document.addEventListener('touchstart', () => {}, { passive: true });
 </script>

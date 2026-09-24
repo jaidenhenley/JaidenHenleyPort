@@ -49,6 +49,8 @@ const isAppStore = study.primaryCta.href.includes('apps.apple.com');
 			alt={study.heroAlt}
 			widths={[440, 680, 880]}
 			sizes="(max-width: 900px) 340px, 440px"
+			loading="eager"
+			fetchpriority="high"
 		/>
 	</figure>
 </header>
@@ -111,11 +113,6 @@ const isAppStore = study.primaryCta.href.includes('apps.apple.com');
 		display: inline-flex;
 		align-items: center;
 		border-radius: var(--radius-md);
-		transition: transform 0.18s ease;
-	}
-
-	.badge-link:active {
-		transform: scale(0.98);
 	}
 
 	.badge-link img {

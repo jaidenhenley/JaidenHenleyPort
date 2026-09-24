@@ -57,11 +57,11 @@ const testimonials = [
 	<section class="section hero">
 		<div class="container hero-grid">
 			<div class="hero-copy">
-				<span class="eyebrow">iOS Developer</span>
+				<span class="eyebrow">Detroit · Open to iOS roles</span>
 				<h1>Jaiden Henley</h1>
 				<p class="hero-lede">
-					iOS developer from Detroit. I build apps that ship: AI tools, games, and civic tech
-					that solves real problems for real people.
+					I build iOS apps that ship: AI tools, games, and civic tech that solves real problems
+					for real people.
 				</p>
 
 				<div class="cta-row">
@@ -138,8 +138,9 @@ const testimonials = [
 			<div class="about-copy">
 				<h2>About</h2>
 				<p class="lede">
-					I am a Swift and SwiftUI developer finishing at the Apple Developer Academy in
-					Detroit, with two apps on the App Store and a co-founded studio with a paying client.
+					I am a Swift and SwiftUI developer in the Apple Developer Academy's second-year
+					cohort in Detroit, with four apps on the App Store and a co-founded studio with paying
+					clients.
 				</p>
 				<p class="lede">
 					My work ranges from a CoreML-powered beach conditions app to an on-device AI flashcard
@@ -257,6 +258,8 @@ const testimonials = [
 
 	.portrait :global(img) {
 		width: 100%;
+		/* The height attribute is only for layout reservation; aspect-ratio sizes it. */
+		height: auto;
 		aspect-ratio: 4 / 5;
 		object-fit: cover;
 		border-radius: var(--radius-xl);
@@ -388,13 +391,23 @@ const testimonials = [
 		}
 
 		.portrait {
-			order: -1;
-			max-width: 340px;
+			max-width: 280px;
 		}
 
 		.project-grid,
 		.quote-grid {
 			grid-template-columns: minmax(0, 1fr);
+		}
+	}
+
+	@media (max-width: 600px) {
+		.portrait {
+			max-width: 200px;
+		}
+
+		.portrait :global(img) {
+			aspect-ratio: 1 / 1;
+			border-radius: var(--radius-lg);
 		}
 	}
 </style>
