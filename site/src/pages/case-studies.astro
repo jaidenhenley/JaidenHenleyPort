@@ -7,6 +7,11 @@ import { projects } from '../data/projects';
 
 const featured = projects.find((project) => project.featured)!;
 const rest = projects.filter((project) => project !== featured);
+
+// The featured project is not a ProjectCard, so its icon is named here. The
+// string must match ProjectCard and CaseStudyHero exactly: the browser only
+// morphs an element into one with the identical view-transition-name.
+const featuredIconName = `icon-${featured.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
 ---
 
 <Base
@@ -28,6 +33,9 @@ const rest = projects.filter((project) => project !== featured);
 						alt={featured.coverAlt}
 						widths={[560, 1120]}
 						sizes="(max-width: 900px) 100vw, 560px"
+						transition:name={featuredIconName}
+						transition:animate="initial"
+						style="view-transition-class: app-icon"
 					/>
 				</a>
 

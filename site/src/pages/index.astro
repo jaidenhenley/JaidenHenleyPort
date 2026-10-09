@@ -3,23 +3,43 @@ import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import portrait from '../assets/images/pic08.jpeg';
+import visionPro from '../assets/images/vision-pro.png';
 // Cards read from the shared project data so the home page cannot drift
 // out of sync with the case study index.
 import { featuredProjects } from '../data/projects';
 
-const skills = [
-	'Swift',
-	'SwiftUI',
-	'SpriteKit',
-	'SwiftData',
-	'Foundation Models',
-	'VisionKit',
-	'Firebase',
-	'Game Center',
-	'AVFoundation',
-	'MapKit',
-	'Git',
-	'Xcode',
+// Client work under NDA: keep this to platform, sector, and stack. Anything
+// about what the app does stays off the public site.
+const currentWork = {
+	status: 'Active · Confidential',
+	title: 'visionOS',
+	client: 'Detroit Healthcare Client',
+	summary:
+		'An immersive spatial computing app for clinical training, built for a Detroit healthcare provider through the MSU Apple Developer Academy. Project details are confidential.',
+	tags: ['visionOS', 'RealityKit', 'ARKit Hand Tracking', 'Reality Composer Pro', 'Healthcare'],
+};
+
+const skillGroups = [
+	{ label: 'Languages', items: ['Swift', 'Python', 'Kotlin', 'JavaScript'] },
+	{
+		label: 'Apple platforms',
+		items: [
+			'SwiftUI',
+			'visionOS',
+			'RealityKit',
+			'ARKit',
+			'HealthKit',
+			'SwiftData',
+			'Core ML',
+			'Foundation Models',
+			'WidgetKit',
+			'App Intents',
+			'SpriteKit',
+			'MapKit',
+		],
+	},
+	{ label: 'Backend', items: ['Supabase', 'Firebase', 'FastAPI'] },
+	{ label: 'Tools', items: ['Xcode', 'Reality Composer Pro', 'Swift Testing', 'Git'] },
 ];
 
 const socials = [
@@ -29,6 +49,12 @@ const socials = [
 ];
 
 const testimonials = [
+	{
+		quote:
+			"Having the CH Studios team behind Tripsetta has been an absolute lifesaver. As a first-time tech founder I've learned that maintenance, testing, optimization, and ongoing development are just as important as building the product itself. Jaiden is fast, knowledgeable, proactive, and always willing to dig deeper than what's immediately in front of him. He consistently identifies opportunities for improvement, solves problems quickly, and helps keep our platform moving forward. This partnership has been invaluable to our growth, and I couldn't be more appreciative of the work they've done so far. A fantastic fit for any fast-growing company looking for a team that truly takes ownership and delivers results.",
+		name: 'Lola Cee',
+		role: 'Founder and Developer, Tripsetta',
+	},
 	{
 		quote:
 			'Jaiden has consistently demonstrated the kind of mindset and work ethic that makes a lasting impact on any team he is part of. As both a teammate and mentee, he has been dependable, motivated, and highly engaged. He brings positive energy, takes initiative without needing to be asked, and approaches every opportunity with a genuine drive to learn and contribute. Jaiden is the type of learner and teammate every mentor hopes to work with.',
@@ -52,7 +78,7 @@ const testimonials = [
 
 <Base
 	title="Jaiden Henley, iOS Developer"
-	description="iOS developer from Detroit building apps that ship: AI tools, games, and civic tech that solves real problems for real people."
+	description="iOS and visionOS developer in Detroit with four apps on the App Store, including a HIPAA-ready health app, and a studio taking on real client work."
 >
 	<section class="section hero">
 		<div class="container hero-grid">
@@ -60,8 +86,8 @@ const testimonials = [
 				<span class="eyebrow">Detroit · Open to iOS roles</span>
 				<h1>Jaiden Henley</h1>
 				<p class="hero-lede">
-					I build iOS apps that ship: AI tools, games, and civic tech that solves real problems
-					for real people.
+					iOS and visionOS developer with four apps on the App Store, including a HIPAA-ready
+					health app, and a studio taking on real client work.
 				</p>
 
 				<div class="cta-row">
@@ -104,6 +130,24 @@ const testimonials = [
 		</div>
 	</section>
 
+	<section class="section now" aria-labelledby="now-title">
+		<div class="container">
+			<article class="now-card">
+				<div class="now-copy">
+					<span class="now-status">{currentWork.status}</span>
+					<h2 id="now-title">{currentWork.title}</h2>
+					<p class="now-client">{currentWork.client}</p>
+					<p class="now-summary">{currentWork.summary}</p>
+					<ul class="chip-row">
+						{currentWork.tags.map((tag) => <li class="chip">{tag}</li>)}
+					</ul>
+				</div>
+
+				<Image class="now-visual" src={visionPro} alt="Apple Vision Pro headset" width={360} />
+			</article>
+		</div>
+	</section>
+
 	<section class="section work" id="work">
 		<div class="container">
 			<header class="section-head">
@@ -138,30 +182,39 @@ const testimonials = [
 			<div class="about-copy">
 				<h2>About</h2>
 				<p class="lede">
-					I am a Swift and SwiftUI developer in the Apple Developer Academy's second-year
-					cohort in Detroit, with four apps on the App Store and a co-founded studio with paying
-					clients.
+					I am an iOS and visionOS developer in Detroit, selected as 1 of 25 learners for the
+					Apple Developer Academy's 2026-2027 Renaissance cohort, where I am building a visionOS
+					app for a healthcare client. I also co-founded CH Studios, a software studio with active
+					contracts across iOS, Android, and web.
 				</p>
 				<p class="lede">
-					My work ranges from a CoreML-powered beach conditions app to an on-device AI flashcard
-					tool built for real student workflows. I care about clean architecture, thoughtful UX,
-					and using Apple's frameworks the way they were intended.
+					This summer I was the sole iOS developer at Cognition Daily, porting a validated brain
+					health research instrument to native SwiftUI under HIPAA constraints. Before that I
+					shipped CoastCast, a Michigan beach conditions app with its own Core ML crowd model, and
+					QuickStudy, an on-device AI flashcard tool. I care about clean architecture, thoughtful
+					UX, and using Apple's frameworks the way they were intended.
 				</p>
 				<p class="lede">
 					Detroit shapes how I build. It pushes you toward things that are real and useful, not
-					just polished demos. That carries into everything I ship.
-				</p>
-				<p class="lede">
-					When I am not coding I am gaming, cooking, hitting the gym, or finding a new spot
-					along the Riverwalk.
+					just polished demos. When I am not coding I am gaming, cooking, hitting the gym, or
+					finding a new spot along the Riverwalk.
 				</p>
 			</div>
 
 			<aside class="about-skills">
 				<span class="eyebrow">Toolkit</span>
-				<ul class="chip-row">
-					{skills.map((skill) => <li class="chip">{skill}</li>)}
-				</ul>
+				{
+					skillGroups.map((group) => (
+						<div class="skill-group">
+							<h3 class="skill-label">{group.label}</h3>
+							<ul class="chip-row">
+								{group.items.map((skill) => (
+									<li class="chip">{skill}</li>
+								))}
+							</ul>
+						</div>
+					))
+				}
 				<a class="btn btn-secondary" href="/resume">View resume</a>
 			</aside>
 		</div>
@@ -175,7 +228,12 @@ const testimonials = [
 				<p>
 					"Jaiden is my co-founder at CH Studios and the person I trust most on a hard
 					engineering problem. We have built this company from the ground up and have been
-					taking on real client work together since day one."
+					taking on real client work together since day one. What stands out about Jaiden is that
+					he does not just write good code, he thinks about the whole product. We shipped
+					CoastCast together and he is currently leading the iOS build of our small business
+					catalogue app. He will jump into an unfamiliar stack, ask the right questions, and
+					deliver something that actually works. He is exactly the kind of engineer and partner
+					you want in your corner."
 				</p>
 				<footer>
 					<span class="quote-name">George Clinkscales Jr.</span>
@@ -273,6 +331,93 @@ const testimonials = [
 		color: var(--fg-3);
 	}
 
+	/* Sits directly under the hero, so it borrows the hero's bottom padding
+	   rather than stacking a second full section gap on top of it. */
+	.now {
+		padding-top: 0;
+	}
+
+	/* Dark in both themes, like a product panel. The border only shows in dark
+	   mode, where it keeps the card from sinking into the page. */
+	.now-card {
+		display: grid;
+		grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+		align-items: center;
+		gap: clamp(32px, 5vw, 56px);
+		padding: clamp(28px, 5vw, 56px);
+		background: #111113;
+		color: #f5f5f7;
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		border-radius: var(--radius-xl);
+		box-shadow: var(--shadow);
+	}
+
+	.now-copy {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 14px;
+		max-width: 680px;
+	}
+
+	.now-status {
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+		font-size: 0.75rem;
+		font-weight: 600;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: rgba(245, 245, 247, 0.62);
+	}
+
+	.now-status::before {
+		content: '';
+		width: 7px;
+		height: 7px;
+		border-radius: 50%;
+		background: #30d158;
+		box-shadow: 0 0 0 4px rgba(48, 209, 88, 0.16);
+	}
+
+	.now-copy h2 {
+		color: #f5f5f7;
+	}
+
+	.now-client {
+		margin-top: -6px;
+		font-size: var(--step-2);
+		letter-spacing: -0.015em;
+		color: rgba(245, 245, 247, 0.72);
+	}
+
+	.now-summary {
+		font-size: var(--step-1);
+		line-height: 1.62;
+		color: rgba(245, 245, 247, 0.86);
+	}
+
+	.now-copy .chip-row {
+		margin-top: 6px;
+	}
+
+	.now-copy .chip {
+		color: rgba(245, 245, 247, 0.88);
+		background: rgba(255, 255, 255, 0.08);
+		border-color: rgba(255, 255, 255, 0.06);
+	}
+
+	/* The source render is 360px wide, so it is capped below that rather than
+	   stretched to fill the column. Its black visor would vanish into the card,
+	   so a soft glow shows through the transparent PNG to give it an outline. */
+	.now-card :global(.now-visual) {
+		width: 100%;
+		max-width: 320px;
+		height: auto;
+		justify-self: center;
+		background: radial-gradient(closest-side, rgba(170, 185, 255, 0.2), rgba(170, 185, 255, 0));
+	}
+
 	.section-head {
 		display: flex;
 		flex-direction: column;
@@ -313,7 +458,20 @@ const testimonials = [
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
-		gap: 16px;
+		gap: 22px;
+	}
+
+	.skill-group {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	.skill-label {
+		font-size: var(--step--1);
+		font-weight: 600;
+		letter-spacing: -0.005em;
+		color: var(--fg-2);
 	}
 
 	.about-skills .btn {
@@ -382,8 +540,13 @@ const testimonials = [
 
 	@media (max-width: 900px) {
 		.hero-grid,
-		.about-grid {
+		.about-grid,
+		.now-card {
 			grid-template-columns: minmax(0, 1fr);
+		}
+
+		.now-card :global(.now-visual) {
+			max-width: 260px;
 		}
 
 		.hero-grid {

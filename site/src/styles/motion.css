@@ -352,8 +352,8 @@
 	transition-duration: 0.1s;
 }
 
-.card.project:active,
-.featured-section .featured:active,
+.card.project:active:not(:has(.footer a[target="_blank"]:active)),
+.featured-section .featured:active:not(:has(.foot a[target="_blank"]:active)),
 .next:active,
 .js .next.is-revealed:active {
 	transform: scale(0.985);
@@ -369,9 +369,12 @@
 	border-bottom-color: transparent;
 }
 
+/* The hard hairline + shadow are replaced by SiteHeader.astro's ::after,
+   a soft gradient that fades in under the header instead (see .site-header
+   and .site-header::after there). border-bottom stays transparent here so
+   prefers-contrast: more below is still the only thing that draws one. */
 .site-header.is-scrolled {
-	border-bottom-color: var(--hairline);
-	box-shadow: 0 1px 12px rgba(0, 0, 0, 0.05);
+	border-bottom-color: transparent;
 }
 
 /* ==========================================================================
@@ -419,8 +422,8 @@
 
 	.btn:active,
 	.badge-link:active,
-	.card.project:active,
-	.featured-section .featured:active,
+	.card.project:active:not(:has(.footer a[target="_blank"]:active)),
+	.featured-section .featured:active:not(:has(.foot a[target="_blank"]:active)),
 	.next:active,
 	.js .next.is-revealed:active {
 		transform: none;

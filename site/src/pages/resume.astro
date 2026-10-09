@@ -17,6 +17,7 @@ const experience = [
 		location: 'Detroit, MI',
 		dates: 'Apr 2026 to Present',
 		bullets: [
+			"CloudCards (contract): leading the native iOS app for a digital business card platform, including a SwiftUI design system ported from the client's web app and the backend API spec for the App Clip, NFC/QR sharing, and native sign-in.",
 			'Tripsetta (contract): retained to maintain and build features across iOS (SwiftUI), Android (Kotlin), and web (HTML/CSS/JS) codebases for an AI-powered travel planning platform.',
 			'CommonSight (contract): built the full Firebase backend from scratch, then led migration to Supabase including auth rewrite, Postgres schema design, RLS policies, and conference demo polish.',
 		],
@@ -28,7 +29,7 @@ const experience = [
 		dates: 'Aug 2026 to Present',
 		bullets: [
 			'Selected as 1 of 25 learners for the highly competitive 2026-2027 second-year cohort.',
-			'Building a visionOS application for an external client alongside a peer development team.',
+			'Building a visionOS application for an external client alongside a peer development team, using RealityKit, ARKit, hand tracking, and Reality Composer Pro.',
 		],
 	},
 	{
@@ -37,7 +38,7 @@ const experience = [
 		location: 'Remote',
 		dates: 'Jun 2026 to Sep 2026',
 		bullets: [
-			'Sole iOS developer for a brain health nonprofit, porting a validated web research instrument to native SwiftUI without altering question wording or scoring logic that would invalidate the collected data.',
+			'Sole iOS developer for a brain health nonprofit, porting a validated web research instrument to native SwiftUI and shipping it to the App Store without altering question wording or scoring logic that would invalidate the collected data.',
 			'Integrated HealthKit sleep, activity, and mindfulness reads against a client-managed Supabase backend, with an offline write queue that reconciles local entries on reconnect.',
 			'Implemented Sign in with Apple and Google authentication with Keychain-only credential storage, NSFileProtectionComplete data protection, and a maintained privacy manifest to meet HIPAA handling requirements and App Store review.',
 		],
@@ -60,7 +61,7 @@ const projectEntries = [
 		stack: 'SwiftUI, Core ML, WeatherKit, FastAPI',
 		dates: 'Mar 2026 to May 2026',
 		bullets: [
-			'Built a Michigan beach conditions app with a custom FastAPI backend deployed on Render, a Core ML crowd prediction model trained end to end on real visitation data, and realtime buoy, weather, and E. coli water quality integration.',
+			'Built and shipped a Michigan beach conditions app with a custom FastAPI backend deployed on Render, a Core ML crowd prediction model trained end to end on real visitation data, and realtime buoy, weather, and E. coli water quality integration.',
 			'Implemented WidgetKit, AppIntents and Siri Shortcuts, and background push notifications using BGAppRefreshTask.',
 		],
 	},
@@ -76,9 +77,10 @@ const projectEntries = [
 	{
 		name: 'Take Flight',
 		stack: 'SpriteKit, SwiftUI, Game Center',
-		dates: 'Jan 2026 to Feb 2026',
+		dates: 'Nov 2025 to Feb 2026',
 		bullets: [
-			'Built a 5-in-1 mini-game survival experience set on Belle Isle. Shipped to the App Store with Game Center, iPad touch controls, and macOS keyboard support.',
+			'Shipped a 5-in-1 survival game set on Belle Isle with a team of five. Owned the core game loop, shared run state across five screens, and Game Center leaderboards and achievements.',
+			'Built a SwiftUI virtual joystick and keyboard input on one shared movement layer, supporting iPhone, iPad, and macOS.',
 		],
 	},
 ];
@@ -87,8 +89,11 @@ const education = [
 	{
 		school: 'iOS Developer, Apple Developer Academy',
 		dates: 'Aug 2025 to May 2026',
-		detail:
-			'Michigan State University, Detroit, MI. Built and shipped 5+ SwiftUI apps across professional development, productivity, and games in an Apple-backed program, and delivered live demos and pitch decks to industry partners.',
+		detail: 'Michigan State University, Detroit, MI',
+		bullets: [
+			"Completed a non-credit certificate program designed to build a foundation for work and a career in the app economy using Apple's iOS ecosystem. Engaged in Apple's challenge-based learning curriculum, gaining exposure to coding, design, entrepreneurship, research, and business analysis while focusing on coding.",
+			'Built 5+ SwiftUI apps across professional development, productivity, and games in an Apple-backed program.',
+		],
 	},
 	{
 		school: '100 Days of SwiftUI, Paul Hudson',
@@ -102,14 +107,14 @@ const skills = [
 	{
 		label: 'Apple frameworks',
 		value:
-			'SwiftUI, SpriteKit, SwiftData, HealthKit, AVKit, MapKit, Foundation Models, Game Center, WeatherKit, Core ML, VisionKit, WidgetKit, AppIntents',
+			'SwiftUI, RealityKit, ARKit, HealthKit, SpriteKit, SwiftData, AVKit, MapKit, Foundation Models, Game Center, WeatherKit, Core ML, VisionKit, WidgetKit, AppIntents',
 	},
 	{
 		label: 'Backend and services',
 		value: 'Firebase (Auth, Firestore), Supabase (Auth, Postgres, RLS), FastAPI (Render)',
 	},
 	{ label: 'Architecture', value: 'MVVM, NavigationStack routing, JSON persistence, state management' },
-	{ label: 'Tools', value: 'Xcode, VS Code, Git and GitHub, Sketch' },
+	{ label: 'Tools', value: 'Xcode, VS Code, Git and GitHub, Sketch, Reality Composer Pro, Swift Testing' },
 ];
 ---
 
@@ -145,11 +150,12 @@ const skills = [
 		<section class="block">
 			<h2>Summary</h2>
 			<p class="lede">
-				iOS developer with three apps live on the App Store. Currently building a visionOS
-				application for an external client as 1 of 25 learners selected for the Apple Developer
-				Academy's Renaissance 2026-2027 cohort, after shipping a HealthKit research app under
-				HIPAA constraints for a brain health nonprofit. Co-founder of CH Studios LLC, a software
-				development studio with active contracts across iOS, Android, and web.
+				iOS and visionOS developer with four apps live on the App Store. Currently building a
+				visionOS application for a Detroit-based healthcare provider as 1 of 25 learners selected
+				for the Apple Developer Academy's Renaissance 2026-2027 cohort, after shipping a
+				HealthKit research app under HIPAA constraints for a brain health nonprofit. Co-founder of
+				CH Studios LLC, a software development studio with active contracts across iOS, Android,
+				and web.
 			</p>
 		</section>
 
@@ -210,6 +216,13 @@ const skills = [
 								<span class="dates">{item.dates}</span>
 							</div>
 							<p class="org">{item.detail}</p>
+							{item.bullets && (
+								<ul class="bullets">
+									{item.bullets.map((bullet) => (
+										<li>{bullet}</li>
+									))}
+								</ul>
+							)}
 						</li>
 					))
 				}

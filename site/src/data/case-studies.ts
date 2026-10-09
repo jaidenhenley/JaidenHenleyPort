@@ -198,7 +198,8 @@ export const caseStudies: Record<string, CaseStudy> = {
 			},
 		],
 		demo: {
-			video: '/videos/CognitionDailyDemo.mp4',
+			video: '/videos/CognitionDailyDemo-web.mp4',
+			poster: cognitionDashboard,
 			aspect: 'phone',
 			heading: 'From habit to score',
 			body: 'Logging a day of tracking, playing through a game, and watching both land in the Brain Health Score on the dashboard.',
@@ -315,7 +316,7 @@ export const caseStudies: Record<string, CaseStudy> = {
 			},
 		],
 		demo: {
-			video: '/videos/CoastCastDemoVid.mov',
+			video: '/videos/CoastCastDemo-web.mp4',
 			poster: coastcastHome,
 			aspect: 'phone',
 			heading: 'One tap, one screen',
@@ -428,7 +429,8 @@ export const caseStudies: Record<string, CaseStudy> = {
 			},
 		],
 		demo: {
-			video: '/videos/QuickStudyDemo1080.mp4',
+			video: '/videos/QuickStudyDemo-web.mp4',
+			poster: quickstudyImport,
 			aspect: 'phone',
 			heading: 'Scan to deck in one pass',
 			body: 'A captured page runs through OCR and generation, then lands in the review list where you decide what is worth keeping.',
@@ -536,7 +538,7 @@ export const caseStudies: Record<string, CaseStudy> = {
 			},
 		],
 		demo: {
-			video: '/videos/TakeFlightDemoCompressed.mp4',
+			video: '/videos/TakeFlightDemo-web.mp4',
 			poster: takeflightCover,
 			aspect: 'wide',
 			heading: 'One run, five challenges',
@@ -642,7 +644,8 @@ export const caseStudies: Record<string, CaseStudy> = {
 			},
 		],
 		demo: {
-			video: '/videos/CommonSightPortVid1.mp4',
+			video: '/videos/CommonSightDemo-web.mp4',
+			poster: commonsightDash,
 			aspect: 'phone',
 			heading: 'Observation to story card',
 			body: 'A resident logs what they see, it lands on the neighborhood map, and Foundation Models turns a cluster of reports into something worth sharing.',
@@ -744,7 +747,7 @@ export const caseStudies: Record<string, CaseStudy> = {
 			},
 		],
 		demo: {
-			video: '/videos/RoastingPlantDemo.mp4',
+			video: '/videos/RoastingPlantDemo-web.mp4',
 			poster: roastingDash,
 			aspect: 'phone',
 			heading: 'Menu to checkout',

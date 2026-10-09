@@ -27,11 +27,28 @@ const nextStudy = caseStudies[next.slug];
 const totalLabel = String(total).padStart(2, '0');
 const isAppStore = study.primaryCta.href.includes('apps.apple.com');
 const code = projectCode[project.slug];
+
+// Sidebar wayfinding: only sections that actually render on this page.
+const hasScreens = Boolean(study.screens && study.screens.length > 0);
+const hasCode = Boolean(code && code.snippets.length > 0);
+const hasNext = Boolean(code && code.nextIterations);
+const sections = [
+	study.demo && { id: 'demo', label: 'Demo' },
+	{ id: 'overview', label: 'Overview' },
+	{ id: 'problem', label: 'The problem' },
+	{ id: 'approach', label: 'Approach' },
+	{ id: 'highlights', label: 'Technical highlights' },
+	hasScreens && { id: 'screens', label: 'Screens' },
+	hasCode && { id: 'code', label: 'Code' },
+	hasNext && { id: 'next-steps', label: 'What is next' },
+	{ id: 'outcome', label: 'Outcome' },
+].filter((section): section is { id: string; label: string } => Boolean(section));
 ---
 
 <Base
 	title={`${project.title} case study | Jaiden Henley`}
 	description={study.lead}
+	ogImage={study.hero}
 	footerVariant="cta"
 >
 	<div class="cs">
@@ -45,14 +62,20 @@ const code = projectCode[project.slug];
 
 		<div class="body">
 			<div class="main">
-				{study.demo && <CaseStudyDemo title={project.title} demo={study.demo} />}
+				{
+					study.demo && (
+						<div id="demo" class="demo-anchor">
+							<CaseStudyDemo title={project.title} demo={study.demo} />
+						</div>
+					)
+				}
 
-				<section class="block">
+				<section class="block" id="overview">
 					<span class="eyebrow">Overview</span>
 					{study.overview.map((paragraph) => <p>{paragraph}</p>)}
 				</section>
 
-				<section class="block">
+				<section class="block" id="problem">
 					<h2>The problem</h2>
 					<span class="rule" aria-hidden="true"></span>
 					<p>{study.problem.intro}</p>
@@ -61,7 +84,7 @@ const code = projectCode[project.slug];
 					</ul>
 				</section>
 
-				<section class="block">
+				<section class="block" id="approach">
 					<h2>Approach</h2>
 					<span class="rule" aria-hidden="true"></span>
 					<ol class="approach">
@@ -77,7 +100,7 @@ const code = projectCode[project.slug];
 					</ol>
 				</section>
 
-				<section class="block">
+				<section class="block" id="highlights">
 					<h2>Technical highlights</h2>
 					<span class="rule" aria-hidden="true"></span>
 					<ul class="bullets">
@@ -93,10 +116,10 @@ const code = projectCode[project.slug];
 
 				{
 					study.screens && study.screens.length > 0 && (
-						<section class="block">
+						<section class="block" id="screens">
 							<h2>Screens</h2>
 							<span class="rule" aria-hidden="true" />
-							<div class="screens">
+							<div class="screens" role="region" aria-label="Screenshots" tabindex="0">
 								{
 									study.screens.map((screen) => (
 										<figure>
@@ -122,7 +145,7 @@ const code = projectCode[project.slug];
 
 				{
 					code && code.snippets.length > 0 && (
-						<section class="block">
+						<section class="block" id="code">
 							<h2>Code</h2>
 							<span class="rule" aria-hidden="true" />
 							<div class="snippets">
@@ -141,7 +164,7 @@ const code = projectCode[project.slug];
 
 				{
 					code && code.nextIterations && (
-						<section class="block">
+						<section class="block" id="next-steps">
 							<h2>What is next</h2>
 							<span class="rule" aria-hidden="true" />
 							<p>{code.nextIterations}</p>
@@ -151,6 +174,7 @@ const code = projectCode[project.slug];
 			</div>
 
 			<aside class="sidebar">
+
 				<div class="facts">
 					<div class="fact">
 						<span class="label">Role</span>
@@ -199,10 +223,25 @@ const code = projectCode[project.slug];
 						}
 					</div>
 				</div>
+
+				<nav class="toc" aria-label="On this page">
+					<span class="toc-label">On this page</span>
+					<ul>
+						{
+							sections.map((section) => (
+								<li>
+									<a href={`#${section.id}`} data-toc-link={section.id}>
+										{section.label}
+									</a>
+								</li>
+							))
+						}
+					</ul>
+				</nav>
 			</aside>
 		</div>
 
-		<section class="outcome">
+		<section class="outcome" id="outcome">
 			<span class="eyebrow">Outcome</span>
 			<div class="stats">
 				{
@@ -408,12 +447,92 @@ const code = projectCode[project.slug];
 
 	/* Clears the 61px sticky site header so the card top is never hidden,
 	   and scrolls internally on short viewports instead of being unreachable. */
+	/* The facts card scrolls away with the page and only the section links
+	   stay pinned, so the sidebar never needs to scroll inside itself on a
+	   short window. Stretching the column gives the sticky nav the full height
+	   of the case study to travel in. */
 	.sidebar {
+		align-self: stretch;
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+
+	/* On this page ---------------------------------------------------------- */
+
+	.toc {
 		position: sticky;
 		top: 85px;
-		max-height: calc(100vh - 109px);
-		overflow-y: auto;
-		overscroll-behavior: contain;
+		padding: 14px 10px 10px;
+		background: var(--surface);
+		border: 1px solid var(--hairline);
+		border-radius: var(--radius-lg);
+	}
+
+	.toc-label {
+		display: block;
+		padding: 0 10px 6px;
+		font-size: 11.5px;
+		font-weight: 600;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--fg-3);
+	}
+
+	.toc ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.toc a {
+		position: relative;
+		display: flex;
+		align-items: center;
+		min-height: 32px;
+		padding: 4px 10px 4px 14px;
+		border-radius: var(--radius-sm);
+		font-size: var(--step--1);
+		line-height: 1.3;
+		color: var(--fg-3);
+		transition: color 0.2s ease;
+	}
+
+	.toc a::before {
+		content: '';
+		position: absolute;
+		left: 2px;
+		top: 8px;
+		bottom: 8px;
+		width: 2px;
+		border-radius: 999px;
+		background: var(--accent);
+		opacity: 0;
+		transform: scaleY(0.4);
+		transition:
+			opacity 0.2s ease,
+			transform 0.2s ease;
+	}
+
+	.toc a:hover {
+		color: var(--fg);
+	}
+
+	.toc a[aria-current='location'] {
+		color: var(--fg);
+		font-weight: 600;
+	}
+
+	.toc a[aria-current='location']::before {
+		opacity: 1;
+		transform: none;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.toc a,
+		.toc a::before {
+			transition: none;
+		}
 	}
 
 	.facts {
@@ -571,7 +690,13 @@ const code = projectCode[project.slug];
 		}
 
 		.sidebar {
-			position: static;
+			align-self: start;
+		}
+
+		/* The sidebar stops following the reader here, so section links
+		   would only ever point at a page already scrolled past. */
+		.toc {
+			display: none;
 		}
 	}
 
@@ -594,5 +719,157 @@ const code = projectCode[project.slug];
 		.stat:first-child {
 			border-top: 0;
 		}
+
+		/* Screens become a swipeable row that bleeds to the screen edges. The
+		   column width leaves the next phone peeking in from the right, which
+		   is the hint that there is more. Padding and scroll padding match the
+		   .cs gutter so the first phone lines up with the text above it. */
+		.screens {
+			grid-template-columns: none;
+			grid-auto-flow: column;
+			grid-auto-columns: min(72vw, 260px);
+			gap: 16px;
+			margin-inline: -20px;
+			padding-inline: 20px;
+			scroll-padding-inline: 20px;
+			/* Room above and below for the phones' drop shadow and their rise-in
+			   reveal, which overflow-y would otherwise clip. */
+			padding-block: 8px 48px;
+			margin-block: -8px -48px;
+			overflow-x: auto;
+			overflow-y: hidden;
+			overscroll-behavior-x: contain;
+			scroll-snap-type: x mandatory;
+			scrollbar-width: none;
+		}
+
+		.screens::-webkit-scrollbar {
+			display: none;
+		}
+
+		.screens:focus-visible {
+			outline-offset: -2px;
+		}
+
+		.screens figure {
+			align-items: stretch;
+			scroll-snap-align: center;
+		}
+
+		.screens figure > :global(.phone) {
+			width: 100%;
+		}
 	}
 </style>
+
+<script>
+	/**
+	 * Scroll spy for the "On this page" links. A section is current once its
+	 * top has crossed a line about a third of the way down the viewport; the
+	 * observer only watches a thin band at that line and then asks which
+	 * section most recently crossed it, so gaps between sections and fast
+	 * scrolls never leave the nav without a current item.
+	 */
+	const LINE = 0.35;
+
+	let teardown: (() => void) | null = null;
+
+	function init() {
+		const links = [...document.querySelectorAll<HTMLAnchorElement>('.toc [data-toc-link]')];
+		if (!links.length) return;
+
+		const items = links
+			.map((link) => ({ link, section: document.getElementById(link.dataset.tocLink ?? '') }))
+			.filter((item): item is { link: HTMLAnchorElement; section: HTMLElement } =>
+				Boolean(item.section)
+			);
+		if (!items.length) return;
+
+		let current: HTMLAnchorElement | null = null;
+		const setCurrent = (link: HTMLAnchorElement) => {
+			if (link === current) return;
+			current?.removeAttribute('aria-current');
+			link.setAttribute('aria-current', 'location');
+			current = link;
+		};
+
+		// A click marks its link at once; the spy stays quiet until the smooth
+		// scroll it started has settled, so it cannot flicker through the
+		// sections in between.
+		let locked = false;
+		let unlockTimer = 0;
+		const unlock = () => {
+			if (!locked) return;
+			locked = false;
+			clearTimeout(unlockTimer);
+			update();
+		};
+
+		const atBottom = () =>
+			innerHeight + scrollY >= document.documentElement.scrollHeight - 2;
+
+		function update() {
+			if (locked) return;
+			if (atBottom()) {
+				setCurrent(items[items.length - 1].link);
+				return;
+			}
+			const line = innerHeight * LINE;
+			let active = items[0];
+			for (const item of items) {
+				if (item.section.getBoundingClientRect().top <= line) active = item;
+				else break;
+			}
+			setCurrent(active.link);
+		}
+
+		const onClick = (event: MouseEvent) => {
+			const link = (event.target as Element).closest<HTMLAnchorElement>('[data-toc-link]');
+			if (!link) return;
+			setCurrent(link);
+			locked = true;
+			clearTimeout(unlockTimer);
+			// scrollend is the precise signal; the timer covers browsers without
+			// it and clicks that do not scroll at all.
+			unlockTimer = window.setTimeout(unlock, 1000);
+		};
+
+		const observer = new IntersectionObserver(update, {
+			rootMargin: `-${LINE * 100}% 0px -${(1 - LINE) * 100 - 5}% 0px`,
+		});
+		items.forEach(({ section }) => observer.observe(section));
+
+		// The last section can be too short to ever reach the line, so the very
+		// bottom of the page claims it.
+		let ticking = false;
+		const onScroll = () => {
+			if (ticking) return;
+			ticking = true;
+			requestAnimationFrame(() => {
+				ticking = false;
+				if (atBottom()) update();
+			});
+		};
+
+		const nav = document.querySelector('.toc');
+		nav?.addEventListener('click', onClick as EventListener);
+		addEventListener('scroll', onScroll, { passive: true });
+		addEventListener('scrollend', unlock);
+		update();
+
+		teardown = () => {
+			observer.disconnect();
+			nav?.removeEventListener('click', onClick as EventListener);
+			removeEventListener('scroll', onScroll);
+			removeEventListener('scrollend', unlock);
+			clearTimeout(unlockTimer);
+			teardown = null;
+		};
+	}
+
+	document.addEventListener('astro:page-load', () => {
+		teardown?.();
+		init();
+	});
+	document.addEventListener('astro:before-swap', () => teardown?.());
+</script>

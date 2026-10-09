@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+---
+
+<Base title="Page not found | Jaiden Henley" description="The link may be out of date. Everything I've built is in the case studies.">
+	<PageHeader
+		eyebrow="404"
+		title="This page moved or never existed"
+		intro="The link may be out of date. Everything I've built is in the case studies."
+	>
+		<div class="actions">
+			<a class="btn btn-primary" href="/case-studies">View case studies</a>
+			<a class="btn btn-secondary" href="/">Go home</a>
+		</div>
+	</PageHeader>
+</Base>
+
+<style>
+	.actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px;
+	}
+</style>

@@ -72,6 +72,7 @@
 
 		// Home
 		{ selector: '.hero-copy > *', intent: 'text' },
+		{ selector: '.now-card', intent: 'media' },
 		{ selector: '.section.work > .container > *', intent: 'text' },
 		{ selector: '.project-grid > *', intent: 'media' },
 		{ selector: '.about-copy > *', intent: 'text' },
@@ -146,6 +147,14 @@
 	 * between arriving at the site and moving around within it.
 	 */
 	let firstLoad = true;
+	/**
+	 * view-transition-names on the page being left, read just before the swap.
+	 * An element on the incoming page whose name is in here is one end of a
+	 * shared-element morph (a project icon travelling between its card and the
+	 * case study hero), and must be settled when init() runs, not left to
+	 * reveal on scroll.
+	 */
+	let outgoingNames = new Set<string>();
 	// Trigger just below the fold so motion reads as the page settling ahead of
 	// the reader rather than reacting after they have already arrived.
 	const LEAD_RATIO = 0.1;
@@ -222,8 +231,21 @@
 		// later so hover and press transitions work as normal afterwards. All
 		// positions are read before any class is written, to avoid a layout per
 		// element.
+		//
+		// The same goes for anything holding the incoming end of a shared-element
+		// morph, wherever it sits: the view transition draws that element live
+		// while it flies in, so a hidden or offset reveal state would have the
+		// icon land on nothing, or on a spot 34px off. A fresh page carries no
+		// data-reveal yet, so it is only this pass that could hide it.
 		if (!arriving) {
-			const onScreen = targets.filter((el) => el.getBoundingClientRect().top < innerHeight);
+			const morphing = [...document.querySelectorAll<HTMLElement>('[data-astro-transition-scope]')].filter(
+				(el) => outgoingNames.has(getComputedStyle(el).viewTransitionName)
+			);
+			outgoingNames = new Set();
+			const onScreen = targets.filter(
+				(el) =>
+					el.getBoundingClientRect().top < innerHeight || morphing.some((m) => el.contains(m))
+			);
 			onScreen.forEach((el) => {
 				el.classList.add('is-instant', 'is-revealed');
 				pending.delete(el);
@@ -367,6 +389,16 @@
 	// astro:page-load fires on first paint and again after every client-side
 	// navigation, which DOMContentLoaded does not once the router is in play.
 	document.addEventListener('astro:page-load', start);
+
+	// The old page is still rendered here, so its names can be read from the
+	// cascade (Astro sets them from a generated stylesheet, not an attribute).
+	document.addEventListener('astro:before-swap', () => {
+		outgoingNames = new Set(
+			[...document.querySelectorAll<HTMLElement>('[data-astro-transition-scope]')]
+				.map((el) => getComputedStyle(el).viewTransitionName)
+				.filter((name) => name && name !== 'none')
+		);
+	});
 
 	// iOS Safari only applies :active on touch when a touchstart listener exists
 	// somewhere above the element. An empty passive one on the document is

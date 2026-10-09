@@ -1,18 +1,45 @@
 ---
+import { projects } from '../data/projects';
+
 const links = [
 	{ label: 'Case Studies', href: '/case-studies' },
 	{ label: 'About', href: '/#about' },
 	{ label: 'Resume', href: '/resume' },
 	{ label: 'Contact', href: '/contact' },
 ];
+
+// Mirrors isCurrentNavLink() in the script below, evaluated once at render
+// time so the first paint (and any page that never runs client JS) still
+// gets the right link marked. The script re-runs this on every
+// astro:page-load since the header persists across client-side navigations.
+function isCurrentNavLink(href: string, pathname: string): boolean {
+	if (href === '/#about') return false;
+
+	let normalized = pathname.replace(/\.html$/, '');
+	if (normalized.length > 1) normalized = normalized.replace(/\/$/, '');
+	if (normalized === '') normalized = '/';
+
+	if (href === '/case-studies') {
+		return normalized === '/case-studies' || caseStudyPaths.includes(normalized);
+	}
+
+	return href === normalized;
+}
+
+// The real list of case study pages, rather than "anything unrecognised",
+// so a 404 (which keeps the missing URL) or a privacy page highlights nothing.
+const caseStudyPaths = projects.map((project) => `/${project.slug}`);
+const currentPath = Astro.url.pathname;
 ---
 
-<header class="site-header" transition:persist="site-header">
+<header class="site-header" transition:persist="site-header" data-case-studies={caseStudyPaths.join(' ')}>
 	<div class="container inner">
 		<a class="wordmark" href="/">Jaiden Henley</a>
 
 		<nav class="nav" aria-label="Main">
-			{links.map((link) => <a href={link.href}>{link.label}</a>)}
+			{links.map((link) => (
+				<a href={link.href} aria-current={isCurrentNavLink(link.href, currentPath) ? 'page' : undefined}>{link.label}</a>
+			))}
 		</nav>
 
 		<div class="actions">
@@ -34,7 +61,9 @@ const links = [
 
 	<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile" inert hidden>
 		<div class="container">
-			{links.map((link) => <a href={link.href}>{link.label}</a>)}
+			{links.map((link) => (
+				<a href={link.href} aria-current={isCurrentNavLink(link.href, currentPath) ? 'page' : undefined}>{link.label}</a>
+			))}
 		</div>
 	</nav>
 </header>
@@ -65,10 +94,20 @@ const links = [
 			window.setTimeout(() => root.classList.remove('theme-transition'), 350);
 		}
 
-		root.dataset.theme = next;
-		try {
-			localStorage.setItem('theme', next);
-		} catch {}
+		// If the chosen theme matches the OS preference, drop the stored
+		// override entirely so the site keeps following the OS from then on,
+		// instead of pinning to that theme forever.
+		if (next === (prefersDark.matches ? 'dark' : 'light')) {
+			delete root.dataset.theme;
+			try {
+				localStorage.removeItem('theme');
+			} catch {}
+		} else {
+			root.dataset.theme = next;
+			try {
+				localStorage.setItem('theme', next);
+			} catch {}
+		}
 	});
 
 	let navOpenTimeout: ReturnType<typeof setTimeout> | undefined;
@@ -123,6 +162,41 @@ const links = [
 	});
 
 	document.addEventListener('astro:before-swap', () => closeMobileNav());
+
+	// The header only renders once (transition:persist), so the aria-current
+	// set at build/render time is only ever correct for the first page of a
+	// visit. Every subsequent client-side navigation has to re-derive it here,
+	// mirroring isCurrentNavLink() in the frontmatter above.
+	const navLinks = document.querySelectorAll<HTMLAnchorElement>('.nav a, .mobile-nav a');
+	const caseStudyPaths = (document.querySelector<HTMLElement>('.site-header')?.dataset.caseStudies ?? '').split(' ');
+
+	function isCurrentNavLink(href: string, pathname: string): boolean {
+		if (href === '/#about') return false;
+
+		let normalized = pathname.replace(/\.html$/, '');
+		if (normalized.length > 1) normalized = normalized.replace(/\/$/, '');
+		if (normalized === '') normalized = '/';
+
+		if (href === '/case-studies') {
+			return normalized === '/case-studies' || caseStudyPaths.includes(normalized);
+		}
+
+		return href === normalized;
+	}
+
+	function updateActiveNavLinks() {
+		const pathname = location.pathname;
+		navLinks.forEach((link) => {
+			const href = link.getAttribute('href') ?? '';
+			if (isCurrentNavLink(href, pathname)) {
+				link.setAttribute('aria-current', 'page');
+			} else {
+				link.removeAttribute('aria-current');
+			}
+		});
+	}
+
+	document.addEventListener('astro:page-load', updateActiveNavLinks);
 </script>
 
 <style>
@@ -134,6 +208,36 @@ const links = [
 		-webkit-backdrop-filter: saturate(180%) blur(20px);
 		backdrop-filter: saturate(180%) blur(20px);
 		border-bottom: 1px solid var(--hairline-2);
+	}
+
+	/* Soft scroll edge: replaces the hard hairline/shadow combo in motion.css
+	   with a faint gradient that fades in under the header once scrolled,
+	   read by motion.css's .is-scrolled state (toggled by ScrollMotion.astro). */
+	.site-header::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 100%;
+		height: 14px;
+		pointer-events: none;
+		opacity: 0;
+		background: linear-gradient(to bottom, rgba(0, 0, 0, 0.06), transparent);
+		transition: opacity 0.3s var(--ease-in-out-soft, ease);
+	}
+
+	:global(:root[data-theme='dark']) .site-header::after {
+		background: linear-gradient(to bottom, rgba(0, 0, 0, 0.35), transparent);
+	}
+
+	@media (prefers-color-scheme: dark) {
+		:global(:root:not([data-theme='light'])) .site-header::after {
+			background: linear-gradient(to bottom, rgba(0, 0, 0, 0.35), transparent);
+		}
+	}
+
+	.site-header.is-scrolled::after {
+		opacity: 1;
 	}
 
 	@media (prefers-reduced-transparency: reduce) {
@@ -182,6 +286,12 @@ const links = [
 	}
 
 	.nav a:hover {
+		color: var(--fg);
+	}
+
+	/* Colour only: a weight change would widen the link and nudge its
+	   neighbours every time the persisted header updates. */
+	.nav a[aria-current='page'] {
 		color: var(--fg);
 	}
 
@@ -291,6 +401,10 @@ const links = [
 		font-size: var(--step-1);
 		font-weight: 450;
 		color: var(--fg-2);
+	}
+
+	.mobile-nav a[aria-current='page'] {
+		color: var(--fg);
 	}
 
 	@media (max-width: 720px) {

@@ -13,11 +13,27 @@ interface Props {
 }
 
 const { title, summary, cover, coverAlt, tags, href, appStoreUrl } = Astro.props;
+
+// Shared-element name for the app icon. CaseStudyHero derives the same string
+// from the same title, and the browser only morphs one element into another
+// when both carry an identical view-transition-name, so this must stay
+// character for character in step with the copy there (and in
+// case-studies.astro). It must also be unique on the page, which holds as
+// long as a project is listed once.
+const iconName = `icon-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
 ---
 
 <article class="card project">
 	<a class="cover" href={href} tabindex="-1" aria-hidden="true">
-		<Image src={cover} alt={coverAlt} widths={[400, 620, 1240]} sizes="(max-width: 900px) 100vw, 576px" />
+		<Image
+			src={cover}
+			alt={coverAlt}
+			widths={[400, 620, 1240]}
+			sizes="(max-width: 900px) 100vw, 576px"
+			transition:name={iconName}
+			transition:animate="initial"
+			style="view-transition-class: app-icon"
+		/>
 	</a>
 
 	<div class="body">
@@ -117,5 +133,30 @@ const { title, summary, cover, coverAlt, tags, href, appStoreUrl } = Astro.props
 	.footer a {
 		position: relative;
 		z-index: 1;
+	}
+</style>
+
+<style is:global>
+	/* Shared app-icon morph. View-transition pseudo-elements hang off the
+	   document root, so this cannot be scoped. It is repeated verbatim in
+	   CaseStudyHero.astro because the rules that time a transition come from
+	   the incoming page: this copy drives the trip back to a card, that one the
+	   trip out to the hero. Only the travelling group is retimed; the rest of
+	   the page keeps Astro's default fade.
+
+	   Both ends are rounded squares clipped at 22.5%, so the snapshots already
+	   carry their corners and scale them in proportion, and the icon never
+	   passes through a square frame on the way.
+
+	   view-transition-class is Chrome 125+ and Safari 18.2+. Where it is
+	   missing this selector is dropped and the icon still morphs, on the
+	   browser's default 0.25s ease. Under reduced motion Astro switches every
+	   view-transition animation off, so the icon is simply in its new place;
+	   the guard here keeps this rule from ever reintroducing travel. */
+	@media (prefers-reduced-motion: no-preference) {
+		::view-transition-group(*.app-icon) {
+			animation-duration: 0.48s;
+			animation-timing-function: var(--ease-out-soft, cubic-bezier(0.32, 0.72, 0, 1));
+		}
 	}
 </style>
