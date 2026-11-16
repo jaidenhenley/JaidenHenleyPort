@@ -15,10 +15,11 @@ import coastcastMap from '../assets/images/CoastCastMap.png';
 import coastcastDetail from '../assets/images/CoastCastBeachDetail.png';
 
 import quickstudyHero from '../assets/icons/quickstudy.png';
-import quickstudyImport from '../assets/images/ImportSource.png';
-import quickstudyPractice from '../assets/images/Practice.png';
-import quickstudyReview from '../assets/images/CardReview.png';
-import quickstudyQuiz from '../assets/images/Quiz.png';
+import quickstudyToday from '../assets/images/QuickStudyToday.png';
+import quickstudyReview from '../assets/images/QuickStudyReview.png';
+import quickstudySource from '../assets/images/QuickStudySource.png';
+import quickstudyWhy from '../assets/images/QuickStudyWhy.png';
+import quickstudyDemoPoster from '../assets/images/QuickStudyDemoPoster.png';
 
 import takeflightHero from '../assets/icons/take-flight.png';
 import takeflightCover from '../assets/images/TakeFlightCoverPhoto.png';
@@ -339,9 +340,9 @@ export const caseStudies: Record<string, CaseStudy> = {
 	quickstudy: {
 		number: '03',
 		category: 'Study tools',
-		tech: 'On-device AI',
-		status: 'Live on the App Store',
-		lead: 'Scan a page or import a PDF and get a study-ready deck in minutes, with an approval step so nothing lands in your deck that you did not choose.',
+		tech: 'On-device and cloud AI',
+		status: 'Version 2.0 live on the App Store',
+		lead: 'Scan a page, import a PDF, or paste notes and get a deck where every card links back to the passage it came from, then study it a few minutes a day.',
 		primaryCta: {
 			label: 'View on the App Store',
 			href: 'https://apps.apple.com/us/app/quickstudy-flashcard-tool/id6759993537',
@@ -350,103 +351,105 @@ export const caseStudies: Record<string, CaseStudy> = {
 		hero: quickstudyHero,
 		heroAlt: 'QuickStudy app icon',
 		overview: [
-			'QuickStudy takes you from notes to practice without the busywork. Scan a page or import a PDF, let the app generate flashcards, then approve what is worth keeping before you study.',
-			'Generation runs on device through Foundation Models, so there is no account and nothing leaves the phone. The AI does the heavy lifting, but you decide what belongs in the deck.',
+			'QuickStudy 2.0 rebuilds the app around studying every day. Import a page, a PDF, or your notes, and cards draft in the background while you keep using the app. Each card carries its source passage, an explanation, and its own quiz answers, and Today shows only the cards that are due.',
+			'Drafting runs through Apple Intelligence, on the iPhone or on Private Cloud Compute. QuickStudy Pro adds Claude Haiku, through a server I run on Cloudflare Workers, for longer documents and for iPhones without Private Cloud Compute. Nothing leaves the device without your agreement, and there is still no account.',
 		],
 		problem: {
 			intro:
-				'Turning notes into a usable deck normally means scanning, cleaning up the text, writing every card by hand, and only then starting to review.',
+				'Version 1.0 got notes into a deck. It did not give anyone a reason to open the app the next day, and its safeguards cost more than they saved.',
 			points: [
-				'VisionKit OCR on a handwritten page comes back with broken words, merged lines, and stray characters that poison everything downstream.',
-				'On-device generation is not available on every device, and even supported ones can fail on low memory.',
-				'Generated cards include repeats and filler, and a noisy deck is worse than no deck at all.',
+				'Every generated card started unapproved, so a fresh set read "0 cards" until you toggled each one on. The safety step had become the main chore.',
+				'A card could not show where it came from. The line numbers stored on quiz questions only ever held the question index, so there was no honest answer to "why is this right?"',
+				'On-device generation needs an Apple Intelligence iPhone, and every other device got a text-chunking fallback instead of real questions.',
 			],
 		},
 		approach: [
 			{
-				title: 'Clean before you generate',
-				body: 'A Core Image pass desaturates, boosts contrast, and sharpens the capture before Vision sees it, then a text cleanup pass trims junk characters and repairs spacing and line breaks.',
+				title: 'Keep drafts by default',
+				body: 'Cards arrive kept. Tap to edit, swipe to remove, and Save commits the set. The human check stays, but it costs one swipe per bad card instead of one tap per good one.',
 			},
 			{
-				title: 'Plan for AI that is not there',
-				body: 'When Foundation Models cannot run, a backup path chunks the cleaned text into card-sized pieces so you still get a usable deck, with UI copy that says what happened instead of failing silently.',
+				title: 'Make every card cite its source',
+				body: 'The model quotes the passage it used, and a deterministic locator maps that quote back onto the document\'s pages, paragraphs, and lines. The model never counts lines, so the link cannot be invented.',
 			},
 			{
-				title: 'Approve before you save',
-				body: 'Generated cards land in a review list where each one toggles on or off. Only approved cards reach study and quiz mode, so decks stay focused.',
+				title: 'Route to the best engine available',
+				body: 'An engine plan tries Private Cloud Compute, then the Pro server running Claude Haiku, then the on-device model, depending on consent, subscription, document length, and what the device supports. Every engine conforms to one CardGenerating protocol.',
 			},
 			{
-				title: 'One protocol, many models',
-				body: 'A CardGenerating protocol defines generation, distractors, and quizzes, so swapping between the on-device model and an external provider changes nothing at the call site.',
+				title: 'Build a reason to come back',
+				body: 'A Leitner schedule of 1, 1, 3, 7, 14, and 30 days decides what is due, and Today turns that into one session. Streaks are derived from session history rather than a counter that can drift, and a Streak Freeze is earned for each full study week.',
 			},
 		],
 		highlights: [
 			{
-				term: 'Handwriting preprocessing',
-				body: 'CIColorControls plus CIUnsharpMask before OCR measurably improved recognition on handwritten pages.',
+				term: 'One call per card',
+				body: 'Question, answer, explanation, source quote, and three distractors come back in a single generation call and are stored on the card, so a quiz builds instantly and works offline.',
 			},
 			{
-				term: 'Provider abstraction',
-				body: 'A single request path handles both OpenAI-compatible and Anthropic APIs, switching auth headers and body shape based on the selected provider.',
+				term: 'Drafting never blocks',
+				body: 'Generation runs in the background and reports through a Library status card. Drafts persist to disk, so a crash or force quit does not lose them.',
 			},
 			{
-				term: 'Keychain storage',
-				body: 'External API keys are stored as encrypted generic passwords through Keychain Services rather than in plaintext defaults.',
+				term: 'Claude behind a verified server',
+				body: 'The Pro server holds the Anthropic API key, so it never ships in the app. Each request is signed with App Attest and carries the StoreKit transaction, and the server verifies both before it calls Claude Haiku.',
 			},
 			{
-				term: 'Local-first persistence',
-				body: 'Decks and study history live on device through AppStorage and UserDefaults, so the app works with no account and no network.',
+				term: 'Consent before the cloud',
+				body: 'Cloud drafting is asked for only after a source is picked, and only when the draft would leave the device. Declining drafts on device and never blocks.',
 			},
 			{
-				term: 'Distractor generation',
-				body: 'Quiz mode builds multiple choice questions from approved cards, generating plausible wrong answers from the source text rather than from other cards.',
+				term: 'Seven languages',
+				body: 'The app is localized into seven languages, and cards are drafted in the language of your notes, not the language of your phone.',
 			},
 		],
 		screens: [
 			{
-				image: quickstudyImport,
-				imageAlt: 'QuickStudy import source screen',
-				caption: 'Import Source',
-				body: 'Scan a handwritten note or import a PDF, with OCR running before generation.',
+				image: quickstudyToday,
+				imageAlt: 'QuickStudy Today screen with a nine card session',
+				caption: 'Today',
+				body: 'One session made of only the cards that are due, with how long it will take.',
 			},
 			{
 				image: quickstudyReview,
-				imageAlt: 'QuickStudy card review list',
-				caption: 'Card Review',
-				body: 'Toggle each generated card on or off before anything is saved.',
+				imageAlt: 'QuickStudy Review Cards sheet',
+				caption: 'Review Cards',
+				body: 'Every draft is kept. Tap to edit, swipe to delete, and check to save.',
 			},
 			{
-				image: quickstudyPractice,
-				imageAlt: 'QuickStudy flashcard practice mode',
-				caption: 'Flashcard Practice',
-				body: 'Swipe through approved cards with a tap to reveal the answer.',
+				image: quickstudySource,
+				imageAlt: 'QuickStudy Source sheet highlighting the passage a card came from',
+				caption: 'Card Source',
+				body: 'Each card opens the exact passage it was drafted from.',
 			},
 			{
-				image: quickstudyQuiz,
-				imageAlt: 'QuickStudy quiz mode',
-				caption: 'Quiz Mode',
-				body: 'Multiple choice questions built from your approved set, with misses circling back.',
+				image: quickstudyWhy,
+				imageAlt: 'QuickStudy wrong answer with an explanation',
+				caption: 'Know Why',
+				body: 'Your answer and the right one side by side, with why. Missed cards come back tomorrow.',
 			},
 		],
 		demo: {
-			video: '/videos/QuickStudyDemo-web.mp4',
-			poster: quickstudyImport,
+			video: '/videos/QuickStudy2Demo-web.mp4',
+			poster: quickstudyDemoPoster,
 			aspect: 'phone',
-			heading: 'Scan to deck in one pass',
-			body: 'A captured page runs through OCR and generation, then lands in the review list where you decide what is worth keeping.',
+			heading: 'Notes to quiz in one pass',
+			body: 'Pasted notes draft in the background, every card opens the passage it came from, and the quiz explains each answer. Recorded on the simulator, with drafting sped up.',
 		},
 		role: 'iOS developer, solo',
-		timeline: 'Dec 2025 to Feb 2026',
-		platform: 'iPhone',
-		stack: ['SwiftUI', 'VisionKit', 'PDFKit', 'Foundation Models', 'Keychain', 'AppStorage'],
+		timeline: 'Dec 2025 to Nov 2026',
+		platform: 'iPhone and iPad',
+		stack: ['SwiftUI', 'Foundation Models', 'Private Cloud Compute', 'StoreKit 2', 'App Attest', 'VisionKit', 'PDFKit', 'Claude Haiku', 'Cloudflare Workers'],
 		stats: [
-			{ value: '2', label: 'Import sources' },
-			{ value: '3', label: 'Study modes' },
+			{ value: '4', label: 'Drafting engines, one protocol' },
+			{ value: '7', label: 'Languages' },
+			{ value: '200', label: 'Automated tests' },
 			{ value: '0', label: 'Accounts required' },
-			{ value: '100%', label: 'On-device generation' },
 		],
-		reflection:
-			'The approval step is the part I would keep in any version of this app. AI is good at producing volume and bad at knowing what matters to you, so putting a human gate between generation and the saved deck is what makes the output trustworthy. Building the fallback path also forced me to treat on-device AI as a capability that may not be there, which is a better default than assuming it will be.',
+		reflection: [
+			'In 1.0 I wrote that the approval step was the part I would keep in any version of this app. 2.0 removed it. The goal was right, a person should decide what is in the deck, but approving every card put the cost on the wrong side. Keeping drafts by default and making removal one swipe kept the person in charge without making them do the work twice.',
+			'The bigger lesson was about trust. A card that can show the sentence it came from is worth more than a smarter model, and the reliable way to get that link was to keep it out of the model\'s hands: let it quote, and let deterministic code find the quote.',
+		],
 	},
 
 	'take-flight': {

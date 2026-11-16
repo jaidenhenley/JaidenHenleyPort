@@ -62,10 +62,10 @@ export const projects: Project[] = [
 		slug: 'quickstudy',
 		title: 'QuickStudy',
 		summary:
-			'A flashcard tool that turns scans and PDFs into study-ready cards using on-device AI.',
+			'A daily study app that turns scans, PDFs, and notes into flashcards that link back to their source, drafted with Apple Intelligence or Claude.',
 		cover: quickstudyCover,
 		coverAlt: 'QuickStudy app icon',
-		tags: ['SwiftUI', 'Foundation Models', 'VisionKit', 'PDF import'],
+		tags: ['SwiftUI', 'Foundation Models', 'StoreKit 2', 'App Attest'],
 		appStoreUrl: 'https://apps.apple.com/us/app/quickstudy-flashcard-tool/id6759993537',
 	},
 	{
@@ -99,5 +99,5 @@ export const projects: Project[] = [
 ];
 
 export const featuredProjects = projects.filter((project) =>
-	['cognition-daily', 'coastcast'].includes(project.slug)
+	['cognition-daily', 'quickstudy'].includes(project.slug)
 );

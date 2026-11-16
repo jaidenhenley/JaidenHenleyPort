@@ -123,103 +123,92 @@ return WaterConditions(
 	quickstudy: {
 		snippets: [
 			{
-				title: 'Handwriting Processing for OCR',
+				title: 'Locating a Card\'s Source',
 				language: 'Swift',
-				description: 'Runs a Core Image pipeline to desaturate, boost contrast, and sharpen a captured image before passing it to Vision for OCR, significantly improving handwriting recognition accuracy.',
-				code: `static func preprocessForHandwriting(_ image: UIImage) -> CGImage? {
-    guard let cgImage = image.cgImage else { return nil }
-    let ciImage = CIImage(cgImage: cgImage)
+				description: 'The model quotes the passage a card came from, and this finds the smallest run of document lines containing that quote. Page, paragraph, and line range come from here, never from the model.',
+				code: `nonisolated private static func matchRange(needle: String, lines: [String]) -> ClosedRange<Int>? {
+    let normalizedLines = lines.map(normalized)
 
-    let controls = ciImage.applyingFilter(
-        "CIColorControls",
-        parameters: [
-            kCIInputSaturationKey: 0.0,      // Grayscale
-            kCIInputContrastKey: 1.45,       // Boost contrast
-            kCIInputBrightnessKey: 0.05
-        ]
-    )
-
-    let sharpened = controls.applyingFilter(
-        "CIUnsharpMask",
-        parameters: [kCIInputRadiusKey: 2.0, kCIInputIntensityKey: 0.85]
-    )
-
-    let context = CIContext(options: nil)
-    return context.createCGImage(sharpened, from: sharpened.extent)
-}`,
-			},
-			{
-				title: 'Quiz Generation Protocol',
-				language: 'Swift',
-				description: 'Defines a shared interface for card generation so the app can swap between on-device and external AI without changing any calling code.',
-				code: `protocol CardGenerating {
-    func generateCards(from text: String) async throws -> [AIFlashcard]
-    func generateDistractors(
-        question: String, correctAnswer: String,
-        otherAnswers: [String], sourceText: String
-    ) async throws -> [String]
-    func generateQuiz(
-        cards: [(question: String, answer: String)],
-        sourceText: String
-    ) async throws -> [AIQuizQuestionModel]
-}`,
-			},
-			{
-				title: 'Different API Requests',
-				language: 'Swift',
-				description: 'Handles both OpenAI-compatible and Anthropic APIs through a single request path, switching auth headers and body format based on the selected provider.',
-				code: `switch apiFormat {
-case .openAI:
-    request.setValue("Bearer \\(apiKey)", forHTTPHeaderField: "Authorization")
-    let body = OpenAIChatRequest(
-        model: model,
-        messages: [
-            .init(role: "system", content: systemMessage),
-            .init(role: "user", content: prompt)
-        ],
-        temperature: 0.3
-    )
-    request.httpBody = try JSONEncoder().encode(body)
-
-case .anthropic:
-    request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
-    request.setValue("2023-06-01", forHTTPHeaderField: "anthropic-version")
-    let body = AnthropicMessagesRequest(
-        model: model,
-        max_tokens: 4096,
-        system: systemMessage,
-        messages: [.init(role: "user", content: prompt)],
-        temperature: 0.3
-    )
-    request.httpBody = try JSONEncoder().encode(body)
-}`,
-			},
-			{
-				title: 'Secure API Key Storage',
-				language: 'Swift',
-				description: 'Stores API keys as encrypted generic passwords using iOS Keychain Services, keeping credentials out of plaintext storage.',
-				code: `enum KeychainManager {
-    private static let service = "com.jaidenhenley.quickstudy"
-    private static let account = "external-api-key"
-
-    static func saveAPIKey(_ key: String) throws {
-        let data = Data(key.utf8)
-        let query: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: service,
-            kSecAttrAccount as String: account
-        ]
-        SecItemDelete(query as CFDictionary)
-        let attributes = query.merging([kSecValueData as String: data]) { _, new in new }
-        let status = SecItemAdd(attributes as CFDictionary, nil)
-        guard status == errSecSuccess else {
-            throw CardGenerationError.keychainError(status)
+    for end in normalizedLines.indices {
+        var joined = ""
+        for start in stride(from: end, through: 0, by: -1) where !normalizedLines[start].isEmpty {
+            joined = joined.isEmpty ? normalizedLines[start] : normalizedLines[start] + " " + joined
+            if joined.contains(needle) { return start...end }
+            if joined.count > needle.count * 2 { break }
         }
+    }
+    return nil
+}`,
+			},
+			{
+				title: 'Choosing Where a Draft Runs',
+				language: 'Swift',
+				description: 'Builds the ordered list of engines to try from consent, subscription, document length, and what the device supports. Nothing reaches the network without consent.',
+				code: `static func plan(for conditions: DraftingConditions, sourceLength: Int) -> [GenerationProvenance.Engine] {
+    guard conditions.mode == .onDevice else { return [.externalAPI] }
+
+    let consented = conditions.consent == .granted
+    var plan: [GenerationProvenance.Engine] = []
+    if consented, conditions.privateCloudReady,
+       privateCloudTakes(sourceLength: sourceLength, isPro: conditions.isPro) {
+        plan.append(.privateCloud)
+    }
+    let usesServer = consented
+        && (conditions.isPro || (conditions.freeHostedGenerationUnused && !conditions.privateCloudReady))
+    let fitsServer = sourceLength <= HostedCardGenerationEngine.maxInputLength
+    if usesServer, fitsServer || !conditions.hasOnDeviceModel {
+        plan.append(.cloud)
+    }
+    if conditions.hasOnDeviceModel || plan.isEmpty {
+        plan.append(.onDevice)
+    }
+    return plan
+}`,
+			},
+			{
+				title: 'One Protocol for Every Engine',
+				language: 'Swift',
+				description: 'Private Cloud Compute, the Pro server, the on-device model, and a user-supplied API all conform to this, so the drafting flow never knows which one it is talking to.',
+				code: `protocol CardGenerating {
+    var countsAgainstAllowance: Bool { get }
+    var sourceChunkLimit: Int? { get }
+    var skippedSourceSections: Int { get }
+    var expectedSeconds: Double { get }
+    var provenance: GenerationProvenance { get }
+    func generateCards(from text: String) async throws -> [AIFlashcard]
+    func generateCards(from text: String, topic: String, count: Int) async throws -> [AIFlashcard]
+}`,
+			},
+			{
+				title: 'Keychain Writes That Never Lose Data',
+				language: 'Swift',
+				description: 'Updates first and only adds when nothing is stored, so a failed write can never destroy the API key or App Attest key ID that was already there.',
+				code: `static func save(_ value: String, account: Account) throws {
+    let query: [String: Any] = [
+        kSecClass as String: kSecClassGenericPassword,
+        kSecAttrService as String: service,
+        kSecAttrAccount as String: account.rawValue
+    ]
+    let data = Data(value.utf8)
+
+    let updateStatus = SecItemUpdate(
+        query as CFDictionary,
+        [kSecValueData as String: data] as CFDictionary
+    )
+    if updateStatus == errSecSuccess { return }
+    guard updateStatus == errSecItemNotFound else {
+        throw CardGenerationError.keychainError(updateStatus)
+    }
+
+    let attributes = query.merging([kSecValueData as String: data]) { _, new in new }
+    let addStatus = SecItemAdd(attributes as CFDictionary, nil)
+    guard addStatus == errSecSuccess else {
+        throw CardGenerationError.keychainError(addStatus)
     }
 }`,
 			},
 		],
-		nextIterations: 'Next I’m keeping it focused and polishing what’s already there. I want OCR to feel more consistent with clearer scan feedback and fewer messy results, and I want the review step to be faster with bulk approve and quick edits so fixing a bad card doesn’t slow everything down. On the study side, I’m tightening the swipe experience, making progress clearer, and adding a simple “review missed questions” loop in quiz mode. If I have time after that, I’ll add lightweight stats like accuracy and streaks so you can actually see improvement.',
+		nextIterations: 'Next is the part of the design 2.0 deliberately left out. Typed answers graded on device, so a paraphrase can count as correct, and sorting new drafts into themes, which I have held for iOS 27. I also want one daily reminder that states the actual workload, which means adding notifications properly, with the permission prompt and privacy manifest entries they need.',
 	},
 	'take-flight': {
 		snippets: [
